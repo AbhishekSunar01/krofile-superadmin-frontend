@@ -1,0 +1,3 @@
+.sidebar_item {
+  @apply px-4 py-3 text-base flex items-center gap-2;
+}
