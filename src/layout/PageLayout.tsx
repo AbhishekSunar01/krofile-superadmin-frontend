@@ -8,7 +8,7 @@ export default function PageLayout(props: {
   const { children, header, description } = props;
   return (
     <div>
-      <div className="h-[110px] border-b bg-card flex flex-col items-start justify-center px-8">
+      <div className="h-[110px] w-full border-b bg-card flex flex-col items-start justify-center px-8 fixed">
         <div className="text-[28px] font-semibold w-full flex justify-between">
           {header}
           <div>
@@ -18,7 +18,7 @@ export default function PageLayout(props: {
         <div className="muted text-base">{description}</div>
       </div>
 
-      <div className="p-8">{children}</div>
+      <div className="p-8 mt-[110px]">{children}</div>
     </div>
   );
 }
