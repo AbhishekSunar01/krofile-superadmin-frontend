@@ -14,16 +14,27 @@ import Logout from "../assets/png/Sidebar logos/Logout.png";
 
 const sidebarItems = [
   { to: "", src: Dashboard, label: "Dashboard" },
-  { to: "", src: UserManagement, label: "User Management" },
-  { to: "", src: Reports, label: "Reports" },
-  { to: "", src: Eagle, label: "Eagle's View" },
-  { to: "", src: Support, label: "Support" },
-  { to: "", src: Subscription, label: "Subscription Manager" },
-  { to: "", src: Notification, label: "Notification Manager" },
-  { to: "", src: System, label: "System Status" },
-  { to: "", src: Activity, label: "Activity Log" },
-  { to: "", src: Settings, label: "Settings" },
+  { to: "/user-management", src: UserManagement, label: "User Management" },
+  { to: "/reports", src: Reports, label: "Reports" },
+  { to: "/eagle-view", src: Eagle, label: "Eagle's View" },
+  { to: "/support", src: Support, label: "Support" },
+  {
+    to: "/subscription-manager",
+    src: Subscription,
+    label: "Subscription Manager",
+  },
+  {
+    to: "notification-manager",
+    src: Notification,
+    label: "Notification Manager",
+  },
+  { to: "/system-status", src: System, label: "System Status" },
+  { to: "activity-log", src: Activity, label: "Activity Log" },
+  { to: "/settings", src: Settings, label: "Settings" },
 ];
+
+const hoverEffect =
+  "hover:font-medium transition-opacity ease-in-out duration-300 delay-75";
 
 const SidebarItem = ({
   to,
@@ -34,7 +45,14 @@ const SidebarItem = ({
   src: string;
   label: string;
 }) => (
-  <NavLink to={to} className="px-4">
+  <NavLink
+    to={to}
+    className={({ isActive }) =>
+      `px-4 ${hoverEffect} ${
+        isActive ? "bg-mainBg mx-4 border-r-4 px-0 border-primary" : ""
+      }`
+    }
+  >
     <div className="sidebar_item">
       <img src={src} alt={label} className="w-4 h-4" />
       {label}
@@ -44,7 +62,7 @@ const SidebarItem = ({
 
 export default function SideBar() {
   return (
-    <div className="h-screen fixed bg-card flex flex-col justify-between items-center border-r w-[260px]">
+    <div className="h-screen fixed bg-card flex flex-col justify-between items-center w-[260px]">
       <h1 className="h-[110px] border-b w-full flex flex-col justify-center text-center p-8">
         <img src={MainLogo} alt="Main Logo" className="w-full mx-auto" />
       </h1>
@@ -56,7 +74,7 @@ export default function SideBar() {
       </div>
 
       <div className="w-full px-4">
-        <NavLink to={""} className="px-4">
+        <NavLink to={""} className={`px-4 ${hoverEffect}`}>
           <div className="sidebar_item">
             <img src={Logout} alt="Logout" className="w-4 h-4" />
             Logout
