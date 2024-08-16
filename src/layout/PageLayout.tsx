@@ -7,11 +7,11 @@ export default function PageLayout(props: {
 }) {
   const { children, title, description } = props;
   return (
-    <div>
-      <div className="fixed w-full">
+    <div className="relative">
+      <div className="sticky top-0 w-full">
         <Header title={title} description={description} />
       </div>
-      <div className="p-8 mt-[110px]">{children}</div>
+      <div className="p-8">{children}</div>
     </div>
   );
 }
