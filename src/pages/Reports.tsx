@@ -6,7 +6,7 @@ export default function Reports() {
       title="Reports"
       description="Gain comprehensive insights into platform performance, user engagement, and system health, empowering you to make data-driven decisions for optimal efficiency and growth."
     >
-      Reporta
+      Reports
     </PageLayout>
   );
 }
