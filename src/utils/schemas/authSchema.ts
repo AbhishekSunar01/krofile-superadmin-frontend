@@ -25,3 +25,10 @@ export const OtpSchema = z.object({
     message: "Your one-time password must be 5 characters.",
   }),
 });
+
+export const NewPasswordSchema = z.object({
+  password: z.string().min(1, { message: "Password is required!" }),
+  confirmPassword: z
+    .string()
+    .min(1, { message: "Confirm Password is required!" }),
+});

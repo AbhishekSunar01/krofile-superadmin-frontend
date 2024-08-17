@@ -118,6 +118,8 @@ export default function ResetPasswordVerify() {
           <div className="button my-[32px]">
             <Button
               disabled={loading}
+              size={"login"}
+              variant={"login"}
               type="submit"
               className={cn(
                 "flex justify-center items-center gap-4 cursor-pointer w-full",

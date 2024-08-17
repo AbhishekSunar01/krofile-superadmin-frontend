@@ -179,6 +179,8 @@ export default function LoginForm() {
                 <Button
                   disabled={loading}
                   type="submit"
+                  size={"login"}
+                  variant={"login"}
                   className={cn(
                     "flex justify-center items-center gap-4 cursor-pointer",
                     {
