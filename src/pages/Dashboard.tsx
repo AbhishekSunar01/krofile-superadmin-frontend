@@ -1,7 +1,9 @@
-import { ActiveSubscriberChart } from "../containers/dashboard/ActiveSubscriberChart";
 import PageLayout from "../layout/PageLayout";
-import TotalCustomers from "../containers/dashboard/TotalCustomers";
 import activeSubscribers from "../json/dummyData/activeSubscribers.json";
+import {
+  ActiveSubscriberChart,
+  TotalCustomers,
+} from "../components/dashboard/index";
 
 export default function Dashboard() {
   return (

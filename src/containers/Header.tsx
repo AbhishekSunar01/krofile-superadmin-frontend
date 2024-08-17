@@ -1,5 +1,5 @@
-import NotificationBell from "../components/custom-ui/notification-bell";
-import UserIcon from "../components/custom-ui/user-icon";
+import NotificationBell from "../components/custom-ui/NotificationBell";
+import UserIcon from "../components/custom-ui/UserIcon";
 
 export default function Header({
   title,

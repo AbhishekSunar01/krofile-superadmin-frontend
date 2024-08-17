@@ -77,7 +77,7 @@ const renderLabel = (viewBox: any, totalVisitors: number) => {
   return null;
 };
 
-export function ActiveSubscriberChart({
+export default function ActiveSubscriberChart({
   pieData,
   titleData,
 }: PieComponentProps) {

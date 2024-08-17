@@ -15,7 +15,7 @@ interface TableDemoProps {
   };
 }
 
-export function TableCountry({ tableData }: TableDemoProps) {
+export function CountryTable({ tableData }: TableDemoProps) {
   return (
     <div className="flex flex-col items-center justify-center bg-white">
       <h1 className="text-2xl">{tableData.caption}</h1>

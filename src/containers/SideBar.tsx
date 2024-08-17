@@ -49,7 +49,7 @@ const SidebarItem = ({
     to={to}
     className={({ isActive }) =>
       `px-4 ${hoverEffect} ${
-        isActive ? "bg-mainBg mx-4 border-r-4 px-0 border-primary" : ""
+        isActive ? "bg-mainBg border-r-4 px-0 border-primary" : ""
       }`
     }
   >
