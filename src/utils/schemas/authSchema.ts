@@ -19,3 +19,9 @@ export const ResetPasswordSchema = z.object({
       message: "Please enter a valid email address.",
     }),
 });
+
+export const OtpSchema = z.object({
+  pin: z.string().min(5, {
+    message: "Your one-time password must be 5 characters.",
+  }),
+});

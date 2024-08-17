@@ -12,6 +12,7 @@ import {
   ActivityLog,
   EagleView,
   ResetPassword,
+  ResetPasswordVerify,
 } from "./pages/index";
 import MainLayout from "./layout/MainLayout";
 import AuthLayout from "./layout/AuthLayout";
@@ -23,6 +24,10 @@ export default function App() {
       <Route path="/auth" element={<AuthLayout />}>
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/reset-password" element={<ResetPassword />} />
+        <Route
+          path="/auth/reset-password-verify-email"
+          element={<ResetPasswordVerify />}
+        />
       </Route>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Dashboard />} />
