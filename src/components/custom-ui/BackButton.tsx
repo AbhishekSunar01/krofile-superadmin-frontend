@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 export default function BackButton() {
   return (
     <>
-      <Button className="">
+      <Button variant="backBtn" size={"backBtn"} className="">
         <ArrowLeft className="h-5 w-5" />
       </Button>
     </>
