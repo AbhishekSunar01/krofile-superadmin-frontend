@@ -18,7 +18,7 @@ import {
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
-import { loginSchema } from "../../utils/schemas/authSchema";
+import { LoginSchema } from "../../utils/schemas/authSchema";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -30,8 +30,8 @@ export default function LoginForm() {
     setShowPassword(!showPassword);
   };
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -39,7 +39,7 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
+  function onSubmit(values: z.infer<typeof LoginSchema>) {
     setLoading(true);
 
     if (values.email !== "admin@gmail.com" && values.password !== "admin") {
@@ -147,7 +147,7 @@ export default function LoginForm() {
                             className="accent-slate-950 text-slate-900 data-[state=checked]:bg-[#14181f] border border-[#14181f]"
                           />
                         </FormControl>
-                        <FormLabel className="text-[14px] font-[400] ml-3 text-[#525e6f]">
+                        <FormLabel className="text-[14px] font-[400] ml-3 muted">
                           Remember me
                         </FormLabel>
                         <FormMessage />

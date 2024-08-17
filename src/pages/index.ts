@@ -10,3 +10,4 @@ export { default as SystemStatus } from "./SystemStatus";
 export { default as UserManagement } from "./UserManagement";
 // Auth
 export { default as Login } from "./auth/Login";
+export { default as ResetPassword } from "./auth/ResetPassword";

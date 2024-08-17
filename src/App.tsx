@@ -11,6 +11,7 @@ import {
   SystemStatus,
   ActivityLog,
   EagleView,
+  ResetPassword,
 } from "./pages/index";
 import MainLayout from "./layout/MainLayout";
 import AuthLayout from "./layout/AuthLayout";
@@ -20,7 +21,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/auth" element={<AuthLayout />}>
-        <Route index element={<Login />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/reset-password" element={<ResetPassword />} />
       </Route>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Dashboard />} />

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import MailImage from "../assets/png/MailImage.svg";
+import MailImage from "../assets/png/Login Images/MailImage.svg";
 import BackButton from "../components/custom-ui/BackButton";
 
 interface IProps {
