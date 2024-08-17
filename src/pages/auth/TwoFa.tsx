@@ -1,11 +1,9 @@
 import SuccessGif from "../../assets/png/Login Images/fasuccess.gif";
 import MailImage from "../../assets/png/Login Images/MailImage.svg";
 import BackButton from "../../components/custom-ui/BackButton";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Loader2, TriangleAlert } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -26,12 +24,7 @@ import {
   InputOTPSlot,
 } from "../../components/ui/input-otp";
 import { cn } from "../../lib/utils";
-
-const FormSchema = z.object({
-  pin: z.string().min(5, {
-    message: "Your one-time password must be 5 characters.",
-  }),
-});
+import { OtpSchema } from "../../utils/schemas/authSchema";
 
 const TwoFAPage = () => {
   const [reset, setReset] = useState(false);
@@ -56,14 +49,14 @@ const TwoFAPage = () => {
     setReset(true);
   };
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof OtpSchema>>({
+    resolver: zodResolver(OtpSchema),
     defaultValues: {
       pin: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof OtpSchema>) {
     setLoading(true);
     if (time.minutes === 0 && time.seconds === 0) {
       setLoading(false);
@@ -97,10 +90,10 @@ const TwoFAPage = () => {
               className="mx-auto h-[98px] w-[98px]"
               alt="mail image"
             />
-            <div className="text-center text-[28px] font-semibold leading-[33.6px] text-[#14181f]">
+            <div className="text-center text-[28px] font-semibold leading-[33.6px]">
               Almost there! Enter the 2FA code to proceed.
             </div>
-            <div className="text-[14px] font-normal text-[#14181f] text-center">
+            <div className="text-[14px] text-center">
               "A 5-digit code has just been sent to admin@gmail.com. Enter it
               below to proceed"
             </div>
@@ -113,9 +106,7 @@ const TwoFAPage = () => {
                 name="pin"
                 render={({ field }) => (
                   <FormItem className="mb-[24px]">
-                    <FormLabel className="text-[16px] text-[#14181f]">
-                      Code
-                    </FormLabel>
+                    <FormLabel className="text-[16px]">Code</FormLabel>
                     <FormControl>
                       <InputOTP maxLength={5} {...field}>
                         <InputOTPGroup>
@@ -134,13 +125,13 @@ const TwoFAPage = () => {
               />
 
               {errorMessage && (
-                <div className="text-[#14181f] text-[14px] font-[500] text-center mb-[24px] bg-[#DF0C3D33] p-[8px] rounded-[8px] flex justify-center items-center gap-2">
+                <div className="text-[14px] font-[500] text-center mb-[24px] bg-[#DF0C3D33] p-[8px] rounded-[8px] flex justify-center items-center gap-2">
                   <TriangleAlert />
                   {errorMessage}
                 </div>
               )}
 
-              <div className="text-[#DF0C3D] tet-[14px] font-normal text-center">
+              <div className="text-destructive tet-[14px] font-normal text-center">
                 Time Remaining: <CountdownTimer time={time} setTime={setTime} />{" "}
                 sec
               </div>
@@ -162,10 +153,10 @@ const TwoFAPage = () => {
                   {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
                 </Button>
               </div>
-              <div className="text-[#14181f] text-center text-[14px] font-[400]">
+              <div className="text-center text-[14px] font-[400]">
                 If you didn’t receive a code!{" "}
                 <span
-                  className="text-[#df0c3d] cursor-pointer font-[400]"
+                  className="text-destructive cursor-pointer font-[400]"
                   onClick={handleResend}
                 >
                   Resend
@@ -177,10 +168,10 @@ const TwoFAPage = () => {
       ) : (
         <div className="mx-auto w-[480px] h-auto flex flex-col gap-[24px]">
           <div className="heading flex flex-col gap-[12px]">
-            <div className="text-center text-[28px] font-semibold leading-[33.6px] text-[#14181f]">
+            <div className="text-center text-[28px] font-semibold leading-[33.6px]">
               Verification Successful
             </div>
-            <div className="text-[14px] font-normal text-[#14181f] text-center">
+            <div className="text-[14px] font-normal text-center">
               You’re all set! Your account access is confirmed
             </div>
           </div>
