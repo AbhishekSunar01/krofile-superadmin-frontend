@@ -18,6 +18,7 @@ import {
 import MainLayout from "./layout/MainLayout";
 import AuthLayout from "./layout/AuthLayout";
 import "./App.css";
+import TwoFAPage from "./pages/auth/TwoFa";
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
           element={<ResetPasswordVerify />}
         />
         <Route path="/auth/set-new-password" element={<NewPassword />} />
+        <Route path="/auth/2fa" element={<TwoFAPage />} />
       </Route>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Dashboard />} />

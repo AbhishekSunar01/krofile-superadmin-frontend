@@ -13,3 +13,4 @@ export { default as Login } from "./auth/Login";
 export { default as ResetPassword } from "./auth/ResetPassword";
 export { default as ResetPasswordVerify } from "./auth/ResetPasswordVerify";
 export { default as NewPassword } from "./auth/NewPassword";
+export { default as TwoFaPage } from "./auth/TwoFa";
