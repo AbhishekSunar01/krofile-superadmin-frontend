@@ -8,7 +8,7 @@ export default function UserIcon() {
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <div>
-        <div className="text-base font-semibold">Abhishek</div>
+        <div className="text-base font-semibold">Santosh Phaiju</div>
       </div>
     </div>
   );
