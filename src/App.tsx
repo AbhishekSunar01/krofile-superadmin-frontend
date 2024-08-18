@@ -34,7 +34,7 @@ export default function App() {
         <Route path="/auth/2fa" element={<TwoFAPage />} />
       </Route>
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/user-management" element={<UserManagement />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/eagle-view" element={<EagleView />} />
