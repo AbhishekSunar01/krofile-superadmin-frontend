@@ -11,7 +11,7 @@ export default function PageLayout(props: {
       <div className="sticky top-0 w-full">
         <Header title={title} description={description} />
       </div>
-      <div className="p-8">{children}</div>
+      <div className="p-6">{children}</div>
     </div>
   );
 }
