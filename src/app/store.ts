@@ -30,30 +30,68 @@ export const useContentManagementStore = create<ContentManagementState>()(
 
 type PlanType = "Standard" | "Upgraded" | "Premium" | "Enterprise";
 
+type PlanDetails = {
+  price: number;
+  discount: number;
+  finalPrice: number;
+};
+
 type MonthlyPlanState = {
-  price: string;
-  discount: string;
-  finalPrice: string;
-  planType: PlanType;
-  setPrice: (price: string) => void;
-  setDiscount: (discount: string) => void;
-  calculateFinalPrice: () => void;
-  setPlanType: (planType: PlanType) => void;
+  plans: Record<PlanType | string, PlanDetails>;
+  setPrice: (planType: PlanType | string, price: number) => void;
+  setDiscount: (planType: PlanType | string, discount: number) => void;
+  calculateFinalPrice: (planType: PlanType | string) => void;
+  addPlanType: (planType: PlanType | string) => void;
 };
 
 export const useMonthlyPlanStore = create<MonthlyPlanState>((set, get) => ({
-  price: "",
-  discount: "",
-  finalPrice: "",
-  planType: "Standard",
-  setPrice: (price) => set({ price }),
-  setDiscount: (discount) => set({ discount }),
-  calculateFinalPrice: () => {
-    const { price, discount } = get();
-    const priceValue = parseFloat(price) || 0;
-    const discountValue = parseFloat(discount) || 0;
-    const finalPrice = priceValue - (priceValue * discountValue) / 100;
-    set({ finalPrice: finalPrice.toFixed(2) });
+  plans: {
+    Standard: { price: 0, discount: 0, finalPrice: 0 },
+    Upgraded: { price: 0, discount: 0, finalPrice: 0 },
+    Premium: { price: 0, discount: 0, finalPrice: 0 },
+    Enterprise: { price: 0, discount: 0, finalPrice: 0 },
   },
-  setPlanType: (planType) => set({ planType }),
+  setPrice: (planType, price) => {
+    const plans = get().plans;
+    set({
+      plans: {
+        ...plans,
+        [planType]: { ...plans[planType], price },
+      },
+    });
+  },
+  setDiscount: (planType, discount) => {
+    const plans = get().plans;
+    set({
+      plans: {
+        ...plans,
+        [planType]: { ...plans[planType], discount },
+      },
+    });
+  },
+  calculateFinalPrice: (planType) => {
+    const plans = get().plans;
+    const { price, discount } = plans[planType];
+    const finalPrice = price - (price * discount) / 100;
+    set({
+      plans: {
+        ...plans,
+        [planType]: {
+          ...plans[planType],
+          finalPrice: parseFloat(finalPrice.toFixed(2)),
+        },
+      },
+    });
+  },
+  addPlanType: (planType) => {
+    const plans = get().plans;
+    if (!plans[planType]) {
+      set({
+        plans: {
+          ...plans,
+          [planType]: { price: 0, discount: 0, finalPrice: 0 },
+        },
+      });
+    }
+  },
 }));
