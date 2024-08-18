@@ -1,0 +1,26 @@
+[
+  {
+    "count": 10200,
+    "description": "Users",
+    "percentage": "10%",
+    "comparison": "vs previous period"
+  },
+  {
+    "count": 7400,
+    "description": "Active Users",
+    "percentage": "5%",
+    "comparison": "vs previous period"
+  },
+  {
+    "count": 5300,
+    "description": "New Users",
+    "percentage": "12%",
+    "comparison": "vs previous period"
+  },
+  {
+    "count": 8900,
+    "description": "Subscribers",
+    "percentage": "8%",
+    "comparison": "vs previous period"
+  }
+]

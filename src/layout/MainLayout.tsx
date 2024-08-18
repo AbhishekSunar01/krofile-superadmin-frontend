@@ -5,7 +5,7 @@ export default function MainLayout() {
   return (
     <div className="flex">
       <SideBar />
-      <div className="w-full ml-[260px] flex flex-col">
+      <div className="flex-grow flex flex-col pl-[260px]">
         <Outlet />
       </div>
     </div>
