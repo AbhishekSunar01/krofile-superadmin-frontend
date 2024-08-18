@@ -13,7 +13,7 @@ import Settings from "../assets/png/Sidebar logos/Settings.png";
 import Logout from "../assets/png/Sidebar logos/Logout.png";
 
 const sidebarItems = [
-  { to: "", src: Dashboard, label: "Dashboard" },
+  { to: "/dashboard", src: Dashboard, label: "Dashboard" },
   { to: "/user-management", src: UserManagement, label: "User Management" },
   { to: "/reports", src: Reports, label: "Reports" },
   { to: "/eagle-view", src: Eagle, label: "Eagle's View" },
