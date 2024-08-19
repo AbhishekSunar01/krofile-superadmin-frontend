@@ -34,64 +34,164 @@ type PlanDetails = {
   price: number;
   discount: number;
   finalPrice: number;
+  isActive: boolean;
 };
 
-type MonthlyPlanState = {
+type PlanState = {
   plans: Record<PlanType | string, PlanDetails>;
   setPrice: (planType: PlanType | string, price: number) => void;
+  setActive: (planType: PlanType | string, isActive: boolean) => void;
   setDiscount: (planType: PlanType | string, discount: number) => void;
   calculateFinalPrice: (planType: PlanType | string) => void;
   addPlanType: (planType: PlanType | string) => void;
 };
 
-export const useMonthlyPlanStore = create<MonthlyPlanState>((set, get) => ({
-  plans: {
-    Standard: { price: 0, discount: 0, finalPrice: 0 },
-    Upgraded: { price: 0, discount: 0, finalPrice: 0 },
-    Premium: { price: 0, discount: 0, finalPrice: 0 },
-    Enterprise: { price: 0, discount: 0, finalPrice: 0 },
-  },
-  setPrice: (planType, price) => {
-    const plans = get().plans;
-    set({
-      plans: {
-        ...plans,
-        [planType]: { ...plans[planType], price },
-      },
-    });
-  },
-  setDiscount: (planType, discount) => {
-    const plans = get().plans;
-    set({
-      plans: {
-        ...plans,
-        [planType]: { ...plans[planType], discount },
-      },
-    });
-  },
-  calculateFinalPrice: (planType) => {
-    const plans = get().plans;
-    const { price, discount } = plans[planType];
-    const finalPrice = price - (price * discount) / 100;
-    set({
-      plans: {
-        ...plans,
-        [planType]: {
-          ...plans[planType],
-          finalPrice: parseFloat(finalPrice.toFixed(2)),
-        },
-      },
-    });
-  },
-  addPlanType: (planType) => {
-    const plans = get().plans;
-    if (!plans[planType]) {
-      set({
+export const useMonthlyPlanStore = create<PlanState>()(
+  devtools(
+    persist(
+      (set, get) => ({
         plans: {
-          ...plans,
-          [planType]: { price: 0, discount: 0, finalPrice: 0 },
+          Standard: { price: 0, discount: 0, finalPrice: 0, isActive: false },
+          Upgraded: { price: 0, discount: 0, finalPrice: 0, isActive: false },
+          Premium: { price: 0, discount: 0, finalPrice: 0, isActive: false },
+          Enterprise: { price: 0, discount: 0, finalPrice: 0, isActive: false },
         },
-      });
-    }
-  },
-}));
+        setPrice: (planType, price) => {
+          const plans = get().plans;
+          set({
+            plans: {
+              ...plans,
+              [planType]: { ...plans[planType], price },
+            },
+          });
+        },
+        setActive: (planType, isActive) => {
+          const plans = get().plans;
+          set({
+            plans: {
+              ...plans,
+              [planType]: { ...plans[planType], isActive },
+            },
+          });
+        },
+        setDiscount: (planType, discount) => {
+          const plans = get().plans;
+          set({
+            plans: {
+              ...plans,
+              [planType]: { ...plans[planType], discount },
+            },
+          });
+        },
+        calculateFinalPrice: (planType) => {
+          const plans = get().plans;
+          const { price, discount } = plans[planType];
+          const finalPrice = price - (price * discount) / 100;
+          set({
+            plans: {
+              ...plans,
+              [planType]: {
+                ...plans[planType],
+                finalPrice: parseFloat(finalPrice.toFixed(2)),
+              },
+            },
+          });
+        },
+        addPlanType: (planType) => {
+          const plans = get().plans;
+          if (!plans[planType]) {
+            set({
+              plans: {
+                ...plans,
+                [planType]: {
+                  price: 0,
+                  discount: 0,
+                  finalPrice: 0,
+                  isActive: false,
+                },
+              },
+            });
+          }
+        },
+      }),
+      {
+        name: "monthly-plan-storage", // Key in localStorage
+      }
+    )
+  )
+);
+
+export const useAnnuallyPlanStore = create<PlanState>()(
+  devtools(
+    persist(
+      (set, get) => ({
+        plans: {
+          Standard: { price: 0, discount: 0, finalPrice: 0, isActive: false },
+          Upgraded: { price: 0, discount: 0, finalPrice: 0, isActive: false },
+          Premium: { price: 0, discount: 0, finalPrice: 0, isActive: false },
+          Enterprise: { price: 0, discount: 0, finalPrice: 0, isActive: false },
+        },
+        setPrice: (planType, price) => {
+          const plans = get().plans;
+          set({
+            plans: {
+              ...plans,
+              [planType]: { ...plans[planType], price },
+            },
+          });
+        },
+        setActive: (planType, isActive) => {
+          const plans = get().plans;
+          set({
+            plans: {
+              ...plans,
+              [planType]: { ...plans[planType], isActive },
+            },
+          });
+        },
+        setDiscount: (planType, discount) => {
+          const plans = get().plans;
+          set({
+            plans: {
+              ...plans,
+              [planType]: { ...plans[planType], discount },
+            },
+          });
+        },
+        calculateFinalPrice: (planType) => {
+          const plans = get().plans;
+          const { price, discount } = plans[planType];
+          const finalPrice = price - (price * discount) / 100;
+          set({
+            plans: {
+              ...plans,
+              [planType]: {
+                ...plans[planType],
+                finalPrice: parseFloat(finalPrice.toFixed(2)),
+              },
+            },
+          });
+        },
+        addPlanType: (planType) => {
+          const plans = get().plans;
+          if (!plans[planType]) {
+            set({
+              plans: {
+                ...plans,
+                [planType]: {
+                  price: 0,
+                  discount: 0,
+                  finalPrice: 0,
+                  isActive: false,
+                },
+              },
+            });
+          }
+        },
+      }),
+      {
+        name: "annually-plan-storage", // Key in localStorage
+      }
+    )
+  )
+);
