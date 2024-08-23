@@ -13,18 +13,21 @@ import { Control } from "react-hook-form";
 interface PlanProps {
   planType: string;
   plan: {
-    price: number;
+    monthlyPrice: number;
+    annuallyPrice: number;
     discount: number;
-    finalPrice?: number;
+    monthlyFinalPrice: number;
+    yearlyFinalPrice: number;
     isActive: boolean;
   };
   finalPrice: number;
-  setPrice: (planType: string, price: number) => void;
-  setDiscount: (planType: string, discount: number) => void;
+  setPrice?: (planType: string, price: number) => void;
   setActive: (planType: string, isActive: boolean) => void;
+  setDiscount: (planType: string, discount: number) => void;
   individualDiscountsDisabled: boolean;
   handleIndividualDiscountChange: (planType: string, discount: number) => void;
   control: Control<any>;
+  isMonthly: boolean;
 }
 
 export default function Plan({
@@ -36,6 +39,7 @@ export default function Plan({
   individualDiscountsDisabled,
   handleIndividualDiscountChange,
   control,
+  isMonthly,
 }: PlanProps) {
   return (
     <div key={planType} className="space-y-2">
@@ -43,7 +47,7 @@ export default function Plan({
         <Switch
           checked={plan.isActive}
           onCheckedChange={(checked) => setActive(planType, checked)}
-        />{" "}
+        />
         <div className="font-medium">{planType} Plan</div>
       </div>
       <div className="flex w-full gap-4">
@@ -52,16 +56,21 @@ export default function Plan({
           name={`${planType}.price`}
           render={({ field }) => (
             <FormItem className="w-3/5">
-              <FormLabel>Price</FormLabel>
+              <FormLabel>
+                {isMonthly ? "Monthly Price" : "Annual Price"}
+              </FormLabel>
               <FormControl>
                 <Input
                   placeholder="Enter Here"
                   {...field}
-                  value={plan.price}
+                  value={isMonthly ? plan.monthlyPrice : plan.annuallyPrice}
                   onChange={(e) => {
-                    const price = parseFloat(e.target.value) || 0;
-                    setPrice(planType, price);
+                    if (isMonthly && setPrice) {
+                      const price = parseFloat(e.target.value) || 0;
+                      setPrice(planType, price);
+                    }
                   }}
+                  disabled={!isMonthly}
                 />
               </FormControl>
               <FormMessage />
@@ -109,7 +118,6 @@ export default function Plan({
           )}
         />
       </div>
-
       <div className="flex items-center pt-2 space-x-2">
         <Checkbox id="terms" />
         <label

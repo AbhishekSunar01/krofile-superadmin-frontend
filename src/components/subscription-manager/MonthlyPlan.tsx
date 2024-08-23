@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   FormControl,
   FormField,
@@ -7,25 +8,31 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { useForm, FormProvider } from "react-hook-form";
-import { useMonthlyPlanStore } from "../../app/store";
-import { useState } from "react";
+import { usePlanStore } from "../../app/store";
 import Plan from "./subscriptionPlan/Plan";
 
 export default function MonthlyPlan() {
   const form = useForm();
-  const { plans, setPrice, setDiscount, setActive } = useMonthlyPlanStore();
+  const {
+    plans,
+    setMonthlyPrice,
+    setDiscount,
+    setActive,
+    calculateFinalPrice,
+  } = usePlanStore();
   const [mainDiscount, setMainDiscount] = useState(0);
   const [mainDiscountDisabled, setMainDiscountDisabled] = useState(false);
   const [individualDiscountsDisabled, setIndividualDiscountsDisabled] =
     useState(false);
 
-  const handleMainDiscountChange = (e: { target: { value: string } }) => {
+  const handleMainDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const discount = parseFloat(e.target.value) || 0;
     setMainDiscount(discount);
     setIndividualDiscountsDisabled(discount > 0);
 
     Object.keys(plans).forEach((planType) => {
-      setDiscount(planType, discount); // Update store directly
+      setDiscount(planType, discount);
+      calculateFinalPrice(planType);
     });
   };
 
@@ -45,7 +52,8 @@ export default function MonthlyPlan() {
         setIndividualDiscountsDisabled(false);
       }
     }
-    setDiscount(planType, discount); // Update store directly
+    setDiscount(planType, discount);
+    calculateFinalPrice(planType);
   };
 
   return (
@@ -57,7 +65,7 @@ export default function MonthlyPlan() {
             name="mainDiscount"
             render={({ field }) => (
               <FormItem className="w-3/5">
-                <FormLabel>Discount{`(%)`}</FormLabel>
+                <FormLabel>Discount (%)</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Enter discount for all plans"
@@ -75,7 +83,7 @@ export default function MonthlyPlan() {
 
         {Object.keys(plans).map((planType) => {
           const plan = plans[planType];
-          const finalPrice = plan.price - (plan.price * plan.discount) / 100;
+          const finalPrice = plan.monthlyFinalPrice;
 
           return (
             <Plan
@@ -83,12 +91,13 @@ export default function MonthlyPlan() {
               planType={planType}
               plan={plan}
               finalPrice={finalPrice}
-              setPrice={setPrice}
-              setDiscount={setDiscount}
+              setPrice={setMonthlyPrice}
               setActive={setActive}
+              setDiscount={setDiscount}
               individualDiscountsDisabled={individualDiscountsDisabled}
               handleIndividualDiscountChange={handleIndividualDiscountChange}
               control={form.control}
+              isMonthly={true}
             />
           );
         })}
