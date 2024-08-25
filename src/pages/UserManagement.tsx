@@ -1,4 +1,6 @@
+import { DataTable, Columns } from "../components/user-management";
 import PageLayout from "../layout/PageLayout";
+import data from "../json/dummyData/DataTable.json";
 
 export default function UserManagement() {
   return (
@@ -6,7 +8,7 @@ export default function UserManagement() {
       title="User Management"
       description="Keep a close eye on every aspect of your businesses, with the ability to track details and take decisive actions."
     >
-      User Management
+      <DataTable columns={Columns} data={data} />
     </PageLayout>
   );
 }

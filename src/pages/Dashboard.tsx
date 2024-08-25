@@ -3,7 +3,9 @@ import activeSubscribers from "../json/dummyData/activeSubscribers.json";
 import {
   ActiveSubscriberChart,
   TotalCustomers,
+  UsersGrowth,
 } from "../components/dashboard/index";
+import userGrowth from "../json/dummyData/userGrowth.json";
 
 export default function Dashboard() {
   return (
@@ -21,6 +23,12 @@ export default function Dashboard() {
             titleData={activeSubscribers.titleData}
           />
         </div>
+      </div>{" "}
+      <div className="">
+        <UsersGrowth
+          chartData={userGrowth.chartData}
+          titleData={userGrowth.titleData}
+        />
       </div>
     </PageLayout>
   );
