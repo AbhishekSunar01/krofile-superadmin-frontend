@@ -48,7 +48,7 @@ export default function Plan({
           checked={plan.isActive}
           onCheckedChange={(checked) => setActive(planType, checked)}
         />
-        <div className="font-medium">{planType} Plan</div>
+        <div className="font-medium">{planType}</div>
       </div>
       <div className="flex w-full gap-4">
         <FormField

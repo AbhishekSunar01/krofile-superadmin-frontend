@@ -34,6 +34,7 @@ type PlanDetails = {
   annuallyPrice: number;
   discount: number;
   monthlyFinalPrice: number;
+  yearlyDiscount: number;
   yearlyFinalPrice: number;
   isActive: boolean;
 };
@@ -58,6 +59,7 @@ export const usePlanStore = create<PlanState>()(
             annuallyPrice: 0,
             discount: 0,
             monthlyFinalPrice: 0,
+            yearlyDiscount: 0,
             yearlyFinalPrice: 0,
             isActive: false,
           },
@@ -67,6 +69,7 @@ export const usePlanStore = create<PlanState>()(
             annuallyPrice: 0,
             discount: 0,
             monthlyFinalPrice: 0,
+            yearlyDiscount: 0,
             yearlyFinalPrice: 0,
             isActive: false,
           },
@@ -76,6 +79,7 @@ export const usePlanStore = create<PlanState>()(
             annuallyPrice: 0,
             discount: 0,
             monthlyFinalPrice: 0,
+            yearlyDiscount: 0,
             yearlyFinalPrice: 0,
             isActive: false,
           },
@@ -85,6 +89,7 @@ export const usePlanStore = create<PlanState>()(
             annuallyPrice: 0,
             discount: 0,
             monthlyFinalPrice: 0,
+            yearlyDiscount: 0,
             yearlyFinalPrice: 0,
             isActive: false,
           },
@@ -119,9 +124,9 @@ export const usePlanStore = create<PlanState>()(
           const monthlyFinalPrice =
             monthlyPrice - (monthlyPrice * discount) / 100;
           const annuallyPrice = monthlyPrice * 12;
-          const additionalAnnualDiscount = 5; // Example additional discount for annual plans
+          const additionalAnnualDiscount = 0; // Example additional discount for annual plans
           const yearlyFinalPrice =
-            annuallyPrice -
+            annuallyPrice -  
             (annuallyPrice * (discount + additionalAnnualDiscount)) / 100;
           set({
             plans: {
@@ -146,6 +151,7 @@ export const usePlanStore = create<PlanState>()(
                 annuallyPrice: 0,
                 discount: 0,
                 monthlyFinalPrice: 0,
+                yearlyDiscount: 0,
                 yearlyFinalPrice: 0,
                 isActive: false,
               },
