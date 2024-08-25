@@ -30,7 +30,7 @@ export default function UsersGrowth({
   );
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="">
       <Card className="flex flex-col w-[450px]">
         <CardHeader className="flex flex-col items-center space-y-0 border-b p-0 sm:flex-row">
           <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
