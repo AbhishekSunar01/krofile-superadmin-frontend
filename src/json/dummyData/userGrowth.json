@@ -1,0 +1,18 @@
+{
+  "chartData": [
+    { "date": "2024-04-01", "desktop": 222 },
+    { "date": "2024-04-02", "desktop": 97 },
+    { "date": "2024-04-03", "desktop": 167 },
+    { "date": "2024-04-04", "desktop": 242 },
+    { "date": "2024-04-05", "desktop": 373 },
+    { "date": "2024-04-06", "desktop": 301 },
+    { "date": "2024-04-07", "desktop": 245 },
+    { "date": "2024-04-08", "desktop": 409 },
+    { "date": "2024-04-09", "desktop": 99 },
+    { "date": "2024-04-10", "desktop": 261 },
+    { "date": "2024-04-11", "desktop": 327 }
+  ],
+  "titleData": {
+    "title": "Active Users Growth Chart"
+  }
+}
