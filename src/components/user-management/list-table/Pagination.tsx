@@ -42,7 +42,7 @@ const Pagination = ({ table }: { table: any }) => {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => table.setPageIndex(0)}
+          onClick={() => table.setPageIndex(currentPage - 1)}
           disabled={!table.getCanPreviousPage()}
           className="flex items-center gap-1 cursor-pointer"
         >
@@ -51,27 +51,30 @@ const Pagination = ({ table }: { table: any }) => {
         </Button>
 
         {getPageNumbers().map((pageNumber, index) => (
-          <Button
-            key={index}
-            variant={
-              currentPage === pageNumber ? "paginationActive" : "pagination"
-            }
-            size="sm"
-            onClick={() => {
-              if (pageNumber !== "...") {
-                table.setPageIndex(pageNumber);
+          <div key={index}>
+            {" "}
+            <Button
+              key={index}
+              variant={
+                currentPage === pageNumber ? "paginationActive" : "pagination"
               }
-            }}
-            disabled={pageNumber === "..." || pageNumber === currentPage}
-          >
-            {pageNumber === "..." ? "..." : pageNumber + 1}
-          </Button>
+              size="sm"
+              onClick={() => {
+                if (pageNumber !== "...") {
+                  table.setPageIndex(pageNumber);
+                }
+              }}
+              disabled={pageNumber === "..." || pageNumber === currentPage}
+            >
+              {pageNumber === "..." ? "..." : pageNumber + 1}
+            </Button>
+          </div>
         ))}
 
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => table.setPageIndex(totalPages - 1)}
+          onClick={() => table.setPageIndex(currentPage + 1)}
           disabled={!table.getCanNextPage()}
           className="flex items-center gap-1 text-primary cursor-pointer"
         >

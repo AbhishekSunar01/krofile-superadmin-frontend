@@ -13,8 +13,8 @@ export default function Dashboard() {
       title="Dashboard"
       description="Easily manage business changes with comprehensive performance metrics and detailed tracking of all upgrades and downgrades."
     >
-      <div className="flex w-full justify-center gap-4">
-        <div className="w-3/4">
+      <div className="flex w-full items-start justify-between mb-5">
+        <div>
           <TotalCustomers />
         </div>
         <div>

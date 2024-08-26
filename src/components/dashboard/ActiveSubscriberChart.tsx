@@ -33,14 +33,14 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const CustomLegend: React.FC<LegendProps> = ({ payload }) => (
-  <ul className="flex flex-col items-start space-y-5">
+  <ul className="flex flex-col items-start space-y-5 mr-2">
     {payload?.map((entry, index) => (
       <li key={`item-${index}`} className="flex items-center space-x-2">
         <span
           className="inline-block w-4 h-4 rounded-full"
           style={{ backgroundColor: entry.color }}
         />
-        <span className="text-[18px] font-[400] text-[#525E6F]">
+        <span className="text-[14px] font-[400] text-[#525E6F]">
           {entry.value}
         </span>
       </li>
@@ -96,8 +96,8 @@ export default function ActiveSubscriberChart({
   );
 
   return (
-    <Card className="flex flex-col w-[480px]">
-      <CardHeader className="items-center pb-0">
+    <Card className="flex flex-col h-[265px] w-full">
+      <CardHeader className="items-center pt-4 pb-2">
         <CardTitle className=" text-[16px] font-[500]">
           {titleData.title}
         </CardTitle>
@@ -107,10 +107,10 @@ export default function ActiveSubscriberChart({
           </span>
         )}
       </CardHeader>
-      <CardContent className="flex items-center justify-center pb-0">
+      <CardContent className="flex items-center justify-center p-0">
         <ChartContainer
           config={chartConfig}
-          className="flex min-h-[250px] min-w-fit items-center"
+          className="flex w-full items-center "
         >
           <PieChart>
             <ChartTooltip
@@ -121,7 +121,7 @@ export default function ActiveSubscriberChart({
               data={dataWithColors}
               dataKey="visitors"
               nameKey="pieData"
-              innerRadius={60}
+              innerRadius={40}
               strokeWidth={5}
             >
               <Label
