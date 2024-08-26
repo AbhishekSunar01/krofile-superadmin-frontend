@@ -1,6 +1,6 @@
 import { DataTable, Columns } from "../components/user-management";
 import PageLayout from "../layout/PageLayout";
-import data from "../json/dummyData/DataTable.json";
+import data from "../json/dummyData/dataTable.json";
 
 export default function UserManagement() {
   return (
