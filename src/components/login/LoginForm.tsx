@@ -42,7 +42,9 @@ export default function LoginForm() {
   function onSubmit(values: z.infer<typeof LoginSchema>) {
     setLoading(true);
 
-    if (values.email !== "admin@gmail.com" && values.password !== "admin") {
+
+    if (values.email !== 'admin@gmail.com' || values.password !== 'admin') {
+      
       setLoading(false);
       setErrorMessage(
         "Oops! The email or password you entered is incorrect. Please try again."

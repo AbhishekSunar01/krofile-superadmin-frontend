@@ -6,8 +6,8 @@ const colors = ["#90CAF9", "#A5D6A7", "#FFCC80", "#CE93D8"];
 
 export default function TotalCustomers() {
   return (
-    <Card className="flex flex-col items-start justify-between p-5 gap-4 h-fit shadow w-full">
-      <div>
+    <Card className="flex flex-col items-start p-5 gap-4 shadow ">
+      <div className=" mb-3">
         <div className="text-xl font-semibold mb-2">Total Customers</div>
         <div className="text-xs font-normal">Customer’s Summary</div>
       </div>
@@ -19,7 +19,7 @@ export default function TotalCustomers() {
           return (
             <div
               key={index}
-              className="rounded-[8px] shadow-custom py-3 px-2 h-[150px] w-[150px] flex flex-col justify-between"
+              className="rounded-[8px] shadow-custom py-3 px-2 flex flex-col justify-between"
               style={{ backgroundColor: backgroundColorWithOpacity }}
             >
               <div className="flex flex-col items-start gap-[12px]">

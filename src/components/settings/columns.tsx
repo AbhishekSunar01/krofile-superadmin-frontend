@@ -1,13 +1,17 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { ColumnDef } from "@tanstack/react-table";
+
 import UpArrow from "../../assets/uparrow.svg";
-import { ArrowUpDown } from "lucide-react";
-import { Button } from "../ui/button";
+
+import { useState } from "react";
+import { Switch } from "../ui/switch";
+import { ActionComponent } from "./ActionComponent";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type userData = {
   id: string;
-  sn: number;
+  sn: string;
   name: string;
   email: string;
   loginDetails: string;
@@ -16,7 +20,7 @@ export type userData = {
   twofa: boolean;
 };
 
-export const columns: ColumnDef<userData>[] = [
+export const Columns: ColumnDef<userData>[] = [
   {
     accessorKey: "sn",
     header: "S.N.",
@@ -26,7 +30,6 @@ export const columns: ColumnDef<userData>[] = [
     cell: ({ row }) => <div className="lowercase">{row.getValue("name")}</div>,
     enableSorting: true,
     header: ({ column }) => {
-      console.log(column);
       return (
         <button
           className="flex justify-center items-center"
@@ -76,5 +79,32 @@ export const columns: ColumnDef<userData>[] = [
   {
     accessorKey: "twofa",
     header: "2FA",
+    cell: ({ row }) => {
+      const [twofa, setTwofa] = useState<boolean>(row.original.twofa);
+
+      const handleToggle = () => {
+        setTwofa(!twofa);
+        console.log("hello");
+        // Optionally update the main data source or trigger an API call here
+      };
+
+      return (
+        <div>
+          <Switch checked={twofa} id="twofa" onCheckedChange={handleToggle} />
+        </div>
+      );
+    },
+
+    // cell: ({ row }) => (
+    //   <div>
+    //     <Switch checked={row.original.twofa} id="twofa" />
+    //   </div>
+    // ),
+  },
+  {
+    id: "actions",
+    header: "Actions",
+    cell: ({ row }) => <ActionComponent row={row} />,
+    accessorKey: "actions",
   },
 ];

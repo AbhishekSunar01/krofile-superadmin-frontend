@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ColumnDef,
   flexRender,
@@ -9,8 +7,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { EllipsisVertical } from "lucide-react";
-import { Switch } from "../ui/switch";
+import React from "react";
 import {
   Table,
   TableBody,
@@ -19,7 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import React from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,7 +26,7 @@ export function DataTableComponent<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-    const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const table = useReactTable({
     data,
     columns,
@@ -41,7 +37,6 @@ export function DataTableComponent<TData, TValue>({
       sorting,
     },
   });
-
 
   return (
     <div className="rounded-md bg-white mt-[24px] w-full overflow-x-auto">
@@ -61,7 +56,6 @@ export function DataTableComponent<TData, TValue>({
                   </TableHead>
                 );
               })}
-              <TableHead>Actions</TableHead>
             </TableRow>
           ))}
         </TableHeader>
@@ -72,7 +66,7 @@ export function DataTableComponent<TData, TValue>({
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >
-                {row.getVisibleCells().map((cell) => {
+                {/* {row.getVisibleCells().map((cell) => {
                 //   console.log("cell", cell.getContext().getValue());
                   if (cell.column.id !== "twofa") {
                     return (
@@ -95,12 +89,13 @@ export function DataTableComponent<TData, TValue>({
                       </TableCell>
                     );
                   }
-                })}
-                <TableCell>
-                  <button className="w-[52px] h-[20px]">
-                    <EllipsisVertical className="w-full h-full cursor-pointer" />
-                  </button>
-                </TableCell>
+                })} */}
+
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
               </TableRow>
             ))
           ) : (

@@ -1,0 +1,508 @@
+[
+  {
+    "_id": "001",
+    "businessName": "Passage to India",
+    "industryType": "Restaurant",
+    "subStatus": "Subscribed",
+    "plan": "Enterprise",
+    "regDate": "2021-05-12",
+    "country": "USA",
+    "customerName": "Jane Cooper",
+    "customerEmail": "cooper@gmail.com",
+    "customerContact": "+1 123 456 7890",
+    "customerType": "6M",
+    "contactNumber": "+1 123 456 7890",
+    "location": "9510 University City Blvd #101, Charlotte, NC 28213",
+    "numberOfLocations": 2,
+    "website": "passagetoindia.com",
+    "teamMembers": 15,
+    "expiryDate": "2025-08-27",
+    "autoRenewal": true
+  },
+  {
+    "_id": "002",
+    "businessName": "Retail World",
+    "industryType": "Retail",
+    "subStatus": "Inactive",
+    "plan": "Standard",
+    "regDate": "2021-07-19",
+    "country": "Canada"
+  },
+  {
+    "_id": "003",
+    "businessName": "AutoCare Solutions",
+    "industryType": "Automotive",
+    "subStatus": "Active",
+    "plan": "Premium",
+    "regDate": "2020-11-11",
+    "country": "Germany"
+  },
+  {
+    "_id": "004",
+    "businessName": "Green Grocers",
+    "industryType": "Food and Beverage",
+    "subStatus": "Unsubscribed",
+    "plan": "Standard",
+    "regDate": "2022-02-15",
+    "country": "France"
+  },
+  {
+    "_id": "005",
+    "businessName": "Glow Beauty",
+    "industryType": "Beauty and Wellness",
+    "subStatus": "Trial",
+    "plan": "Premium",
+    "regDate": "2021-06-01",
+    "country": "UK"
+  },
+  {
+    "_id": "006",
+    "businessName": "Hospitality Experts",
+    "industryType": "Hospitality and Tourism",
+    "subStatus": "Pending Confirmation",
+    "plan": "Enterprise",
+    "regDate": "2022-09-10",
+    "country": "Australia"
+  },
+  {
+    "_id": "007",
+    "businessName": "Arts Hub",
+    "industryType": "Arts and Entertainment",
+    "subStatus": "Active",
+    "plan": "Standard",
+    "regDate": "2021-03-19",
+    "country": "USA"
+  },
+  {
+    "_id": "008",
+    "businessName": "ProServices Ltd.",
+    "industryType": "Professional Services",
+    "subStatus": "On Hold",
+    "plan": "Enterprise",
+    "regDate": "2022-08-23",
+    "country": "Canada"
+  },
+  {
+    "_id": "009",
+    "businessName": "AdVantage",
+    "industryType": "Marketing and Advertising",
+    "subStatus": "Subscribed",
+    "plan": "Premium",
+    "regDate": "2020-04-12",
+    "country": "Germany"
+  },
+  {
+    "_id": "010",
+    "businessName": "FitNation",
+    "industryType": "Sports and Fitness",
+    "subStatus": "Expired",
+    "plan": "Basic",
+    "regDate": "2021-08-20",
+    "country": "UK"
+  },
+  {
+    "_id": "011",
+    "businessName": "EcoEnergy Group",
+    "industryType": "Utilities and Energy",
+    "subStatus": "Lapsed",
+    "plan": "Standard",
+    "regDate": "2021-04-11",
+    "country": "Norway"
+  },
+  {
+    "_id": "012",
+    "businessName": "Logistics Hub",
+    "industryType": "Transportation and Logistics",
+    "subStatus": "Suspended",
+    "plan": "Enterprise",
+    "regDate": "2022-12-03",
+    "country": "Netherlands"
+  },
+  {
+    "_id": "013",
+    "businessName": "EduLearn Inc.",
+    "industryType": "Education and Training",
+    "subStatus": "Subscribed",
+    "plan": "Standard",
+    "regDate": "2020-09-14",
+    "country": "India"
+  },
+  {
+    "_id": "014",
+    "businessName": "FinServ Solutions",
+    "industryType": "Financial Services",
+    "subStatus": "Overdue",
+    "plan": "Premium",
+    "regDate": "2021-11-29",
+    "country": "USA"
+  },
+  {
+    "_id": "015",
+    "businessName": "AgriTech Farms",
+    "industryType": "Agriculture and Farming",
+    "subStatus": "Rejected",
+    "plan": "Standard",
+    "regDate": "2022-07-04",
+    "country": "Brazil"
+  },
+  {
+    "_id": "016",
+    "businessName": "Tech Innovators Inc.",
+    "industryType": "Information Technology and Software",
+    "subStatus": "Subscribed",
+    "plan": "Enterprise",
+    "regDate": "2021-02-15",
+    "country": "Canada"
+  },
+  {
+    "_id": "017",
+    "businessName": "MediaWorks",
+    "industryType": "Media and Publishing",
+    "subStatus": "Unsubscribed",
+    "plan": "Basic",
+    "regDate": "2020-05-18",
+    "country": "UK"
+  },
+  {
+    "_id": "018",
+    "businessName": "ManufacturePro",
+    "industryType": "Manufacturing",
+    "subStatus": "Expired",
+    "plan": "Standard",
+    "regDate": "2022-03-22",
+    "country": "Germany"
+  },
+  {
+    "_id": "019",
+    "businessName": "HealthFirst Corp.",
+    "industryType": "Healthcare and Life Sciences",
+    "subStatus": "Active",
+    "plan": "Enterprise",
+    "regDate": "2022-06-27",
+    "country": "South Africa"
+  },
+  {
+    "_id": "020",
+    "businessName": "CarePlus Services",
+    "industryType": "Personal Care Services",
+    "subStatus": "Pending Confirmation",
+    "plan": "Standard",
+    "regDate": "2021-12-15",
+    "country": "Australia"
+  },
+  {
+    "_id": "021",
+    "businessName": "Epic Meals",
+    "industryType": "Restaurant",
+    "subStatus": "Subscribed",
+    "plan": "Enterprise",
+    "regDate": "2022-08-02",
+    "country": "USA"
+  },
+  {
+    "_id": "022",
+    "businessName": "City Mart",
+    "industryType": "Retail",
+    "subStatus": "Subscribed",
+    "plan": "Standard",
+    "regDate": "2022-11-19",
+    "country": "UK"
+  },
+  {
+    "_id": "023",
+    "businessName": "DriveSafe Auto",
+    "industryType": "Automotive",
+    "subStatus": "Lapsed",
+    "plan": "Premium",
+    "regDate": "2020-12-03",
+    "country": "Canada"
+  },
+  {
+    "_id": "024",
+    "businessName": "Tasty Bites",
+    "industryType": "Food and Beverage",
+    "subStatus": "Inactive",
+    "plan": "Standard",
+    "regDate": "2021-10-15",
+    "country": "Australia"
+  },
+  {
+    "_id": "025",
+    "businessName": "Beauty Bliss",
+    "industryType": "Beauty and Wellness",
+    "subStatus": "Subscribed",
+    "plan": "Enterprise",
+    "regDate": "2022-02-22",
+    "country": "USA"
+  },
+  {
+    "_id": "026",
+    "businessName": "TravelMate",
+    "industryType": "Hospitality and Tourism",
+    "subStatus": "Subscribed",
+    "plan": "Premium",
+    "regDate": "2021-03-11",
+    "country": "France"
+  },
+  {
+    "_id": "027",
+    "businessName": "Creative Minds",
+    "industryType": "Arts and Entertainment",
+    "subStatus": "Pending Confirmation",
+    "plan": "Standard",
+    "regDate": "2020-08-07",
+    "country": "Germany"
+  },
+  {
+    "_id": "028",
+    "businessName": "ConsultPro",
+    "industryType": "Professional Services",
+    "subStatus": "Active",
+    "plan": "Enterprise",
+    "regDate": "2021-09-30",
+    "country": "India"
+  },
+  {
+    "_id": "029",
+    "businessName": "MarketLeads",
+    "industryType": "Marketing and Advertising",
+    "subStatus": "Expired",
+    "plan": "Premium",
+    "regDate": "2022-01-05",
+    "country": "Brazil"
+  },
+  {
+    "_id": "030",
+    "businessName": "FitLife Gym",
+    "industryType": "Sports and Fitness",
+    "subStatus": "Overdue",
+    "plan": "Standard",
+    "regDate": "2022-10-01",
+    "country": "Singapore"
+  },
+  {
+    "_id": "031",
+    "businessName": "SunPower",
+    "industryType": "Utilities and Energy",
+    "subStatus": "Suspended",
+    "plan": "Enterprise",
+    "regDate": "2022-03-13",
+    "country": "Canada"
+  },
+  {
+    "_id": "032",
+    "businessName": "CargoFlow",
+    "industryType": "Transportation and Logistics",
+    "subStatus": "Subscribed",
+    "plan": "Standard",
+    "regDate": "2020-07-23",
+    "country": "USA"
+  },
+  {
+    "_id": "033",
+    "businessName": "LearnSmart",
+    "industryType": "Education and Training",
+    "subStatus": "Rejected",
+    "plan": "Basic",
+    "regDate": "2022-05-08",
+    "country": "South Africa"
+  },
+  {
+    "_id": "034",
+    "businessName": "MoneyWise",
+    "industryType": "Financial Services",
+    "subStatus": "Subscribed",
+    "plan": "Premium",
+    "regDate": "2021-04-22",
+    "country": "USA"
+  },
+  {
+    "_id": "035",
+    "businessName": "AgriGrowth",
+    "industryType": "Agriculture and Farming",
+    "subStatus": "On Hold",
+    "plan": "Standard",
+    "regDate": "2021-12-17",
+    "country": "Australia"
+  },
+  {
+    "_id": "036",
+    "businessName": "CodeMasters",
+    "industryType": "Information Technology and Software",
+    "subStatus": "Pending Confirmation",
+    "plan": "Enterprise",
+    "regDate": "2021-07-15",
+    "country": "India"
+  },
+  {
+    "_id": "037",
+    "businessName": "PublishToday",
+    "industryType": "Media and Publishing",
+    "subStatus": "Subscribed",
+    "plan": "Standard",
+    "regDate": "2022-11-02",
+    "country": "Australia"
+  },
+  {
+    "_id": "038",
+    "businessName": "InduManu",
+    "industryType": "Manufacturing",
+    "subStatus": "Active",
+    "plan": "Premium",
+    "regDate": "2021-01-19",
+    "country": "USA"
+  },
+  {
+    "_id": "039",
+    "businessName": "MediLife Global",
+    "industryType": "Healthcare and Life Sciences",
+    "subStatus": "Lapsed",
+    "plan": "Enterprise",
+    "regDate": "2022-07-09",
+    "country": "Brazil"
+  },
+  {
+    "_id": "040",
+    "businessName": "PureCare",
+    "industryType": "Personal Care Services",
+    "subStatus": "Active",
+    "plan": "Standard",
+    "regDate": "2020-06-25",
+    "country": "Canada"
+  },
+  {
+    "_id": "041",
+    "businessName": "TechConnect",
+    "industryType": "Information Technology and Software",
+    "subStatus": "Subscribed",
+    "plan": "Premium",
+    "regDate": "2023-01-10",
+    "country": "Canada"
+  },
+  {
+    "_id": "042",
+    "businessName": "Green Earth",
+    "industryType": "Agriculture and Farming",
+    "subStatus": "Active",
+    "plan": "Enterprise",
+    "regDate": "2023-02-15",
+    "country": "Brazil"
+  },
+  {
+    "_id": "043",
+    "businessName": "MediServe",
+    "industryType": "Healthcare and Life Sciences",
+    "subStatus": "On Hold",
+    "plan": "Standard",
+    "regDate": "2023-03-20",
+    "country": "South Africa"
+  },
+  {
+    "_id": "044",
+    "businessName": "EduVision",
+    "industryType": "Education and Training",
+    "subStatus": "Expired",
+    "plan": "Basic",
+    "regDate": "2023-04-25",
+    "country": "India"
+  },
+  {
+    "_id": "045",
+    "businessName": "ArtWorks",
+    "industryType": "Arts and Entertainment",
+    "subStatus": "Pending Confirmation",
+    "plan": "Enterprise",
+    "regDate": "2023-05-30",
+    "country": "USA"
+  },
+  {
+    "_id": "046",
+    "businessName": "FitWell",
+    "industryType": "Sports and Fitness",
+    "subStatus": "Subscribed",
+    "plan": "Premium",
+    "regDate": "2023-06-05",
+    "country": "UK"
+  },
+  {
+    "_id": "047",
+    "businessName": "TravelEasy",
+    "industryType": "Hospitality and Tourism",
+    "subStatus": "Inactive",
+    "plan": "Standard",
+    "regDate": "2023-07-10",
+    "country": "Australia"
+  },
+  {
+    "_id": "048",
+    "businessName": "RetailPro",
+    "industryType": "Retail",
+    "subStatus": "Active",
+    "plan": "Enterprise",
+    "regDate": "2023-08-15",
+    "country": "Canada"
+  },
+  {
+    "_id": "049",
+    "businessName": "AutoMaster",
+    "industryType": "Automotive",
+    "subStatus": "Unsubscribed",
+    "plan": "Basic",
+    "regDate": "2023-09-20",
+    "country": "Germany"
+  },
+  {
+    "_id": "050",
+    "businessName": "FoodLovers",
+    "industryType": "Food and Beverage",
+    "subStatus": "Lapsed",
+    "plan": "Standard",
+    "regDate": "2023-10-25",
+    "country": "France"
+  },
+  {
+    "_id": "051",
+    "businessName": "BeautyPro",
+    "industryType": "Beauty and Wellness",
+    "subStatus": "Overdue",
+    "plan": "Premium",
+    "regDate": "2023-11-30",
+    "country": "USA"
+  },
+  {
+    "_id": "052",
+    "businessName": "GreenPower",
+    "industryType": "Utilities and Energy",
+    "subStatus": "Subscribed",
+    "plan": "Enterprise",
+    "regDate": "2024-01-04",
+    "country": "Norway"
+  },
+  {
+    "_id": "053",
+    "businessName": "ProLogistics",
+    "industryType": "Transportation and Logistics",
+    "subStatus": "Rejected",
+    "plan": "Basic",
+    "regDate": "2024-02-08",
+    "country": "Netherlands"
+  },
+  {
+    "_id": "054",
+    "businessName": "MarketVision",
+    "industryType": "Marketing and Advertising",
+    "subStatus": "Suspended",
+    "plan": "Premium",
+    "regDate": "2024-03-12",
+    "country": "Singapore"
+  },
+  {
+    "_id": "055",
+    "businessName": "ConsultGroup",
+    "industryType": "Professional Services",
+    "subStatus": "Pending Confirmation",
+    "plan": "Standard",
+    "regDate": "2024-04-16",
+    "country": "India"
+  }
+]

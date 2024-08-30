@@ -8,7 +8,7 @@ export default function PageLayout(props: {
   const { children, title, description } = props;
   return (
     <div className="">
-      <div className="sticky top-0 w-full">
+      <div className="sticky top-0 w-full z-50">
         <Header title={title} description={description} />
       </div>
       <div className="p-6">{children}</div>

@@ -1,0 +1,232 @@
+[
+  {
+    "id": "1",
+    "sn": "1",
+    "name": "John Doe",
+    "email": "johndoe@gmail.com",
+    "loginDetails": "Last: 3 hours ago",
+    "role": "Admin",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "2",
+    "sn": "2",
+    "name": "Admin1",
+    "email": "admin1@gmail.com",
+    "loginDetails": "Last: 2 days ago",
+    "role": "Support",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": false
+  },
+  {
+    "id": "3",
+    "sn": "3",
+    "name": "Admin2",
+    "email": "admin2@gmail.com",
+    "loginDetails": "Last: 2 days ago",
+    "role": "Support",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": false
+  },
+  {
+    "id": "4",
+    "sn": "4",
+    "name": "Santosh",
+    "email": "santoshphaiju@gmail.com",
+    "loginDetails": "Last: 2 days ago",
+    "role": "Admin",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "5",
+    "sn": "5",
+    "name": "Alice Smith",
+    "email": "alicesmith@gmail.com",
+    "loginDetails": "Last: 4 hours ago",
+    "role": "User",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": false
+  },
+  {
+    "id": "6",
+    "sn": "6",
+    "name": "Bob Johnson",
+    "email": "bobjohnson@gmail.com",
+    "loginDetails": "Last: 5 hours ago",
+    "role": "Admin",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "7",
+    "sn": "7",
+    "name": "Charlie Brown",
+    "email": "charliebrown@gmail.com",
+    "loginDetails": "Last: 1 day ago",
+    "role": "User",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": false
+  },
+  {
+    "id": "8",
+    "sn": "8",
+    "name": "David Clark",
+    "email": "davidclark@gmail.com",
+    "loginDetails": "Last: 3 days ago",
+    "role": "Admin",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "9",
+    "sn": "9",
+    "name": "Eve Wilson",
+    "email": "evewilson@gmail.com",
+    "loginDetails": "Last: 6 hours ago",
+    "role": "User",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": false
+  },
+  {
+    "id": "10",
+    "sn": "10",
+    "name": "Frank Miller",
+    "email": "frankmiller@gmail.com",
+    "loginDetails": "Last: 2 days ago",
+    "role": "Support",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "11",
+    "sn": "11",
+    "name": "Grace Lee",
+    "email": "gracelee@gmail.com",
+    "loginDetails": "Last: 1 day ago",
+    "role": "Admin",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "12",
+    "sn": "12",
+    "name": "Hank Moore",
+    "email": "hankmoore@gmail.com",
+    "loginDetails": "Last: 7 hours ago",
+    "role": "User",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": false
+  },
+  {
+    "id": "13",
+    "sn": "13",
+    "name": "Ivy King",
+    "email": "ivyking@gmail.com",
+    "loginDetails": "Last: 8 hours ago",
+    "role": "Support",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "14",
+    "sn": "14",
+    "name": "Jack White",
+    "email": "jackwhite@gmail.com",
+    "loginDetails": "Last: 9 hours ago",
+    "role": "Admin",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "15",
+    "sn": "15",
+    "name": "Karen Adams",
+    "email": "karenadams@gmail.com",
+    "loginDetails": "Last: 1 hour ago",
+    "role": "User",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": false
+  },
+  {
+    "id": "16",
+    "sn": "16",
+    "name": "Leo Walker",
+    "email": "leowalker@gmail.com",
+    "loginDetails": "Last: 10 hours ago",
+    "role": "Support",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "17",
+    "sn": "17",
+    "name": "Mona Scott",
+    "email": "monascott@gmail.com",
+    "loginDetails": "Last: 1 day ago",
+    "role": "Admin",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "18",
+    "sn": "18",
+    "name": "Nathaniel Young",
+    "email": "nathaniyoung@gmail.com",
+    "loginDetails": "Last: 2 hours ago",
+    "role": "User",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": false
+  },
+  {
+    "id": "19",
+    "sn": "19",
+    "name": "Olivia Harris",
+    "email": "oliviaharris@gmail.com",
+    "loginDetails": "Last: 3 hours ago",
+    "role": "Support",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "20",
+    "sn": "20",
+    "name": "Peter Evans",
+    "email": "peterevans@gmail.com",
+    "loginDetails": "Last: 4 hours ago",
+    "role": "Admin",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "21",
+    "sn": "21",
+    "name": "Quinn Martinez",
+    "email": "quinnmartinez@gmail.com",
+    "loginDetails": "Last: 5 hours ago",
+    "role": "User",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": false
+  },
+  {
+    "id": "22",
+    "sn": "22",
+    "name": "Rachel Thompson",
+    "email": "rachelthompson@gmail.com",
+    "loginDetails": "Last: 6 hours ago",
+    "role": "Support",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  },
+  {
+    "id": "23",
+    "sn": "23",
+    "name": "Samuel Carter",
+    "email": "samuelcarter@gmail.com",
+    "loginDetails": "Last: 7 hours ago",
+    "role": "Admin",
+    "lastPasswordChange": "Fri Aug 30 2024",
+    "twofa": true
+  }
+]

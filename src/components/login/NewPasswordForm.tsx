@@ -22,7 +22,7 @@ interface IProps {
   setVerified: (value: boolean) => void;
 }
 
-export default function ({ setVerified }: IProps) {
+export default function NewPasswordForm({ setVerified }: IProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -57,6 +57,7 @@ export default function ({ setVerified }: IProps) {
     setHasNumber(/\d/.test(password));
     setHasSpecialChar(/[!@#$%^&*(),.?":{}|<>]/.test(password));
     setDoPasswordsMatch(password === confirmPassword);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.watch("password"), form.watch("confirmPassword")]);
 
   function onSubmit(values: z.infer<typeof NewPasswordSchema>) {
@@ -148,12 +149,12 @@ export default function ({ setVerified }: IProps) {
                   {showConfirmPassword === false ? (
                     <EyeOff
                       onClick={toggleConfirmPasswordVisibility}
-                      className="absolute top-9 right-4 text-muted cursor-pointer"
+                      className="absolute top-9 right-4 cursor-pointer"
                     />
                   ) : (
                     <Eye
                       onClick={toggleConfirmPasswordVisibility}
-                      className="absolute top-9 right-4 text-muted cursor-pointer"
+                      className="absolute top-9 right-4 cursor-pointer"
                     />
                   )}
                   <FormMessage />
