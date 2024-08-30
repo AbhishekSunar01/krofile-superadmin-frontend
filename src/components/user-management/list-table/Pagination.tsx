@@ -38,7 +38,7 @@ const Pagination = ({ table }: { table: any }) => {
 
   return (
     <div className="flex items-center justify-end space-x-2 py-4">
-      <div className="space-x-2 flex items-center justify-center">
+      <div className="flex space-x-2 items-center justify-center">
         <Button
           variant="ghost"
           size="sm"
@@ -66,7 +66,7 @@ const Pagination = ({ table }: { table: any }) => {
               }}
               disabled={pageNumber === "..." || pageNumber === currentPage}
             >
-              {pageNumber === "..." ? "..." : pageNumber + 1}
+              {typeof pageNumber === "number" ? pageNumber + 1 : pageNumber}
             </Button>
           </div>
         ))}

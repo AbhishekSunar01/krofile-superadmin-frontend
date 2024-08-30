@@ -4,6 +4,7 @@ import SearchIcon from "../../assets/search.svg";
 
 import { z } from "zod";
 
+import { Table } from "@tanstack/react-table";
 import {
   ChevronLeft,
   ChevronRight,
@@ -13,12 +14,25 @@ import {
 } from "lucide-react";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { Input } from "../ui/input";
+import { Separator } from "../ui/separator";
 
 const formSchema = z.object({
   searchQuery: z.string(),
 });
 
-const TableHeading = () => {
+interface TableOptionProps<TData> {
+  table: Table<TData>;
+  fromRow: number;
+  toRow: number;
+  totalRows: number;
+}
+
+function TableOptions<TData>({
+  table,
+  fromRow,
+  toRow,
+  totalRows,
+}: TableOptionProps<TData>) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -63,12 +77,38 @@ const TableHeading = () => {
         </div>
 
         <div className="flex options justify-center items-center gap-[16px]">
-          <div className="pagination text-[#6F7C8E] text-[14px] flex justify-center items-center gap-[14px] py-1">
-            1 - 4 of 4{" "}
-            <ChevronLeft className="cursor-pointer h-[20px] w-[20px]" />{" "}
-            <ChevronRight className="cursor-pointer h-[20px] w-[20px]" />
+          <div className="pagination text-[#6F7C8E] text-[14px] flex justify-center items-center gap-[14px] py-1 select-none">
+            {fromRow} - {toRow} of {totalRows}
+            <button
+              disabled={!table.getCanPreviousPage()}
+              onClick={() => table.previousPage()}
+            >
+              <ChevronLeft
+                className={`h-[20px] w-[20px] ${
+                  !table.getCanPreviousPage()
+                    ? "cursor-not-allowed opacity-50"
+                    : "cursor-pointer"
+                }`}
+              />{" "}
+            </button>
+            <button
+              disabled={!table.getCanNextPage()}
+              onClick={() => table.nextPage()}
+            >
+              <ChevronRight
+                className={`h-[20px] w-[20px] ${
+                  !table.getCanNextPage()
+                    ? "cursor-not-allowed opacity-50"
+                    : "cursor-pointer"
+                }`}
+              />
+            </button>
           </div>
-          <div className="flex dataOptions justify-center items-center gap-[18px] text-[#6e6e71] py-1 border-l border-[#6F7C8E] pl-[16px]">
+          <Separator
+            orientation="vertical"
+            className=" border-gray-400 h-[24px] border-[1px]"
+          />
+          <div className="flex dataOptions justify-center items-center gap-[18px] text-[#6e6e71]">
             <Filter className="h-[20px] w-[20px] cursor-pointer" />
             <Printer className="h-[20px] w-[20px] cursor-pointer" />
             <Download className="h-[20px] w-[20px] cursor-pointer" />
@@ -77,6 +117,6 @@ const TableHeading = () => {
       </div>
     </>
   );
-};
+}
 
-export default TableHeading;
+export default TableOptions;
