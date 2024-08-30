@@ -1,4 +1,4 @@
-import { DialogClose } from "@radix-ui/react-dialog";
+import { DialogClose, DialogTitle } from "@radix-ui/react-dialog";
 import { EllipsisVertical, Eye, Trash2 } from "lucide-react";
 import BuildingImage from "../../assets/svg/building.svg";
 import DeleteImage from "../../assets/svg/delete.png";
@@ -23,9 +23,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { userData } from "./columns";
+import { settingsDataType } from "./columns";
 
-export const ActionComponent = ({ row }: { row: Row<userData> }) => {
+export const ActionComponent = ({ row }: { row: Row<settingsDataType> }) => {
   return (
     <div>
       <DropdownMenu>
@@ -61,12 +61,15 @@ export const ActionComponent = ({ row }: { row: Row<userData> }) => {
                       />
                     </div>
                     <div>
-                      <div className="text-[18px] leading-5 text-secondary-foreground font-[500]">
-                        View Details
-                      </div>
-                      <div className="text-[#525E6F] font-[400] text-[14px]">
-                        Details of User
-                      </div>
+                      <DialogTitle className="hidden">
+                        View details
+                      </DialogTitle>
+                        <div className="text-[18px] leading-5 text-secondary-foreground font-[500]">
+                          View Details
+                        </div>
+                        <div className="text-[#525E6F] font-[400] text-[14px]">
+                          Details of User
+                        </div>
                     </div>
                   </div>
                 </DialogHeader>
@@ -162,7 +165,7 @@ export const ActionComponent = ({ row }: { row: Row<userData> }) => {
                       className="w-full mb-4"
                       // onClick={handleBlockConfirm}
                     >
-                      Yes, Confirm 
+                      Yes, Confirm
                     </Button>
                   </DialogClose>
                   <DialogClose asChild>

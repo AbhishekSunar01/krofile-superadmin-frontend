@@ -9,7 +9,7 @@ import { ActionComponent } from "./ActionComponent";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type userData = {
+export type settingsDataType = {
   id: string;
   sn: string;
   name: string;
@@ -18,12 +18,28 @@ export type userData = {
   role: string;
   lastPasswordChange: string;
   twofa: boolean;
+  active: boolean;
 };
 
-export const Columns: ColumnDef<userData>[] = [
+export const Columns: ColumnDef<settingsDataType>[] = [
   {
     accessorKey: "sn",
     header: "S.N.",
+    cell: ({ row }) => {
+      const [active, setActive] = useState<boolean>(row.original.active);
+
+      const handleToggle = () => {
+        setActive(!active);
+
+        // Optionally update the main data source or trigger an API call here
+      };
+      return (
+        <div className="flex gap-2">
+          <Switch id="active" checked={active} onCheckedChange={handleToggle} />
+          {row.getValue("sn")}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "name",
@@ -84,7 +100,7 @@ export const Columns: ColumnDef<userData>[] = [
 
       const handleToggle = () => {
         setTwofa(!twofa);
-        console.log("hello");
+
         // Optionally update the main data source or trigger an API call here
       };
 

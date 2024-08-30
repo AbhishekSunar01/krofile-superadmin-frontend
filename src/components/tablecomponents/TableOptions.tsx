@@ -1,6 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import SearchIcon from "../../assets/search.svg";
+import csv from "../../assets/svg/csv.svg";
+import excel from "../../assets/svg/excel.svg";
 
 import { z } from "zod";
 
@@ -12,6 +14,13 @@ import {
   Filter,
   Printer,
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
@@ -110,8 +119,32 @@ function TableOptions<TData>({
           />
           <div className="flex dataOptions justify-center items-center gap-[18px] text-[#6e6e71]">
             <Filter className="h-[20px] w-[20px] cursor-pointer" />
-            <Printer className="h-[20px] w-[20px] cursor-pointer" />
-            <Download className="h-[20px] w-[20px] cursor-pointer" />
+            <Printer
+              onClick={() => window.print()}
+              className="h-[20px] w-[20px] cursor-pointer"
+            />
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Download className="h-[20px] w-[20px] cursor-pointer" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-[182px] gap-1 rounded-[8px] shadow-md flex-1"
+                align="end"
+              >
+                <DropdownMenuItem className="font-normal text-[14px] flex justify-start items-center gap-1 p-0 hover:bg-gray-100">
+                  <img className="w-[40px] h-[40px]" src={csv} alt="" />
+                  Export as CSV
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="font-normal text-[14px] flex justify-start items-center gap-1 py-0 px-0 hover:bg-gray-100">
+                  <div className="w-[40px] h-[40px] p-2">
+                    <img src={excel} alt="" className="w-full h-full" />{" "}
+                  </div>
+                  Export as Excel
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
