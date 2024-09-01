@@ -6,7 +6,10 @@
     "category": "Request",
     "source": "Support",
     "regDate": "Feb 14, 2023",
-    "status": "Active"
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-001",
+    "note": "We would like to request the addition of a feedback section regarding a recurring water leakage problem in the washroom."
   },
   {
     "_id": "02",
@@ -15,7 +18,9 @@
     "category": "Feedback",
     "source": "Review Platform",
     "regDate": "Jul 19, 2021",
-    "status": "Inactive"
+    "status": "Rejected",
+    "customerName": "John Doe",
+    "note": "We observed slow load times during peak hours and minor bugs in the order processing module. The user interface is intuitive but could benefit from customizable dashboards and enhanced reporting tools. Overall, the system is beneficial, but addressing these issues will improve our experience. Customer support has been responsive and helpful."
   },
   {
     "_id": "03",
@@ -24,7 +29,10 @@
     "category": "Request",
     "source": "Delivery Platform",
     "regDate": "Nov 11, 2020",
-    "status": "Active"
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-002",
+    "note": "Requesting additional delivery options for urgent automotive parts."
   },
   {
     "_id": "04",
@@ -33,7 +41,9 @@
     "category": "Feedback",
     "source": "Unified Digital Wallet",
     "regDate": "Mar 25, 2024",
-    "status": "Pending"
+    "status": "Pending",
+    "customerName": "John Doe",
+    "note": "The platform offers innovative solutions but could benefit from enhanced security features for transactions."
   },
   {
     "_id": "05",
@@ -42,7 +52,10 @@
     "category": "Request",
     "source": "Support",
     "regDate": "Jan 03, 2022",
-    "status": "Active"
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-003",
+    "note": "Requesting a service center locator feature within the mobile app."
   },
   {
     "_id": "06",
@@ -51,7 +64,9 @@
     "category": "Feedback",
     "source": "Review Platform",
     "regDate": "May 12, 2023",
-    "status": "Resolved"
+    "status": "Completed",
+    "customerName": "John Doe",
+    "note": "The food quality is excellent, but delivery times could be improved."
   },
   {
     "_id": "07",
@@ -60,7 +75,10 @@
     "category": "Request",
     "source": "Delivery Platform",
     "regDate": "Jun 18, 2021",
-    "status": "Active"
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-004",
+    "note": "Requesting faster delivery options for high-demand electronics."
   },
   {
     "_id": "08",
@@ -69,7 +87,9 @@
     "category": "Feedback",
     "source": "Unified Digital Wallet",
     "regDate": "Dec 29, 2022",
-    "status": "Pending"
+    "status": "Pending",
+    "customerName": "John Doe",
+    "note": "The clothing quality is good, but the checkout process could be simplified."
   },
   {
     "_id": "09",
@@ -78,7 +98,10 @@
     "category": "Request",
     "source": "Support",
     "regDate": "Oct 10, 2023",
-    "status": "Active"
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-005",
+    "note": "Requesting a loyalty program for frequent customers."
   },
   {
     "_id": "10",
@@ -87,9 +110,10 @@
     "category": "Feedback",
     "source": "Washroom Feedback",
     "regDate": "Aug 22, 2023",
-    "status": "Pending"
+    "status": "Pending",
+    "customerName": "John Doe",
+    "note": "The washroom cleanliness is satisfactory, but more frequent maintenance is required."
   },
-
   {
     "_id": "11",
     "businessName": "Techie Hardware",
@@ -97,7 +121,10 @@
     "category": "Request",
     "source": "Support",
     "regDate": "Jan 05, 2023",
-    "status": "Active"
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-006",
+    "note": "Requesting bulk order options for enterprise customers."
   },
   {
     "_id": "12",
@@ -106,7 +133,9 @@
     "category": "Feedback",
     "source": "Review Platform",
     "regDate": "Apr 21, 2022",
-    "status": "Resolved"
+    "status": "Completed",
+    "customerName": "John Doe",
+    "note": "Product quality is consistently good, but shipping times could be improved."
   },
   {
     "_id": "13",
@@ -115,7 +144,10 @@
     "category": "Request",
     "source": "Unified Digital Wallet",
     "regDate": "Aug 15, 2023",
-    "status": "Pending"
+    "status": "Pending",
+    "customerName": "John Doe",
+    "reference": "Ref-007",
+    "note": "Requesting real-time tracking of buses and trains within the app."
   },
   {
     "_id": "14",
@@ -124,7 +156,9 @@
     "category": "Feedback",
     "source": "Delivery Platform",
     "regDate": "Feb 18, 2021",
-    "status": "Active"
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "note": "Property management is responsive, but the website could be more user-friendly."
   },
   {
     "_id": "15",
@@ -133,7 +167,10 @@
     "category": "Request",
     "source": "Support",
     "regDate": "Oct 30, 2022",
-    "status": "Inactive"
+    "status": "Rejected",
+    "customerName": "John Doe",
+    "reference": "Ref-008",
+    "note": "Requesting an option for custom meal plans in the subscription service."
   },
   {
     "_id": "16",
@@ -142,7 +179,9 @@
     "category": "Feedback",
     "source": "Washroom Feedback",
     "regDate": "Jul 22, 2023",
-    "status": "Resolved"
+    "status": "Completed",
+    "customerName": "John Doe",
+    "note": "Service quality is good, but the waiting area could be more comfortable."
   },
   {
     "_id": "17",
@@ -151,7 +190,10 @@
     "category": "Request",
     "source": "Unified Digital Wallet",
     "regDate": "May 09, 2022",
-    "status": "Active"
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-009",
+    "note": "Requesting online appointment scheduling for all branches."
   },
   {
     "_id": "18",
@@ -160,7 +202,9 @@
     "category": "Feedback",
     "source": "Review Platform",
     "regDate": "Dec 01, 2023",
-    "status": "Pending"
+    "status": "Pending",
+    "customerName": "John Doe",
+    "note": "Product variety is excellent, but the return policy could be more flexible."
   },
   {
     "_id": "19",
@@ -169,7 +213,10 @@
     "category": "Request",
     "source": "Delivery Platform",
     "regDate": "Mar 14, 2024",
-    "status": "Active"
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-010",
+    "note": "Requesting an upgrade to the security system to include facial recognition."
   },
   {
     "_id": "20",
@@ -178,6 +225,66 @@
     "category": "Feedback",
     "source": "Support",
     "regDate": "Jun 30, 2021",
-    "status": "Resolved"
+    "status": "Completed",
+    "customerName": "John Doe",
+    "note": "The curriculum is well-structured, but more interactive activities would be beneficial."
+  },
+  {
+    "_id": "21",
+    "businessName": "PetCare Plus",
+    "industryType": "Pet Services",
+    "category": "Request",
+    "source": "Support",
+    "regDate": "Jul 10, 2023",
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-011",
+    "note": "Requesting an option to schedule grooming appointments online."
+  },
+  {
+    "_id": "22",
+    "businessName": "TechGears",
+    "industryType": "Technology",
+    "category": "Feedback",
+    "source": "Review Platform",
+    "regDate": "Sep 14, 2022",
+    "status": "Completed",
+    "customerName": "John Doe",
+    "note": "The product range is excellent, but customer support response times could be faster."
+  },
+  {
+    "_id": "23",
+    "businessName": "EcoBuild",
+    "industryType": "Construction",
+    "category": "Request",
+    "source": "Delivery Platform",
+    "regDate": "Nov 03, 2021",
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-012",
+    "note": "Requesting eco-friendly building materials to be included in the product catalog."
+  },
+  {
+    "_id": "24",
+    "businessName": "TravelSafe",
+    "industryType": "Transportation",
+    "category": "Feedback",
+    "source": "Unified Digital Wallet",
+    "regDate": "Dec 28, 2023",
+    "status": "Pending",
+    "customerName": "John Doe",
+    "note": "The booking process is smooth, but additional payment options would be appreciated."
+  },
+  {
+    "_id": "25",
+    "businessName": "MediCare Supplies",
+    "industryType": "Healthcare",
+    "category": "Request",
+    "source": "Support",
+    "regDate": "Aug 17, 2023",
+    "status": "In Progress",
+    "customerName": "John Doe",
+    "reference": "Ref-013",
+    "note": "Requesting expedited shipping for medical supplies in emergencies."
   }
 ]

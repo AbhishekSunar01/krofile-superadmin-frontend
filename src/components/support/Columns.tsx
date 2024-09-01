@@ -1,15 +1,5 @@
 import { Button } from "../ui/button";
-import { ColumnDefinition } from "../user-management/list-table/DataTable";
-
-export type SupportBusinessData = {
-  _id: string;
-  businessName: string;
-  industryType: string;
-  category: string;
-  source: string;
-  regDate: string;
-  status: string;
-};
+import { ColumnDefinition, SupportBusinessData } from "../../types/type";
 
 export const SupportColumns: ColumnDefinition<SupportBusinessData>[] = [
   {
@@ -47,7 +37,7 @@ export const SupportColumns: ColumnDefinition<SupportBusinessData>[] = [
     accessorKey: "category",
     sortable: false,
     filterable: true,
-    searchable: true,
+    searchable: false,
   },
   {
     id: "source",
@@ -55,7 +45,7 @@ export const SupportColumns: ColumnDefinition<SupportBusinessData>[] = [
     accessorKey: "source",
     sortable: false,
     filterable: true,
-    searchable: true,
+    searchable: false,
   },
   {
     id: "regDate",
@@ -78,6 +68,29 @@ export const SupportColumns: ColumnDefinition<SupportBusinessData>[] = [
     accessorKey: "status",
     sortable: false,
     filterable: true,
-    searchable: true,
+    searchable: false,
+    cell: ({ row }) => {
+      const status = row.getValue("status") as string;
+      let colorClass = "";
+
+      switch (status) {
+        case "Pending":
+          colorClass = "text-orange-500";
+          break;
+        case "In Progress":
+          colorClass = "text-blue-500";
+          break;
+        case "Completed":
+          colorClass = "text-green-500";
+          break;
+        case "Rejected":
+          colorClass = "text-red-500";
+          break;
+        default:
+          colorClass = "text-gray-500";
+      }
+
+      return <span className={colorClass}>{status}</span>;
+    },
   },
 ];

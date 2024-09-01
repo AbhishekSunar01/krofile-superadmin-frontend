@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -23,7 +23,7 @@ import {
 } from "../../ui/table";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
-import FilterDropdown, { FilterOption } from "./Filter";
+import FilterDropdown from "./Filter";
 import Pagination from "./Pagination";
 
 import search from "../../../assets/svg/search.svg";
@@ -43,35 +43,23 @@ import {
 } from "../../ui/dropdown-menu";
 import { Separator } from "../../ui/separator";
 
-import BusinessDetailsSheet, { BusinessData } from "./BusinessDetailsSheet";
+import ViewDetails from "../../support/ViewDetails";
 
-export type DataTableItem = {
-  [key: string]: unknown;
-};
-
-export type ColumnDefinition<T extends DataTableItem> = {
-  id: string;
-  header: string;
-  accessorKey: keyof T;
-  sortable?: boolean;
-  searchable?: boolean;
-  filterable?: boolean;
-  cell?: (info: {
-    row: { getValue: (key: keyof T) => any; original: T };
-  }) => React.ReactNode;
-};
-
-interface DataTableProps<T extends DataTableItem> {
-  data: T[];
-  columns: ColumnDefinition<T>[];
-  title: string;
-}
+import {
+  BusinessData,
+  ColumnDefinition,
+  DataTableItem,
+  DataTableProps,
+  FilterOption,
+} from "../../../types/type";
+import BusinessDetailsSheet from "./BusinessDetailsSheet";
 
 export default function DataTable<T extends DataTableItem>({
   data,
   columns,
   title,
-}: DataTableProps<T>) {
+  detailViewType,
+}: DataTableProps<T> & { detailViewType: "sheet" | "dialog" }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -87,10 +75,25 @@ export default function DataTable<T extends DataTableItem>({
 
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<BusinessData | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleRowClick = (row: BusinessData) => {
+  const uniqueStatuses = useMemo(() => {
+    const statuses = new Set<string>();
+    data.forEach((item: any) => {
+      if (item.status) {
+        statuses.add(item.status);
+      }
+    });
+    return Array.from(statuses);
+  }, [data]);
+
+  const handleRowClick = (row: any) => {
     setSelectedRow(row);
-    setIsSheetOpen(true);
+    if (detailViewType === "sheet") {
+      setIsSheetOpen(true);
+    } else {
+      setIsDialogOpen(true);
+    }
   };
 
   const filteredData = useMemo(() => {
@@ -116,8 +119,6 @@ export default function DataTable<T extends DataTableItem>({
       });
     });
   }, [data, activeFilters]);
-
-  // console.log("Filtered data:", filteredData);
 
   const handleRemoveFilter = (filterLabel: string, item: string) => {
     setActiveFilters((prevFilters) => {
@@ -376,12 +377,20 @@ export default function DataTable<T extends DataTableItem>({
             )}
           </TableBody>
         </Table>
-
-        <BusinessDetailsSheet
-          isOpen={isSheetOpen}
-          onOpenChange={setIsSheetOpen}
-          businessData={selectedRow}
-        />
+        {detailViewType === "sheet" ? (
+          <BusinessDetailsSheet
+            isOpen={isSheetOpen}
+            onOpenChange={setIsSheetOpen}
+            businessData={selectedRow}
+          />
+        ) : (
+          <ViewDetails
+            isOpen={isDialogOpen}
+            onOpenChange={setIsDialogOpen}
+            data={selectedRow}
+            availableStatuses={uniqueStatuses}
+          />
+        )}
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <Pagination table={table} />
@@ -412,8 +421,6 @@ function extractFilterOptions<T extends DataTableItem>(
       });
     }
   });
-
-  console.log("Filter options:", filterOptions);
 
   return filterOptions;
 }

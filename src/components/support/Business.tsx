@@ -5,7 +5,12 @@ import { SupportColumns } from "./Columns";
 export default function Business() {
   return (
     <div>
-      <DataTable columns={SupportColumns} data={data} title="" />
+      <DataTable
+        columns={SupportColumns}
+        data={data}
+        title=""
+        detailViewType="dialog"
+      />
     </div>
   );
 }

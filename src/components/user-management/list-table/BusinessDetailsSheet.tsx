@@ -19,33 +19,10 @@ import {
   TableHeader,
   TableRow,
 } from "../../ui/table";
-
-export type BusinessData = {
-  _id: string;
-  businessName: string;
-  industryType: string;
-  subStatus: string;
-  plan: string;
-  regDate: string;
-  country: string;
-  customerName?: string;
-  customerEmail?: string;
-  customerContact?: string;
-  customerType?: string;
-  contactNumber?: string;
-  location?: string;
-  numberOfLocations?: number;
-  website?: string;
-  teamMembers?: number;
-  expiryDate?: string;
-  autoRenewal?: boolean;
-};
-
-interface BusinessDetailsSheetProps {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-  businessData: BusinessData | null;
-}
+import {
+  BusinessDetailsSheetProps,
+  SubscriptionDetailsProps,
+} from "../../../types/type";
 
 const BusinessDetailsSheet: React.FC<BusinessDetailsSheetProps> = ({
   isOpen,
@@ -115,10 +92,6 @@ const BusinessDetailsSheet: React.FC<BusinessDetailsSheetProps> = ({
 };
 
 export default BusinessDetailsSheet;
-
-interface SubscriptionDetailsProps {
-  businessData: BusinessData;
-}
 
 const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
   businessData,

@@ -6,9 +6,9 @@ import Subscription from "./Subscription";
 import SupportTicket from "./SupportTicket";
 
 export default function SupportComponent() {
-  const overviewHasData = true;
-  const businessHasData = true;
-  const supportHasData = false;
+  const overviewHasData = false;
+  const businessHasData = false;
+  const supportHasData = true;
   const subscriptionHasData = true;
 
   return (
