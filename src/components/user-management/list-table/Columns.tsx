@@ -265,6 +265,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "_id",
     sortable: false,
     searchable: true,
+    filterable: false,
     cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
   },
   {
@@ -273,6 +274,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "businessName",
     sortable: true,
     searchable: true,
+    filterable: false,
     cell: ({ row }) => (
       <Button variant="ghost">{row.getValue("businessName")}</Button>
     ),
@@ -283,6 +285,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "industryType",
     sortable: false,
     searchable: true,
+    filterable: true,
   },
   {
     id: "subStatus",
@@ -290,6 +293,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "subStatus",
     sortable: false,
     searchable: true,
+    filterable: true,
   },
   {
     id: "plan",
@@ -297,6 +301,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "plan",
     sortable: false,
     searchable: true,
+    filterable: true,
   },
   {
     id: "regDate",
@@ -319,6 +324,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "country",
     sortable: true,
     searchable: true,
+    filterable: false,
     cell: ({ row }) => (
       <Button variant="ghost">{row.getValue("country")}</Button>
     ),

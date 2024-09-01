@@ -8,7 +8,7 @@ export default function UserManagement() {
       title="User Management"
       description="Keep a close eye on every aspect of your businesses, with the ability to track details and take decisive actions."
     >
-      <DataTable columns={Columns} data={data} />
+      <DataTable columns={Columns} data={data} title="Overall User List" />
     </PageLayout>
   );
 }

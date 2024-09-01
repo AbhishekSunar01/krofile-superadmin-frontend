@@ -23,7 +23,7 @@ import {
 } from "../../ui/table";
 import { Input } from "../../ui/input";
 import { Button } from "../../ui/button";
-import FilterDropdown from "./Filter";
+import FilterDropdown, { FilterOption } from "./Filter";
 import Pagination from "./Pagination";
 
 import search from "../../../assets/svg/search.svg";
@@ -55,6 +55,7 @@ export type ColumnDefinition<T extends DataTableItem> = {
   accessorKey: keyof T;
   sortable?: boolean;
   searchable?: boolean;
+  filterable?: boolean;
   cell?: (info: {
     row: { getValue: (key: keyof T) => any; original: T };
   }) => React.ReactNode;
@@ -63,11 +64,13 @@ export type ColumnDefinition<T extends DataTableItem> = {
 interface DataTableProps<T extends DataTableItem> {
   data: T[];
   columns: ColumnDefinition<T>[];
+  title: string;
 }
 
 export default function DataTable<T extends DataTableItem>({
   data,
   columns,
+  title,
 }: DataTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -97,8 +100,8 @@ export default function DataTable<T extends DataTableItem>({
 
         const normalizedKey = key.toLowerCase().replace(/\s+/g, "");
         const dataKeyMap: { [key: string]: string } = {
-          subscriptionstatus: "subStatus",
-          industry: "industryType",
+          substatus: "subStatus",
+          industrytype: "industryType",
           plan: "plan",
         };
 
@@ -113,6 +116,8 @@ export default function DataTable<T extends DataTableItem>({
       });
     });
   }, [data, activeFilters]);
+
+  console.log("Filtered data:", filteredData);
 
   const handleRemoveFilter = (filterLabel: string, item: string) => {
     setActiveFilters((prevFilters) => {
@@ -220,9 +225,14 @@ export default function DataTable<T extends DataTableItem>({
   const fromRow = pageIndex * pageSize + 1;
   const toRow = Math.min(fromRow + pageSize - 1, totalRows);
 
+  const filterOptions = useMemo(
+    () => extractFilterOptions(data, columns),
+    [data, columns]
+  );
+
   return (
     <div className="w-full">
-      <h1 className="text-[22px] font-medium pb-4">Overall User List</h1>
+      {title && <h1 className="text-[22px] font-medium pb-4">{title}</h1>}
       <div className="flex flex-row justify-between items-center p-4 bg-white rounded-[8px]">
         <div className="relative">
           <img
@@ -249,7 +259,10 @@ export default function DataTable<T extends DataTableItem>({
             className=" border-gray-400 h-[24px] border-[1px]"
           />
 
-          <FilterDropdown onFilterChange={handleFilterChange} />
+          <FilterDropdown
+            filterOptions={filterOptions}
+            onFilterChange={handleFilterChange}
+          />
 
           <img
             src={print}
@@ -375,4 +388,32 @@ export default function DataTable<T extends DataTableItem>({
       </div>
     </div>
   );
+}
+
+function extractFilterOptions<T extends DataTableItem>(
+  data: T[],
+  columns: ColumnDefinition<T>[]
+): FilterOption[] {
+  const filterOptions: FilterOption[] = [];
+
+  columns.forEach((col) => {
+    if (col.filterable) {
+      const optionsSet = new Set<string>();
+      data.forEach((item) => {
+        const value = item[col.accessorKey] as string;
+        if (value) {
+          optionsSet.add(value);
+        }
+      });
+
+      filterOptions.push({
+        label: col.header,
+        options: Array.from(optionsSet),
+      });
+    }
+  });
+
+  console.log("Filter options:", filterOptions);
+
+  return filterOptions;
 }
