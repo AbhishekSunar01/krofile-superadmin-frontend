@@ -124,7 +124,7 @@ const ActionCell: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between w-full gap-4 ">
                   <Button
-                    variant="outline"
+                    variant="outline1"
                     className="w-full"
                     onClick={() => setSuspendDialogOpen(false)}
                   >
@@ -163,7 +163,7 @@ const ActionCell: React.FC = () => {
                     Yes, Confirm
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="outline1"
                     className="w-full"
                     onClick={() => setSuspendDialogOpen(false)}
                   >
@@ -212,7 +212,7 @@ const ActionCell: React.FC = () => {
                     Yes, Confirm
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="outline1"
                     className="w-full"
                     onClick={() => setBlockDialogOpen(false)}
                   >
@@ -240,7 +240,7 @@ const ActionCell: React.FC = () => {
                     Yes, Confirm
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="outline1"
                     className="w-full"
                     onClick={() => setBlockDialogOpen(false)}
                   >

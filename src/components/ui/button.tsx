@@ -14,7 +14,9 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/80",
         success: "bg-[#00A81C] text-white shadow-sm hover:bg-[#00A81C]/80",
-        outline: "border border-input bg-background shadow-sm ",
+        outline1: "border border-input bg-background shadow-sm ",
+        outline:
+          "border border-input bg-background shadow-sm hover:bg-mainBg hover:text-accent-foreground hover:shadow-md",
         pagination: "text-primary border border-input bg-background",
         paginationActive:
           "bg-[#1E7BC8] text-white rounded-full border border-input disabled:opacity-100",
@@ -27,6 +29,7 @@ const buttonVariants = cva(
           "bg-[#14181f] text-primary-foreground rounded-[24px] px-[64px] text-[18px] font-[500]",
         backBtn:
           "bg-[#F6F7F9] border border-[#e2e6e9] rounded-full flex justify-center items-center h-[48px] w-[48px] cursor-pointer",
+        disabled: "bg-[#B6C1CA] shadow-none cursor-not-allowed text-white",
       },
       size: {
         default: "h-9 px-4 py-2",
