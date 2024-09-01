@@ -99,10 +99,10 @@ export default function DataTable<T extends DataTableItem>({
         if (values.length === 0) return true;
 
         const normalizedKey = key.toLowerCase().replace(/\s+/g, "");
+
         const dataKeyMap: { [key: string]: string } = {
-          substatus: "subStatus",
+          "subs.status": "subStatus",
           industrytype: "industryType",
-          plan: "plan",
         };
 
         const dataKey = dataKeyMap[normalizedKey] || normalizedKey;
@@ -117,7 +117,7 @@ export default function DataTable<T extends DataTableItem>({
     });
   }, [data, activeFilters]);
 
-  console.log("Filtered data:", filteredData);
+  // console.log("Filtered data:", filteredData);
 
   const handleRemoveFilter = (filterLabel: string, item: string) => {
     setActiveFilters((prevFilters) => {
