@@ -1,0 +1,183 @@
+[
+  {
+    "_id": "01",
+    "businessName": "Green Grocers",
+    "industryType": "Retail",
+    "category": "Request",
+    "source": "Support",
+    "regDate": "Feb 14, 2023",
+    "status": "Active"
+  },
+  {
+    "_id": "02",
+    "businessName": "Retail World",
+    "industryType": "Retail",
+    "category": "Feedback",
+    "source": "Review Platform",
+    "regDate": "Jul 19, 2021",
+    "status": "Inactive"
+  },
+  {
+    "_id": "03",
+    "businessName": "AutoCare Solutions",
+    "industryType": "Automotive",
+    "category": "Request",
+    "source": "Delivery Platform",
+    "regDate": "Nov 11, 2020",
+    "status": "Active"
+  },
+  {
+    "_id": "04",
+    "businessName": "Tech Innovators",
+    "industryType": "Technology",
+    "category": "Feedback",
+    "source": "Unified Digital Wallet",
+    "regDate": "Mar 25, 2024",
+    "status": "Pending"
+  },
+  {
+    "_id": "05",
+    "businessName": "AutoPlus",
+    "industryType": "Automotive",
+    "category": "Request",
+    "source": "Support",
+    "regDate": "Jan 03, 2022",
+    "status": "Active"
+  },
+  {
+    "_id": "06",
+    "businessName": "Fresh Eats",
+    "industryType": "Food & Beverage",
+    "category": "Feedback",
+    "source": "Review Platform",
+    "regDate": "May 12, 2023",
+    "status": "Resolved"
+  },
+  {
+    "_id": "07",
+    "businessName": "ElectroMart",
+    "industryType": "Electronics",
+    "category": "Request",
+    "source": "Delivery Platform",
+    "regDate": "Jun 18, 2021",
+    "status": "Active"
+  },
+  {
+    "_id": "08",
+    "businessName": "Clothing Co.",
+    "industryType": "Apparel",
+    "category": "Feedback",
+    "source": "Unified Digital Wallet",
+    "regDate": "Dec 29, 2022",
+    "status": "Pending"
+  },
+  {
+    "_id": "09",
+    "businessName": "Happy Wheels",
+    "industryType": "Automotive",
+    "category": "Request",
+    "source": "Support",
+    "regDate": "Oct 10, 2023",
+    "status": "Active"
+  },
+  {
+    "_id": "10",
+    "businessName": "WashRoom Services",
+    "industryType": "Services",
+    "category": "Feedback",
+    "source": "Washroom Feedback",
+    "regDate": "Aug 22, 2023",
+    "status": "Pending"
+  },
+
+  {
+    "_id": "11",
+    "businessName": "Techie Hardware",
+    "industryType": "Electronics",
+    "category": "Request",
+    "source": "Support",
+    "regDate": "Jan 05, 2023",
+    "status": "Active"
+  },
+  {
+    "_id": "12",
+    "businessName": "Garden Fresh",
+    "industryType": "Agriculture",
+    "category": "Feedback",
+    "source": "Review Platform",
+    "regDate": "Apr 21, 2022",
+    "status": "Resolved"
+  },
+  {
+    "_id": "13",
+    "businessName": "Metro Transit",
+    "industryType": "Transportation",
+    "category": "Request",
+    "source": "Unified Digital Wallet",
+    "regDate": "Aug 15, 2023",
+    "status": "Pending"
+  },
+  {
+    "_id": "14",
+    "businessName": "Skyline Properties",
+    "industryType": "Real Estate",
+    "category": "Feedback",
+    "source": "Delivery Platform",
+    "regDate": "Feb 18, 2021",
+    "status": "Active"
+  },
+  {
+    "_id": "15",
+    "businessName": "Foodie's Delight",
+    "industryType": "Food & Beverage",
+    "category": "Request",
+    "source": "Support",
+    "regDate": "Oct 30, 2022",
+    "status": "Inactive"
+  },
+  {
+    "_id": "16",
+    "businessName": "AutoMax Services",
+    "industryType": "Automotive",
+    "category": "Feedback",
+    "source": "Washroom Feedback",
+    "regDate": "Jul 22, 2023",
+    "status": "Resolved"
+  },
+  {
+    "_id": "17",
+    "businessName": "HealthFirst",
+    "industryType": "Healthcare",
+    "category": "Request",
+    "source": "Unified Digital Wallet",
+    "regDate": "May 09, 2022",
+    "status": "Active"
+  },
+  {
+    "_id": "18",
+    "businessName": "StyleHub",
+    "industryType": "Apparel",
+    "category": "Feedback",
+    "source": "Review Platform",
+    "regDate": "Dec 01, 2023",
+    "status": "Pending"
+  },
+  {
+    "_id": "19",
+    "businessName": "SafeHomes",
+    "industryType": "Security",
+    "category": "Request",
+    "source": "Delivery Platform",
+    "regDate": "Mar 14, 2024",
+    "status": "Active"
+  },
+  {
+    "_id": "20",
+    "businessName": "BrightStart Education",
+    "industryType": "Education",
+    "category": "Feedback",
+    "source": "Support",
+    "regDate": "Jun 30, 2021",
+    "status": "Resolved"
+  }
+]

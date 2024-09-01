@@ -2,7 +2,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -12,17 +12,24 @@ const buttonVariants = cva(
         default:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/80",
+        success: "bg-[#00A81C] text-white shadow-sm hover:bg-[#00A81C]/80",
+        outline1: "border border-input bg-background shadow-sm ",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-input bg-background shadow-sm hover:bg-mainBg hover:text-accent-foreground hover:shadow-md",
+        pagination: "text-primary border border-input bg-background",
+        paginationActive:
+          "bg-[#1E7BC8] text-white rounded-full border border-input disabled:opacity-100",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost:
+          "hover:bg-gray-10 hover:text-accent-foreground font-[400] text-[14px] cursor-default",
         link: "text-primary underline-offset-4 hover:underline",
         login:
           "bg-[#14181f] text-primary-foreground rounded-[24px] px-[64px] text-[18px] font-[500]",
         backBtn:
           "bg-[#F6F7F9] border border-[#e2e6e9] rounded-full flex justify-center items-center h-[48px] w-[48px] cursor-pointer",
+        disabled: "bg-[#B6C1CA] shadow-none cursor-not-allowed text-white",
       },
       size: {
         default: "h-9 px-4 py-2",
