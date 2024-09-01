@@ -34,6 +34,8 @@ interface TableOptionProps<TData> {
   fromRow: number;
   toRow: number;
   totalRows: number;
+  globalFilter: string;
+  setGlobalFilter: (value: string) => void;
 }
 
 function TableOptions<TData>({
@@ -41,6 +43,8 @@ function TableOptions<TData>({
   fromRow,
   toRow,
   totalRows,
+  globalFilter,
+  setGlobalFilter
 }: TableOptionProps<TData>) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,14 +69,28 @@ function TableOptions<TData>({
               <FormField
                 control={form.control}
                 name="searchQuery"
-                render={({ field }) => (
+                render={() => (
                   <FormItem className="relative">
                     {/* <FormLabel>Username</FormLabel> */}
                     <FormControl>
                       <Input
                         className="w-[380px] !pl-[40px] px-[12px] bg-[#F6F7F9] text-[14px] text-[#525E6F]"
                         placeholder="Search"
-                        {...field}
+                        // value={
+                        //   (table
+                        //     .getColumn("email")
+                        //     ?.getFilterValue() as string) ?? ""
+                        // }
+                        // onChange={(event) =>
+                        //   table
+                        //     .getColumn("email")
+                        //     ?.setFilterValue(event.target.value)
+                        // }
+                        value={globalFilter}
+                        onChange={(event) =>
+                          setGlobalFilter(event.target.value)
+                        }
+                        // {...field}
                       />
                     </FormControl>
                     <div className="searchIcon absolute -top-[2px] left-3">

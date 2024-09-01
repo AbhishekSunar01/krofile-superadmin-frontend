@@ -25,6 +25,7 @@ export const Columns: ColumnDef<settingsDataType>[] = [
   {
     accessorKey: "sn",
     header: "S.N.",
+    enableGlobalFilter: true,
     cell: ({ row }) => {
       const [active, setActive] = useState<boolean>(row.original.active);
 
@@ -43,6 +44,7 @@ export const Columns: ColumnDef<settingsDataType>[] = [
   },
   {
     accessorKey: "name",
+    enableGlobalFilter: true,
     cell: ({ row }) => <div className="lowercase">{row.getValue("name")}</div>,
     enableSorting: true,
     header: ({ column }) => {
@@ -62,6 +64,7 @@ export const Columns: ColumnDef<settingsDataType>[] = [
   },
   {
     accessorKey: "email",
+    enableGlobalFilter: true,
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
     enableSorting: true,
     header: ({ column }) => {
@@ -83,14 +86,17 @@ export const Columns: ColumnDef<settingsDataType>[] = [
   {
     accessorKey: "loginDetails",
     header: "Login Details",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "role",
     header: "Role",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "lastPasswordChange",
     header: "Last Password Change",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "twofa",

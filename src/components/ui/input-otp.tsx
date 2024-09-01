@@ -2,7 +2,7 @@ import * as React from "react";
 import { DashIcon } from "@radix-ui/react-icons";
 import { OTPInput, OTPInputContext } from "input-otp";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,
@@ -26,7 +26,7 @@ const InputOTPGroup = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("grid grid-cols-5 gap-4 w-full", className)}
+    className={cn("grid grid-cols-6 gap-2 w-full", className)}
     {...props}
   />
 ));
@@ -51,7 +51,7 @@ const InputOTPSlot = React.forwardRef<
     >
       {char}
       {hasFakeCaret && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+        <div className="flex pointer-events-none absolute inset-0 items-center justify-center">
           <div className="h-4 w-px animate-caret-blink bg-foreground duration-1000" />
         </div>
       )}

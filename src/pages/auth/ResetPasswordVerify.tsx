@@ -59,7 +59,7 @@ export default function ResetPasswordVerify() {
       setLoading(false);
       setErrorMessage("Invalid or expired reset code. Please try again.");
     } else {
-      if (data.pin === "12345") {
+      if (data.pin === "123456") {
         setTimeout(() => {
           setLoading(false);
           nav("/auth/set-new-password");
@@ -89,13 +89,14 @@ export default function ResetPasswordVerify() {
               <FormItem className="mb-[24px]">
                 <FormLabel className="text-[16px]">Code</FormLabel>
                 <FormControl>
-                  <InputOTP maxLength={5} {...field}>
+                  <InputOTP maxLength={6} {...field}>
                     <InputOTPGroup>
                       <InputOTPSlot index={0} />
                       <InputOTPSlot index={1} />
                       <InputOTPSlot index={2} />
                       <InputOTPSlot index={3} />
                       <InputOTPSlot index={4} />
+                      <InputOTPSlot index={5} />
                     </InputOTPGroup>
                   </InputOTP>
                 </FormControl>

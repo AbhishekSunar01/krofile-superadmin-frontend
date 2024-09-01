@@ -1,14 +1,16 @@
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
 
-import React from "react";
+import React, { useState } from "react";
 import TableOptions from "../tablecomponents/TableOptions";
 import {
   Table,
@@ -30,15 +32,35 @@ export function DataTableComponent<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
+  const [globalFilter, setGlobalFilter] = useState("");
   const table = useReactTable({
-    data,
-    columns,
+    data: data,
+    columns: columns,
     onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    enableGlobalFilter: true,
+    globalFilterFn: (row, _columnId, filterValue) => {
+      const searchableColumns = columns.filter((col) => col.enableGlobalFilter);
+      return searchableColumns.some((col) => {
+        const cellValue = row.getValue(col.accessorKey.toString());
+        return cellValue
+          ?.toString()
+          .toLowerCase()
+          .includes(filterValue.toLowerCase());
+      });
+    },
     state: {
       sorting,
+      columnFilters,
+      globalFilter,
     },
   });
 
@@ -55,6 +77,8 @@ export function DataTableComponent<TData, TValue>({
         fromRow={fromRow}
         toRow={toRow}
         totalRows={totalRows}
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
       />
       <div className="rounded-md bg-white mt-[24px] w-full overflow-x-auto">
         <Table className="overflow-x-auto min-w-[1000px]">
@@ -130,24 +154,6 @@ export function DataTableComponent<TData, TValue>({
             )}
           </TableBody>
         </Table>
-        {/* <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div> */}
       </div>
       <Pagination table={table} />
     </div>
