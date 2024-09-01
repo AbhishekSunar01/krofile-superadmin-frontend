@@ -162,7 +162,8 @@ export const ActionComponent = ({ row }: { row: Row<settingsDataType> }) => {
                   <DialogClose asChild>
                     <Button
                       variant="destructive"
-                      className="w-full mb-4"
+                      className="w-full mb-4 rounded-[8px]"
+                      size={"lg"}
                       // onClick={handleBlockConfirm}
                     >
                       Yes, Confirm
@@ -171,7 +172,8 @@ export const ActionComponent = ({ row }: { row: Row<settingsDataType> }) => {
                   <DialogClose asChild>
                     <Button
                       variant="outline"
-                      className="w-full"
+                      className="w-full rounded-[8px]"
+                      size={"lg"}
                       // onClick={() => setBlockDialogOpen(false)}
                     >
                       Cancel

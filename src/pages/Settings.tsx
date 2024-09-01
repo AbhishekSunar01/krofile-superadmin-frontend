@@ -98,12 +98,12 @@ export default function Settings() {
                     <SelectGroup>
                       <SelectLabel>Choose Role</SelectLabel>
                       <SelectItem value="support">Support</SelectItem>
-                      <SelectItem value="admin">Admin</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
               </div>
             </div>
+            <hr />
             <DialogFooter>
               <div className="flex justify-between w-full gap-2">
                 <DialogClose asChild>
