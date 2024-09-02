@@ -1,11 +1,5 @@
 import PageLayout from "../layout/PageLayout";
-import activeSubscribers from "../json/dummyData/activeSubscribers.json";
-import {
-  ActiveSubscriberChart,
-  TotalCustomers,
-  UsersGrowth,
-} from "../components/dashboard/index";
-import userGrowth from "../json/dummyData/userGrowth.json";
+import { TotalCustomers } from "../components/dashboard/index";
 
 export default function Dashboard() {
   return (
@@ -17,19 +11,19 @@ export default function Dashboard() {
         <div>
           <TotalCustomers />
         </div>
-        <div>
+        {/* <div>
           <ActiveSubscriberChart
             pieData={activeSubscribers.pieData}
             titleData={activeSubscribers.titleData}
           />
-        </div>
+        </div> */}
       </div>{" "}
-      <div className="">
+      {/* <div className="">
         <UsersGrowth
           chartData={userGrowth.chartData}
           titleData={userGrowth.titleData}
         />
-      </div>
+      </div> */}
     </PageLayout>
   );
 }
