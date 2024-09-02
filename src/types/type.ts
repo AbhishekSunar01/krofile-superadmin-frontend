@@ -75,9 +75,28 @@ export type SupportBusinessData = {
   note?: string;
 };
 
-export type ViewDetailsProps = {
+export type ViewBusinessProps = {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   data: SupportBusinessData | null;
   availableStatuses: string[];
+};
+
+export type SupportTicketData = {
+  _id: string;
+  businessName: string;
+  industryType: string;
+  topic: string;
+  subject: string;
+  date: string;
+  status: string;
+  logo?: string;
+  description?: string;
+  image?: string[];
+};
+
+export type ViewTicketProps = {
+  isTicketOpen: boolean;
+  onBack: () => void;
+  data: SupportTicketData | null;
 };

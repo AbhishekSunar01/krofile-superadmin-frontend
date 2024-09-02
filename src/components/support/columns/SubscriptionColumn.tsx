@@ -1,7 +1,7 @@
-import { Button } from "../ui/button";
-import { ColumnDefinition, SupportBusinessData } from "../../types/type";
+import { Button } from "../../ui/button";
+import { ColumnDefinition, SupportBusinessData } from "../../../types/type";
 
-export const SupportColumns: ColumnDefinition<SupportBusinessData>[] = [
+export const SubscriptionColumn: ColumnDefinition<SupportBusinessData>[] = [
   {
     id: "id",
     header: "S.N.",

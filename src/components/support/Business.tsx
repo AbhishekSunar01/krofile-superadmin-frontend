@@ -1,12 +1,12 @@
 import { DataTable } from "../user-management";
 import data from "../../json/dummyData/supportBusiness.json";
-import { SupportColumns } from "./Columns";
+import { SupportBusinessColumns } from "./columns/BusinessColumns";
 
 export default function Business() {
   return (
     <div>
       <DataTable
-        columns={SupportColumns}
+        columns={SupportBusinessColumns}
         data={data}
         title=""
         detailViewType="dialog"

@@ -1,0 +1,155 @@
+[
+  {
+    "_id": "01",
+    "businessName": "Bistro Delight",
+    "industryType": "Restaurant",
+    "topic": "Order Issues",
+    "subject": "Late Delivery Complaint",
+    "date": "Jul 15, 2024",
+    "status": "Pending",
+    "logo": "/src/assets/images/logo.jpg",
+    "description": "I am experiencing an issue when trying to log in to the Krofile admin panel. Despite entering my correct username and password, I am unable to access my account. The login page either reloads without any error message.",
+    "image": [
+      "https://via.placeholder.com/150",
+      "https://via.placeholder.com/150",
+      "https://via.placeholder.com/150"
+    ]
+  },
+  {
+    "_id": "02",
+    "businessName": "Tech Savvy",
+    "industryType": "Electronics",
+    "topic": "Product Inquiry",
+    "subject": "Availability of New Laptop Models",
+    "date": "Jul 16, 2024",
+    "status": "Completed",
+    "logo": "/src/assets/images/logo.jpg",
+    "description": "I am experiencing an issue when trying to log in to the Krofile admin panel. Despite entering my correct username and password, I am unable to access my account. The login page either reloads without any error message."
+  },
+  {
+    "_id": "03",
+    "businessName": "GreenGrocers",
+    "industryType": "Retail",
+    "topic": "Account and Login Issues",
+    "subject": "Password Reset Assistance",
+    "date": "Jul 17, 2024",
+    "status": "In Progress",
+    "logo": "/src/assets/images/logo.jpg",
+    "description": "I am experiencing an issue when trying to log in to the Krofile admin panel. Despite entering my correct username and password, I am unable to access my account. The login page either reloads without any error message."
+  },
+  {
+    "_id": "04",
+    "businessName": "Fitness Hub",
+    "industryType": "Fitness",
+    "topic": "Membership Issues",
+    "subject": "Cancel Membership Request",
+    "date": "Jul 18, 2024",
+    "status": "Rejected",
+    "logo": "/src/assets/images/logo.jpg",
+    "description": "I am experiencing an issue when trying to log in to the Krofile admin panel. Despite entering my correct username and password, I am unable to access my account. The login page either reloads without any error message."
+  },
+  {
+    "_id": "05",
+    "businessName": "StylePoint",
+    "industryType": "Apparel",
+    "topic": "Return and Refund",
+    "subject": "Return Request for Incorrect Item",
+    "date": "Jul 19, 2024",
+    "status": "Pending",
+    "description": "I am experiencing an issue when trying to log in to the Krofile admin panel. Despite entering my correct username and password, I am unable to access my account. The login page either reloads without any error message."
+  },
+  {
+    "_id": "06",
+    "businessName": "AutoCare",
+    "industryType": "Automotive",
+    "topic": "Service Issues",
+    "subject": "Delay in Vehicle Service",
+    "date": "Jul 20, 2024",
+    "status": "Completed",
+    "logo": "/src/assets/images/logo.jpg",
+    "description": "I am experiencing an issue when trying to log in to the Krofile admin panel. Despite entering my correct username and password, I am unable to access my account. The login page either reloads without any error message."
+  },
+  {
+    "_id": "07",
+    "businessName": "EduSmart",
+    "industryType": "Education",
+    "topic": "Course Enrollment",
+    "subject": "Issues with Online Enrollment",
+    "date": "Jul 21, 2024",
+    "status": "In Progress",
+    "logo": "/src/assets/images/logo.jpg"
+  },
+  {
+    "_id": "08",
+    "businessName": "HealthFirst",
+    "industryType": "Healthcare",
+    "topic": "Billing Issues",
+    "subject": "Incorrect Billing Amount",
+    "date": "Jul 22, 2024",
+    "status": "Pending",
+    "logo": "/src/assets/images/logo.jpg"
+  },
+  {
+    "_id": "09",
+    "businessName": "Pet World",
+    "industryType": "Pet Services",
+    "topic": "Appointment Issues",
+    "subject": "Reschedule Grooming Appointment",
+    "date": "Jul 23, 2024",
+    "status": "Completed"
+  },
+  {
+    "_id": "10",
+    "businessName": "HomeComfort",
+    "industryType": "Real Estate",
+    "topic": "Property Inquiry",
+    "subject": "Availability of New Apartments",
+    "date": "Jul 24, 2024",
+    "status": "Rejected"
+  },
+  {
+    "_id": "11",
+    "businessName": "Urban Eats",
+    "industryType": "Food & Beverage",
+    "topic": "Order Issues",
+    "subject": "Missing Items in Delivery",
+    "date": "Jul 25, 2024",
+    "status": "In Progress"
+  },
+  {
+    "_id": "12",
+    "businessName": "MediSupply",
+    "industryType": "Healthcare",
+    "topic": "Product Inquiry",
+    "subject": "Availability of Medical Supplies",
+    "date": "Jul 26, 2024",
+    "status": "Completed"
+  },
+  {
+    "_id": "13",
+    "businessName": "TechLand",
+    "industryType": "Technology",
+    "topic": "Technical Support",
+    "subject": "Software Installation Issues",
+    "date": "Jul 27, 2024",
+    "status": "Pending"
+  },
+  {
+    "_id": "14",
+    "businessName": "TravelEase",
+    "industryType": "Transportation",
+    "topic": "Booking Issues",
+    "subject": "Problems with Online Booking",
+    "date": "Jul 28, 2024",
+    "status": "In Progress"
+  },
+  {
+    "_id": "15",
+    "businessName": "GardenFresh",
+    "industryType": "Agriculture",
+    "topic": "Product Inquiry",
+    "subject": "Organic Produce Availability",
+    "date": "Jul 29, 2024",
+    "status": "Completed"
+  }
+]

@@ -1,16 +1,21 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import logo from "../../assets/images/logo.jpg";
-import { ViewDetailsProps } from "../../types/type";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "../../ui/dialog";
+import logo from "../../../assets/images/logo.jpg";
+import { ViewBusinessProps } from "../../../types/type";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
-} from "../ui/select";
-import { Button } from "../ui/button";
+} from "../../ui/select";
+import { Button } from "../../ui/button";
 
-const ViewDetails: React.FC<ViewDetailsProps> = ({
+const ViewBusiness: React.FC<ViewBusinessProps> = ({
   data,
   isOpen,
   onOpenChange,
@@ -80,4 +85,4 @@ const ViewDetails: React.FC<ViewDetailsProps> = ({
   );
 };
 
-export default ViewDetails;
+export default ViewBusiness;
