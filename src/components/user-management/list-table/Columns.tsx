@@ -15,8 +15,7 @@ import suspend from "../../../assets/svg/suspend.svg";
 import unblock from "../../../assets/svg/unblock.svg";
 import reactivate from "../../../assets/svg/reactivate.svg";
 import { MoreVertical } from "lucide-react";
-import { ColumnDefinition } from "./DataTable";
-import { BusinessData } from "./BusinessDetailsSheet";
+import { BusinessData, ColumnDefinition } from "../../../types/type";
 
 const ActionCell: React.FC = () => {
   const [isSuspended, setIsSuspended] = useState(false);

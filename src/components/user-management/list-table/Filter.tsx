@@ -13,15 +13,7 @@ import { ChevronLeft } from "lucide-react";
 import filter from "../../../assets/svg/filter.svg";
 import forward from "../../../assets/svg/forward.svg";
 
-export interface FilterOption {
-  label: string;
-  options: string[];
-}
-
-interface FilterDropdownProps {
-  onFilterChange: (selectedOptions: { [key: string]: string[] }) => void;
-  filterOptions: FilterOption[];
-}
+import { FilterOption, FilterDropdownProps } from "../../../types/type";
 
 const FilterDropdown: React.FC<FilterDropdownProps> = ({
   onFilterChange,
