@@ -68,7 +68,6 @@ export const Columns: ColumnDef<settingsDataType>[] = [
     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
     enableSorting: true,
     header: ({ column }) => {
-      console.log(column);
       return (
         <button
           className="flex justify-center items-center"

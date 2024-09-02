@@ -44,7 +44,7 @@ function TableOptions<TData>({
   toRow,
   totalRows,
   globalFilter,
-  setGlobalFilter
+  setGlobalFilter,
 }: TableOptionProps<TData>) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

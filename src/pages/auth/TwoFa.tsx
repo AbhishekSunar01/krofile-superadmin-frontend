@@ -1,80 +1,16 @@
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import SuccessGif from "../../assets/png/Login Images/fasuccess.gif";
 import MailImage from "../../assets/png/Login Images/MailImage.svg";
 import BackButton from "../../components/custom-ui/BackButton";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Loader2, TriangleAlert } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { toast } from "sonner";
-import CountdownTimer from "../../components/custom-ui/PasswordVerifyTimer";
+import EmailVerify from "../../components/login/EmailVerify";
 import { Button } from "../../components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../../components/ui/form";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "../../components/ui/input-otp";
 import { cn } from "../../lib/utils";
-import { OtpSchema } from "../../utils/schemas/authSchema";
 
 const TwoFAPage = () => {
-  const [reset, setReset] = useState(false);
-  const [time, setTime] = useState({
-    minutes: 2,
-    seconds: 0,
-  });
-  const [errorMessage, setErrorMessage] = useState("");
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (reset === true) {
-      setTime({
-        minutes: 2,
-        seconds: 0,
-      });
-    }
-  }, [reset]);
-
-  const handleResend = () => {
-    setReset(true);
-  };
-
-  const form = useForm<z.infer<typeof OtpSchema>>({
-    resolver: zodResolver(OtpSchema),
-    defaultValues: {
-      pin: "",
-    },
-  });
-
-  function onSubmit(data: z.infer<typeof OtpSchema>) {
-    setLoading(true);
-    if (time.minutes === 0 && time.seconds === 0) {
-      setLoading(false);
-      setErrorMessage("Invalid or expired reset code. Please try again.");
-    } else {
-      if (data.pin === "123456") {
-        setTimeout(() => {
-          setLoading(false);
-          setErrorMessage("");
-          setVerified(true);
-          toast.success("You are successfully verified!");
-        }, 2000);
-      } else {
-        setLoading(false);
-        setErrorMessage("Invalid or expired reset code. Please try again.");
-      }
-    }
-  }
 
   return (
     <div className="flex justify-center min-h-[84vh] items-center">
@@ -99,7 +35,7 @@ const TwoFAPage = () => {
             </div>
           </div>
 
-          <Form {...form}>
+          {/* <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="mt-[24px]">
               <FormField
                 control={form.control}
@@ -164,7 +100,8 @@ const TwoFAPage = () => {
                 </span>
               </div>
             </form>
-          </Form>
+          </Form> */}
+          <EmailVerify verificationCode="123456" setVerified={setVerified} />
         </div>
       ) : (
         <div className="mx-auto w-[480px] h-auto flex flex-col gap-[24px]">

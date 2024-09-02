@@ -84,13 +84,13 @@ export default function UserIcon() {
                       </div>
                       <div>
                         <DialogTitle className="hidden">
-                          View details
+                          Edit details
                         </DialogTitle>
                         <div className="text-[18px] leading-5 text-secondary-foreground font-[500]">
-                          View Details
+                          Edit Details
                         </div>
                         <div className="text-[#525E6F] font-[400] text-[14px]">
-                          Details of User
+                          Edit and Save Your Details
                         </div>
                       </div>
                     </div>
@@ -135,7 +135,7 @@ export default function UserIcon() {
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="username">Username</Label>
                       <Input
-                        value={"Santosh Phaiju"}
+                        defaultValue={"Santosh Phaiju"}
                         type="text"
                         placeholder="Username"
                         className="h-[45px]"
@@ -144,7 +144,7 @@ export default function UserIcon() {
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="email">Email Address</Label>
                       <Input
-                        value={"santoshphaiju@gmail.com"}
+                        defaultValue={"santoshphaiju@gmail.com"}
                         type="email"
                         placeholder="Email"
                         className="h-[45px]"
@@ -153,7 +153,10 @@ export default function UserIcon() {
 
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="role">Role</Label>
-                      <Select value="admin">
+                      <Select
+                        onValueChange={() => console.log("hi")}
+                        defaultValue="admin"
+                      >
                         <SelectTrigger
                           id="role"
                           name="role"
@@ -201,7 +204,7 @@ export default function UserIcon() {
                   className={cn(
                     "relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-gray-100 hover:bg-gray-100 cursor-pointer  data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                   )}
-                  to="/auth/reset-password" // need to create change password page...
+                  to="/auth/change-password" // need to create change password page...
                 >
                   <Lock className="mr-2 h-4 w-4" />
                   <span>Change Password</span>

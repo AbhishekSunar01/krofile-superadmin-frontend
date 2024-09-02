@@ -32,3 +32,11 @@ export const NewPasswordSchema = z.object({
     .string()
     .min(1, { message: "Confirm Password is required!" }),
 });
+
+export const ChangePasswordSchema = z.object({
+  oldpassword: z.string().min(1, { message: "Old Password is required!" }),
+  password: z.string().min(1, { message: "Password is required!" }),
+  confirmPassword: z
+    .string()
+    .min(1, { message: "Confirm Password is required!" }),
+});
