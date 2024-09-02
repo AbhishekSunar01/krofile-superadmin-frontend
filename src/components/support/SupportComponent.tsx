@@ -8,8 +8,8 @@ import SupportTicket from "./SupportTicket";
 export default function SupportComponent() {
   const overviewHasData = false;
   const businessHasData = false;
-  const supportHasData = true;
-  const subscriptionHasData = true;
+  const supportHasData = false;
+  const subscriptionHasData = false;
 
   return (
     <div className="w-full min-h-[80vh] bg-white p-6 gap-4 rounded-[12px]">
