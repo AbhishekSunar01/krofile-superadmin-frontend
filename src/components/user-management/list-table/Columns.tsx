@@ -15,8 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
 import { Input } from "../../ui/input";
-import { BusinessData } from "./BusinessDetailsSheet";
-import { ColumnDefinition } from "./DataTable";
+import { BusinessData, ColumnDefinition } from "../../../types/type";
 
 const ActionCell: React.FC = () => {
   const [isSuspended, setIsSuspended] = useState(false);
@@ -124,7 +123,7 @@ const ActionCell: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between w-full gap-4 ">
                   <Button
-                    variant="outline"
+                    variant="outline1"
                     className="w-full"
                     onClick={() => setSuspendDialogOpen(false)}
                   >
@@ -163,7 +162,7 @@ const ActionCell: React.FC = () => {
                     Yes, Confirm
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="outline1"
                     className="w-full"
                     onClick={() => setSuspendDialogOpen(false)}
                   >
@@ -212,7 +211,7 @@ const ActionCell: React.FC = () => {
                     Yes, Confirm
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="outline1"
                     className="w-full"
                     onClick={() => setBlockDialogOpen(false)}
                   >
@@ -240,7 +239,7 @@ const ActionCell: React.FC = () => {
                     Yes, Confirm
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="outline1"
                     className="w-full"
                     onClick={() => setBlockDialogOpen(false)}
                   >
@@ -265,6 +264,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "_id",
     sortable: false,
     searchable: true,
+    filterable: false,
     cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
   },
   {
@@ -273,6 +273,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "businessName",
     sortable: true,
     searchable: true,
+    filterable: false,
     cell: ({ row }) => (
       <Button variant="ghost">{row.getValue("businessName")}</Button>
     ),
@@ -283,6 +284,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "industryType",
     sortable: false,
     searchable: true,
+    filterable: true,
   },
   {
     id: "subStatus",
@@ -290,6 +292,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "subStatus",
     sortable: false,
     searchable: true,
+    filterable: true,
   },
   {
     id: "plan",
@@ -297,6 +300,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "plan",
     sortable: false,
     searchable: true,
+    filterable: true,
   },
   {
     id: "regDate",
@@ -319,6 +323,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     accessorKey: "country",
     sortable: true,
     searchable: true,
+    filterable: false,
     cell: ({ row }) => (
       <Button variant="ghost">{row.getValue("country")}</Button>
     ),

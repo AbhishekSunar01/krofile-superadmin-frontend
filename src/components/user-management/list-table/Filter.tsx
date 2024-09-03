@@ -13,64 +13,12 @@ import { ChevronLeft } from "lucide-react";
 import filter from "../../../assets/svg/filter.svg";
 import forward from "../../../assets/svg/forward.svg";
 
-interface FilterOption {
-  label: string;
-  options: string[];
-}
+import { FilterOption, FilterDropdownProps } from "../../../types/type";
 
-const filterOptions: FilterOption[] = [
-  {
-    label: "Subscription Status",
-    options: [
-      "Active",
-      "Inactive",
-      "Pending Confirmation",
-      "Unsubscribed",
-      "Trial",
-      "On Hold",
-      "Subscribed",
-      "Expired",
-      "Lapsed",
-      "Suspended",
-      "Overdue",
-      "Rejected",
-    ],
-  },
-  {
-    label: "Plan",
-    options: ["Basic", "Standard", "Premium", "Enterprise"],
-  },
-  {
-    label: "Industry",
-    options: [
-      "Restaurant",
-      "Retail",
-      "Automotive",
-      "Food and Beverage",
-      "Beauty and Wellness",
-      "Hospitality and Tourism",
-      "Arts and Entertainment",
-      "Professional Services",
-      "Marketing and Advertising",
-      "Sports and Fitness",
-      "Utilities and Energy",
-      "Transportation and Logistics",
-      "Education and Training",
-      "Financial Services",
-      "Agriculture and Farming",
-      "Information Technology and Software",
-      "Media and Publishing",
-      "Manufacturing",
-      "Healthcare and Life Sciences",
-      "Personal Care Services",
-    ],
-  },
-];
-interface FilterDropdownProps {
-  onFilterChange: (selectedOptions: { [key: string]: string[] }) => void;
-}
-
-const FilterDropdown: React.FC<FilterDropdownProps> = ({ onFilterChange }) => {
+const FilterDropdown: React.FC<FilterDropdownProps> = ({
+  onFilterChange,
+  filterOptions,
+}) => {
   const [selectedFilter, setSelectedFilter] = useState<FilterOption | null>(
     null
   );
