@@ -1,4 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import {
+  CustomTabs,
+  CustomTabsContent,
+  CustomTabsList,
+  CustomTabsTrigger,
+} from "../ui/tabs";
 import Business from "./Business";
 import NoData from "./NoData";
 import Overview from "./Overview";
@@ -14,30 +19,32 @@ export default function SupportComponent() {
   return (
     <div className="w-full min-h-[80vh] bg-white p-6 gap-4 rounded-[12px]">
       <h1 className="text-xl font-semibold">Overall Notifications</h1>
-      <Tabs defaultValue="overview">
-        <TabsList className="ml-11">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="business">Business</TabsTrigger>
-          <TabsTrigger value="support">Support Ticket</TabsTrigger>
-          <TabsTrigger value="subscription">Subscription Query</TabsTrigger>
-        </TabsList>
+      <CustomTabs defaultValue="overview">
+        <CustomTabsList className="ml-11">
+          <CustomTabsTrigger value="overview">Overview</CustomTabsTrigger>
+          <CustomTabsTrigger value="business">Business</CustomTabsTrigger>
+          <CustomTabsTrigger value="support">Support Ticket</CustomTabsTrigger>
+          <CustomTabsTrigger value="subscription">
+            Subscription Query
+          </CustomTabsTrigger>
+        </CustomTabsList>
 
-        <TabsContent value="overview">
+        <CustomTabsContent value="overview">
           {overviewHasData ? <Overview /> : <NoData />}
-        </TabsContent>
+        </CustomTabsContent>
 
-        <TabsContent value="business">
+        <CustomTabsContent value="business">
           {businessHasData ? <Business /> : <NoData />}
-        </TabsContent>
+        </CustomTabsContent>
 
-        <TabsContent value="support">
+        <CustomTabsContent value="support">
           {supportHasData ? <SupportTicket /> : <NoData />}
-        </TabsContent>
+        </CustomTabsContent>
 
-        <TabsContent value="subscription">
+        <CustomTabsContent value="subscription">
           {subscriptionHasData ? <Subscription /> : <NoData />}
-        </TabsContent>
-      </Tabs>
+        </CustomTabsContent>
+      </CustomTabs>
     </div>
   );
 }
