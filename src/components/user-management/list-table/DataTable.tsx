@@ -206,8 +206,8 @@ export default function DataTable<T extends DataTableItem>({
         );
       },
       cell: col.cell
-        ? ({ row }) => col.cell!({ row })
-        : ({ row }) => row.getValue(col.accessorKey),
+        ? ({ row }: { row: any }) => col.cell!({ row })
+        : ({ row }: { row: any }) => row.getValue(col.accessorKey),
     })),
   ];
 
@@ -223,7 +223,7 @@ export default function DataTable<T extends DataTableItem>({
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: (row, columnId, filterValue) => {
+    globalFilterFn: (row, filterValue) => {
       const searchableColumns = columns.filter((col) => col.searchable);
       return searchableColumns.some((col) => {
         const cellValue = row.getValue(col.accessorKey.toString());

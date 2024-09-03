@@ -10,7 +10,7 @@ import { cn } from "../../lib/utils";
 
 const TwoFAPage = () => {
   const [verified, setVerified] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   return (
     <div className="flex justify-center min-h-[84vh] items-center">

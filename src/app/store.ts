@@ -46,6 +46,7 @@ type PlanState = {
   calculateFinalPrice: (planType: string) => void;
   addPlanType: (planType: string) => void;
   setActive: (planType: string, isActive: boolean) => void;
+  loadPlansFromJSON: () => void; // Add this line
 };
 
 export const usePlanStore = create<PlanState>()(
@@ -126,7 +127,7 @@ export const usePlanStore = create<PlanState>()(
           const annuallyPrice = monthlyPrice * 12;
           const additionalAnnualDiscount = 0; // Example additional discount for annual plans
           const yearlyFinalPrice =
-            annuallyPrice -  
+            annuallyPrice -
             (annuallyPrice * (discount + additionalAnnualDiscount)) / 100;
           set({
             plans: {
@@ -166,6 +167,23 @@ export const usePlanStore = create<PlanState>()(
               [planType]: { ...plans[planType], isActive },
             },
           });
+        },
+        loadPlansFromJSON: () => {
+          // Implementation to load plans from JSON
+          const jsonPlans = {
+            Standard: {
+              name: "Standard",
+              monthlyPrice: 10,
+              annuallyPrice: 120,
+              discount: 10,
+              monthlyFinalPrice: 9,
+              yearlyDiscount: 10,
+              yearlyFinalPrice: 108,
+              isActive: true,
+            },
+            // Add other plans as needed
+          };
+          set({ plans: jsonPlans });
         },
       }),
       {

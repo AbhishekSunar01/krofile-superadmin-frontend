@@ -78,7 +78,7 @@ export type SupportBusinessData = {
 export type ViewBusinessProps = {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  data: SupportBusinessData | null;
+  data: any;
   availableStatuses: string[];
 };
 
@@ -98,5 +98,5 @@ export type SupportTicketData = {
 export type ViewTicketProps = {
   isTicketOpen: boolean;
   onBack: () => void;
-  data: SupportTicketData | null;
+  data: any;
 };

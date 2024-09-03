@@ -47,16 +47,16 @@ export function DataTableComponent<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     enableGlobalFilter: true,
-    globalFilterFn: (row, _columnId, filterValue) => {
-      const searchableColumns = columns.filter((col) => col.enableGlobalFilter);
-      return searchableColumns.some((col) => {
-        const cellValue = row.getValue(col.accessorKey.toString());
-        return cellValue
-          ?.toString()
-          .toLowerCase()
-          .includes(filterValue.toLowerCase());
-      });
-    },
+    // globalFilterFn: (row, _columnId, filterValue) => {
+    //   const searchableColumns = columns.filter((col) => col.enableGlobalFilter);
+    //   return searchableColumns.some((col) => {
+    //     const cellValue = row.getValue(col.accessorKey.toString());
+    //     return cellValue
+    //       ?.toString()
+    //       .toLowerCase()
+    //       .includes(filterValue.toLowerCase());
+    //   });
+    // },
     state: {
       sorting,
       columnFilters,
