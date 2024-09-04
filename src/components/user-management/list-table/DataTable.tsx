@@ -26,7 +26,7 @@ import { Button } from "../../ui/button";
 import FilterDropdown from "./Filter";
 import Pagination from "./Pagination";
 
-import search from "../../../assets/svg/search.svg";
+import search from "../../../assets/svg/Search.svg";
 import print from "../../../assets/svg/print.svg";
 import download from "../../../assets/svg/download.svg";
 import csv from "../../../assets/svg/csv.svg";
