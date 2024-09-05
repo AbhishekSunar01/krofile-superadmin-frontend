@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "border border-input bg-background shadow-sm hover:bg-mainBg hover:text-accent-foreground hover:shadow-md",
         pagination: "text-primary border border-input bg-background",
         paginationActive:
-          "bg-[#1E7BC8] text-white rounded-full border border-input disabled:opacity-100",
+          "bg-primary text-white rounded-full border border-input disabled:opacity-100",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost:
@@ -28,7 +28,7 @@ const buttonVariants = cva(
         login:
           "bg-[#14181f] text-primary-foreground rounded-[24px] px-[64px] text-[18px] font-[500]",
         backBtn:
-          "bg-[#F6F7F9] border border-[#e2e6e9] rounded-full flex justify-center items-center h-[48px] w-[48px] cursor-pointer",
+          "bg-[#F6F7F9] border border-borderColor rounded-full flex justify-center items-center h-[48px] w-[48px] cursor-pointer",
         disabled: "bg-[#B6C1CA] shadow-none cursor-not-allowed text-white",
       },
       size: {

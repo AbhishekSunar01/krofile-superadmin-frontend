@@ -27,20 +27,10 @@ import FilterDropdown from "./Filter";
 import Pagination from "./Pagination";
 
 import search from "../../../assets/svg/Search.svg";
-import print from "../../../assets/svg/print.svg";
-import download from "../../../assets/svg/download.svg";
-import csv from "../../../assets/svg/csv.svg";
-import excel from "../../../assets/svg/excel.svg";
+
 import up from "../../../assets/svg/up.svg";
 import down from "../../../assets/svg/down.svg";
 
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from "../../ui/dropdown-menu";
 import { Separator } from "../../ui/separator";
 
 import {
@@ -53,15 +43,17 @@ import {
 import BusinessDetailsSheet from "./BusinessDetailsSheet";
 import ViewBusiness from "../../support/view-details/ViewBusiness";
 import TicketDetails from "../../support/view-details/ViewTicket";
+import ViewSubscription from "../../support/view-details/ViewSubscription";
+import Download from "./Download";
 
 export default function DataTable<T extends DataTableItem>({
   data,
   columns,
   title,
   detailViewType,
-}: DataTableProps<T> & {
-  detailViewType: "sheet" | "dialog" | "ticket" | "subscription";
-}) {
+  showDownload,
+  fileName,
+}: DataTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -79,7 +71,7 @@ export default function DataTable<T extends DataTableItem>({
   const [selectedRow, setSelectedRow] = useState<BusinessData | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isTicketOpen, setIsTicketOpen] = useState(false);
-  // const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
+  const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
 
   const uniqueStatuses = useMemo(() => {
     const statuses = new Set<string>();
@@ -103,9 +95,9 @@ export default function DataTable<T extends DataTableItem>({
       case "ticket":
         setIsTicketOpen(true);
         break;
-      // case "subscription":
-      //   setIsSubscriptionOpen(true);
-      //   break;
+      case "subscription":
+        setIsSubscriptionOpen(true);
+        break;
       default:
         break;
     }
@@ -257,12 +249,12 @@ export default function DataTable<T extends DataTableItem>({
     <>
       {detailViewType === "ticket" && selectedRow ? (
         <TicketDetails
-        data={selectedRow}
-        onBack={handleBack}
-        isOpen={isTicketOpen}
-        onOpenChange={setIsTicketOpen}
-        availableStatuses={uniqueStatuses}
-      />
+          data={selectedRow}
+          onBack={handleBack}
+          isOpen={isTicketOpen}
+          onOpenChange={setIsTicketOpen}
+          availableStatuses={uniqueStatuses}
+        />
       ) : (
         <div className="w-full">
           {title && <h1 className="text-[22px] font-medium pb-4">{title}</h1>}
@@ -297,34 +289,7 @@ export default function DataTable<T extends DataTableItem>({
                 onFilterChange={handleFilterChange}
               />
 
-              <img
-                src={print}
-                alt="print"
-                className="h-[24px] w-[24px] cursor-pointer"
-              />
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <img
-                    src={download}
-                    alt="download"
-                    className="h-[24px] w-[24px] cursor-pointer"
-                  />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  className="w-[182px] gap-1 py-2 px-[2px] rounded-[6px] shadow-md flex-1"
-                  align="end"
-                >
-                  <DropdownMenuItem className="font-normal text-[14px]">
-                    <img src={csv} alt="" />
-                    Export as CSV
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="font-normal text-[14px]">
-                    <img src={excel} alt="" className="p-2" /> Export as Excel
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              {showDownload && <Download data={data} fileName={fileName} />}
             </div>
           </div>
 
@@ -424,6 +389,15 @@ export default function DataTable<T extends DataTableItem>({
               <ViewBusiness
                 isOpen={isDialogOpen}
                 onOpenChange={setIsDialogOpen}
+                data={selectedRow}
+                availableStatuses={uniqueStatuses}
+              />
+            )}
+
+            {detailViewType === "subscription" && (
+              <ViewSubscription
+                isOpen={isSubscriptionOpen}
+                onOpenChange={setIsSubscriptionOpen}
                 data={selectedRow}
                 availableStatuses={uniqueStatuses}
               />

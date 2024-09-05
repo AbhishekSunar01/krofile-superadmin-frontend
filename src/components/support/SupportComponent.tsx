@@ -13,7 +13,7 @@ import SupportTicket from "./SupportTicket";
 export default function SupportComponent() {
   const overviewHasData = true;
   const businessHasData = false;
-  const supportHasData = false;
+  const supportHasData = true;
   const subscriptionHasData = false;
 
   return (

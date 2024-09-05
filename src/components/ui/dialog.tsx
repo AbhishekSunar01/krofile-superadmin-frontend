@@ -36,6 +36,8 @@ const closeButtonVariants = cva(
         default: "bg-accent",
         bordered:
           "border border-gray-300 rounded-full p-1 right-6 top-6 h-[32px] w-[32px] flex items-center justify-center",
+        cross:
+          " rounded-full p-1 right-6 top-6 h-[32px] w-[32px] flex items-center justify-center",
       },
     },
     defaultVariants: {

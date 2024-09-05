@@ -19,6 +19,9 @@ export type DataTableProps<T extends DataTableItem> = {
   data: T[];
   columns: ColumnDefinition<T>[];
   title: string;
+  detailViewType: "sheet" | "dialog" | "ticket" | "subscription";
+  showDownload?: boolean;
+  fileName?: any;
 };
 
 export interface FilterOption {
@@ -99,6 +102,26 @@ export type ViewTicketProps = {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   onBack: () => void;
+  data: any | null;
+  availableStatuses: string[];
+};
+
+export type SupportSubscriptionData = {
+  _id: string;
+  name: string;
+  email: string;
+  date: string;
+  businessName: string;
+  country: string;
+  status: string;
+  contactNumber?: string;
+  location?: string;
+  note?: string;
+};
+
+export type ViewSubscriptionProps = {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
   data: any;
   availableStatuses: string[];
 };

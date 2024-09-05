@@ -25,7 +25,7 @@ const ViewBusiness: React.FC<ViewBusinessProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="p-6 min-w-[400px]">
+      <DialogContent className="p-6 min-w-[400px]" variant={"cross"}>
         <DialogHeader>
           <DialogTitle>
             <img src={logo} alt="Logo" className="h-[48px] w-[48px]" />

@@ -13,6 +13,8 @@ export default function UserManagement() {
         data={data}
         title="Overall User List"
         detailViewType="sheet"
+        showDownload={true}
+        fileName="User-List"
       />
     </PageLayout>
   );

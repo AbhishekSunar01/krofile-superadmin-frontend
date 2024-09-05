@@ -22,6 +22,7 @@ const selectTriggerVariants = cva(
     variants: {
       variant: {
         default: "border border-input bg-transparent",
+        border: " bg-transparent",
         noBorder: "bg-transparent shadow-none p-0 py-[1px] focus:ring-0",
       },
     },
@@ -46,7 +47,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      {variant === "noBorder" ? (
+      {variant === "noBorder" || "border" ? (
         <ChevronDownIcon className="h-4 w-4 opacity-50" />
       ) : (
         <CaretSortIcon className="h-4 w-4 opacity-50" />

@@ -152,14 +152,14 @@ const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
             <div className="flex items-center justify-between">
               <div className=" pl-6 text-xl font-semibold flex flex-col">
                 {businessData.businessName}
-                <span className="text-sm font-normal text-[#525E6F]">
+                <span className="text-sm font-normal text-dialogText">
                   {businessData.industryType}
                 </span>
-                <span className="text-sm font-normal text-[#525E6F]">
+                <span className="text-sm font-normal text-dialogText">
                   {businessData.location}
                 </span>
               </div>
-              <div className="gap-[6px] flex flex-col text-[#525E6F] ">
+              <div className="gap-[6px] flex flex-col text-dialogText ">
                 <span className="text-sm font-normal flex justify-between w-full">
                   Reg Date: <span>{businessData.regDate}</span>
                 </span>
@@ -169,7 +169,7 @@ const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
               </div>
             </div>
             <div className="px-6 pt-12">
-              <Table className=" border rounded-md border-[#E2E6E9]">
+              <Table className=" border rounded-md border-borderColor">
                 <TableHeader>
                   <TableRow>
                     <TableHead className=" text-black font-semibold">

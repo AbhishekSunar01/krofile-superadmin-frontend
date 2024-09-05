@@ -170,7 +170,7 @@ const Upload: React.FC<{ onUpload: (files: FileWithPreview[]) => void }> = ({
           <div
             onDrop={handleDrop}
             onDragOver={handleDragOver}
-            className="border border-dashed border-[#E2E6E9] rounded-md min-h-40 w-full flex items-center justify-center flex-col gap-4 p-8"
+            className="border border-dashed border-borderColor rounded-md min-h-40 w-full flex items-center justify-center flex-col gap-4 p-8"
           >
             <img src={cloud} alt="Cloud" className="h-12 w-12" />
             <div className="flex flex-col items-center justify-center font-normal gap-y-3">
@@ -292,7 +292,7 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
     >
       <button
         onClick={onBack}
-        className="text-[#525E6F] mb-2 flex items-center text-sm font-normal"
+        className="text-dialogText mb-2 flex items-center text-sm font-normal"
       >
         <img src={arrow} alt="back arrow" className="h-8 w-8" /> Back
       </button>
@@ -301,7 +301,7 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
         <h3 className="text-xl font-semibold mb-4">Ticket Details</h3>
         <hr />
       </div>
-      <div className="flex flex-row gap-6 text-sm font-normal text-[#525E6F]">
+      <div className="flex flex-row gap-6 text-sm font-normal text-dialogText">
         <div className="w-[250px] h-fit bg-gray-100 px-3 pt-2 pb-1 gap-[10px] rounded-lg">
           <div className="mb-1 flex justify-between">
             <span className="text-sm font-semibold">Topic</span>
@@ -351,7 +351,7 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
                 </h3>
               </div>
             </div>
-            <div className="p-4 ml-10 rounded-b-md text-justify border border-[#E2E6E9]">
+            <div className="p-4 ml-10 rounded-b-md text-justify border border-borderColor">
               <span className="text-sm">
                 {data.description || "No description provided."}
               </span>
@@ -382,13 +382,13 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
               <div className="flex flex-row gap-2 items-center">
                 <img src={krofileLogo} alt="Krofile Team" className="h-8 w-8" />
                 <div className="flex items-center w-full">
-                  <div className="bg-[#DF0C3D] transform rotate-45 h-6 w-5"></div>
-                  <h3 className="-ml-5 z-10 text-sm font-medium py-2 px-3 text-white bg-[#DF0C3D] w-full rounded-t-md">
+                  <div className="bg-ticketBg transform rotate-45 h-6 w-5"></div>
+                  <h3 className="-ml-5 z-10 text-sm font-medium py-2 px-3 text-white bg-ticketBg w-full rounded-t-md">
                     Krofile Team
                   </h3>
                 </div>
               </div>
-              <div className="mb-2 p-4 ml-10 rounded-b-md text-justify border border-[#E2E6E9]">
+              <div className="mb-2 p-4 ml-10 rounded-b-md text-justify border border-borderColor">
                 <span className="text-sm">{submittedMessage.text}</span>
                 <div className="mt-3 flex flex-row justify-between">
                   {submittedMessage.images.map((image, imgIndex) => (
@@ -412,13 +412,13 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
             <div className="flex flex-row gap-2 items-center">
               <img src={krofileLogo} alt="Krofile Team" className="h-8 w-8" />
               <div className="flex items-center w-full">
-                <div className="bg-[#DF0C3D] transform rotate-45 h-6 w-5"></div>
-                <h3 className="-ml-5 z-10 text-sm font-medium py-2 px-3 text-white bg-[#DF0C3D] w-full rounded-t-md">
+                <div className="bg-ticketBg transform rotate-45 h-6 w-5"></div>
+                <h3 className="-ml-5 z-10 text-sm font-medium py-2 px-3 text-white bg-ticketBg w-full rounded-t-md">
                   Krofile Team
                 </h3>
               </div>
             </div>
-            <div className="mb-2 p-4 ml-10 rounded-b-md text-justify border border-[#E2E6E9]">
+            <div className="mb-2 p-4 ml-10 rounded-b-md text-justify border border-borderColor">
               <div className="flex gap-4 cursor-pointer w-fit">
                 <ToggleGroup type="multiple">
                   <ToggleGroupItem value="bold" aria-label="Toggle bold">
