@@ -8,6 +8,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import * as React from "react";
 
 import { cn } from "../../lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
 const Select = SelectPrimitive.Root;
 
@@ -15,21 +16,41 @@ const SelectGroup = SelectPrimitive.Group;
 
 const SelectValue = SelectPrimitive.Value;
 
+const selectTriggerVariants = cva(
+  "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+  {
+    variants: {
+      variant: {
+        default: "border border-input bg-transparent",
+        noBorder: "bg-transparent shadow-none p-0 py-[1px] focus:ring-0",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+interface SelectTriggerProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>,
+    VariantProps<typeof selectTriggerVariants> {}
+
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  SelectTriggerProps
+>(({ className, children, variant, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
-    className={cn(
-      "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
-      className
-    )}
+    className={cn(selectTriggerVariants({ variant }), className)}
     {...props}
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <CaretSortIcon className="h-4 w-4 opacity-50" />
+      {variant === "noBorder" ? (
+        <ChevronDownIcon className="h-4 w-4 opacity-50" />
+      ) : (
+        <CaretSortIcon className="h-4 w-4 opacity-50" />
+      )}
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));

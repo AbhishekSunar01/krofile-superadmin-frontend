@@ -96,7 +96,9 @@ export type SupportTicketData = {
 };
 
 export type ViewTicketProps = {
-  isTicketOpen: boolean;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
   onBack: () => void;
   data: any;
+  availableStatuses: string[];
 };

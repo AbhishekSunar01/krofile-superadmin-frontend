@@ -257,10 +257,12 @@ export default function DataTable<T extends DataTableItem>({
     <>
       {detailViewType === "ticket" && selectedRow ? (
         <TicketDetails
-          data={selectedRow}
-          isTicketOpen={isTicketOpen}
-          onBack={handleBack}
-        />
+        data={selectedRow}
+        onBack={handleBack}
+        isOpen={isTicketOpen}
+        onOpenChange={setIsTicketOpen}
+        availableStatuses={uniqueStatuses}
+      />
       ) : (
         <div className="w-full">
           {title && <h1 className="text-[22px] font-medium pb-4">{title}</h1>}

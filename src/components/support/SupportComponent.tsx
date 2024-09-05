@@ -11,7 +11,7 @@ import Subscription from "./Subscription";
 import SupportTicket from "./SupportTicket";
 
 export default function SupportComponent() {
-  const overviewHasData = false;
+  const overviewHasData = true;
   const businessHasData = false;
   const supportHasData = false;
   const subscriptionHasData = false;
