@@ -4,6 +4,7 @@ import { ChevronLeft } from "lucide-react";
 import { Input } from "../ui/input";
 import industryTypes from "../../json/dummyData/industryTypes.json";
 import whitetick from "../../assets/svg/whitetick.svg";
+import { Checkbox } from "../ui/checkbox";
 
 type Business = {
   id: number;
@@ -98,9 +99,11 @@ export default function CustomBusiness() {
             {selectedBusinesses.map((business: Business) => (
               <div
                 key={business.id}
-                className="p-2 rounded-lg w-2/4 cursor-pointer hover:bg-mainBg"
+                className="p-2 rounded-lg w-2/4 cursor-pointer hover:bg-mainBg flex items-center gap-2"
               >
-                {business.name}
+                {/* {business.name} */}
+                <Checkbox id={business.name} defaultChecked />
+                <label htmlFor={business.name}>{business.name}</label>
               </div>
             ))}
           </div>
