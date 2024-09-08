@@ -29,15 +29,16 @@ const DialogOverlay = React.forwardRef<
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
 const closeButtonVariants = cva(
-  "absolute right-6 top-6 rounded-full opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none",
+  "absolute right-6 top-6 rounded-full opacity-70 ring-offset-background transition-opacity hover:opacity-100  disabled:pointer-events-none",
   {
     variants: {
       variant: {
-        default: "bg-accent",
+        default:
+          "bg-transparent p-1 h-[32px] w-[32px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
         bordered:
           "border border-gray-300 rounded-full p-1 right-6 top-6 h-[32px] w-[32px] flex items-center justify-center",
         cross:
-          " rounded-full p-1 right-6 top-6 h-[32px] w-[32px] flex items-center justify-center",
+          " rounded-full p-1 right-6 top-[20px] h-[32px] w-[32px] flex items-center justify-center ",
       },
     },
     defaultVariants: {

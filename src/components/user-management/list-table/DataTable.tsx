@@ -30,6 +30,7 @@ import search from "../../../assets/svg/Search.svg";
 
 import up from "../../../assets/svg/up.svg";
 import down from "../../../assets/svg/down.svg";
+import close from "../../../assets/svg/close.svg";
 
 import { Separator } from "../../ui/separator";
 
@@ -148,6 +149,10 @@ export default function DataTable<T extends DataTableItem>({
 
       return updatedFilters;
     });
+  };
+
+  const handleRemoveAllFilters = () => {
+    setActiveFilters({});
   };
 
   const tableColumns: ColumnDef<T>[] = [
@@ -289,7 +294,9 @@ export default function DataTable<T extends DataTableItem>({
                 onFilterChange={handleFilterChange}
               />
 
-              {showDownload && <Download data={data} fileName={fileName} />}
+              {showDownload && (
+                <Download data={filteredData} fileName={fileName} />
+              )}
             </div>
           </div>
 
@@ -300,28 +307,46 @@ export default function DataTable<T extends DataTableItem>({
                   selectedItems.length > 0 && (
                     <div
                       key={filterLabel}
-                      className="flex gap-4  text-sm font-normal text-[#F8F8F8]"
+                      className="flex gap-2 items-center justify-between text-sm font-normal text-[#F8F8F8]"
                     >
-                      <span className=" flex items-center rounded-[12px] bg-[#00A81C] p-2">
-                        {filterLabel} :
-                      </span>
-                      <div className="flex flex-wrap gap-2 ">
-                        {selectedItems.map((item, index) => (
-                          <span
-                            key={index}
-                            className="bg-[#1A69AA] rounded-[12px] flex items-center p-2"
-                          >
-                            {item}{" "}
-                            <button
-                              className="ml-2 text-white text-xl focus:outline-none cursor-pointer"
+                      <div className="flex gap-2">
+                        <span className=" flex items-center rounded-[12px] bg-[#00A81C] p-2 ">
+                          {filterLabel}
+                        </span>
+                        <div className="flex flex-wrap gap-2 ">
+                          {selectedItems.map((item, index) => (
+                            <span
+                              key={index}
+                              className="bg-[#51A2E5] rounded-[12px] flex items-center justify-center px-2 cursor-pointer"
                               onClick={() =>
                                 handleRemoveFilter(filterLabel, item)
                               }
                             >
-                              &times;
-                            </button>
-                          </span>
-                        ))}
+                              {item}{" "}
+                              <button className="ml-1 flex items-center text-white text-xl focus:outline-none cursor-pointer">
+                                <img
+                                  src={close}
+                                  alt="close"
+                                  className="h-5 w-5 -mt-[2px]"
+                                />
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div
+                        className="bg-[#DF0C3D] rounded-[12px] flex items-center justify-center p-2 cursor-pointer min-w-[100px]"
+                        onClick={handleRemoveAllFilters}
+                      >
+                        Clear All
+                        <button className="ml-1 flex items-center text-white text-xl focus:outline-none cursor-pointer">
+                          <img
+                            src={close}
+                            alt="close"
+                            className="h-5 w-5 -mt-[2px]"
+                          />
+                        </button>
                       </div>
                     </div>
                   )

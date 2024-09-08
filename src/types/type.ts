@@ -125,3 +125,14 @@ export type ViewSubscriptionProps = {
   data: any;
   availableStatuses: string[];
 };
+
+export interface FileWithPreview extends File {
+  preview: string;
+  id: string;
+}
+
+export interface SubmittedMessage {
+  text: string;
+  images: FileWithPreview[];
+  date: string;
+}
