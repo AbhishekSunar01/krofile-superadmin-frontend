@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { Controller, useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -14,32 +13,23 @@ import TextFormatter from "../custom-ui/TextFormatter";
 import { Textarea } from "../ui/textarea";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { useNotificationType } from "../../store/notificationManagerStore";
-
-const notificationSchema = z.object({
-  title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
-  }),
-  startDate: z.string().refine((val) => !isNaN(Date.parse(val)), {
-    message: "Invalid date format",
-  }),
-  endDate: z.string().refine((val) => !isNaN(Date.parse(val)), {
-    message: "Invalid date format",
-  }),
-  url: z.string().min(2, {
-    message: "URL must be at least 2 characters.",
-  }),
-  type: z.string().min(2, {
-    message: "Type must be at least 2 characters.",
-  }),
-  description: z.string().min(2, {
-    message: "Description must be at least 2 characters.",
-  }),
-});
+import { notificationSchema } from "../../utils/schemas/notificationSchema";
+import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 export default function NotificationForm() {
   const { selectedValue, setSelectedValue } = useNotificationType();
   const form = useForm({
     resolver: zodResolver(notificationSchema),
+    mode: "onChange", // Ensure validation is triggered on change
     defaultValues: {
       title: "",
       startDate: "",
@@ -50,8 +40,17 @@ export default function NotificationForm() {
     },
   });
 
+  const { isValid } = form.formState;
+
   const onSubmit = (data: any) => {
     console.log(data);
+  };
+
+  const handleRadioChange = async (value: string) => {
+    const isValid = await form.trigger();
+    if (isValid || value === "notificationform") {
+      setSelectedValue(value);
+    }
   };
 
   return (
@@ -116,11 +115,39 @@ export default function NotificationForm() {
         <FormField
           control={form.control}
           name="type"
-          render={({ field }) => (
+          render={({}) => (
             <FormItem>
               <FormLabel>Type</FormLabel>
               <FormControl>
-                <Input placeholder="Enter type" {...field} />
+                {/* <Input placeholder="Enter type" {...field} /> */}
+                <Controller
+                  control={form.control}
+                  name="type"
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Types</SelectLabel>
+                          <SelectItem value="System Update">
+                            System Update
+                          </SelectItem>
+                          <SelectItem value="Maintenance">
+                            Maintenance
+                          </SelectItem>
+                          <SelectItem value="Promotions and Offers">
+                            Promotions and Offers
+                          </SelectItem>
+                          <SelectItem value="Compliance and Policy">
+                            Compliance and Policy
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -146,37 +173,47 @@ export default function NotificationForm() {
             </FormItem>
           )}
         />
-      </form>
 
-      <h5 className="mt-4 mb-2 font-medium">Push Notification To*</h5>
-      <div>
-        <RadioGroup
-          value={selectedValue}
-          onValueChange={(value) => setSelectedValue(value)}
-          className="flex gap-4"
-        >
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="notificationform">
-              <input
-                type="radio"
-                value="notificationform"
-                checked={selectedValue === "notificationform"}
-              />
-            </RadioGroupItem>
-            All
-          </div>
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="hello">
-              <input
-                type="radio"
-                value="hello"
-                checked={selectedValue === "hello"}
-              />
-            </RadioGroupItem>
-            Custom Business
-          </div>
-        </RadioGroup>
-      </div>
+        <h5 className="mt-4 mb-2 font-medium">Push Notification To*</h5>
+        <div>
+          <RadioGroup
+            value={selectedValue}
+            onValueChange={handleRadioChange}
+            className="flex gap-4"
+          >
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value="notificationform">
+                <input
+                  type="radio"
+                  value="notificationform"
+                  checked={selectedValue === "notificationform"}
+                />
+              </RadioGroupItem>
+              All
+            </div>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value="hello">
+                <input
+                  type="radio"
+                  value="hello"
+                  checked={selectedValue === "hello"}
+                />
+              </RadioGroupItem>
+              Custom Business
+            </div>
+          </RadioGroup>
+        </div>
+
+        <div className="w-full flex justify-end mt-4">
+          <Button
+            type="submit"
+            variant={isValid ? "default" : "disabled"}
+            size={"lg"}
+          >
+            Send Notification
+          </Button>
+        </div>
+      </form>
     </Form>
   );
 }

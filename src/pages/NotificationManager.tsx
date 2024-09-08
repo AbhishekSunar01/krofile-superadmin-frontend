@@ -8,6 +8,7 @@ import {
 } from "../components/notification-manager/index";
 import { useNotificationType } from "../store/notificationManagerStore";
 import CustomBusiness from "../components/notification-manager/CustomBusiness";
+import { Button } from "../components/ui/button";
 
 const TabContent = ({ activeTab }: { activeTab: string }) => {
   switch (activeTab) {
@@ -46,6 +47,11 @@ export default function NotificationManager() {
         <Card className="p-8 transition-all delay-75 ease-linear">
           <h4 className="border-b pb-2 mb-2">Push Notifications</h4>
           <CustomBusiness />
+          <div className="w-full flex justify-end">
+            <Button variant={"disabled"} size={"lg"}>
+              Send Notification
+            </Button>
+          </div>
         </Card>
       )}
     </PageLayout>

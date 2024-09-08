@@ -73,7 +73,7 @@ export default function CustomBusiness() {
         {filteredIndustryTypes.map((industry: IndustryType) => (
           <div
             key={industry.id}
-            className={`p-2 rounded-lg w-2/4 cursor-pointer hover:bg-mainBg flex gap-2 items-center ${
+            className={`p-2 w-2/4 cursor-pointer hover:bg-mainBg flex gap-2 items-center ${
               selectedIndustries.some((selected) => selected.id === industry.id)
                 ? "bg-mainBg"
                 : ""
