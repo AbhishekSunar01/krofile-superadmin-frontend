@@ -100,3 +100,13 @@ export type ViewTicketProps = {
   onBack: () => void;
   data: any;
 };
+
+export interface NotificationType {
+  sno?: number;
+  title: string;
+  type: string;
+  status: string;
+  business: string;
+  startDate: string;
+  expirationDate: string;
+}

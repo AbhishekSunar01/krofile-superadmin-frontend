@@ -102,6 +102,47 @@ const CustomTabsContent = React.forwardRef<
 ));
 CustomTabsContent.displayName = TabsPrimitive.Content.displayName;
 
+// Vertical Tabs variant
+const VerticalTabs = TabsPrimitive.Root;
+
+const VerticalTabsList = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.List>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
+>(({ className, ...props }, ref) => (
+  <div>
+    <TabsPrimitive.List ref={ref} className={cn("", className)} {...props} />
+    {/* <hr className="border" /> */}
+  </div>
+));
+VerticalTabsList.displayName = TabsPrimitive.List.displayName;
+
+const VerticalTabsTrigger = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      "py-[10px] px-[12px] w-[200px] data-[state=active]:bg-gray-200",
+      className
+    )}
+    {...props}
+  />
+));
+VerticalTabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
+
+const VerticalTabsContent = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Content
+    ref={ref}
+    className={cn("w-full", className)}
+    {...props}
+  />
+));
+VerticalTabsContent.displayName = TabsPrimitive.Content.displayName;
+
 export {
   Tabs,
   TabsList,
@@ -111,4 +152,8 @@ export {
   CustomTabsList,
   CustomTabsTrigger,
   CustomTabsContent,
+  VerticalTabs,
+  VerticalTabsList,
+  VerticalTabsTrigger,
+  VerticalTabsContent,
 };
