@@ -265,7 +265,9 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     sortable: false,
     searchable: true,
     filterable: false,
-    cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
+    cell: ({ row }) => {
+      return String(row.index + 1).padStart(2, "0");
+    },
   },
   {
     id: "businessName",

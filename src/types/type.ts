@@ -11,7 +11,9 @@ export type ColumnDefinition<T extends DataTableItem> = {
   searchable?: boolean;
   filterable?: boolean;
   cell?: (info: {
-    row: { getValue: (key: keyof T) => any; original: T };
+    row: {
+      index: number; getValue: (key: keyof T) => any; original: T 
+};
   }) => React.ReactNode;
 };
 

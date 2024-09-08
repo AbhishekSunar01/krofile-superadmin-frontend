@@ -19,6 +19,8 @@ import {
 import { Button } from "../../ui/button";
 import { FileWithPreview } from "../../../types/type";
 
+const MAX_FILES = 5;
+
 const Upload: React.FC<{ onUpload: (files: FileWithPreview[]) => void }> = ({
   onUpload,
 }) => {
@@ -47,7 +49,13 @@ const Upload: React.FC<{ onUpload: (files: FileWithPreview[]) => void }> = ({
         .map(processFile)
         .filter((file): file is FileWithPreview => file !== null);
 
-      setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+      setFiles((prevFiles) => {
+        const updatedFiles = [...prevFiles, ...newFiles].slice(0, MAX_FILES);
+        if (updatedFiles.length > MAX_FILES) {
+          alert(`You can only upload a maximum of ${MAX_FILES} images.`);
+        }
+        return updatedFiles;
+      });
     }
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -61,7 +69,13 @@ const Upload: React.FC<{ onUpload: (files: FileWithPreview[]) => void }> = ({
       .map(processFile)
       .filter((file): file is FileWithPreview => file !== null);
 
-    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    setFiles((prevFiles) => {
+      const updatedFiles = [...prevFiles, ...newFiles].slice(0, MAX_FILES);
+      if (updatedFiles.length > MAX_FILES) {
+        alert(`You can only upload a maximum of ${MAX_FILES} images.`);
+      }
+      return updatedFiles;
+    });
   };
 
   const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
@@ -154,12 +168,13 @@ const Upload: React.FC<{ onUpload: (files: FileWithPreview[]) => void }> = ({
             className="border border-dashed border-borderColor rounded-md min-h-40 w-full flex items-center justify-center flex-col gap-4 p-8"
           >
             <img src={cloud} alt="Cloud" className="h-12 w-12" />
-            <div className="flex flex-col items-center justify-center font-normal gap-y-3">
+            <div className="flex flex-col items-center justify-center font-normal gap-y-3 text-center">
               <span className="text-base">
                 Select a file or drag and drop here
               </span>
               <span className="text-sm pb-6">
-                Jpg and png, file size not more than 10 mb.
+                Jpg and png, file size not more than 10 mb. Maximum {MAX_FILES}{" "}
+                images.
               </span>
               <input
                 type="file"
@@ -173,6 +188,7 @@ const Upload: React.FC<{ onUpload: (files: FileWithPreview[]) => void }> = ({
               <Button
                 variant="outline1"
                 onClick={() => fileInputRef.current?.click()}
+                disabled={files.length >= MAX_FILES}
               >
                 Select File
               </Button>
