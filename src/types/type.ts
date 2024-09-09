@@ -12,16 +12,18 @@ export type ColumnDefinition<T extends DataTableItem> = {
   filterable?: boolean;
   cell?: (info: {
     row: {
-      index: number; getValue: (key: keyof T) => any; original: T 
-};
+      index: number;
+      getValue: (key: keyof T) => any;
+      original: T;
+    };
   }) => React.ReactNode;
 };
 
 export type DataTableProps<T extends DataTableItem> = {
   data: T[];
   columns: ColumnDefinition<T>[];
-  title: string;
-  detailViewType: "sheet" | "dialog" | "ticket" | "subscription";
+  title?: string;
+  detailViewType?: "sheet" | "dialog" | "ticket" | "subscription";
   showDownload?: boolean;
   fileName?: any;
 };
@@ -138,3 +140,12 @@ export interface SubmittedMessage {
   images: FileWithPreview[];
   date: string;
 }
+
+export type ActivityLog = {
+  _id: string;
+  date: string;
+  event: string;
+  action: string;
+  member: string;
+  device: string;
+};

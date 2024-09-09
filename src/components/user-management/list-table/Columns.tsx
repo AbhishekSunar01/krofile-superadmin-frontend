@@ -266,7 +266,11 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     searchable: true,
     filterable: false,
     cell: ({ row }) => {
-      return String(row.index + 1).padStart(2, "0");
+      return (
+        <div className="flex items-center justify-center">
+          {String(row.index + 1).padStart(2, "0")}
+        </div>
+      );
     },
   },
   {
@@ -309,6 +313,7 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     header: "Reg. Date",
     accessorKey: "regDate",
     sortable: true,
+    searchable: true,
     cell: ({ row }) => (
       <Button variant="ghost">
         {new Date(row.original.regDate).toLocaleDateString("en-US", {

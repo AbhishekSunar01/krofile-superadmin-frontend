@@ -20,19 +20,19 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../ui/table";
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
-import FilterDropdown from "./Filter";
-import Pagination from "./Pagination";
+} from "../ui/table";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import FilterDropdown from "../user-management/list-table/Filter";
+import Pagination from "../user-management/list-table/Pagination";
 
-import search from "../../../assets/svg/Search.svg";
+import search from "../../assets/svg/Search.svg";
 
-import up from "../../../assets/svg/up.svg";
-import down from "../../../assets/svg/down.svg";
-import close from "../../../assets/svg/close.svg";
+import up from "../../assets/svg/up.svg";
+import down from "../../assets/svg/down.svg";
+import close from "../../assets/svg/close.svg";
 
-import { Separator } from "../../ui/separator";
+import { Separator } from "../ui/separator";
 
 import {
   BusinessData,
@@ -40,12 +40,13 @@ import {
   DataTableItem,
   DataTableProps,
   FilterOption,
-} from "../../../types/type";
-import BusinessDetailsSheet from "./BusinessDetailsSheet";
-import ViewBusiness from "../../support/view-details/ViewBusiness";
-import TicketDetails from "../../support/view-details/ViewTicket";
-import ViewSubscription from "../../support/view-details/ViewSubscription";
-import Download from "./Download";
+} from "../../types/type";
+import BusinessDetailsSheet from "../user-management/list-table/BusinessDetailsSheet";
+import ViewBusiness from "../support/view-details/ViewBusiness";
+import TicketDetails from "../support/view-details/ViewTicket";
+import ViewSubscription from "../support/view-details/ViewSubscription";
+import Download from "../user-management/list-table/Download";
+import { cn } from "../../lib/utils";
 
 export default function DataTable<T extends DataTableItem>({
   data,
@@ -156,11 +157,6 @@ export default function DataTable<T extends DataTableItem>({
   };
 
   const tableColumns: ColumnDef<T>[] = [
-    {
-      id: "select",
-      enableSorting: false,
-      enableHiding: false,
-    },
     ...columns.map((col) => ({
       accessorKey: col.accessorKey,
       header: ({ column }: { column: any }) => {
@@ -220,7 +216,7 @@ export default function DataTable<T extends DataTableItem>({
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: (row, filterValue) => {
+    globalFilterFn: (row, columnId, filterValue) => {
       const searchableColumns = columns.filter((col) => col.searchable);
       return searchableColumns.some((col) => {
         const cellValue = row.getValue(col.accessorKey.toString());
@@ -359,8 +355,17 @@ export default function DataTable<T extends DataTableItem>({
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => (
-                      <TableHead key={header.id}>
+                    {headerGroup.headers.map((header, index) => (
+                      <TableHead
+                        key={header.id}
+                        className={cn(
+                          "h-[80px] px-[16px]",
+                          index === 0 ? "pl-8" : ""
+                        )}
+                        style={
+                          header.id === "id" ? { textAlign: "center" } : {}
+                        }
+                      >
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -380,7 +385,10 @@ export default function DataTable<T extends DataTableItem>({
                       onClick={() => handleRowClick(row.original)}
                     >
                       {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>
+                        <TableCell
+                          key={cell.id}
+                          className={cn("h-[80px] px-[16px]")}
+                        >
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()

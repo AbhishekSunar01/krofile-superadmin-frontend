@@ -5,7 +5,7 @@ import {
   CustomTabsTrigger,
 } from "../ui/tabs";
 import Business from "./Business";
-import NoData from "./NoData";
+import NoData from "../custom-ui/NoData";
 import Overview from "./Overview";
 import Subscription from "./Subscription";
 import SupportTicket from "./SupportTicket";
@@ -14,7 +14,7 @@ export default function SupportComponent() {
   const overviewHasData = true;
   const businessHasData = true;
   const supportHasData = true;
-  const subscriptionHasData = false;
+  const subscriptionHasData = true;
 
   return (
     <div className="w-full min-h-[80vh] bg-white p-6 gap-4 rounded-[12px]">

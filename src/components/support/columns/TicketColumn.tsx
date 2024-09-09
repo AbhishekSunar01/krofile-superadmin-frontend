@@ -8,7 +8,14 @@ export const TicketColumn: ColumnDefinition<SupportTicketData>[] = [
     accessorKey: "_id",
     sortable: false,
     searchable: true,
-    cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center justify-center px-0">
+          {String(row.getValue("_id")).padStart(2, "0")}
+        </div>
+      );
+    },
+    // cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
   },
   {
     id: "businessName",
@@ -52,6 +59,7 @@ export const TicketColumn: ColumnDefinition<SupportTicketData>[] = [
     header: "Date",
     accessorKey: "date",
     sortable: true,
+    searchable: true,
     cell: ({ row }) => (
       <Button variant="ghost">
         {new Date(row.original.date).toLocaleDateString("en-US", {

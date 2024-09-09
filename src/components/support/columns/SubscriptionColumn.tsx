@@ -8,7 +8,14 @@ export const SubscriptionColumn: ColumnDefinition<SupportSubscriptionData>[] = [
     accessorKey: "_id",
     sortable: false,
     searchable: true,
-    cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center justify-center">
+          {String(row.getValue("_id")).padStart(2, "0")}
+        </div>
+      );
+    },
+    // cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
   },
   {
     id: "name",
