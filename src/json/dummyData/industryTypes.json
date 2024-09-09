@@ -1,0 +1,574 @@
+[
+  {
+    "id": 1,
+    "type": "Restaurant",
+    "business": [
+      {
+        "id": 1,
+        "name": "McDonald's"
+      },
+      {
+        "id": 2,
+        "name": "KFC"
+      },
+      {
+        "id": 3,
+        "name": "Burger King"
+      },
+      {
+        "id": 4,
+        "name": "Subway"
+      },
+      {
+        "id": 5,
+        "name": "Starbucks"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "type": "Retail",
+    "business": [
+      {
+        "id": 6,
+        "name": "Walmart"
+      },
+      {
+        "id": 7,
+        "name": "Target"
+      },
+      {
+        "id": 8,
+        "name": "Best Buy"
+      },
+      {
+        "id": 9,
+        "name": "Home Depot"
+      },
+      {
+        "id": 10,
+        "name": "Costco"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "type": "Automotive",
+    "business": [
+      {
+        "id": 11,
+        "name": "Toyota"
+      },
+      {
+        "id": 12,
+        "name": "Ford"
+      },
+      {
+        "id": 13,
+        "name": "Honda"
+      },
+      {
+        "id": 14,
+        "name": "Chevrolet"
+      },
+      {
+        "id": 15,
+        "name": "Nissan"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "type": "Food & Beverage",
+    "business": [
+      {
+        "id": 16,
+        "name": "Coca-Cola"
+      },
+      {
+        "id": 17,
+        "name": "Pepsi"
+      },
+      {
+        "id": 18,
+        "name": "Nestle"
+      },
+      {
+        "id": 19,
+        "name": "Unilever"
+      },
+      {
+        "id": 20,
+        "name": "Kraft Heinz"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "type": "Beauty & Wellness",
+    "business": [
+      {
+        "id": 21,
+        "name": "L'Oreal"
+      },
+      {
+        "id": 22,
+        "name": "Estée Lauder"
+      },
+      {
+        "id": 23,
+        "name": "Procter & Gamble"
+      },
+      {
+        "id": 24,
+        "name": "Unilever"
+      },
+      {
+        "id": 25,
+        "name": "Shiseido"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "type": "Hospitality & Tourism",
+    "business": [
+      {
+        "id": 26,
+        "name": "Marriott"
+      },
+      {
+        "id": 27,
+        "name": "Hilton"
+      },
+      {
+        "id": 28,
+        "name": "Hyatt"
+      },
+      {
+        "id": 29,
+        "name": "Airbnb"
+      },
+      {
+        "id": 30,
+        "name": "Expedia"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "type": "Art, Entertainment & Recreation",
+    "business": [
+      {
+        "id": 31,
+        "name": "Disney"
+      },
+      {
+        "id": 32,
+        "name": "Warner Bros."
+      },
+      {
+        "id": 33,
+        "name": "Universal Studios"
+      },
+      {
+        "id": 34,
+        "name": "Sony Pictures"
+      },
+      {
+        "id": 35,
+        "name": "Netflix"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "type": "Professional Services",
+    "business": [
+      {
+        "id": 36,
+        "name": "Deloitte"
+      },
+      {
+        "id": 37,
+        "name": "PwC"
+      },
+      {
+        "id": 38,
+        "name": "EY"
+      },
+      {
+        "id": 39,
+        "name": "KPMG"
+      },
+      {
+        "id": 40,
+        "name": "Accenture"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "type": "Marketing & Advertising",
+    "business": [
+      {
+        "id": 41,
+        "name": "WPP"
+      },
+      {
+        "id": 42,
+        "name": "Omnicom"
+      },
+      {
+        "id": 43,
+        "name": "Publicis"
+      },
+      {
+        "id": 44,
+        "name": "Interpublic"
+      },
+      {
+        "id": 45,
+        "name": "Dentsu"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "type": "Sports & Fitness",
+    "business": [
+      {
+        "id": 46,
+        "name": "Nike"
+      },
+      {
+        "id": 47,
+        "name": "Adidas"
+      },
+      {
+        "id": 48,
+        "name": "Under Armour"
+      },
+      {
+        "id": 49,
+        "name": "Puma"
+      },
+      {
+        "id": 50,
+        "name": "Reebok"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "type": "Utilities & Energy",
+    "business": [
+      {
+        "id": 51,
+        "name": "ExxonMobil"
+      },
+      {
+        "id": 52,
+        "name": "Chevron"
+      },
+      {
+        "id": 53,
+        "name": "Duke Energy"
+      },
+      {
+        "id": 54,
+        "name": "Southern Company"
+      },
+      {
+        "id": 55,
+        "name": "NextEra Energy"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "type": "Transportation & Logistics",
+    "business": [
+      {
+        "id": 56,
+        "name": "FedEx"
+      },
+      {
+        "id": 57,
+        "name": "UPS"
+      },
+      {
+        "id": 58,
+        "name": "DHL"
+      },
+      {
+        "id": 59,
+        "name": "Maersk"
+      },
+      {
+        "id": 60,
+        "name": "Union Pacific"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "type": "Non-profit & Community Services",
+    "business": [
+      {
+        "id": 61,
+        "name": "Red Cross"
+      },
+      {
+        "id": 62,
+        "name": "United Way"
+      },
+      {
+        "id": 63,
+        "name": "Salvation Army"
+      },
+      {
+        "id": 64,
+        "name": "Feeding America"
+      },
+      {
+        "id": 65,
+        "name": "Habitat for Humanity"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "type": "Media & Publishing",
+    "business": [
+      {
+        "id": 66,
+        "name": "The New York Times"
+      },
+      {
+        "id": 67,
+        "name": "The Washington Post"
+      },
+      {
+        "id": 68,
+        "name": "BBC"
+      },
+      {
+        "id": 69,
+        "name": "CNN"
+      },
+      {
+        "id": 70,
+        "name": "Reuters"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "type": "Manufacturing & Industrial",
+    "business": [
+      {
+        "id": 71,
+        "name": "General Electric"
+      },
+      {
+        "id": 72,
+        "name": "Siemens"
+      },
+      {
+        "id": 73,
+        "name": "3M"
+      },
+      {
+        "id": 74,
+        "name": "Honeywell"
+      },
+      {
+        "id": 75,
+        "name": "Caterpillar"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "type": "Information Technology & Services",
+    "business": [
+      {
+        "id": 76,
+        "name": "Microsoft"
+      },
+      {
+        "id": 77,
+        "name": "Apple"
+      },
+      {
+        "id": 78,
+        "name": "Google"
+      },
+      {
+        "id": 79,
+        "name": "Amazon"
+      },
+      {
+        "id": 80,
+        "name": "IBM"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "type": "Healthcare & Life Sciences",
+    "business": [
+      {
+        "id": 81,
+        "name": "Johnson & Johnson"
+      },
+      {
+        "id": 82,
+        "name": "Pfizer"
+      },
+      {
+        "id": 83,
+        "name": "Merck"
+      },
+      {
+        "id": 84,
+        "name": "Roche"
+      },
+      {
+        "id": 85,
+        "name": "Novartis"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "type": "Agriculture & Farming",
+    "business": [
+      {
+        "id": 86,
+        "name": "John Deere"
+      },
+      {
+        "id": 87,
+        "name": "Cargill"
+      },
+      {
+        "id": 88,
+        "name": "ADM"
+      },
+      {
+        "id": 89,
+        "name": "Monsanto"
+      },
+      {
+        "id": 90,
+        "name": "Syngenta"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "type": "Financial Services",
+    "business": [
+      {
+        "id": 91,
+        "name": "JPMorgan Chase"
+      },
+      {
+        "id": 92,
+        "name": "Goldman Sachs"
+      },
+      {
+        "id": 93,
+        "name": "Morgan Stanley"
+      },
+      {
+        "id": 94,
+        "name": "Bank of America"
+      },
+      {
+        "id": 95,
+        "name": "Citigroup"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "type": "Education & Training",
+    "business": [
+      {
+        "id": 96,
+        "name": "Harvard University"
+      },
+      {
+        "id": 97,
+        "name": "Stanford University"
+      },
+      {
+        "id": 98,
+        "name": "MIT"
+      },
+      {
+        "id": 99,
+        "name": "Yale University"
+      },
+      {
+        "id": 100,
+        "name": "Princeton University"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "type": "Construction & Real Estate",
+    "business": [
+      {
+        "id": 101,
+        "name": "Bechtel"
+      },
+      {
+        "id": 102,
+        "name": "Lennar"
+      },
+      {
+        "id": 103,
+        "name": "D.R. Horton"
+      },
+      {
+        "id": 104,
+        "name": "PulteGroup"
+      },
+      {
+        "id": 105,
+        "name": "Toll Brothers"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "type": "Personal Care Services",
+    "business": [
+      {
+        "id": 106,
+        "name": "Great Clips"
+      },
+      {
+        "id": 107,
+        "name": "Supercuts"
+      },
+      {
+        "id": 108,
+        "name": "Sport Clips"
+      },
+      {
+        "id": 109,
+        "name": "Fantastic Sams"
+      },
+      {
+        "id": 110,
+        "name": "Regis Corporation"
+      }
+    ]
+  }
+]

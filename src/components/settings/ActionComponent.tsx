@@ -61,15 +61,13 @@ export const ActionComponent = ({ row }: { row: Row<settingsDataType> }) => {
                       />
                     </div>
                     <div>
-                      <DialogTitle className="hidden">
-                        View details
-                      </DialogTitle>
-                        <div className="text-[18px] leading-5 text-secondary-foreground font-[500]">
-                          View Details
-                        </div>
-                        <div className="text-[#525E6F] font-[400] text-[14px]">
-                          Details of User
-                        </div>
+                      <DialogTitle className="hidden">View details</DialogTitle>
+                      <div className="text-[18px] leading-5 text-secondary-foreground font-[500]">
+                        View Details
+                      </div>
+                      <div className="text-[#525E6F] font-[400] text-[14px]">
+                        Details of User
+                      </div>
                     </div>
                   </div>
                 </DialogHeader>

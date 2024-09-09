@@ -149,3 +149,13 @@ export type ActivityLog = {
   member: string;
   device: string;
 };
+
+export interface NotificationType {
+  sno?: number;
+  title: string;
+  type: string;
+  status: string;
+  business: string;
+  startDate: string;
+  expirationDate: string;
+}
