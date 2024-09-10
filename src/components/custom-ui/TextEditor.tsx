@@ -86,7 +86,6 @@ import { Bold, Italic, Underline, List } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 
 const TextFormatter = ({
-  quillRef,
   activeFormats,
   toggleFormat,
 }: {
