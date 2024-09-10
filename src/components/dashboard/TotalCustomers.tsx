@@ -6,12 +6,12 @@ const colors = ["#90CAF9", "#A5D6A7", "#FFCC80", "#CE93D8"];
 
 export default function TotalCustomers() {
   return (
-    <Card className="flex flex-col items-start p-5 gap-4 shadow ">
+    <Card className="flex flex-col items-start p-5 gap-4 shadow w-[740px]">
       <div className=" mb-3">
         <div className="text-xl font-semibold mb-2">Total Customers</div>
         <div className="text-xs font-normal">Customer’s Summary</div>
       </div>
-      <div className="flex w-full flex-wrap justify-between gap-4">
+      <div className="flex w-full flex-wrap  gap-4">
         {data.map((item, index) => {
           const color = colors[index % colors.length];
           const backgroundColorWithOpacity = `${color}33`;

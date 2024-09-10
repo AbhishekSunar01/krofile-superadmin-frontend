@@ -18,13 +18,7 @@ interface PieComponentProps {
   titleData: { title: string; subtitle?: string };
 }
 
-const colorPalette = [
-  "hsl(var(--chart-1))",
-  "hsl(var(--chart-2))",
-  "hsl(var(--chart-3))",
-  "hsl(var(--chart-4))",
-  "hsl(var(--chart-5))",
-];
+const colorPalette = ["#90CAF9", "#A5D6A7", "#FFCC80", "#CE93D8"];
 
 const chartConfig = {
   visitors: {
@@ -60,7 +54,7 @@ const renderLabel = (viewBox: any, totalVisitors: number) => {
         <tspan
           x={viewBox.cx}
           y={(viewBox.cy || 0) - 10}
-          className="fill-muted-foreground text-lg"
+          className="fill-muted-foreground text-lg font-normal"
         >
           Total Value
         </tspan>
@@ -96,18 +90,13 @@ export default function ActiveSubscriberChart({
   );
 
   return (
-    <Card className="flex flex-col h-[265px] w-full">
-      <CardHeader className="items-center pt-4 pb-2">
-        <CardTitle className=" text-[16px] font-[500]">
+    <Card className="flex flex-col h-[265px] min-w-[400px]">
+      <CardHeader className="items-start pt-4 pb-2">
+        <CardTitle className="text-left text-[16px] font-[500]">
           {titleData.title}
         </CardTitle>
-        {titleData.subtitle && (
-          <span className="text-xs text-muted-foreground">
-            {titleData.subtitle}
-          </span>
-        )}
       </CardHeader>
-      <CardContent className="flex items-center justify-center p-0">
+      <CardContent className="flex items-center justify-center -mt-0">
         <ChartContainer
           config={chartConfig}
           className="flex w-full items-center "
@@ -121,7 +110,7 @@ export default function ActiveSubscriberChart({
               data={dataWithColors}
               dataKey="visitors"
               nameKey="pieData"
-              innerRadius={40}
+              innerRadius={50}
               strokeWidth={5}
             >
               <Label
