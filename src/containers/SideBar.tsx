@@ -28,7 +28,7 @@ const sidebarItems = [
     src: Notification,
     label: "Notification Manager",
   },
-  { to: "/system-status", src: System, label: "System Status" },
+  { to: "/system-status", src: System, label: "System Health" },
   { to: "activity-log", src: Activity, label: "Activity Log" },
   { to: "/settings", src: Settings, label: "Settings" },
 ];
