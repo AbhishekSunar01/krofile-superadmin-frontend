@@ -138,7 +138,7 @@ const Upload: React.FC<{ onUpload: (files: FileWithPreview[]) => void }> = ({
           <DialogTitle className="text-xl font-semibold">Add Image</DialogTitle>
           <hr className="mb-4 border-gray-300" />
           {files.length > 0 && (
-            <div className="mb-4  max-h-[300px] overflow-y-auto">
+            <div className="mb-4  max-h-[180px] overflow-y-auto">
               {files.map((file) => (
                 <div
                   key={file.id}
