@@ -3,6 +3,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
 import { cn } from "../../lib/utils";
+import { cva, type VariantProps } from "class-variance-authority";
 
 const Dialog = DialogPrimitive.Root;
 
@@ -27,10 +28,33 @@ const DialogOverlay = React.forwardRef<
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
+const closeButtonVariants = cva(
+  "absolute right-6 top-6 rounded-full opacity-70 ring-offset-background transition-opacity hover:opacity-100  disabled:pointer-events-none",
+  {
+    variants: {
+      variant: {
+        default:
+          "bg-transparent p-1 h-[32px] w-[32px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+        bordered:
+          "border border-gray-300 rounded-full p-1 right-6 top-6 h-[32px] w-[32px] flex items-center justify-center",
+        cross:
+          " rounded-full p-1 right-6 top-[20px] h-[32px] w-[32px] flex items-center justify-center ",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+interface DialogContentProps
+  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
+    VariantProps<typeof closeButtonVariants> {}
+
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  DialogContentProps
+>(({ className, children, variant, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
@@ -42,7 +66,9 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+
+      <DialogPrimitive.Close className={closeButtonVariants({ variant })}>
+        {" "}
         <Cross2Icon className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>

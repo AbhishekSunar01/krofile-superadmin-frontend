@@ -1,65 +1,71 @@
 import { Button } from "../../ui/button";
-import { ColumnDefinition, SupportBusinessData } from "../../../types/type";
+import { ColumnDefinition, SupportSubscriptionData } from "../../../types/type";
 
-export const SubscriptionColumn: ColumnDefinition<SupportBusinessData>[] = [
+export const SubscriptionColumn: ColumnDefinition<SupportSubscriptionData>[] = [
   {
     id: "id",
     header: "S.N.",
     accessorKey: "_id",
     sortable: false,
     searchable: true,
-    cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center justify-center">
+          {String(row.getValue("_id")).padStart(2, "0")}
+        </div>
+      );
+    },
+    // cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
   },
   {
-    id: "businessName",
-    header: "Business Name",
-    accessorKey: "businessName",
+    id: "name",
+    header: "Name",
+    accessorKey: "name",
     sortable: true,
     searchable: true,
-    cell: ({ row }) => (
-      <Button variant="ghost">{row.getValue("businessName")}</Button>
-    ),
+    cell: ({ row }) => <Button variant="ghost">{row.getValue("name")}</Button>,
   },
   {
-    id: "industryType",
-    header: "Industry Type",
-    accessorKey: "industryType",
-    sortable: true,
+    id: "email",
+    header: "Email",
+    accessorKey: "email",
+    sortable: false,
     filterable: false,
-    searchable: false,
-    cell: ({ row }) => (
-      <Button variant="ghost">{row.getValue("industryType")}</Button>
-    ),
+    searchable: true,
   },
+
   {
-    id: "category",
-    header: "Category",
-    accessorKey: "category",
-    sortable: false,
-    filterable: true,
-    searchable: false,
-  },
-  {
-    id: "source",
-    header: "Source",
-    accessorKey: "source",
-    sortable: false,
-    filterable: true,
-    searchable: false,
-  },
-  {
-    id: "regDate",
+    id: "date",
     header: "Date",
-    accessorKey: "regDate",
+    accessorKey: "date",
     sortable: true,
     cell: ({ row }) => (
       <Button variant="ghost">
-        {new Date(row.original.regDate).toLocaleDateString("en-US", {
+        {new Date(row.original.date).toLocaleDateString("en-US", {
           year: "numeric",
           month: "short",
           day: "2-digit",
         })}
       </Button>
+    ),
+  },
+  {
+    id: "businessName",
+    header: "Business Name",
+    accessorKey: "businessName",
+    sortable: false,
+    searchable: true,
+  },
+
+  {
+    id: "country",
+    header: "Country",
+    accessorKey: "country",
+    sortable: true,
+    searchable: true,
+    filterable: false,
+    cell: ({ row }) => (
+      <Button variant="ghost">{row.getValue("country")}</Button>
     ),
   },
   {
@@ -74,16 +80,19 @@ export const SubscriptionColumn: ColumnDefinition<SupportBusinessData>[] = [
       let colorClass = "";
 
       switch (status) {
-        case "Pending":
+        case "New Request":
           colorClass = "text-orange-500";
           break;
-        case "In Progress":
+        case "Under Review":
           colorClass = "text-blue-500";
           break;
         case "Completed":
           colorClass = "text-green-500";
           break;
         case "Rejected":
+          colorClass = "text-red-500";
+          break;
+        case "Cancelled":
           colorClass = "text-red-500";
           break;
         default:

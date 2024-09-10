@@ -11,14 +11,21 @@ export type ColumnDefinition<T extends DataTableItem> = {
   searchable?: boolean;
   filterable?: boolean;
   cell?: (info: {
-    row: { getValue: (key: keyof T) => any; original: T };
+    row: {
+      index: number;
+      getValue: (key: keyof T) => any;
+      original: T;
+    };
   }) => React.ReactNode;
 };
 
 export type DataTableProps<T extends DataTableItem> = {
   data: T[];
   columns: ColumnDefinition<T>[];
-  title: string;
+  title?: string;
+  detailViewType?: "sheet" | "dialog" | "ticket" | "subscription";
+  showDownload?: boolean;
+  fileName?: any;
 };
 
 export interface FilterOption {
@@ -96,9 +103,51 @@ export type SupportTicketData = {
 };
 
 export type ViewTicketProps = {
-  isTicketOpen: boolean;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
   onBack: () => void;
+  data: any | null;
+  availableStatuses: string[];
+};
+
+export type SupportSubscriptionData = {
+  _id: string;
+  name: string;
+  email: string;
+  date: string;
+  businessName: string;
+  country: string;
+  status: string;
+  contactNumber?: string;
+  location?: string;
+  note?: string;
+};
+
+export type ViewSubscriptionProps = {
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
   data: any;
+  availableStatuses: string[];
+};
+
+export interface FileWithPreview extends File {
+  preview: string;
+  id: string;
+}
+
+export interface SubmittedMessage {
+  text: string;
+  images: FileWithPreview[];
+  date: string;
+}
+
+export type ActivityLog = {
+  _id: string;
+  date: string;
+  event: string;
+  action: string;
+  member: string;
+  device: string;
 };
 
 export interface NotificationType {
