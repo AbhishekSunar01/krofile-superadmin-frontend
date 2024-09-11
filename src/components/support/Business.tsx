@@ -10,6 +10,8 @@ export default function Business() {
         data={data}
         title=""
         detailViewType="dialog"
+        showDownload={true}
+        fileName="Business-List"
       />
     </div>
   );

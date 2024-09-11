@@ -40,7 +40,7 @@ const CustomLegend: React.FC<LegendProps> = ({ payload }) => (
           className="inline-block w-4 h-4 rounded-full"
           style={{ backgroundColor: entry.color }}
         />
-        <span className="text-[14px] font-[400] text-[#525E6F]">
+        <span className="text-[14px] font-[400] text-dialogText">
           {entry.value}
         </span>
       </li>

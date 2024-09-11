@@ -20,28 +20,19 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../ui/table";
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
-import FilterDropdown from "./Filter";
-import Pagination from "./Pagination";
+} from "../ui/table";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import FilterDropdown from "../user-management/list-table/Filter";
+import Pagination from "../user-management/list-table/Pagination";
 
-import search from "../../../assets/svg/Search.svg";
-import print from "../../../assets/svg/print.svg";
-import download from "../../../assets/svg/download.svg";
-import csv from "../../../assets/svg/csv.svg";
-import excel from "../../../assets/svg/excel.svg";
-import up from "../../../assets/svg/up.svg";
-import down from "../../../assets/svg/down.svg";
+import search from "../../assets/svg/Search.svg";
 
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-} from "../../ui/dropdown-menu";
-import { Separator } from "../../ui/separator";
+import up from "../../assets/svg/up.svg";
+import down from "../../assets/svg/down.svg";
+import close from "../../assets/svg/close.svg";
+
+import { Separator } from "../ui/separator";
 
 import {
   BusinessData,
@@ -49,19 +40,22 @@ import {
   DataTableItem,
   DataTableProps,
   FilterOption,
-} from "../../../types/type";
-import BusinessDetailsSheet from "./BusinessDetailsSheet";
-import ViewBusiness from "../../support/view-details/ViewBusiness";
-import TicketDetails from "../../support/view-details/ViewTicket";
+} from "../../types/type";
+import BusinessDetailsSheet from "../user-management/list-table/BusinessDetailsSheet";
+import ViewBusiness from "../support/view-details/ViewBusiness";
+import TicketDetails from "../support/view-details/ViewTicket";
+import ViewSubscription from "../support/view-details/ViewSubscription";
+import Download from "../user-management/list-table/Download";
+import { cn } from "../../lib/utils";
 
 export default function DataTable<T extends DataTableItem>({
   data,
   columns,
   title,
   detailViewType,
-}: DataTableProps<T> & {
-  detailViewType: "sheet" | "dialog" | "ticket" | "subscription";
-}) {
+  showDownload,
+  fileName,
+}: DataTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -79,7 +73,7 @@ export default function DataTable<T extends DataTableItem>({
   const [selectedRow, setSelectedRow] = useState<BusinessData | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isTicketOpen, setIsTicketOpen] = useState(false);
-  // const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
+  const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
 
   const uniqueStatuses = useMemo(() => {
     const statuses = new Set<string>();
@@ -103,9 +97,9 @@ export default function DataTable<T extends DataTableItem>({
       case "ticket":
         setIsTicketOpen(true);
         break;
-      // case "subscription":
-      //   setIsSubscriptionOpen(true);
-      //   break;
+      case "subscription":
+        setIsSubscriptionOpen(true);
+        break;
       default:
         break;
     }
@@ -158,12 +152,11 @@ export default function DataTable<T extends DataTableItem>({
     });
   };
 
+  const handleRemoveAllFilters = () => {
+    setActiveFilters({});
+  };
+
   const tableColumns: ColumnDef<T>[] = [
-    {
-      id: "select",
-      enableSorting: false,
-      enableHiding: false,
-    },
     ...columns.map((col) => ({
       accessorKey: col.accessorKey,
       header: ({ column }: { column: any }) => {
@@ -223,7 +216,7 @@ export default function DataTable<T extends DataTableItem>({
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: (row, filterValue) => {
+    globalFilterFn: (row, _columnId, filterValue) => {
       const searchableColumns = columns.filter((col) => col.searchable);
       return searchableColumns.some((col) => {
         const cellValue = row.getValue(col.accessorKey.toString());
@@ -258,8 +251,10 @@ export default function DataTable<T extends DataTableItem>({
       {detailViewType === "ticket" && selectedRow ? (
         <TicketDetails
           data={selectedRow}
-          isTicketOpen={isTicketOpen}
           onBack={handleBack}
+          isOpen={isTicketOpen}
+          onOpenChange={setIsTicketOpen}
+          availableStatuses={uniqueStatuses}
         />
       ) : (
         <div className="w-full">
@@ -295,34 +290,9 @@ export default function DataTable<T extends DataTableItem>({
                 onFilterChange={handleFilterChange}
               />
 
-              <img
-                src={print}
-                alt="print"
-                className="h-[24px] w-[24px] cursor-pointer"
-              />
-
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <img
-                    src={download}
-                    alt="download"
-                    className="h-[24px] w-[24px] cursor-pointer"
-                  />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  className="w-[182px] gap-1 py-2 px-[2px] rounded-[6px] shadow-md flex-1"
-                  align="end"
-                >
-                  <DropdownMenuItem className="font-normal text-[14px]">
-                    <img src={csv} alt="" />
-                    Export as CSV
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="font-normal text-[14px]">
-                    <img src={excel} alt="" className="p-2" /> Export as Excel
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              {showDownload && (
+                <Download data={filteredData} fileName={fileName} />
+              )}
             </div>
           </div>
 
@@ -333,28 +303,46 @@ export default function DataTable<T extends DataTableItem>({
                   selectedItems.length > 0 && (
                     <div
                       key={filterLabel}
-                      className="flex gap-4  text-sm font-normal text-[#F8F8F8]"
+                      className="flex gap-2 items-center justify-between text-sm font-normal text-[#F8F8F8]"
                     >
-                      <span className=" flex items-center rounded-[12px] bg-[#00A81C] p-2">
-                        {filterLabel} :
-                      </span>
-                      <div className="flex flex-wrap gap-2 ">
-                        {selectedItems.map((item, index) => (
-                          <span
-                            key={index}
-                            className="bg-[#1A69AA] rounded-[12px] flex items-center p-2"
-                          >
-                            {item}{" "}
-                            <button
-                              className="ml-2 text-white text-xl focus:outline-none cursor-pointer"
+                      <div className="flex gap-2">
+                        <span className=" flex items-center rounded-[12px] bg-[#00A81C] p-2 ">
+                          {filterLabel}
+                        </span>
+                        <div className="flex flex-wrap gap-2 ">
+                          {selectedItems.map((item, index) => (
+                            <span
+                              key={index}
+                              className="bg-[#51A2E5] rounded-[12px] flex items-center justify-center px-2 cursor-pointer"
                               onClick={() =>
                                 handleRemoveFilter(filterLabel, item)
                               }
                             >
-                              &times;
-                            </button>
-                          </span>
-                        ))}
+                              {item}{" "}
+                              <button className="ml-1 flex items-center text-white text-xl focus:outline-none cursor-pointer">
+                                <img
+                                  src={close}
+                                  alt="close"
+                                  className="h-5 w-5 -mt-[2px]"
+                                />
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div
+                        className="bg-[#DF0C3D] rounded-[12px] flex items-center justify-center p-2 cursor-pointer min-w-[100px]"
+                        onClick={handleRemoveAllFilters}
+                      >
+                        Clear All
+                        <button className="ml-1 flex items-center text-white text-xl focus:outline-none cursor-pointer">
+                          <img
+                            src={close}
+                            alt="close"
+                            className="h-5 w-5 -mt-[2px]"
+                          />
+                        </button>
                       </div>
                     </div>
                   )
@@ -367,8 +355,17 @@ export default function DataTable<T extends DataTableItem>({
               <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => (
-                      <TableHead key={header.id}>
+                    {headerGroup.headers.map((header, index) => (
+                      <TableHead
+                        key={header.id}
+                        className={cn(
+                          "h-[80px] px-[16px]",
+                          index === 0 ? "pl-8" : ""
+                        )}
+                        style={
+                          header.id === "id" ? { textAlign: "center" } : {}
+                        }
+                      >
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -388,7 +385,10 @@ export default function DataTable<T extends DataTableItem>({
                       onClick={() => handleRowClick(row.original)}
                     >
                       {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>
+                        <TableCell
+                          key={cell.id}
+                          className={cn("h-[80px] px-[16px]")}
+                        >
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
@@ -422,6 +422,15 @@ export default function DataTable<T extends DataTableItem>({
               <ViewBusiness
                 isOpen={isDialogOpen}
                 onOpenChange={setIsDialogOpen}
+                data={selectedRow}
+                availableStatuses={uniqueStatuses}
+              />
+            )}
+
+            {detailViewType === "subscription" && (
+              <ViewSubscription
+                isOpen={isSubscriptionOpen}
+                onOpenChange={setIsSubscriptionOpen}
                 data={selectedRow}
                 availableStatuses={uniqueStatuses}
               />

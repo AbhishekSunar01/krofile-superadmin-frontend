@@ -8,7 +8,14 @@ export const SupportBusinessColumns: ColumnDefinition<SupportBusinessData>[] = [
     accessorKey: "_id",
     sortable: false,
     searchable: true,
-    cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
+    cell: ({ row }) => {
+      return (
+        <div className="flex items-center justify-center -ml-2">
+          {String(row.getValue("_id")).padStart(2, "0")}
+        </div>
+      );
+    },
+    // cell: ({ row }) => String(row.getValue("_id")).padStart(2, "0"),
   },
   {
     id: "businessName",
@@ -26,7 +33,7 @@ export const SupportBusinessColumns: ColumnDefinition<SupportBusinessData>[] = [
     accessorKey: "industryType",
     sortable: true,
     filterable: false,
-    searchable: false,
+    searchable: true,
     cell: ({ row }) => (
       <Button variant="ghost">{row.getValue("industryType")}</Button>
     ),
@@ -37,7 +44,7 @@ export const SupportBusinessColumns: ColumnDefinition<SupportBusinessData>[] = [
     accessorKey: "category",
     sortable: false,
     filterable: true,
-    searchable: false,
+    searchable: true,
   },
   {
     id: "source",
@@ -45,13 +52,14 @@ export const SupportBusinessColumns: ColumnDefinition<SupportBusinessData>[] = [
     accessorKey: "source",
     sortable: false,
     filterable: true,
-    searchable: false,
+    searchable: true,
   },
   {
     id: "regDate",
     header: "Date",
     accessorKey: "regDate",
     sortable: true,
+    searchable: true,
     cell: ({ row }) => (
       <Button variant="ghost">
         {new Date(row.original.regDate).toLocaleDateString("en-US", {
@@ -68,7 +76,7 @@ export const SupportBusinessColumns: ColumnDefinition<SupportBusinessData>[] = [
     accessorKey: "status",
     sortable: false,
     filterable: true,
-    searchable: false,
+    searchable: true,
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
       let colorClass = "";

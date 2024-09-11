@@ -53,6 +53,9 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        borderColor: "#E2E6E9",
+        dialogText: "#525E6F",
+        ticketBg: "#DF0C3D",
       },
       borderRadius: {
         lg: "var(--radius)",
