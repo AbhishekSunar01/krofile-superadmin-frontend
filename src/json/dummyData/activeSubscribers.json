@@ -1,9 +1,9 @@
 {
   "pieData": [
-    { "pieData": "Standard Plan", "visitors": 275 },
-    { "pieData": "Upgraded Plan", "visitors": 200 },
-    { "pieData": "Premium Plan", "visitors": 287 },
-    { "pieData": "Enterprise Plan", "visitors": 173 }
+    { "pieData": "Standard Plan", "visitors": 250 },
+    { "pieData": "Upgraded Plan", "visitors": 250 },
+    { "pieData": "Premium Plan", "visitors": 250 },
+    { "pieData": "Enterprise Plan", "visitors": 250 }
   ],
   "titleData": {
     "title": "Active Subscribers by User Segments"

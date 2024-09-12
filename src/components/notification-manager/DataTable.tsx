@@ -72,7 +72,7 @@ export function DataTable({ columns, data }: DataTableProps) {
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="h-[80px]">
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -93,7 +93,7 @@ export function DataTable({ columns, data }: DataTableProps) {
                 data-state={row.getIsSelected() && "selected"}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
+                  <TableCell key={cell.id} className="h-[80px]">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}

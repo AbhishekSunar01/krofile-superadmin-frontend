@@ -30,6 +30,7 @@ const buttonVariants = cva(
         backBtn:
           "bg-[#F6F7F9] border border-borderColor rounded-full flex justify-center items-center h-[48px] w-[48px] cursor-pointer",
         disabled: "bg-[#B6C1CA] shadow-none cursor-not-allowed text-white",
+        start: "bg- text-white shadow-sm hover:bg-start/80",
       },
       size: {
         default: "h-9 px-4 py-2",
