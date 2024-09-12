@@ -80,7 +80,7 @@ const ActionCell: React.FC = () => {
           <DialogTrigger
             onClick={(event) => event.stopPropagation()}
             className={`gap-1 flex text-sm p-2 ${
-              isSuspended ? "text-[#00A81C]" : "text-[#DB6E00]"
+              isSuspended ? "text-accentGreen" : "text-accentOrange"
             }`}
           >
             <img
@@ -96,7 +96,7 @@ const ActionCell: React.FC = () => {
           >
             {!isSuspended ? (
               <>
-                <div className="flex items-center justify-center w-20 h-20 bg-[#DB6E00]/20 rounded-full">
+                <div className="flex items-center justify-center w-20 h-20 bg-accentOrange/20 rounded-full">
                   <img
                     src={suspend}
                     alt="suspend"
@@ -109,7 +109,7 @@ const ActionCell: React.FC = () => {
                 </p>
                 <div className="w-full -mt-1">
                   <h3 className=" text-base font-medium mb-[2px]">
-                    Suspension Days <span className="text-red-500">*</span>
+                    Suspension Days <span className="text-desctructive">*</span>
                   </h3>
                   <Input
                     type="number"
@@ -178,7 +178,7 @@ const ActionCell: React.FC = () => {
           <DialogTrigger
             onClick={(event) => event.stopPropagation()}
             className={`gap-1 flex text-sm p-2 ${
-              isBlocked ? "text-[#00A81C]" : "text-[#DF0C3D]"
+              isBlocked ? "text-accentGreen" : "text-[#DF0C3D]"
             }`}
           >
             <img

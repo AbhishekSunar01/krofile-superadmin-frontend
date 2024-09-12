@@ -71,16 +71,16 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
 
   switch (data.status) {
     case "Pending":
-      colorClass = "text-orange-500";
+      colorClass = "text-accentOrange";
       break;
     case "In Progress":
-      colorClass = "text-blue-500";
+      colorClass = "text-primary";
       break;
     case "Completed":
-      colorClass = "text-green-500";
+      colorClass = "text-accentGreen";
       break;
     case "Rejected":
-      colorClass = "text-red-500";
+      colorClass = "text-desctructive";
       break;
     default:
       colorClass = "text-gray-500";
