@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "01",
+    "industryType": "Restaurant",
+    "count": 2500,
+    "ratio": "25%"
+  },
+  {
+    "_id": "02",
+    "industryType": "Retail",
+    "count": 1500,
+    "ratio": "15%"
+  },
+  {
+    "_id": "03",
+    "industryType": "Healthcare",
+    "count": 2000,
+    "ratio": "20%"
+  },
+  {
+    "_id": "04",
+    "industryType": "Education",
+    "count": 1000,
+    "ratio": "10%"
+  },
+  {
+    "_id": "05",
+    "industryType": "Technology",
+    "count": 3000,
+    "ratio": "30%"
+  }
+]
