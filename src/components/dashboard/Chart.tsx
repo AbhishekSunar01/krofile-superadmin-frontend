@@ -29,7 +29,7 @@ export default function Chart({ chartData, title, tooltipData }: ChartProps) {
 
   return (
     <div className="">
-      <Card className="flex flex-col w-[420px]">
+      <Card className="flex flex-col min-w-[420px]">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-5">
           <div className="font-normal text-sm">{title}</div>
           <div className="flex items-center gap-x-5">

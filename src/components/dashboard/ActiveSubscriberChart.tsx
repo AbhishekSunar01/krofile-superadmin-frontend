@@ -119,7 +119,7 @@ export default function ActiveSubscriberChart({
   );
 
   return (
-    <Card className="flex flex-col h-[265px] min-w-[450px]">
+    <Card className="flex flex-col h-[265px] min-w-[400px]">
       <CardHeader className="items-start pt-4 pb-2">
         <CardTitle className="text-left text-[16px] font-[500]">
           {titleData.title}
