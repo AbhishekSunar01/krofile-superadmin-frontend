@@ -1,4 +1,4 @@
-import { DataTable } from "../components/user-management";
+import DataTable from "../components/custom-ui/DataTable";
 import PageLayout from "../layout/PageLayout";
 import data from "../json/dummyData/activityLog.json";
 import { ActivityLogColumns } from "../components/activity-log/ActivityColumn";

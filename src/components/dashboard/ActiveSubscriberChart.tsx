@@ -10,7 +10,6 @@ import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
-  ChartTooltipContent,
 } from "../../components/ui/chart";
 
 interface PieComponentProps {
@@ -18,13 +17,18 @@ interface PieComponentProps {
   titleData: { title: string; subtitle?: string };
 }
 
-const colorPalette = [
-  "hsl(var(--chart-1))",
-  "hsl(var(--chart-2))",
-  "hsl(var(--chart-3))",
-  "hsl(var(--chart-4))",
-  "hsl(var(--chart-5))",
-];
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    payload: {
+      pieData: string;
+      visitors: number;
+      fill: string;
+    };
+  }>;
+}
+
+const colorPalette = ["#90CAF9", "#A5D6A7", "#FFCC80", "#CE93D8"];
 
 const chartConfig = {
   visitors: {
@@ -60,18 +64,37 @@ const renderLabel = (viewBox: any, totalVisitors: number) => {
         <tspan
           x={viewBox.cx}
           y={(viewBox.cy || 0) - 10}
-          className="fill-muted-foreground text-lg"
+          className="fill-muted-foreground text-base font-normal"
         >
           Total Value
         </tspan>
         <tspan
           x={viewBox.cx}
           y={(viewBox.cy || 0) + 20}
-          className="fill-foreground text-3xl font-bold"
+          className="fill-foreground text-2xl font-bold"
         >
           {totalVisitors.toLocaleString()}
         </tspan>
       </text>
+    );
+  }
+  return null;
+};
+
+const CustomTooltip: React.FC<CustomTooltipProps> = ({ payload }) => {
+  if (payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="bg-[#000000] text-white p-2 rounded-md text-xs font-normal">
+        <div className="flex items-center space-x-2  ">
+          <span
+            className="inline-block w-2 h-2 rounded-full"
+            style={{ backgroundColor: data.fill }}
+          />
+          <span>{data.pieData}</span>
+        </div>
+        <div className="ml-6">Count: {data.visitors}</div>
+      </div>
     );
   }
   return null;
@@ -96,32 +119,24 @@ export default function ActiveSubscriberChart({
   );
 
   return (
-    <Card className="flex flex-col h-[265px] w-full">
-      <CardHeader className="items-center pt-4 pb-2">
-        <CardTitle className=" text-[16px] font-[500]">
+    <Card className="flex flex-col h-[265px] min-w-[450px]">
+      <CardHeader className="items-start pt-4 pb-2">
+        <CardTitle className="text-left text-[16px] font-[500]">
           {titleData.title}
         </CardTitle>
-        {titleData.subtitle && (
-          <span className="text-xs text-muted-foreground">
-            {titleData.subtitle}
-          </span>
-        )}
       </CardHeader>
-      <CardContent className="flex items-center justify-center p-0">
+      <CardContent className="flex items-center justify-center -mt-3">
         <ChartContainer
           config={chartConfig}
           className="flex w-full items-center "
         >
           <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
+            <ChartTooltip cursor={false} content={<CustomTooltip />} />
             <Pie
               data={dataWithColors}
               dataKey="visitors"
               nameKey="pieData"
-              innerRadius={40}
+              innerRadius={50}
               strokeWidth={5}
             >
               <Label
