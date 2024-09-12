@@ -9,8 +9,6 @@ import {
   FormMessage,
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
-import TextFormatter from "../custom-ui/TextFormatter";
-import { Textarea } from "../ui/textarea";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { useNotificationType } from "../../store/notificationManagerStore";
 import { notificationSchema } from "../../utils/schemas/notificationSchema";
@@ -24,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import TextEditor from "../custom-ui/TextEditor";
 
 export default function NotificationForm() {
   const { selectedValue, setSelectedValue } = useNotificationType();
@@ -119,7 +118,6 @@ export default function NotificationForm() {
             <FormItem>
               <FormLabel>Type</FormLabel>
               <FormControl>
-                {/* <Input placeholder="Enter type" {...field} /> */}
                 <Controller
                   control={form.control}
                   name="type"
@@ -161,12 +159,7 @@ export default function NotificationForm() {
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <div className="p-4 mt-2 rounded-lg border flex flex-col items-start gap-2">
-                  <TextFormatter />
-                  <Textarea
-                    className="bg-mainBg h-16"
-                    placeholder="Type here..."
-                    {...field}
-                  />
+                  <TextEditor value={field.value} onChange={field.onChange} />
                 </div>
               </FormControl>
               <FormMessage />
@@ -187,7 +180,9 @@ export default function NotificationForm() {
                   type="radio"
                   value="notificationform"
                   checked={selectedValue === "notificationform"}
+                  onChange={() => handleRadioChange("notificationform")}
                 />
+                Notification Form
               </RadioGroupItem>
               All
             </div>
@@ -197,7 +192,9 @@ export default function NotificationForm() {
                   type="radio"
                   value="hello"
                   checked={selectedValue === "hello"}
+                  onChange={() => handleRadioChange("hello")}
                 />
+                Custom Business
               </RadioGroupItem>
               Custom Business
             </div>
