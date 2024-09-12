@@ -182,7 +182,7 @@ export default function NewPasswordForm({ setVerified }: IProps) {
                 <div className="flex justify-start items-center gap-2">
                   <div
                     className={`${
-                      isLengthValid ? "bg-[#00A81C]" : "bg-destructive"
+                      isLengthValid ? "bg-accentGreen" : "bg-destructive"
                     } rounded-full h-[16px] w-[16px] flex justify-center items-center`}
                   >
                     {isLengthValid ? (
@@ -196,7 +196,7 @@ export default function NewPasswordForm({ setVerified }: IProps) {
                 <div className="flex justify-start items-center gap-2">
                   <div
                     className={`${
-                      hasNumber ? "bg-[#00A81C]" : "bg-destructive"
+                      hasNumber ? "bg-accentGreen" : "bg-destructive"
                     } rounded-full h-[16px] w-[16px] flex justify-center items-center`}
                   >
                     {hasNumber ? (
@@ -210,7 +210,7 @@ export default function NewPasswordForm({ setVerified }: IProps) {
                 <div className="flex justify-start items-center gap-2">
                   <div
                     className={`${
-                      hasSpecialChar ? "bg-[#00A81C]" : "bg-destructive"
+                      hasSpecialChar ? "bg-accentGreen" : "bg-destructive"
                     } rounded-full h-[16px] w-[16px] flex justify-center items-center`}
                   >
                     {hasSpecialChar ? (

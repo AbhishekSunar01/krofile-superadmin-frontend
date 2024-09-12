@@ -33,7 +33,7 @@ export default function TotalCustomers() {
                 </div>
               </div>
               <div className="text-xs flex items-center text-[#1E7BC8] gap-2">
-                <span className="text-[#00A81C]">{item.percentage}</span>
+                <span className="text-accentGreen">{item.percentage}</span>
                 {item.comparison}
               </div>
             </div>
