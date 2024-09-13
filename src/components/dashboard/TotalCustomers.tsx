@@ -38,7 +38,7 @@ export default function TotalCustomers() {
                 <img
                   src={growth}
                   alt="growth"
-                  className="bg-accentGreen p-1 rounded-full"
+                  className="bg-accentGreen p-[2px] rounded-full"
                 />{" "}
                 <span className="text-accentGreen">{item.percentage}</span>
                 {item.comparison}

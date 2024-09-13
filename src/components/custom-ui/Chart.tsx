@@ -9,6 +9,8 @@ import {
   ChartTooltipContent,
 } from "../ui/chart";
 
+import growth from "../../assets/svg/growth.svg";
+
 interface ChartProps {
   chartData: { date: string; data: number }[];
   title: string;
@@ -32,9 +34,19 @@ export default function Chart({ chartData, title, tooltipData }: ChartProps) {
       <Card className="flex flex-col min-w-[420px]">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-5">
           <div className="font-normal text-sm">{title}</div>
-          <div className="flex items-center gap-x-5">
-            <span className="text-base font-semibold leading-none">
-              {totalData.toLocaleString()}
+          <div className="flex items-center gap-x-2">
+            <span className="text-base font-semibold leading-none ">
+              {totalData.toLocaleString()}{" "}
+            </span>{" "}
+            <span className="text-xs flex items-center text-[#1E7BC8] gap-1 ">
+              {" "}
+              <img
+                src={growth}
+                alt="growth"
+                className="bg-accentGreen p-1 rounded-full"
+              />{" "}
+              <span className="text-accentGreen">26%</span>
+              vs previous period
             </span>
           </div>
         </div>
