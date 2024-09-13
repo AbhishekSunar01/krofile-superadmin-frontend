@@ -1,6 +1,5 @@
 [
   {
-    "icon": "/src/assets/svg/note.svg",
     "title": "🎉 First feedback received from ",
     "businessName": "Maybeline",
     "img": "/src/assets/images/maybeline.png",
@@ -9,7 +8,6 @@
     "date": "Jul 16, 2024"
   },
   {
-    "icon": "/src/assets/svg/pull-request.svg",
     "title": "New delivery platform request on ",
     "businessName": "Passage to India",
     "img": "/src/assets/images/logo.jpg",
@@ -18,7 +16,6 @@
     "date": "Jul 20, 2024"
   },
   {
-    "icon": "/src/assets/svg/pull-request.svg",
     "title": "First unified digital wallet request on ",
     "businessName": "Tesla",
     "img": "/src/assets/images/tesla.png",
@@ -27,7 +24,6 @@
     "date": "Jul 19, 2024"
   },
   {
-    "icon": "/src/assets/svg/pull-request.svg",
     "title": "New review platform request on ",
     "businessName": "Nike",
     "img": "/src/assets/images/nike.png",
@@ -36,7 +32,6 @@
     "date": "Jul 18, 2024"
   },
   {
-    "icon": "/src/assets/svg/pull-request.svg",
     "title": "New washroom issue request on",
     "businessName": "Stanford University",
     "img": "/src/assets/images/su.png",
@@ -45,16 +40,14 @@
     "date": "Jul 17, 2024"
   },
   {
-    "icon": "/src/assets/svg/pull-request.svg",
-    "title": "🎉 First feature request on ",
-    "businessName": "Maybelline",
+    "title": "First feature request on ",
+    "businessName": "Maybeline",
     "img": "/src/assets/images/maybeline.png",
     "source": "Profile Setting",
     "category": "Request",
     "date": "Jul 16, 2024"
   },
   {
-    "icon": "/src/assets/svg/ticket.svg",
     "title": "First ticket issue from ",
     "businessName": "Tesla",
     "img": "/src/assets/images/tesla.png",

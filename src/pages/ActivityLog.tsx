@@ -5,7 +5,7 @@ import { ActivityLogColumns } from "../components/activity-log/ActivityColumn";
 import NoData from "../components/custom-ui/NoData";
 
 export default function ActivityLog() {
-  const activitHasData = false;
+  const activitHasData = true;
   return (
     <PageLayout
       title="Activity Log"
