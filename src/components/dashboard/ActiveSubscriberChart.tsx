@@ -37,7 +37,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const CustomLegend: React.FC<LegendProps> = ({ payload }) => (
-  <ul className="flex flex-col items-start space-y-5 mr-2">
+  <ul className="flex flex-col items-start space-y-4 -mr-2">
     {payload?.map((entry, index) => (
       <li key={`item-${index}`} className="flex items-center space-x-2">
         <span
@@ -125,7 +125,7 @@ export default function ActiveSubscriberChart({
           {titleData.title}
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex items-center justify-center -mt-3">
+      <CardContent className="flex items-center justify-center -mt-2">
         <ChartContainer
           config={chartConfig}
           className="flex w-full items-center "

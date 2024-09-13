@@ -38,7 +38,7 @@ export default function Chart({ chartData, title, tooltipData }: ChartProps) {
             <span className="text-base font-semibold leading-none ">
               {totalData.toLocaleString()}{" "}
             </span>{" "}
-            <span className="text-xs flex items-center text-[#1E7BC8] gap-1 ">
+            <span className="text-xs flex items-center text-primary gap-1 ">
               {" "}
               <img
                 src={growth}

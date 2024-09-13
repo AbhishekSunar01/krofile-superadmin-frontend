@@ -7,7 +7,7 @@ const colors = ["#90CAF9", "#A5D6A7", "#FFCC80", "#CE93D8"];
 
 export default function TotalCustomers() {
   return (
-    <Card className="flex flex-col items-start p-5 gap-4 shadow w-[750px]">
+    <Card className="flex flex-col items-start p-5 gap-4 shadow w-[740px]">
       <div className=" mb-1">
         <div className="text-xl font-semibold mb-2">Total Customers</div>
         <div className="text-xs font-normal">Customer’s Summary</div>
@@ -34,7 +34,7 @@ export default function TotalCustomers() {
                 </div>
               </div>
 
-              <div className="text-xs flex items-center text-[#1E7BC8] gap-1 mt-2">
+              <div className="text-xs flex items-center text-primary gap-1 mt-2">
                 <img
                   src={growth}
                   alt="growth"
