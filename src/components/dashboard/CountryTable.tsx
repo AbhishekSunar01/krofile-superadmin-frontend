@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -20,17 +20,46 @@ interface CountryTableProps {
   tableData: Country[];
 }
 
-const CountryTable: React.FC<CountryTableProps> = ({ tableData }) => {
-  const importFlag = async (iconName: string) => {
-    try {
-      const flag = await import(`../../assets/svg/flag/${iconName}.svg`);
-      return flag.default;
-    } catch (error) {
-      console.error(`Error loading flag for ${iconName}:`, error);
-      return null;
-    }
-  };
+const importFlag = async (iconName: string): Promise<string | null> => {
+  try {
+    const flag = await import(`../../assets/svg/flag/${iconName}.svg`);
+    return flag.default;
+  } catch (error) {
+    console.error(`Error loading flag for ${iconName}:`, error);
+    return null;
+  }
+};
 
+const CountryRow: React.FC<{ country: Country }> = React.memo(({ country }) => {
+  const { _id, country: countryName, ratio, count } = country;
+  const iconName = useMemo(() => countryName?.toLowerCase(), [countryName]);
+  const [flagSrc, setFlagSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    importFlag(iconName).then(setFlagSrc);
+  }, [iconName]);
+
+  return (
+    <TableRow key={_id}>
+      <TableCell className="font-medium py-3 flex gap-2 items-center">
+        {flagSrc && (
+          <img
+            className="h-[24px] w-[24px]"
+            src={flagSrc}
+            alt={`${countryName} flag`}
+            height={24}
+            width={24}
+          />
+        )}
+        {countryName}
+      </TableCell>
+      <TableCell>{ratio}</TableCell>
+      <TableCell>{count}</TableCell>
+    </TableRow>
+  );
+});
+
+const CountryTable: React.FC<CountryTableProps> = ({ tableData }) => {
   return (
     <Card className="flex flex-col bg-white rounded-md px-4 pt-4">
       <div className="px-2 gap-2 flex flex-col">
@@ -47,33 +76,9 @@ const CountryTable: React.FC<CountryTableProps> = ({ tableData }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {tableData.map(({ _id, country, ratio, count }) => {
-            const iconName = country?.toLowerCase();
-            const [flagSrc, setFlagSrc] = React.useState<string | null>(null);
-
-            React.useEffect(() => {
-              importFlag(iconName).then(setFlagSrc);
-            }, [iconName]);
-
-            return (
-              <TableRow key={_id}>
-                <TableCell className="font-medium py-3 flex gap-2 items-center">
-                  {flagSrc && (
-                    <img
-                      className="h-[24px] w-[24px]"
-                      src={flagSrc}
-                      alt={`${country} flag`}
-                      height={50}
-                      width={50}
-                    />
-                  )}
-                  {country}
-                </TableCell>
-                <TableCell>{ratio}</TableCell>
-                <TableCell>{count}</TableCell>
-              </TableRow>
-            );
-          })}
+          {tableData.map((country) => (
+            <CountryRow key={country._id} country={country} />
+          ))}
         </TableBody>
       </Table>
     </Card>
