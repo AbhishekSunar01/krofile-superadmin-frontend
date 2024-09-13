@@ -306,7 +306,7 @@ export default function DataTable<T extends DataTableItem>({
                       className="flex gap-2 items-center justify-between text-sm font-normal text-[#F8F8F8]"
                     >
                       <div className="flex gap-2">
-                        <span className=" flex items-center rounded-[12px] bg-[#00A81C] p-2 ">
+                        <span className=" flex items-center rounded-[12px] bg-accentGreen p-2 ">
                           {filterLabel}
                         </span>
                         <div className="flex flex-wrap gap-2 ">

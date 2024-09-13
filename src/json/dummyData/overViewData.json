@@ -2,7 +2,7 @@
   {
     "title": "🎉 First feedback received from ",
     "businessName": "Maybeline",
-    "img": "/src/assets/images/maybeline.png",
+    "img": "/assets/images/maybeline.png",
     "source": "Profile Setting",
     "category": "Feedback",
     "date": "Jul 16, 2024"
@@ -10,7 +10,7 @@
   {
     "title": "New delivery platform request on ",
     "businessName": "Passage to India",
-    "img": "/src/assets/images/logo.jpg",
+    "img": "/assets/images/logo.jpg",
     "source": "Delivery Platform",
     "category": "Request",
     "date": "Jul 20, 2024"
@@ -18,7 +18,7 @@
   {
     "title": "First unified digital wallet request on ",
     "businessName": "Tesla",
-    "img": "/src/assets/images/tesla.png",
+    "img": "/assets/images/tesla.png",
     "source": "Unified Digital Wallet",
     "category": "Request",
     "date": "Jul 19, 2024"
@@ -26,7 +26,7 @@
   {
     "title": "New review platform request on ",
     "businessName": "Nike",
-    "img": "/src/assets/images/nike.png",
+    "img": "/assets/images/nike.png",
     "source": "Review Platform",
     "category": "Request",
     "date": "Jul 18, 2024"
@@ -34,7 +34,7 @@
   {
     "title": "New washroom issue request on",
     "businessName": "Stanford University",
-    "img": "/src/assets/images/su.png",
+    "img": "/assets/images/su.png",
     "source": "Washroom Feedback Manager",
     "category": "Request",
     "date": "Jul 17, 2024"

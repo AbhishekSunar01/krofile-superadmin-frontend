@@ -84,7 +84,7 @@ export default function CustomBusiness() {
             {selectedIndustries.some(
               (selected) => selected.id === industry.id
             ) && (
-              <div className="bg-accentDarkGreen w-fit rounded-full px-[0.5px]">
+              <div className="bg-accentGreen w-fit rounded-full px-[0.5px]">
                 <img src={whitetick} alt="tick" />
               </div>
             )}

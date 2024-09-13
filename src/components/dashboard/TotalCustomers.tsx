@@ -33,6 +33,7 @@ export default function TotalCustomers() {
                   <div className="text-sm">{item.description}</div>
                 </div>
               </div>
+            
               <div className="text-xs flex items-center text-[#1E7BC8] gap-1 mt-2">
                 <img
                   src={growth}
