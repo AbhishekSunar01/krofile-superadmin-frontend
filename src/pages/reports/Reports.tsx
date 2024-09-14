@@ -3,11 +3,12 @@ import PageLayout from "../../layout/PageLayout";
 
 import ReportChart from "../../components/reports/AreaChart";
 import ReportCard from "../../components/reports/ReportCard";
-import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
-// import retentionChartDataJson from "../../json/dummyData/retentionGrowthData.json";
-import formatNumberWithCommas from "../../utils/formatNumberWithComma";
 import ReportTable from "../../components/reports/ReportTable";
-import ActiveSubscribersDataJson from '../../json/dummyData/activeSubscribersData.json';
+import ReportStackedChart from "../../components/reports/StackedAreaChart";
+import ActiveSubscribersDataJson from "../../json/dummyData/activeSubscribersData.json";
+import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
+import retentionChartDataJson from "../../json/dummyData/retentionGrowthData.json";
+import formatNumberWithCommas from "../../utils/formatNumberWithComma";
 
 interface IChartData {
   date: string;
@@ -18,12 +19,13 @@ export default function Reports() {
   const activeUserGrowthChartData: IChartData[] =
     activeUserGrowthChartDataJson.chartData;
 
-  const ActiveSubscribersData: Record<string, any>[] = ActiveSubscribersDataJson.data;
+  const ActiveSubscribersData: Record<string, any>[] =
+    ActiveSubscribersDataJson.data;
 
-  // const retentionChartData: IChartData[] = retentionChartDataJson.chartData;
+  const retentionChartData: IChartData[] = retentionChartDataJson.chartData;
 
   const activeUserChartLabels: string[] = ["Count"];
-  // const retentionChartLabels: string[] = ["retentionrate", "retentiongrowth"];
+  const retentionChartLabels: string[] = ["retentionrate", "retentiongrowth"];
 
   const activeUserGrowthChartConfig = {
     count: {
@@ -32,16 +34,16 @@ export default function Reports() {
     },
   } satisfies ChartConfig;
 
-  // const retentionChartConfig = {
-  //   retentionrate: {
-  //     label: "retentionrate",
-  //     color: "hsl(var(--chart-6))",
-  //   },
-  //   retentiongrowth: {
-  //     label: "retentiongrowth",
-  //     color: "hsl(var(--chart-2))",
-  //   },
-  // } satisfies ChartConfig;
+  const retentionChartConfig = {
+    retentionrate: {
+      label: "retentionrate",
+      color: "hsl(var(--chart-6))",
+    },
+    retentiongrowth: {
+      label: "retentiongrowth",
+      color: "hsl(var(--chart-2))",
+    },
+  } satisfies ChartConfig;
 
   const findTotal = (data: IChartData[]): number => {
     const total = data.reduce((acc, curVal) => {
@@ -90,7 +92,7 @@ export default function Reports() {
           }
         />
 
-        {/* <ReportCard
+        <ReportCard
           cardTitle="Retention Growth"
           cardLink="/reports"
           growthPercentage={
@@ -98,17 +100,15 @@ export default function Reports() {
           }
           // total={findTotal(activeUserGrowthChartData) || 0}
           childrenComponent={
-            <ReportChart
+            <ReportStackedChart
               chartConfig={retentionChartConfig}
               chartData={retentionChartData}
-
               XAxisDataKey={"date"}
-              YAxisDataKey={"retentionrate"}
               areaType="natural"
               chartLabels={retentionChartLabels}
             />
           }
-        /> */}
+        />
       </div>
     </PageLayout>
   );
