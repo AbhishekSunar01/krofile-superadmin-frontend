@@ -4,11 +4,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "../../ui/dropdown-menu";
-import print from "../../../assets/svg/print.svg";
-import download from "../../../assets/svg/download.svg";
-import csv from "../../../assets/svg/csv.svg";
-import excel from "../../../assets/svg/excel.svg";
+} from "../ui/dropdown-menu";
+import print from "../../assets/svg/print.svg";
+import download from "../../assets/svg/download.svg";
+import csv from "../../assets/svg/csv.svg";
+import excel from "../../assets/svg/excel.svg";
 import * as XLSX from "xlsx";
 
 const exportToCSV = (data: any, fileName: string) => {

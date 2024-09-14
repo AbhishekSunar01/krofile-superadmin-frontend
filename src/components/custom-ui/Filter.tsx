@@ -6,14 +6,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuItem,
-} from "../../ui/dropdown-menu";
-import { Checkbox } from "../../ui/checkbox";
+} from "../ui/dropdown-menu";
+import { Checkbox } from "../ui/checkbox";
 import { ChevronLeft } from "lucide-react";
 
-import filter from "../../../assets/svg/filter.svg";
-import forward from "../../../assets/svg/forward.svg";
+import filter from "../../assets/svg/filter.svg";
+import forward from "../../assets/svg/forward.svg";
 
-import { FilterOption, FilterDropdownProps } from "../../../types/type";
+import { FilterOption, FilterDropdownProps } from "../../types/type";
 
 const FilterDropdown: React.FC<FilterDropdownProps> = ({
   onFilterChange,

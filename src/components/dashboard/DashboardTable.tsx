@@ -7,6 +7,9 @@ import {
 } from "../../components/ui/table";
 import { Card } from "../../components/ui/card";
 
+import growth from "../../assets/svg/growth.svg";
+
+
 interface DashboardTableProps {
   data: Record<string, any>[];
   title: string;
@@ -42,9 +45,21 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
       {" "}
       <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-5">
         <div className="font-normal text-sm">{title}</div>
-        <div className="flex items-center gap-x-5">
+
+        <div className="flex items-center gap-x-2">
           <span className="text-base font-semibold leading-none">
-            {totalData.toLocaleString()}
+            {totalData.toLocaleString()}{" "}
+          </span>{" "}
+          <span className="text-xs flex items-center text-primary gap-1 ">
+            {" "}
+            <img
+              src={growth}
+              alt="growth"
+              className="bg-accentGreen p-1 rounded-full"
+            />{" "}
+            <span className="text-accentGreen">26%</span>
+            vs previous period
+
           </span>
         </div>
       </div>

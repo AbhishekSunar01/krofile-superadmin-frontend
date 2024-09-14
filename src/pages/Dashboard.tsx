@@ -15,7 +15,9 @@ import subscribersData from "../json/dummyData/subscribersData.json";
 import { useState } from "react";
 
 export default function Dashboard() {
-  const [dashboardHasData, setDashboardHasData] = useState(false);
+
+  const [dashboardHasData, setDashboardHasData] = useState(true);
+
 
   const handleButtonClick = () => {
     setDashboardHasData(true);
