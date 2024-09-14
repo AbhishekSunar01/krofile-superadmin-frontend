@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import {
   Table,
@@ -43,7 +42,7 @@ const CountryRow: React.FC<{ country: Country }> = React.memo(({ country }) => {
 
   return (
     <TableRow key={_id}>
-      <TableCell className="font-medium py-3 flex gap-2 items-center">
+      <TableCell className="flex font-medium py-3 gap-2 items-center">
         {flagSrc && (
           <img
             className="h-[24px] w-[24px]"
@@ -64,7 +63,7 @@ const CountryRow: React.FC<{ country: Country }> = React.memo(({ country }) => {
 const CountryTable: React.FC<CountryTableProps> = ({ tableData }) => {
   return (
     <Card className="flex flex-col bg-white rounded-md px-4 pt-4">
-      <div className="px-2 gap-2 flex flex-col">
+      <div className="flex px-2 gap-2 flex-col">
         <span className="text-sm font-normal">Statistics</span>
         <span className="text-sm font-medium">Popular Countries</span>
       </div>
@@ -78,35 +77,9 @@ const CountryTable: React.FC<CountryTableProps> = ({ tableData }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-
-          {tableData.map(({ _id, country, ratio, count }) => {
-            const iconName = country?.toLowerCase();
-            const [flagSrc, setFlagSrc] = React.useState<string | null>(null);
-
-            React.useEffect(() => {
-              importFlag(iconName).then(setFlagSrc);
-            }, [iconName]);
-
-            return (
-              <TableRow key={_id}>
-                <TableCell className="font-medium py-3 flex gap-2 items-center">
-                  {flagSrc && (
-                    <img
-                      className="h-[24px] w-[24px]"
-                      src={flagSrc}
-                      alt={`${country} flag`}
-                      height={50}
-                      width={50}
-                    />
-                  )}
-                  {country}
-                </TableCell>
-                <TableCell>{ratio}</TableCell>
-                <TableCell>{count}</TableCell>
-              </TableRow>
-            );
-          })}
-
+          {tableData.map((country) => (
+            <CountryRow key={country._id} country={country} />
+          ))}
         </TableBody>
       </Table>
     </Card>
