@@ -25,7 +25,7 @@ const ReportCard = ({
 }: IReportCardProps) => {
   return (
     <>
-      <Card className="col-span-2">
+      <Card className="border col-span-2 h-[460px] overflow-auto">
         <CardHeader>
           <CardTitle className="font-[400] font-inter text-[16px] flex justify-between items-center text-[#14181F]">
             <div>{cardTitle}</div>

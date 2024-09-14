@@ -6,6 +6,8 @@ import ReportCard from "../../components/reports/ReportCard";
 import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
 // import retentionChartDataJson from "../../json/dummyData/retentionGrowthData.json";
 import formatNumberWithCommas from "../../utils/formatNumberWithComma";
+import ReportTable from "../../components/reports/ReportTable";
+import ActiveSubscribersDataJson from '../../json/dummyData/activeSubscribersData.json';
 
 interface IChartData {
   date: string;
@@ -71,6 +73,19 @@ export default function Reports() {
               areaType="natural"
               chartLabels={activeUserChartLabels}
             />
+          }
+        />
+        <ReportCard
+          cardTitle="Active Subscribers"
+          cardLink="/reports"
+          growthPercentage={
+            activeUserGrowthChartDataJson.growthPercentage || "0"
+          }
+          total={
+            formatNumberWithCommas(findTotal(activeUserGrowthChartData)) || 0
+          }
+          childrenComponent={
+            <ReportTable data={ActiveSubscribersDataJson} headings={["SL No", "Business Name", "Reg. Date", "Subs. Plan"]} />
           }
         />
 

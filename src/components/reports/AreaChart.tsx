@@ -28,7 +28,7 @@ const ReportAreaChart = ({
   return (
     <>
       <ChartContainer
-        className="aspect-auto h-[300px] w-full"
+        className="h-[330px] w-full"
         config={chartConfig}
       >
         <AreaChart
@@ -38,6 +38,7 @@ const ReportAreaChart = ({
             left: 0,
             right: 0,
           }}
+          className=""
         >
           <defs>
             <linearGradient id="colorData" x1="0" y1="0" x2="0" y2="1">
@@ -59,8 +60,9 @@ const ReportAreaChart = ({
             dataKey={YAxisDataKey}
             tickLine={false}
             axisLine={false}
-            tickMargin={8}
+            tickMargin={24}
             tickFormatter={(value) => value / 1000 + "k"}
+            padding={{ top: 10 }}
           />
 
           <XAxis
