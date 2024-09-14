@@ -56,6 +56,23 @@ ul {
   @apply text-[#525E6F];
 }
 
+/* TextEditor.css */
+
+.ql-container {
+  border: none !important;
+  border-radius: 0.75rem;
+  height: 80px;
+}
+
+.ql-toolbar.ql-snow {
+  border: none !important;
+}
+
+.ql-editor {
+  border: none !important;
+  border-radius: 0.75rem; /* Adjust the value to match your rounded-xl class */
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

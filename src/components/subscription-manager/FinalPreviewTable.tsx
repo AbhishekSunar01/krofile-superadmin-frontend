@@ -23,7 +23,7 @@ export default function FinalPreviewTable() {
                 }`}
               >
                 {index === 1 && (
-                  <div className="absolute top-0 w-full bg-accentDarkGreen text-xs py-1 text-white rounded-t-xl">
+                  <div className="absolute top-0 w-full bg-accentGreen text-xs py-1 text-white rounded-t-xl">
                     Recommended
                   </div>
                 )}

@@ -52,7 +52,7 @@ export default function SystemStatus() {
                 <TableCell
                   className={
                     service.status === "Online"
-                      ? "text-accentDarkGreen"
+                      ? "text-accentGreen"
                       : "text-destructive"
                   }
                 >

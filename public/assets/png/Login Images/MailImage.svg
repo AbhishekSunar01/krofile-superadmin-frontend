@@ -1,0 +1,17 @@
+<svg width="96" height="99" viewBox="0 0 96 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 8">
+<g id="Union">
+<path d="M55.3471 2.5121C51.0217 -0.837364 44.9784 -0.837369 40.6529 2.5121L0 33.9923L96 33.9923L55.3471 2.5121Z" fill="#DCECFA"/>
+<path d="M48 71.1618L96 33.9923L0 33.9923L48 71.1618Z" fill="#DCECFA"/>
+</g>
+<g id="Group 7">
+<rect id="Rectangle 3" x="30.4492" y="46.8228" width="36" height="36" rx="2" fill="#51A2E5"/>
+<rect id="Rectangle 4" x="1" y="-1" width="20" height="22" rx="9" transform="matrix(1 0 0 -1 37.4492 55.8228)" stroke="#51A2E5" stroke-width="2"/>
+<circle id="Ellipse 7" cx="48" cy="57.8228" r="3" fill="#97C7EF"/>
+</g>
+<g id="Subtract">
+<path d="M0.218873 33.8228L0 33.9922V33.8228H0.218873Z" fill="#F6F7F9"/>
+<path d="M95.7811 33.8228L96 33.9922L55.3471 65.4724C51.0217 68.8219 44.9784 68.8219 40.6529 65.4724L0 33.9922V86.8228C0 93.4502 5.37258 98.8228 12 98.8228H84C90.6274 98.8228 96 93.4502 96 86.8228V33.9922V33.8228H95.7811Z" fill="#F6F7F9"/>
+</g>
+</g>
+</svg>

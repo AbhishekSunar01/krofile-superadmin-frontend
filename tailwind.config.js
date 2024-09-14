@@ -23,7 +23,8 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         mainBg: "#F6F7F9",
-        accentDarkGreen: "#00A81C",
+        accentGreen: "#00A81C",
+        accentOrange: "#DB6E00",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",

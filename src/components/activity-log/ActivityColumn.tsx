@@ -53,13 +53,13 @@ export const ActivityLogColumns: ColumnDefinition<ActivityLog>[] = [
 
       switch (status) {
         case "Update":
-          colorClass = "text-orange-500";
+          colorClass = "text-accentOrange";
           break;
         case "Create":
-          colorClass = "text-green-500";
+          colorClass = "text-accentGreen";
           break;
         case "Delete":
-          colorClass = "text-red-500";
+          colorClass = "text-destructive";
           break;
         default:
           colorClass = "text-gray-500";
