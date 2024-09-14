@@ -1,122 +1,125 @@
-[
-  {
-    "_id": "01",
-    "businessName": "Passage to India",
-    "date": "Jul 28, 2024",
-    "plan": "Standard"
-  },
-  {
-    "_id": "02",
-    "businessName": "Tech Innovators",
-    "date": "Aug 15, 2024",
-    "plan": "Premium"
-  },
-  {
-    "_id": "03",
-    "businessName": "Green Grocers",
-    "date": "Sep 10, 2024",
-    "plan": "Basic"
-  },
-  {
-    "_id": "04",
-    "businessName": "Urban Outfitters",
-    "date": "Oct 05, 2024",
-    "plan": "Standard"
-  },
-  {
-    "_id": "05",
-    "businessName": "Health First Clinic",
-    "date": "Nov 20, 2024",
-    "plan": "Premium"
-  },
-  {
-    "_id": "06",
-    "businessName": "FitLife Gym",
-    "date": "Dec 05, 2024",
-    "plan": "Basic"
-  },
-  {
-    "_id": "07",
-    "businessName": "Bright Minds School",
-    "date": "Jan 15, 2025",
-    "plan": "Standard"
-  },
-  {
-    "_id": "08",
-    "businessName": "QuickByte Solutions",
-    "date": "Feb 03, 2025",
-    "plan": "Premium"
-  },
-  {
-    "_id": "09",
-    "businessName": "Eco Clean Services",
-    "date": "Mar 12, 2025",
-    "plan": "Basic"
-  },
-  {
-    "_id": "10",
-    "businessName": "Mountain View Retreat",
-    "date": "Apr 22, 2025",
-    "plan": "Standard"
-  },
-  {
-    "_id": "11",
-    "businessName": "Cyber Shield Technologies",
-    "date": "May 18, 2025",
-    "plan": "Premium"
-  },
-  {
-    "_id": "12",
-    "businessName": "Fresh Fields Market",
-    "date": "Jun 30, 2025",
-    "plan": "Basic"
-  },
-  {
-    "_id": "13",
-    "businessName": "The Artisan's Corner",
-    "date": "Jul 12, 2025",
-    "plan": "Standard"
-  },
-  {
-    "_id": "14",
-    "businessName": "NextGen Robotics",
-    "date": "Aug 05, 2025",
-    "plan": "Premium"
-  },
-  {
-    "_id": "15",
-    "businessName": "Cozy Homes Furniture",
-    "date": "Sep 19, 2025",
-    "plan": "Basic"
-  },
-  {
-    "_id": "16",
-    "businessName": "Golden Gate Restaurant",
-    "date": "Oct 10, 2025",
-    "plan": "Standard"
-  },
-  {
-    "_id": "17",
-    "businessName": "Pure Wellness Spa",
-    "date": "Nov 01, 2025",
-    "plan": "Premium"
-  },
-  {
-    "_id": "18",
-    "businessName": "Bright Future Consulting",
-    "date": "Dec 15, 2025",
-    "plan": "Basic"
-  },
-  {
-    "_id": "19",
-    "businessName": "CloudBase Hosting",
-    "date": "Jan 07, 2026",
-    "plan": "Premium"
-  },
-  {
-    "_id": "20",
-    "businessName": "Cityscape Architects",
-    "date": "Feb 20, 2026",
-    "plan": "Standard"
-  }
-]
+{
+  "data": [
+    {
+      "_id": "01",
+      "businessName": "Passage to India",
+      "date": "Jul 28, 2024",
+      "plan": "Standard"
+    },
+    {
+      "_id": "02",
+      "businessName": "Tech Innovators",
+      "date": "Aug 15, 2024",
+      "plan": "Premium"
+    },
+    {
+      "_id": "03",
+      "businessName": "Green Grocers",
+      "date": "Sep 10, 2024",
+      "plan": "Basic"
+    },
+    {
+      "_id": "04",
+      "businessName": "Urban Outfitters",
+      "date": "Oct 05, 2024",
+      "plan": "Standard"
+    },
+    {
+      "_id": "05",
+      "businessName": "Health First Clinic",
+      "date": "Nov 20, 2024",
+      "plan": "Premium"
+    },
+    {
+      "_id": "06",
+      "businessName": "FitLife Gym",
+      "date": "Dec 05, 2024",
+      "plan": "Basic"
+    },
+    {
+      "_id": "07",
+      "businessName": "Bright Minds School",
+      "date": "Jan 15, 2025",
+      "plan": "Standard"
+    },
+    {
+      "_id": "08",
+      "businessName": "QuickByte Solutions",
+      "date": "Feb 03, 2025",
+      "plan": "Premium"
+    },
+    {
+      "_id": "09",
+      "businessName": "Eco Clean Services",
+      "date": "Mar 12, 2025",
+      "plan": "Basic"
+    },
+    {
+      "_id": "10",
+      "businessName": "Mountain View Retreat",
+      "date": "Apr 22, 2025",
+      "plan": "Standard"
+    },
+    {
+      "_id": "11",
+      "businessName": "Cyber Shield Technologies",
+      "date": "May 18, 2025",
+      "plan": "Premium"
+    },
+    {
+      "_id": "12",
+      "businessName": "Fresh Fields Market",
+      "date": "Jun 30, 2025",
+      "plan": "Basic"
+    },
+    {
+      "_id": "13",
+      "businessName": "The Artisan's Corner",
+      "date": "Jul 12, 2025",
+      "plan": "Standard"
+    },
+    {
+      "_id": "14",
+      "businessName": "NextGen Robotics",
+      "date": "Aug 05, 2025",
+      "plan": "Premium"
+    },
+    {
+      "_id": "15",
+      "businessName": "Cozy Homes Furniture",
+      "date": "Sep 19, 2025",
+      "plan": "Basic"
+    },
+    {
+      "_id": "16",
+      "businessName": "Golden Gate Restaurant",
+      "date": "Oct 10, 2025",
+      "plan": "Standard"
+    },
+    {
+      "_id": "17",
+      "businessName": "Pure Wellness Spa",
+      "date": "Nov 01, 2025",
+      "plan": "Premium"
+    },
+    {
+      "_id": "18",
+      "businessName": "Bright Future Consulting",
+      "date": "Dec 15, 2025",
+      "plan": "Basic"
+    },
+    {
+      "_id": "19",
+      "businessName": "CloudBase Hosting",
+      "date": "Jan 07, 2026",
+      "plan": "Premium"
+    },
+    {
+      "_id": "20",
+      "businessName": "Cityscape Architects",
+      "date": "Feb 20, 2026",
+      "plan": "Standard"
+    }
+  ],
+  "growthPercentage": "15"
+}

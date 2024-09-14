@@ -18,6 +18,8 @@ export default function Reports() {
   const activeUserGrowthChartData: IChartData[] =
     activeUserGrowthChartDataJson.chartData;
 
+  const ActiveSubscribersData: Record<string, any>[] = ActiveSubscribersDataJson.data;
+
   // const retentionChartData: IChartData[] = retentionChartDataJson.chartData;
 
   const activeUserChartLabels: string[] = ["Count"];
@@ -78,14 +80,13 @@ export default function Reports() {
         <ReportCard
           cardTitle="Active Subscribers"
           cardLink="/reports"
-          growthPercentage={
-            activeUserGrowthChartDataJson.growthPercentage || "0"
-          }
-          total={
-            formatNumberWithCommas(findTotal(activeUserGrowthChartData)) || 0
-          }
+          growthPercentage={ActiveSubscribersDataJson.growthPercentage || "0"}
+          total={formatNumberWithCommas(ActiveSubscribersData.length) || 0}
           childrenComponent={
-            <ReportTable data={ActiveSubscribersDataJson} headings={["SL No", "Business Name", "Reg. Date", "Subs. Plan"]} />
+            <ReportTable
+              data={ActiveSubscribersData}
+              headings={["SL No", "Business Name", "Reg. Date", "Subs. Plan"]}
+            />
           }
         />
 
