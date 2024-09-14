@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "01",
+    "businessName": "Passage to India",
+    "date": "Jul 28, 2024",
+    "plan": "Standard"
+  },
+  {
+    "_id": "02",
+    "businessName": "Tech Innovators",
+    "date": "Aug 15, 2024",
+    "plan": "Premium"
+  },
+  {
+    "_id": "03",
+    "businessName": "Green Grocers",
+    "date": "Sep 10, 2024",
+    "plan": "Basic"
+  },
+  {
+    "_id": "04",
+    "businessName": "Urban Outfitters",
+    "date": "Oct 05, 2024",
+    "plan": "Standard"
+  },
+  {
+    "_id": "05",
+    "businessName": "Health First Clinic",
+    "date": "Nov 20, 2024",
+    "plan": "Premium"
+  }
+]

@@ -23,7 +23,7 @@ import {
 } from "../ui/table";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import FilterDropdown from "../user-management/list-table/Filter";
+import FilterDropdown from "./Filter";
 import Pagination from "../user-management/list-table/Pagination";
 
 import search from "../../assets/svg/Search.svg";
@@ -45,7 +45,7 @@ import BusinessDetailsSheet from "../user-management/list-table/BusinessDetailsS
 import ViewBusiness from "../support/view-details/ViewBusiness";
 import TicketDetails from "../support/view-details/ViewTicket";
 import ViewSubscription from "../support/view-details/ViewSubscription";
-import Download from "../user-management/list-table/Download";
+import Download from "./Download";
 import { cn } from "../../lib/utils";
 
 export default function DataTable<T extends DataTableItem>({

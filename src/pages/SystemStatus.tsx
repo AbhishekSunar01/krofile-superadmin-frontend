@@ -37,7 +37,7 @@ export default function SystemStatus() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">S.N.</TableHead>
+              <TableHead className="w-[100px] h-[80px]">S.N.</TableHead>
               <TableHead>Services</TableHead>
               <TableHead>Current Status</TableHead>
             </TableRow>
@@ -45,7 +45,9 @@ export default function SystemStatus() {
           <TableBody>
             {servicesStatus.map((service) => (
               <TableRow key={service.id}>
-                <TableCell className="font-medium">{service.id}</TableCell>
+                <TableCell className="font-medium h-[80px]">
+                  {service.id}
+                </TableCell>
                 <TableCell>{service.serviceName}</TableCell>
                 <TableCell
                   className={

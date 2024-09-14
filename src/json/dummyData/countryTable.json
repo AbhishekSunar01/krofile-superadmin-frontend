@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "1",
+    "country": "USA",
+    "ratio": "30%",
+    "count": 3000
+  },
+  {
+    "_id": "2",
+    "country": "Australia",
+    "ratio": "25%",
+    "count": 2500
+  },
+  {
+    "_id": "3",
+    "country": "China",
+    "ratio": "20%",
+    "count": 2000
+  },
+  {
+    "_id": "4",
+    "country": "Germany",
+    "ratio": "15%",
+    "count": 2000
+  },
+  {
+    "_id": "5",
+    "country": "Japan",
+    "ratio": "10%",
+    "count": 1000
+  }
+]

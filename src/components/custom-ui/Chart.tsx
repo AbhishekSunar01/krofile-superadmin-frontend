@@ -1,7 +1,7 @@
 import * as React from "react";
 import { CartesianGrid, AreaChart, XAxis, YAxis, Area } from "recharts";
 
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import {
   ChartConfig,
   ChartContainer,
@@ -9,41 +9,49 @@ import {
   ChartTooltipContent,
 } from "../ui/chart";
 
-interface UsersGrowthProps {
-  chartData: { date: string; desktop: number }[];
-  titleData: { title: string; subtitle?: string };
+import growth from "../../assets/svg/growth.svg";
+
+interface ChartProps {
+  chartData: { date: string; data: number }[];
+  title: string;
+  tooltipData: string;
 }
 
 const chartConfig = {
-  desktop: {
-    color: "hsl(var(--chart-1))",
+  data: {
+    color: "hsl(var(--chart-6))",
   },
 } satisfies ChartConfig;
 
-export default function UsersGrowth({
-  chartData,
-  titleData,
-}: UsersGrowthProps) {
-  const totalDesktop = React.useMemo(
-    () => chartData.reduce((acc, curr) => acc + curr.desktop, 0),
+export default function Chart({ chartData, title, tooltipData }: ChartProps) {
+  const totalData = React.useMemo(
+    () => chartData.reduce((acc, curr) => acc + curr.data, 0),
     [chartData]
   );
 
   return (
     <div className="">
-      <Card className="flex flex-col w-[450px]">
-        <CardHeader className="flex flex-col items-center space-y-0 border-b p-0 sm:flex-row">
-          <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-            <CardTitle>{titleData.title}</CardTitle>
-            <div className="flex items-center gap-x-5">
-              <span className="text-lg font-bold leading-none sm:text-3xl">
-                {totalDesktop.toLocaleString()}
-              </span>
-              <span className="text-xs text-muted-foreground"></span>
-            </div>
+      <Card className="flex flex-col min-w-[420px]">
+        <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-5">
+          <div className="font-normal text-sm">{title}</div>
+          <div className="flex items-center gap-x-2">
+            <span className="text-base font-semibold leading-none ">
+              {totalData.toLocaleString()}{" "}
+            </span>{" "}
+            <span className="text-xs flex items-center text-primary gap-1 ">
+              {" "}
+              <img
+                src={growth}
+                alt="growth"
+                className="bg-accentGreen p-1 rounded-full"
+              />{" "}
+              <span className="text-accentGreen">26%</span>
+              vs previous period
+            </span>
           </div>
-        </CardHeader>
-        <CardContent className="px-2 sm:p-6 flex items-center justify-center">
+        </div>
+        <CardContent className="px-2 sm:p-6 flex flex-col items-center justify-center">
+          {" "}
           <ChartContainer
             config={chartConfig}
             className="aspect-auto h-[250px] w-full"
@@ -57,15 +65,15 @@ export default function UsersGrowth({
               }}
             >
               <defs>
-                <linearGradient id="colorDesktop" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="colorData" x1="0" y1="0" x2="0" y2="1">
                   <stop
                     offset="5%"
-                    stopColor="var(--color-desktop)"
+                    stopColor="var(--color-data)"
                     stopOpacity={0.8}
                   />
                   <stop
                     offset="95%"
-                    stopColor="var(--color-desktop)"
+                    stopColor="var(--color-data)"
                     stopOpacity={0.1}
                   />
                 </linearGradient>
@@ -94,7 +102,7 @@ export default function UsersGrowth({
               <ChartTooltip
                 content={
                   <ChartTooltipContent
-                    className="max-w-[150px] text-[16px]"
+                    // className="w-fit text-[12px]"
                     labelFormatter={(value) => {
                       return new Date(value).toLocaleDateString("en-US", {
                         month: "short",
@@ -102,16 +110,16 @@ export default function UsersGrowth({
                         year: "numeric",
                       });
                     }}
-                    formatter={(value) => [` Count: ${value}`]}
+                    formatter={(value) => [` ${tooltipData}: ${value}`]}
                   />
                 }
               />
               <Area
                 type="monotone"
-                dataKey="desktop"
-                stroke={`var(--color-desktop)`}
+                dataKey="data"
+                stroke={`var(--color-data)`}
                 fillOpacity={1}
-                fill="url(#colorDesktop)"
+                fill="url(#colorData)"
               />
             </AreaChart>
           </ChartContainer>
