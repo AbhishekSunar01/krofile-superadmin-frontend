@@ -113,7 +113,7 @@ const SubmittedMessages: React.FC<{
             <img src={krofileLogo} alt="Krofile Team" className="h-8 w-8" />
             <div className="flex items-center w-full">
               <div className="bg-ticketBg transform rotate-45 h-6 w-5"></div>
-              <h3 className="-ml-5 z-10 text-sm font-medium py-2 px-3 text-white bg-ticketBg w-full rounded-t-md flex justify-between items-center">
+              <h3 className="-ml-5 z-10 text-sm font-medium py-1 px-3 text-white bg-ticketBg w-full rounded-t-md flex justify-between items-center">
                 Krofile Team
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -141,7 +141,7 @@ const SubmittedMessages: React.FC<{
               </h3>
             </div>
           </div>
-          <div className="mb-2 px-2 pb-4 ml-10 rounded-b-md text-justify border border-borderColor">
+          <div className="mb-2 p-4 ml-10 rounded-b-md text-justify border border-borderColor">
             {editingIndex === index ? (
               <>
                 <RichTextEditor
@@ -182,7 +182,7 @@ const SubmittedMessages: React.FC<{
             ) : (
               <>
                 <div
-                  className="text-sm"
+                  className="text-sm -mt-5 break-all"
                   dangerouslySetInnerHTML={{
                     __html: submittedMessage.text,
                   }}

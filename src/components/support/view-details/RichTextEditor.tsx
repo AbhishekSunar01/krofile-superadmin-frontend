@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import bold from "../../../assets/svg/bold.svg";
@@ -14,6 +14,8 @@ interface RichTextEditorProps {
   onImageUpload: (files: FileWithPreview[]) => void;
 }
 
+const CHARACTER_LIMIT = 300;
+
 const RichTextEditor: React.FC<RichTextEditorProps> = ({
   value,
   onChange,
@@ -21,6 +23,26 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
 }) => {
   const [activeFormats, setActiveFormats] = useState<string[]>([]);
   const quillRef = useRef<ReactQuill>(null);
+  const [charCount, setCharCount] = useState(0);
+
+  useEffect(() => {
+    const textContent = value.replace(/<[^>]*>/g, "");
+    setCharCount(textContent.length);
+  }, [value]);
+
+  const handleChange = (content: string) => {
+    const quill = quillRef.current?.getEditor();
+    if (quill) {
+      const text = quill.getText().trim();
+      if (text.length <= CHARACTER_LIMIT) {
+        onChange(content);
+      } else {
+        const trimmedDelta = quill.getContents(0, CHARACTER_LIMIT);
+        quill.setContents(trimmedDelta);
+        onChange(quill.root.innerHTML);
+      }
+    }
+  };
 
   const handleFormat = useCallback((format: string) => {
     if (quillRef.current) {
@@ -44,7 +66,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         quill.formatText(0, length, format, !currentFormat[format]);
       }
 
-      // Update active formats
       const newActiveFormats = quill.getFormat();
       setActiveFormats(
         Object.keys(newActiveFormats).filter((f) => newActiveFormats[f])
@@ -117,13 +138,13 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         <ReactQuill
           ref={quillRef}
           value={value}
-          onChange={onChange}
+          onChange={handleChange}
           modules={modules}
-          className="w-full p-1 bg-gray-100 h-[120px]"
+          className="w-full px-1 bg-gray-100 h-[120px] break-all"
           placeholder="Type here..."
         />
         <div className="flex items-end justify-end text-xs absolute bottom-2 right-2">
-          {value.replace(/<[^>]*>/g, "").length}/300
+          {charCount}/{CHARACTER_LIMIT}
         </div>
       </div>
     </div>
