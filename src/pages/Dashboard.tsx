@@ -4,14 +4,14 @@ import {
   Chart,
   TotalCustomers,
   CountryTable,
-  DashboardTable,
+  // DashboardTable,
 } from "../components/dashboard/index";
 import activeSubscribers from "../json/dummyData/activeSubscribers.json";
 import userGrowth from "../json/dummyData/userGrowth.json";
-import referral from "../json/dummyData/referralData.json";
+// import referral from "../json/dummyData/referralData.json";
 import country from "../json/dummyData/countryTable.json";
-import industryData from "../json/dummyData/industryType.json";
-import subscribersData from "../json/dummyData/subscribersData.json";
+// import industryData from "../json/dummyData/industryType.json";
+// import subscribersData from "../json/dummyData/subscribersData.json";
 import { useState } from "react";
 
 export default function Dashboard() {
