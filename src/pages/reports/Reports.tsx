@@ -93,7 +93,7 @@ export default function Reports() {
               tickFormatter={(value) => value / 1000 + "k"}
               gradientColors={{
                 startColor: "#22D1EE66",
-                endColor: "#85EEFF00",
+                endColor: "#85EEFF4D",
               }}
               strokeColor="#22D1EE"
             />

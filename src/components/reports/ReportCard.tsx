@@ -25,9 +25,9 @@ const ReportCard = ({
 }: IReportCardProps) => {
   return (
     <>
-      <Card className="border col-span-2 h-[460px] overflow-auto">
+      <Card className="border col-span-2 h-[470px] select-none">
         <CardHeader>
-          <CardTitle className="font-[400] font-inter text-[16px] flex justify-between items-center text-[#14181F]">
+          <CardTitle className="font-[400] font-inter text-[16px] flex justify-between items-center text-[#14181F] ">
             <div>{cardTitle}</div>
             <Link
               className="text-[#1E7BC8] text-[12px] underline capitalize underline-offset-2"
