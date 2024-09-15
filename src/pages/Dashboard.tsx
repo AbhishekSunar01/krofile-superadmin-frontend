@@ -3,16 +3,16 @@ import {
   ActiveSubscriberChart,
   Chart,
   CountryTable,
-  DashboardTable,
   TotalCustomers,
+  // DashboardTable,
 } from "../components/dashboard/index";
 import activeSubscribers from "../json/dummyData/activeSubscribers.json";
-import country from "../json/dummyData/countryTable.json";
-import industryData from "../json/dummyData/industryType.json";
-import referral from "../json/dummyData/referralData.json";
-import subscribersData from "../json/dummyData/subscribersData.json";
 import userGrowth from "../json/dummyData/userGrowth.json";
+// import referral from "../json/dummyData/referralData.json";
+import country from "../json/dummyData/countryTable.json";
 import PageLayout from "../layout/PageLayout";
+// import industryData from "../json/dummyData/industryType.json";
+// import subscribersData from "../json/dummyData/subscribersData.json";
 
 export default function Dashboard() {
   const [dashboardHasData, setDashboardHasData] = useState(true);
@@ -60,13 +60,13 @@ export default function Dashboard() {
               tooltipData="Count"
             />
             <CountryTable tableData={country} />
-            <Chart
+            {/* <Chart
               chartData={referral}
               title="B2B Referral"
               tooltipData="Refers"
-            />
+            /> */}
           </div>
-          <div className="flex w-full gap-6">
+          {/* <div className="flex w-full gap-6 ">
             <DashboardTable
               data={industryData}
               title="Active Users by Industry Type"
@@ -77,7 +77,7 @@ export default function Dashboard() {
               title="Active Subscribers"
               type={""}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </PageLayout>
