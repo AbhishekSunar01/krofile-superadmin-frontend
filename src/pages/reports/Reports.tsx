@@ -1,12 +1,16 @@
 import { ChartConfig } from "../../components/ui/chart";
 import PageLayout from "../../layout/PageLayout";
 
-import ReportChart from "../../components/reports/AreaChart";
+import {
+  default as ReportAreaChart,
+  default as ReportChart,
+} from "../../components/reports/AreaChart";
 import ReportCard from "../../components/reports/ReportCard";
 import ReportTable from "../../components/reports/ReportTable";
 import ReportStackedChart from "../../components/reports/StackedAreaChart";
 import ActiveSubscribersDataJson from "../../json/dummyData/activeSubscribersData.json";
 import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
+import churnRateDataJson from "../../json/dummyData/churnRateData.json";
 import retentionChartDataJson from "../../json/dummyData/retentionGrowthData.json";
 import formatNumberWithCommas from "../../utils/formatNumberWithComma";
 
@@ -22,10 +26,13 @@ export default function Reports() {
   const ActiveSubscribersData: Record<string, any>[] =
     ActiveSubscribersDataJson.data;
 
+  const churnRateData: IChartData[] = churnRateDataJson.chartData;
+
   const retentionChartData: IChartData[] = retentionChartDataJson.chartData;
 
   const activeUserChartLabels: string[] = ["Count"];
   const retentionChartLabels: string[] = ["retentionrate", "retentiongrowth"];
+  const churnRateChartLabels: string[] = ["ChurnRate"];
 
   const activeUserGrowthChartConfig = {
     count: {
@@ -37,10 +44,17 @@ export default function Reports() {
   const retentionChartConfig = {
     retentionrate: {
       label: "retentionrate",
-      color: "hsl(var(--chart-6))",
+      color: "#22D1EE",
     },
     retentiongrowth: {
       label: "retentiongrowth",
+      color: "#DF0C3D",
+    },
+  } satisfies ChartConfig;
+
+  const churnRateChartConfig = {
+    churnrate: {
+      label: "ChurnRate",
       color: "hsl(var(--chart-2))",
     },
   } satisfies ChartConfig;
@@ -56,7 +70,7 @@ export default function Reports() {
   return (
     <PageLayout
       title="Reports"
-      description="Gain comprehensive insights into platform performance, user engagement, and system health, empowering you to make data-driven decisions for optimal efficiency and growth."
+      description="Gain comprehensive insights into platform performance, user engagement, and system health, empowering you to make data-driven decisions for optimal     efficiency and growth."
     >
       <div className="grid grid-cols-4 gap-4">
         <ReportCard
@@ -76,6 +90,12 @@ export default function Reports() {
               YAxisDataKey={"count"}
               areaType="natural"
               chartLabels={activeUserChartLabels}
+              tickFormatter={(value) => value / 1000 + "k"}
+              gradientColors={{
+                startColor: "#22D1EE66",
+                endColor: "#85EEFF00",
+              }}
+              strokeColor="#22D1EE"
             />
           }
         />
@@ -106,6 +126,28 @@ export default function Reports() {
               XAxisDataKey={"date"}
               areaType="natural"
               chartLabels={retentionChartLabels}
+            />
+          }
+        />
+        <ReportCard
+          cardTitle="Churn Rate"
+          cardLink="/reports"
+          growthPercentage={churnRateDataJson.growthPercentage || "0"}
+          // total={findTotal(activeUserGrowthChartData) || 0}
+          childrenComponent={
+            <ReportAreaChart
+              YAxisDataKey="churnrate"
+              chartConfig={churnRateChartConfig}
+              chartData={churnRateData}
+              XAxisDataKey={"date"}
+              areaType="linear"
+              chartLabels={churnRateChartLabels}
+              tickFormatter={(value) => value + "%"}
+              gradientColors={{
+                startColor: "#EE222266",
+                endColor: "#FF858500",
+              }}
+              strokeColor="#EE2222"
             />
           }
         />

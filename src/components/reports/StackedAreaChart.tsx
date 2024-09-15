@@ -14,6 +14,29 @@ interface IAreaChartProps {
   areaType?: "linear" | "monotone" | "natural" | "step";
 }
 
+interface CustomLegendProps {
+  payload?: Array<{
+    value: string;
+    color: string;
+  }>;
+}
+
+const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
+  return (
+    <div className="flex justify-end -mt-[45px] items-center gap-4 mb-4 w-full">
+      {payload?.map((entry, index) => (
+        <div key={`legend-item-${index}`} className="flex items-center gap-2">
+          <div
+            className="inline-block w-3 h-3 rounded-full"
+            style={{ backgroundColor: entry.color }}
+          ></div>
+          <span className="text-sm text-gray-700">{entry.value}(%)</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{
@@ -68,7 +91,15 @@ const ReportStackedChart = ({
             left: 0,
             right: 0,
           }}
+          className=""
         >
+          {/* Custom Legend */}
+          <ChartLegend
+            verticalAlign="top"
+            align="right"
+            content={<CustomLegend />}
+          />
+
           <defs>
             <linearGradient id="color1" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#22D1EE66" stopOpacity={1} />
@@ -81,7 +112,7 @@ const ReportStackedChart = ({
           </defs>
 
           <CartesianGrid vertical={true} />
-          <ChartLegend />
+          {/* <ChartLegend  /> */}
 
           {/* Left Y-Axis */}
           <YAxis
