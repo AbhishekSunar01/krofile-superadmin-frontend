@@ -13,7 +13,7 @@ h1 {
 }
 
 h2 {
-  @apply scroll-m-20  text-3xl font-semibold tracking-tight;
+  @apply scroll-m-20 text-3xl font-semibold tracking-tight;
 }
 
 h3 {
@@ -101,6 +101,7 @@ ul {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --chart-6: 191 82% 53%;
+
   }
 
   .dark {

@@ -1,18 +1,18 @@
-import PageLayout from "../layout/PageLayout";
+import { useState } from "react";
 import {
   ActiveSubscriberChart,
   Chart,
-  TotalCustomers,
   CountryTable,
+  TotalCustomers,
   // DashboardTable,
 } from "../components/dashboard/index";
 import activeSubscribers from "../json/dummyData/activeSubscribers.json";
 import userGrowth from "../json/dummyData/userGrowth.json";
 // import referral from "../json/dummyData/referralData.json";
 import country from "../json/dummyData/countryTable.json";
+import PageLayout from "../layout/PageLayout";
 // import industryData from "../json/dummyData/industryType.json";
 // import subscribersData from "../json/dummyData/subscribersData.json";
-import { useState } from "react";
 
 export default function Dashboard() {
   const [dashboardHasData, setDashboardHasData] = useState(true);
@@ -28,7 +28,7 @@ export default function Dashboard() {
     >
       <div className="relative">
         {!dashboardHasData && (
-          <div className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm z-10 flex items-center justify-center">
+          <div className="flex absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm z-10 items-center justify-center">
             <div className="flex flex-col text-[#151515] gap-y-4 -mt-80">
               <span className="text-xl font-semibold ">
                 You currently don’t have any data
@@ -74,7 +74,7 @@ export default function Dashboard() {
             />
             <DashboardTable
               data={subscribersData}
-              title="Active Subscribers "
+              title="Active Subscribers"
               type={""}
             />
           </div> */}
