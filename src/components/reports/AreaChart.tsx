@@ -187,12 +187,12 @@ const ReportAreaChart = ({
               <stop
                 offset="5%"
                 stopColor={`${gradientColors.startColor}`}
-                stopOpacity={0.8}
+                stopOpacity={1}
               />
               <stop
                 offset="95%"
                 stopColor={`${gradientColors.endColor}`}
-                stopOpacity={0.1}
+                stopOpacity={0}
               />
             </linearGradient>
           </defs>
