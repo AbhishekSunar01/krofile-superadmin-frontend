@@ -4,13 +4,8 @@ import deleteIcon from "../../../assets/svg/delete.svg";
 import cross from "../../../assets/svg/cross.svg";
 import arrowRight from "../../../assets/svg/arrow-right.svg";
 import krofileLogo from "../../../assets/images/krofile-logo.png";
-import bold from "../../../assets/svg/bold.svg";
-import underline from "../../../assets/svg/underline.svg";
-import uolist from "../../../assets/svg/unorderlist.svg";
-import italic from "../../../assets/svg/italic.svg";
-
 import { MoreVertical } from "lucide-react";
-
+import RichTextEditor from "./RichTextEditor";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,19 +13,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
-
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogHeader,
 } from "../../ui/dialog";
-import Upload from "./Upload";
 import { Button } from "../../ui/button";
 import { FileWithPreview, SubmittedMessage } from "../../../types/type";
-
-import { ToggleGroup, ToggleGroupItem } from "../../ui/toggle-group";
-import { Textarea } from "../../ui/textarea";
 
 const MAX_IMAGES = 5;
 
@@ -43,7 +33,6 @@ const SubmittedMessages: React.FC<{
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editMessage, setEditMessage] = useState("");
   const [editImages, setEditImages] = useState<FileWithPreview[]>([]);
-
   const [isImageOverlayOpen, setIsImageOverlayOpen] = useState(false);
   const [carouselImages, setCarouselImages] = useState<FileWithPreview[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -71,10 +60,6 @@ const SubmittedMessages: React.FC<{
     setEditImages([]);
   };
 
-  const handleEditInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setEditMessage(e.target.value);
-  };
-
   const handleEditUpload = (files: FileWithPreview[]) => {
     setEditImages((prevImages) => {
       const remainingSlots = MAX_IMAGES - prevImages.length;
@@ -93,11 +78,9 @@ const SubmittedMessages: React.FC<{
   };
 
   const handleDelete = (index: number) => {
-    setSubmittedMessages((prevMessages) => {
-      const updatedMessages = [...prevMessages];
-      updatedMessages.splice(index, 1);
-      return updatedMessages;
-    });
+    setSubmittedMessages((prevMessages) =>
+      prevMessages.filter((_, i) => i !== index)
+    );
   };
 
   const handleImageClick = (messageIndex: number, imageIndex: number) => {
@@ -132,90 +115,40 @@ const SubmittedMessages: React.FC<{
               <div className="bg-ticketBg transform rotate-45 h-6 w-5"></div>
               <h3 className="-ml-5 z-10 text-sm font-medium py-2 px-3 text-white bg-ticketBg w-full rounded-t-md flex justify-between items-center">
                 Krofile Team
-                <div className="">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="h-8 w-8 p-0">
-                        <span className="sr-only">Open menu</span>
-                        <MoreVertical className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuItem>
-                        <div
-                          onClick={() => handleEdit(index)}
-                          className="flex py-1 gap-2"
-                        >
-                          <img src={edit} alt="Edit" className="h-4 w-4 mr-2" />
-                          Edit
-                        </div>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <div
-                          onClick={() => handleDelete(index)}
-                          className="flex py-1 gap-2"
-                        >
-                          <img
-                            src={deleteIcon}
-                            alt="Delete"
-                            className="h-4 w-4 mr-2"
-                          />
-                          Delete
-                        </div>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-8 w-8 p-0">
+                      <span className="sr-only">Open menu</span>
+                      <MoreVertical className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => handleEdit(index)}>
+                      <img src={edit} alt="Edit" className="h-4 w-4 mr-2" />
+                      Edit
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleDelete(index)}>
+                      <img
+                        src={deleteIcon}
+                        alt="Delete"
+                        className="h-4 w-4 mr-2"
+                      />
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </h3>
             </div>
           </div>
-          <div className="mb-2 p-4 ml-10 rounded-b-md text-justify border border-borderColor">
+          <div className="mb-2 px-2 pb-4 ml-10 rounded-b-md text-justify border border-borderColor">
             {editingIndex === index ? (
               <>
-                <div className="flex gap-4 cursor-pointer w-fit">
-                  <ToggleGroup type="multiple">
-                    <ToggleGroupItem value="bold" aria-label="Toggle bold">
-                      <img src={bold} alt="Bold" className="h-6 w-6" />
-                    </ToggleGroupItem>
-                    <ToggleGroupItem value="italic" aria-label="Toggle italic">
-                      <img src={italic} alt="Italic" className="h-6 w-6" />
-                    </ToggleGroupItem>
-                    <ToggleGroupItem
-                      value="underline"
-                      aria-label="Toggle underline"
-                    >
-                      <img
-                        src={underline}
-                        alt="Underline"
-                        className="h-6 w-6"
-                      />
-                    </ToggleGroupItem>
-                    <ToggleGroupItem
-                      value="unorderlist"
-                      aria-label="Toggle un-orderlist"
-                    >
-                      <img
-                        src={uolist}
-                        alt="Unordered List"
-                        className="h-6 w-6"
-                      />
-                    </ToggleGroupItem>
-                    <Upload onUpload={handleEditUpload} />
-                  </ToggleGroup>
-                </div>
-                <div className="relative">
-                  <Textarea
-                    className="w-full p-2 mt-2 bg-gray-100 h-[120px] resize-none"
-                    placeholder="Type here..."
-                    maxLength={300}
-                    value={editMessage}
-                    onChange={handleEditInputChange}
-                  />
-                  <div className="flex items-end justify-end text-xs absolute bottom-2 right-2">
-                    {editMessage.length}/300
-                  </div>
-                </div>
+                <RichTextEditor
+                  value={editMessage}
+                  onChange={setEditMessage}
+                  onImageUpload={handleEditUpload}
+                />
                 <div className="mt-3 flex flex-row">
                   {editImages.map((image, imgIndex) => (
                     <div key={imgIndex} className="relative mr-2">
@@ -248,7 +181,12 @@ const SubmittedMessages: React.FC<{
               </>
             ) : (
               <>
-                <span className="text-sm">{submittedMessage.text}</span>
+                <div
+                  className="text-sm"
+                  dangerouslySetInnerHTML={{
+                    __html: submittedMessage.text,
+                  }}
+                />
                 <div className="mt-3 flex flex-row justify-between">
                   {submittedMessage.images.map((image, imgIndex) => (
                     <img
@@ -259,7 +197,7 @@ const SubmittedMessages: React.FC<{
                       onClick={() => handleImageClick(index, imgIndex)}
                     />
                   ))}
-                  <span className="flex w-full text-sm items-end justify-end">
+                  <span className="flex w-full text-sm items-end justify-end mr-2">
                     {submittedMessage.date}
                   </span>
                 </div>
@@ -268,6 +206,7 @@ const SubmittedMessages: React.FC<{
           </div>
         </div>
       ))}
+
       {isImageOverlayOpen && (
         <Dialog open={isImageOverlayOpen} onOpenChange={setIsImageOverlayOpen}>
           <DialogContent className="flex flex-col">
@@ -277,14 +216,13 @@ const SubmittedMessages: React.FC<{
               </DialogTitle>
               <hr className="mb-4 mt-2 border-gray-300" />
             </DialogHeader>
-
             <div className="relative flex justify-center items-center w-full">
               {carouselImages.length > 0 && (
                 <>
                   {currentImageIndex > 0 && (
                     <button
                       onClick={handlePreviousImage}
-                      className="absolute -left-4 h-12 w-12 cursor-pointer z-10  rounded-full flex items-center justify-center"
+                      className="absolute -left-4 h-12 w-12 cursor-pointer z-10 rounded-full flex items-center justify-center"
                     >
                       <img
                         src={arrowRight}
@@ -293,13 +231,11 @@ const SubmittedMessages: React.FC<{
                       />
                     </button>
                   )}
-
                   <img
                     src={carouselImages[currentImageIndex]?.preview}
                     alt={`Image ${currentImageIndex + 1}`}
                     className="max-w-full max-h-[400px] object-contain"
                   />
-
                   {currentImageIndex < carouselImages.length - 1 && (
                     <button
                       onClick={handleNextImage}

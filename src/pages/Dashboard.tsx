@@ -60,13 +60,13 @@ export default function Dashboard() {
               tooltipData="Count"
             />
             <CountryTable tableData={country} />
-            <Chart
+            {/* <Chart
               chartData={referral}
               title="B2B Referral"
               tooltipData="Refers"
-            />
+            /> */}
           </div>
-          <div className="flex w-full gap-6 ">
+          {/* <div className="flex w-full gap-6 ">
             <DashboardTable
               data={industryData}
               title="Active Users by Industry Type"
@@ -77,7 +77,7 @@ export default function Dashboard() {
               title="Active Subscribers "
               type={""}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </PageLayout>

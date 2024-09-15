@@ -102,6 +102,10 @@ export type SupportTicketData = {
   image?: string[];
 };
 
+export interface FileWithPreview extends File {
+  preview: string;
+}
+
 export type ViewTicketProps = {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
