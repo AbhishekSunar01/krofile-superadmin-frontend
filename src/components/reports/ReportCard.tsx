@@ -38,7 +38,7 @@ const ReportCard = ({
           </CardTitle>
           <CardDescription className="flex select-none justify-start items-center gap-[2px]">
             <span className="text-[28px] text-[#14181F] font-inter font-[600]">
-              {total}&nbsp;
+              {total}
             </span>
             <img
               src={GrowthIndicator}

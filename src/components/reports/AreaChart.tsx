@@ -232,7 +232,7 @@ const ReportAreaChart = ({
                     year: "numeric",
                   })
                 }
-                formatter={(value) => [`${firstLabel}: ${value}`]}
+                formatter={(value) => [`${firstLabel.toLocaleUpperCase()}: ${value}`]}
               />
             }
           />

@@ -12,7 +12,9 @@ import ActiveSubscribersDataJson from "../../json/dummyData/activeSubscribersDat
 import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
 import churnRateDataJson from "../../json/dummyData/churnRateData.json";
 import retentionChartDataJson from "../../json/dummyData/retentionGrowthData.json";
+import systemHealthDataJson from "../../json/dummyData/systemHealthData.json";
 import formatNumberWithCommas from "../../utils/formatNumberWithComma";
+import ReportBarChart from "../../components/reports/ReportBarChart";
 
 interface IChartData {
   date: string;
@@ -22,13 +24,11 @@ interface IChartData {
 export default function Reports() {
   const activeUserGrowthChartData: IChartData[] =
     activeUserGrowthChartDataJson.chartData;
-
   const ActiveSubscribersData: Record<string, any>[] =
     ActiveSubscribersDataJson.data;
-
   const churnRateData: IChartData[] = churnRateDataJson.chartData;
-
   const retentionChartData: IChartData[] = retentionChartDataJson.chartData;
+  const systemHealthChartData: IChartData[] = systemHealthDataJson.chartData;
 
   const activeUserChartLabels: string[] = ["Count"];
   const retentionChartLabels: string[] = ["retentionrate", "retentiongrowth"];
@@ -56,6 +56,17 @@ export default function Reports() {
     churnrate: {
       label: "ChurnRate",
       color: "hsl(var(--chart-2))",
+    },
+  } satisfies ChartConfig;
+
+  const systemHealthChartConfig = {
+    online: {
+      label: "Online",
+      color: "#00A81C",
+    },
+    offline: {
+      label: "Offline",
+      color: "#DF0C3D",
     },
   } satisfies ChartConfig;
 
@@ -148,6 +159,22 @@ export default function Reports() {
                 endColor: "#FF858500",
               }}
               strokeColor="#EE2222"
+            />
+          }
+        />
+        <ReportCard
+          cardTitle="System Health"
+          cardLink="/reports"
+          growthPercentage={churnRateDataJson.growthPercentage || "0"}
+          // total={findTotal(activeUserGrowthChartData) || 0}
+          childrenComponent={
+            <ReportBarChart
+              chartConfig={systemHealthChartConfig}
+              chartData={systemHealthChartData}
+              YAxisDataKey={"online"}
+              chartLabels={["online", "offline"]}
+              tickFormatter={(value) => value + "%"}
+              
             />
           }
         />

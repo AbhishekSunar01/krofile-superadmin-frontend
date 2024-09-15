@@ -30,7 +30,9 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
             className="inline-block w-3 h-3 rounded-full"
             style={{ backgroundColor: entry.color }}
           ></div>
-          <span className="text-sm text-gray-700">{entry.value}(%)</span>
+          <span className="text-sm text-gray-700 capitalize">
+            {entry.value}(%)
+          </span>
         </div>
       ))}
     </div>
@@ -40,10 +42,11 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
 interface CustomTooltipProps {
   active?: boolean;
   payload?: Array<{
+    name: string;
+    value: number;
+    color: string;
     payload: {
       date: string;
-      retentionrate: number;
-      retentiongrowth: number;
     };
   }>;
 }
@@ -53,21 +56,18 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
     return (
       <div className="bg-[#000000] text-white p-2 rounded-md text-xs font-normal">
         <div className="mb-2">{payload[0].payload.date}</div>
-        <div className="flex justify-start items-center gap-2">
+        {payload.map((entry, index) => (
           <div
-            className="inline-block w-2 h-2 rounded-full"
-            style={{ backgroundColor: "var(--color-retentionrate)" }}
-          ></div>
-          {payload[0].payload.retentionrate}%
-        </div>
-
-        <div className="flex justify-start items-center gap-2">
-          <div
-            className="inline-block w-2 h-2 rounded-full"
-            style={{ backgroundColor: "var(--color-retentiongrowth)" }}
-          ></div>
-          {payload[1].payload.retentiongrowth}
-        </div>
+            key={`tooltip-item-${index}`}
+            className="flex justify-start items-center gap-2"
+          >
+            <div
+              className="inline-block w-2 h-2 rounded-full"
+              style={{ backgroundColor: entry.color }}
+            ></div>
+            <span className="capitalize">{entry.value}%</span>
+          </div>
+        ))}
       </div>
     );
   }
@@ -156,7 +156,7 @@ const ReportStackedChart = ({
 
           {/* Stack areas */}
 
-          <Area
+          {/* <Area
             dataKey={chartLabels[0]}
             type={areaType}
             stroke={`var(--color-${chartLabels[0]})`}
@@ -171,7 +171,19 @@ const ReportStackedChart = ({
             fillOpacity={1}
             fill={`url(#color2)`}
             yAxisId={"right"} // Assign to left or right Y-axis
-          />
+          /> */}
+          {/* Dynamic Area components */}
+          {chartLabels.map((label, index) => (
+            <Area
+              key={index}
+              dataKey={label} // Dynamically set the dataKey based on chartLabels
+              type={areaType}
+              stroke={`var(--color-${label})`}
+              fillOpacity={1}
+              fill={`url(#color${index + 1})`} // Dynamically use gradient ids
+              yAxisId={index % 2 === 0 ? "left" : "right"} // Alternate between left and right Y-axis
+            />
+          ))}
         </AreaChart>
       </ChartContainer>
     </>
