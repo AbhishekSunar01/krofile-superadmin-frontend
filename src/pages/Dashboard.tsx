@@ -4,15 +4,15 @@ import {
   Chart,
   CountryTable,
   TotalCustomers,
-  // DashboardTable,
+  DashboardTable,
 } from "../components/dashboard/index";
 import activeSubscribers from "../json/dummyData/activeSubscribers.json";
 import userGrowth from "../json/dummyData/userGrowth.json";
-// import referral from "../json/dummyData/referralData.json";
+import referral from "../json/dummyData/referralData.json";
 import country from "../json/dummyData/countryTable.json";
 import PageLayout from "../layout/PageLayout";
-// import industryData from "../json/dummyData/industryType.json";
-// import subscribersData from "../json/dummyData/subscribersData.json";
+import industryData from "../json/dummyData/industryType.json";
+import subscribersData from "../json/dummyData/subscribersData.json";
 
 export default function Dashboard() {
   const [dashboardHasData, setDashboardHasData] = useState(true);
@@ -46,27 +46,30 @@ export default function Dashboard() {
           </div>
         )}
         <div className={`${!dashboardHasData ? " blur-0" : ""}`}>
-          <div className="flex gap-6 w-full mb-6">
-            <TotalCustomers />
+          <div className="grid grid-cols-11 gap-6 w-full mb-6">
+            <TotalCustomers className="col-span-7" />
             <ActiveSubscriberChart
               pieData={activeSubscribers.pieData}
               titleData={activeSubscribers.titleData}
+              className="col-span-4"
             />
           </div>
-          <div className="flex gap-6 mb-6">
+          <div className="grid grid-cols-11 gap-6 mb-6">
             <Chart
               chartData={userGrowth}
               title="Active Users Growth Chart"
               tooltipData="Count"
+              className="col-span-4"
             />
-            <CountryTable tableData={country} />
-            {/* <Chart
+            <CountryTable tableData={country} className="col-span-3" />
+            <Chart
               chartData={referral}
               title="B2B Referral"
               tooltipData="Refers"
-            /> */}
+              className="col-span-4"
+            />
           </div>
-          {/* <div className="flex w-full gap-6 ">
+          <div className="flex w-full gap-6 ">
             <DashboardTable
               data={industryData}
               title="Active Users by Industry Type"
@@ -77,7 +80,7 @@ export default function Dashboard() {
               title="Active Subscribers"
               type={""}
             />
-          </div> */}
+          </div>
         </div>
       </div>
     </PageLayout>

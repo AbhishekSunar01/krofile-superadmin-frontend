@@ -9,7 +9,6 @@ import { Card } from "../../components/ui/card";
 
 import growth from "../../assets/svg/growth.svg";
 
-
 interface DashboardTableProps {
   data: Record<string, any>[];
   title: string;
@@ -36,7 +35,7 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
   const columns = type === "industry" ? industry : subscribers;
 
   const totalData = React.useMemo(
-    () => data.reduce((acc, curr) => acc + curr.count, 0),
+    () => data.reduce((acc, curr) => acc + (curr.count ?? 0), 0),
     [data]
   );
 
@@ -59,7 +58,6 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
             />{" "}
             <span className="text-accentGreen">26%</span>
             vs previous period
-
           </span>
         </div>
       </div>

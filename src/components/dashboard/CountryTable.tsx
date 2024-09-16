@@ -19,6 +19,7 @@ interface Country {
 
 interface CountryTableProps {
   tableData: Country[];
+  className?: string;
 }
 
 const importFlag = async (iconName: string): Promise<string | null> => {
@@ -60,29 +61,34 @@ const CountryRow: React.FC<{ country: Country }> = React.memo(({ country }) => {
   );
 });
 
-const CountryTable: React.FC<CountryTableProps> = ({ tableData }) => {
+const CountryTable: React.FC<CountryTableProps> = ({
+  tableData,
+  className = "",
+}) => {
   return (
-    <Card className="flex flex-col bg-white rounded-md px-4 pt-4">
-      <div className="flex px-2 gap-2 flex-col">
-        <span className="text-sm font-normal">Statistics</span>
-        <span className="text-sm font-medium">Popular Countries</span>
-      </div>
+    <div className={className}>
+      <Card className="flex flex-col bg-white rounded-md px-4 pt-4 h-full">
+        <div className="flex px-2 gap-2 flex-col">
+          <span className="text-sm font-normal">Statistics</span>
+          <span className="text-sm font-medium">Popular Countries</span>
+        </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="py-3">Country</TableHead>
-            <TableHead>Ratio</TableHead>
-            <TableHead>Count</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {tableData.map((country) => (
-            <CountryRow key={country._id} country={country} />
-          ))}
-        </TableBody>
-      </Table>
-    </Card>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="py-3">Country</TableHead>
+              <TableHead>Ratio</TableHead>
+              <TableHead>Count</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {tableData.map((country) => (
+              <CountryRow key={country._id} country={country} />
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
+    </div>
   );
 };
 

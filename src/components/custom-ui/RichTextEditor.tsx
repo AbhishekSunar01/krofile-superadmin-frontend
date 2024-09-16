@@ -5,13 +5,13 @@ import bold from "../../../assets/svg/bold.svg";
 import italic from "../../../assets/svg/italic.svg";
 import underline from "../../../assets/svg/underline.svg";
 import uolist from "../../../assets/svg/unorderlist.svg";
-import Upload from "./Upload";
-import { FileWithPreview } from "../../../types/type";
+import Upload from "../support/view-details/Upload";
+import { FileWithPreview } from "../../types/type";
 
 interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
-  onImageUpload: (files: FileWithPreview[]) => void;
+  onImageUpload?: (files: FileWithPreview[]) => void;
 }
 
 const CHARACTER_LIMIT = 300;
@@ -94,7 +94,9 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         text: file.text.bind(file),
       };
     });
-    onImageUpload(filesWithPreview);
+    if (onImageUpload) {
+      onImageUpload(filesWithPreview);
+    }
   };
 
   return (
@@ -132,7 +134,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         >
           <img src={uolist} alt="Unordered List" className="h-6 w-6" />
         </button>
-        <Upload onUpload={handleUpload} />
+        {onImageUpload && <Upload onUpload={handleUpload} />}
       </div>
       <div className="relative">
         <ReactQuill
