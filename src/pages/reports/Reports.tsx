@@ -161,7 +161,7 @@ export default function Reports() {
         />
         <ReportCard
           cardTitle="Active Subscribers"
-          cardLink="/reports"
+          cardLink="/reports/active-users"
           growthPercentage={ActiveSubscribersDataJson.growthPercentage || "0"}
           total={formatNumberWithCommas(ActiveSubscribersData.length) || 0}
           childrenComponent={
