@@ -2,10 +2,10 @@ import PageLayout from "../layout/PageLayout";
 import ActiveSubscribersDataJson from "../json/dummyData/activeSubscribersData.json";
 import activeUserGrowthChartDataJson from "../json/dummyData/activeUserGrowthChartData.json";
 import { ChartConfig } from "../components/ui/chart";
-import ReportCard from "../components/reports/ReportCard";
 import formatNumberWithCommas from "../utils/formatNumberWithComma";
 import ReportAreaChart from "../components/reports/AreaChart";
 import ReportTable from "../components/reports/ReportTable";
+import EagleViewCard from "../components/eagle-view/EagleViewCard";
 
 interface IChartData {
   date: string;
@@ -40,9 +40,8 @@ export default function EagleView() {
       description="Eagle's View integrates visitor data from all businesses into a single, consolidated view. Monitor overall trends, enhance strategies, and make informed decisions with this powerful tool, driving growth and efficiency toward future success."
     >
       <div className="grid grid-cols-4 gap-4">
-        <ReportCard
-          cardTitle="Active Users Growth Chart"
-          cardLink="/reports"
+        <EagleViewCard
+          cardTitle="Overall Visitors"
           growthPercentage={
             activeUserGrowthChartDataJson.growthPercentage || "0"
           }
@@ -67,9 +66,8 @@ export default function EagleView() {
           }
         />
 
-        <ReportCard
-          cardTitle="Active Subscribers"
-          cardLink="/reports"
+        <EagleViewCard
+          cardTitle="Review Platforms visits"
           growthPercentage={ActiveSubscribersDataJson.growthPercentage || "0"}
           total={formatNumberWithCommas(ActiveSubscribersData.length) || 0}
           childrenComponent={
