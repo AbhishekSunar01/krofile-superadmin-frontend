@@ -1,10 +1,10 @@
 import React, { useCallback, useRef, useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import bold from "../../../assets/svg/bold.svg";
-import italic from "../../../assets/svg/italic.svg";
-import underline from "../../../assets/svg/underline.svg";
-import uolist from "../../../assets/svg/unorderlist.svg";
+import bold from "../../assets/svg/bold.svg";
+import italic from "../../assets/svg/italic.svg";
+import underline from "../../assets/svg/underline.svg";
+import uolist from "../../assets/svg/unorderlist.svg";
 import Upload from "../support/view-details/Upload";
 import { FileWithPreview } from "../../types/type";
 
