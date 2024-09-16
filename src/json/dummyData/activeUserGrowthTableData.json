@@ -1,0 +1,184 @@
+{
+  "data": [
+    {
+      "_id": "01",
+      "businessName": "Passage To India",
+      "industryType": "Restaurant",
+      "subStatus": "Subscribed",
+      "plan": "Standard",
+      "regDate": "2024-09-01",
+      "country": "USA"
+    },
+    {
+      "_id": "02",
+      "businessName": "The Coffee Spot",
+      "industryType": "Cafe",
+      "subStatus": "Subscribed",
+      "plan": "Premium",
+      "regDate": "2024-08-15",
+      "country": "Canada"
+    },
+    {
+      "_id": "03",
+      "businessName": "Green Valley Farm",
+      "industryType": "Agriculture",
+      "subStatus": "Expired",
+      "plan": "Basic",
+      "regDate": "2023-11-20",
+      "country": "Australia"
+    },
+    {
+      "_id": "04",
+      "businessName": "Tech Innovators",
+      "industryType": "IT Services",
+      "subStatus": "Subscribed",
+      "plan": "Enterprise",
+      "regDate": "2024-07-03",
+      "country": "India"
+    },
+    {
+      "_id": "05",
+      "businessName": "Sunshine Bakes",
+      "industryType": "Bakery",
+      "subStatus": "Subscribed",
+      "plan": "Standard",
+      "regDate": "2024-09-10",
+      "country": "UK"
+    },
+    {
+      "_id": "06",
+      "businessName": "Healthy Living",
+      "industryType": "Healthcare",
+      "subStatus": "Unsubscribed",
+      "plan": "Premium",
+      "regDate": "2022-12-22",
+      "country": "Germany"
+    },
+    {
+      "_id": "07",
+      "businessName": "Fitness First",
+      "industryType": "Fitness",
+      "subStatus": "Subscribed",
+      "plan": "Standard",
+      "regDate": "2024-03-18",
+      "country": "USA"
+    },
+    {
+      "_id": "08",
+      "businessName": "Urban Threads",
+      "industryType": "Fashion",
+      "subStatus": "Subscribed",
+      "plan": "Basic",
+      "regDate": "2023-09-29",
+      "country": "France"
+    },
+    {
+      "_id": "09",
+      "businessName": "Happy Paws",
+      "industryType": "Pet Care",
+      "subStatus": "Expired",
+      "plan": "Standard",
+      "regDate": "2023-04-12",
+      "country": "Canada"
+    },
+    {
+      "_id": "10",
+      "businessName": "Mountain Adventures",
+      "industryType": "Tourism",
+      "subStatus": "Subscribed",
+      "plan": "Enterprise",
+      "regDate": "2024-08-25",
+      "country": "Nepal"
+    },
+    {
+      "_id": "11",
+      "businessName": "Digital Solutions",
+      "industryType": "Consulting",
+      "subStatus": "Subscribed",
+      "plan": "Premium",
+      "regDate": "2024-06-09",
+      "country": "USA"
+    },
+    {
+      "_id": "12",
+      "businessName": "Blue Lagoon Spa",
+      "industryType": "Wellness",
+      "subStatus": "Subscribed",
+      "plan": "Standard",
+      "regDate": "2024-01-15",
+      "country": "Maldives"
+    },
+    {
+      "_id": "13",
+      "businessName": "Eco Home Builders",
+      "industryType": "Construction",
+      "subStatus": "Subscribed",
+      "plan": "Basic",
+      "regDate": "2023-07-18",
+      "country": "New Zealand"
+    },
+    {
+      "_id": "14",
+      "businessName": "Vegan Delight",
+      "industryType": "Restaurant",
+      "subStatus": "Unsubscribed",
+      "plan": "Premium",
+      "regDate": "2023-10-30",
+      "country": "UK"
+    },
+    {
+      "_id": "15",
+      "businessName": "Travel More",
+      "industryType": "Tourism",
+      "subStatus": "Subscribed",
+      "plan": "Standard",
+      "regDate": "2024-09-05",
+      "country": "USA"
+    },
+    {
+      "_id": "16",
+      "businessName": "Global Traders",
+      "industryType": "Wholesale",
+      "subStatus": "Expired",
+      "plan": "Basic",
+      "regDate": "2022-11-02",
+      "country": "China"
+    },
+    {
+      "_id": "17",
+      "businessName": "Future Tech Labs",
+      "industryType": "IT Services",
+      "subStatus": "Subscribed",
+      "plan": "Enterprise",
+      "regDate": "2024-04-25",
+      "country": "India"
+    },
+    {
+      "_id": "18",
+      "businessName": "Blossom Florists",
+      "industryType": "Retail",
+      "subStatus": "Subscribed",
+      "plan": "Standard",
+      "regDate": "2024-08-02",
+      "country": "Australia"
+    },
+    {
+      "_id": "19",
+      "businessName": "Quick Fix Repairs",
+      "industryType": "Maintenance",
+      "subStatus": "Unsubscribed",
+      "plan": "Basic",
+      "regDate": "2023-05-17",
+      "country": "South Africa"
+    },
+    {
+      "_id": "20",
+      "businessName": "Mindful Yoga Studio",
+      "industryType": "Wellness",
+      "subStatus": "Subscribed",
+      "plan": "Premium",
+      "regDate": "2024-02-27",
+      "country": "USA"
+    }
+  ]
+}

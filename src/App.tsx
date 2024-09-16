@@ -22,6 +22,8 @@ import {
   SystemStatus,
   UserManagement,
 } from "./pages/index";
+import ActiveUsersGrowthPage from "./pages/reports/ActiveUsersGrowthPage";
+import ActiveUsersPage from "./pages/reports/ActiveUsersPage";
 
 export default function App() {
   return (
@@ -47,6 +49,14 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-management" element={<UserManagement />} />
           <Route path="/reports" element={<Reports />} />
+          <Route 
+            path="/reports/active-users-growth"
+            element={<ActiveUsersGrowthPage />}
+          />
+          <Route
+            path="/reports/active-users"
+            element={<ActiveUsersPage />}
+          />
           <Route path="/eagle-view" element={<EagleView />} />
           <Route path="/support" element={<Support />} />
           <Route

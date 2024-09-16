@@ -120,7 +120,7 @@ export default function Reports() {
   };
 
   const findTotal = (data: Record<string, any>[]): number => {
-      const total = data.reduce((acc: number, curVal: Record<string, any>) => {
+    const total = data.reduce((acc: number, curVal: Record<string, any>) => {
       const count = curVal.count || 0; // Handle cases where count might be undefined
       return acc + count;
     }, 0); // Initialize the accumulator to 0
@@ -135,7 +135,7 @@ export default function Reports() {
       <div className="grid grid-cols-4 gap-4">
         <ReportCard
           cardTitle="Active Users Growth Chart"
-          cardLink="/reports"
+          cardLink="/reports/active-users-growth"
           growthPercentage={
             activeUserGrowthChartDataJson.growthPercentage || "0"
           }
@@ -166,6 +166,7 @@ export default function Reports() {
           total={formatNumberWithCommas(ActiveSubscribersData.length) || 0}
           childrenComponent={
             <ReportTable
+            dataPerPage={5}
               data={ActiveSubscribersData}
               headings={["SL No", "Business Name", "Reg. Date", "Subs. Plan"]}
               dataKeys={["_id", "businessName", "date", "plan"]}
@@ -273,11 +274,10 @@ export default function Reports() {
           cardTitle="Active Users by Industry Type"
           cardLink="/reports"
           growthPercentage={IndustryDataJson.growthPercentage || "0"}
-          total={
-            formatNumberWithCommas(findTotal(IndustryTableData)) || 0
-          }
+          total={formatNumberWithCommas(findTotal(IndustryTableData)) || 0}
           childrenComponent={
             <ReportTable
+              dataPerPage={5}
               data={IndustryTableData}
               headings={["SL No", "Industry Type", "Count", "Ratio"]}
               dataKeys={["_id", "industryType", "count", "ratio"]}

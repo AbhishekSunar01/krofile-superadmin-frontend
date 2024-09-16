@@ -96,8 +96,7 @@
 
 // export default ReportTable;
 
-
-import { ChevronRight, ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import {
   Table,
@@ -112,11 +111,17 @@ interface ITableProps {
   data: Record<string, any>[];
   headings: string[];
   dataKeys: string[];
+  dataPerPage: number;
 }
 
-const ReportTable = ({ headings, data, dataKeys }: ITableProps) => {
+const ReportTable = ({
+  headings,
+  data,
+  dataKeys,
+  dataPerPage,
+}: ITableProps) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 5; // Number of rows you want to display per page
+  const rowsPerPage = dataPerPage; // Number of rows you want to display per page
 
   // Calculate the total number of pages
   const totalPages = Math.ceil(data.length / rowsPerPage);
