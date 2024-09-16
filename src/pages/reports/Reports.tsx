@@ -119,13 +119,13 @@ export default function Reports() {
     }, 0); // Initialize the sum to 0
   };
 
-  // const findTotal = (data: IChartData[]): number => {
-  //   const total = data.reduce((acc, curVal) => {
-  //     const count = curVal.count || 0; // Handle cases where count might be undefined
-  //     return acc + count;
-  //   }, 0); // Initialize the accumulator to 0
-  //   return total;
-  // };
+  const findTotal = (data: Record<string, any>[]): number => {
+      const total = data.reduce((acc: number, curVal: Record<string, any>) => {
+      const count = curVal.count || 0; // Handle cases where count might be undefined
+      return acc + count;
+    }, 0); // Initialize the accumulator to 0
+    return total;
+  };
 
   return (
     <PageLayout
@@ -272,8 +272,10 @@ export default function Reports() {
         <ReportCard
           cardTitle="Active Users by Industry Type"
           cardLink="/reports"
-          growthPercentage={ActiveSubscribersDataJson.growthPercentage || "0"}
-          total={formatNumberWithCommas(ActiveSubscribersData.length) || 0}
+          growthPercentage={IndustryDataJson.growthPercentage || "0"}
+          total={
+            formatNumberWithCommas(findTotal(IndustryTableData)) || 0
+          }
           childrenComponent={
             <ReportTable
               data={IndustryTableData}
