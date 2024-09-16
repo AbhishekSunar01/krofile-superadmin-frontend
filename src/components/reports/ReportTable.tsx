@@ -111,9 +111,10 @@ import {
 interface ITableProps {
   data: Record<string, any>[];
   headings: string[];
+  dataKeys: string[];
 }
 
-const ReportTable = ({ headings, data }: ITableProps) => {
+const ReportTable = ({ headings, data, dataKeys }: ITableProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 5; // Number of rows you want to display per page
 
@@ -148,13 +149,25 @@ const ReportTable = ({ headings, data }: ITableProps) => {
             ))}
           </TableRow>
         </TableHeader>
-        <TableBody>
+        {/* <TableBody>
           {currentData.map((item, index) => (
             <TableRow key={index}>
               <TableCell>{item._id}</TableCell>
               <TableCell>{item.businessName}</TableCell>
               <TableCell>{item.date}</TableCell>
               <TableCell>{item.plan}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody> */}
+        <TableBody>
+          {currentData.map((item, index) => (
+            <TableRow key={index}>
+              {dataKeys.map((data, index) => (
+                <TableCell key={index}>
+                  {/* Dynamically display the value based on the heading. If it doesn't exist in the item, show a default value */}
+                  {item[data] !== undefined ? item[data] : "N/A"}
+                </TableCell>
+              ))}
             </TableRow>
           ))}
         </TableBody>

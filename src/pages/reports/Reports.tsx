@@ -14,6 +14,7 @@ import ActiveSubscribersDataJson from "../../json/dummyData/activeSubscribersDat
 import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
 import b2breferralDataJson from "../../json/dummyData/b2breferrals.json";
 import churnRateDataJson from "../../json/dummyData/churnRateData.json";
+import IndustryDataJson from "../../json/dummyData/industryData.json";
 import popularCountriesDataJson from "../../json/dummyData/popularCountriesChartData.json";
 import retentionChartDataJson from "../../json/dummyData/retentionGrowthData.json";
 import systemHealthDataJson from "../../json/dummyData/systemHealthData.json";
@@ -34,6 +35,7 @@ export default function Reports() {
   const systemHealthChartData: IChartData[] = systemHealthDataJson.chartData;
   const b2bReferralChartData: IChartData[] = b2breferralDataJson.chartData;
   const popularCountriesChartData = popularCountriesDataJson.chartData;
+  const IndustryTableData: Record<string, any>[] = IndustryDataJson.data;
 
   const activeUserChartLabels: string[] = ["Count"];
   const retentionChartLabels: string[] = ["retentionrate", "retentiongrowth"];
@@ -166,6 +168,7 @@ export default function Reports() {
             <ReportTable
               data={ActiveSubscribersData}
               headings={["SL No", "Business Name", "Reg. Date", "Subs. Plan"]}
+              dataKeys={["_id", "businessName", "date", "plan"]}
             />
           }
         />
@@ -228,7 +231,9 @@ export default function Reports() {
           cardTitle="B2B Referral"
           cardLink="/reports"
           growthPercentage={b2breferralDataJson.growthPercentage || "0"}
-          total={formatNumberWithCommas(findTotalSum(b2bReferralChartData)) || 0}
+          total={
+            formatNumberWithCommas(findTotalSum(b2bReferralChartData)) || 0
+          }
           childrenComponent={
             <ReportChart
               chartConfig={b2bReferralChartConfig}
@@ -260,6 +265,20 @@ export default function Reports() {
               XAxisDataKey={"date"}
               chartLabels={popularCountriesLabels} // Correct Labels for Countries
               lineType="linear"
+            />
+          }
+        />
+
+        <ReportCard
+          cardTitle="Active Users by Industry Type"
+          cardLink="/reports"
+          growthPercentage={ActiveSubscribersDataJson.growthPercentage || "0"}
+          total={formatNumberWithCommas(ActiveSubscribersData.length) || 0}
+          childrenComponent={
+            <ReportTable
+              data={IndustryTableData}
+              headings={["SL No", "Industry Type", "Count", "Ratio"]}
+              dataKeys={["_id", "industryType", "count", "ratio"]}
             />
           }
         />

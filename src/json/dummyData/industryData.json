@@ -1,0 +1,125 @@
+{
+  "data": [
+    {
+      "_id": "01",
+      "industryType": "Financial Services",
+      "count": 120,
+      "ratio": "10"
+    },
+    {
+      "_id": "02",
+      "industryType": "Healthcare and Wellness",
+      "count": 200,
+      "ratio": "15"
+    },
+    {
+      "_id": "03",
+      "industryType": "Retail and E-commerce",
+      "count": 80,
+      "ratio": "5"
+    },
+    {
+      "_id": "04",
+      "industryType": "Education and Training",
+      "count": 140,
+      "ratio": "10"
+    },
+    {
+      "_id": "05",
+      "industryType": "Technology and Software Development",
+      "count": 180,
+      "ratio": "20"
+    },
+    {
+      "_id": "06",
+      "industryType": "Real Estate and Property Management",
+      "count": 90,
+      "ratio": "5"
+    },
+    {
+      "_id": "07",
+      "industryType": "Hospitality and Tourism",
+      "count": 130,
+      "ratio": "10"
+    },
+    {
+      "_id": "08",
+      "industryType": "Automotive and Transportation",
+      "count": 170,
+      "ratio": "20"
+    },
+    {
+      "_id": "09",
+      "industryType": "Construction and Infrastructure",
+      "count": 60,
+      "ratio": "5"
+    },
+    {
+      "_id": "10",
+      "industryType": "Manufacturing and Production",
+      "count": 110,
+      "ratio": "10"
+    },
+    {
+      "_id": "11",
+      "industryType": "Energy and Utilities",
+      "count": 190,
+      "ratio": "20"
+    },
+    {
+      "_id": "12",
+      "industryType": "Agriculture and Farming",
+      "count": 70,
+      "ratio": "5"
+    },
+    {
+      "_id": "13",
+      "industryType": "Entertainment and Media",
+      "count": 150,
+      "ratio": "10"
+    },
+    {
+      "_id": "14",
+      "industryType": "Legal and Consulting Services",
+      "count": 160,
+      "ratio": "15"
+    },
+    {
+      "_id": "15",
+      "industryType": "Telecommunications",
+      "count": 85,
+      "ratio": "5"
+    },
+    {
+      "_id": "16",
+      "industryType": "Food and Beverage",
+      "count": 125,
+      "ratio": "10"
+    },
+    {
+      "_id": "17",
+      "industryType": "Pharmaceuticals and Biotechnology",
+      "count": 175,
+      "ratio": "20"
+    },
+    {
+      "_id": "18",
+      "industryType": "Fashion and Apparel",
+      "count": 95,
+      "ratio": "5"
+    },
+    {
+      "_id": "19",
+      "industryType": "Logistics and Supply Chain",
+      "count": 135,
+      "ratio": "15"
+    },
+    {
+      "_id": "20",
+      "industryType": "Environmental and Sustainability",
+      "count": 145,
+      "ratio": "10"
+    }
+  ],
+  "growthPercentage": "15"
+}
