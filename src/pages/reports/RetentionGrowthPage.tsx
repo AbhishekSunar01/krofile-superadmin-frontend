@@ -32,12 +32,13 @@ const RetentionGrowthPage = () => {
     const retentionrate = data.retentionrate || 0;
     const retentiongrowth = data.retentiongrowth || 0;
     const month = getMonths(new Date(data.date).getMonth());
+    const day = new Date(data.date).getDate();
 
     return {
       ...data,
       retentionrate,
       retentiongrowth,
-      month: month,
+      month: day + " " + month,
       _id: index + 1,
     };
   });

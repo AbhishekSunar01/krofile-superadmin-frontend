@@ -3,9 +3,8 @@ import ReportCard from "../../components/reports/ReportCard";
 import ReportsLayout from "../../components/reports/ReportsLayout";
 import ReportTable from "../../components/reports/ReportTable";
 import { ChartConfig } from "../../components/ui/chart";
-import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
-import activeUserGrowthTableData from "../../json/dummyData/activeUserGrowthTableData.json";
-import formatNumberWithCommas from "../../utils/formatNumberWithComma";
+import churnRateDataJson from "../../json/dummyData/churnRateData.json";
+import { getMonths } from "../../utils/getMonths";
 
 interface IChartData {
   date: string;
@@ -13,89 +12,64 @@ interface IChartData {
 }
 
 const ChurnRatePage = () => {
-  const activeUserGrowthChartData: IChartData[] =
-    activeUserGrowthChartDataJson.chartData;
+  const churnRateData: IChartData[] = churnRateDataJson.chartData;
 
-  const activeUserChartLabels: string[] = ["Count"];
+  const churnRateChartLabels: string[] = ["ChurnRate"];
 
-  const activeUserGrowthChartConfig = {
-    count: {
-      label: "Count",
-      color: "hsl(var(--chart-6))",
+  const churnRateChartConfig = {
+    churnrate: {
+      label: "ChurnRate",
+      color: "hsl(var(--chart-2))",
     },
   } satisfies ChartConfig;
 
-  interface ChartData {
-    date: string;
-    [key: string]: number | string; // Allows for dynamic country keys
-  }
+  const churnRateTableData = churnRateData.map((data, index) => {
+    const churnRate = data.churnrate || 0;
 
-  const findTotalSum = (chartData: ChartData[]): number => {
-    return chartData.reduce((totalSum, dataEntry) => {
-      // Loop through each key in the dataEntry object
-      for (const key in dataEntry) {
-        // Skip the "date" key and only sum numerical values (country data)
-        if (key !== "date" && typeof dataEntry[key] === "number") {
-          totalSum += dataEntry[key] as number;
-        }
-      }
-      return totalSum;
-    }, 0); // Initialize the sum to 0
-  };
+    const month = getMonths(new Date(data.date).getMonth());
+    const day = new Date(data.date).getDate();
+
+    return {
+      ...data,
+      churnrate: churnRate,
+      month: day + " " + month,
+      _id: index + 1,
+    };
+  });
 
   return (
     <>
-      <ReportsLayout activePage="Active Users Growth Chart">
+      <ReportsLayout activePage="Churn Rate">
         <ReportCard
-          cardTitle="Active Users Growth Chart"
-          cardLink="/reports/active-users-growth"
-          growthPercentage={
-            activeUserGrowthChartDataJson.growthPercentage || "0"
-          }
-          total={
-            formatNumberWithCommas(findTotalSum(activeUserGrowthChartData)) || 0
-          }
+          cardTitle="Churn Rate"
+          growthPercentage={churnRateDataJson.growthPercentage || "0"}
           childrenComponent={
             <ReportAreaChart
-              chartConfig={activeUserGrowthChartConfig}
-              chartData={activeUserGrowthChartData}
+              YAxisDataKey="churnrate"
+              chartConfig={churnRateChartConfig}
+              chartData={churnRateData}
               XAxisDataKey={"date"}
-              YAxisDataKey={"count"}
-              areaType="natural"
-              chartLabels={activeUserChartLabels}
-              tickFormatter={(value) => value / 1000 + "k"}
+              areaType="linear"
+              chartLabels={churnRateChartLabels}
+              tickFormatter={(value) => value + "%"}
               gradientColors={{
-                startColor: "#22D1EE66",
-                endColor: "#85EEFF4D",
+                startColor: "#EE222266",
+                endColor: "#FF858500",
               }}
-              strokeColor="#22D1EE"
+              strokeColor="#EE2222"
             />
           }
         />
 
         <div className="mt-4">
-          <ReportTable
-            dataPerPage={7}
-            data={activeUserGrowthTableData.data}
-            headings={[
-              "S.N.",
-              "Business Name",
-              "Industry Type",
-              "Subs. Status",
-              "Plan",
-              "Reg. Date",
-              "Country",
-            ]}
-            dataKeys={[
-              "_id",
-              "businessName",
-              "industryType",
-              "subStatus",
-              "plan",
-              "regDate",
-              "country",
-            ]}
-          />
+          <div className="mt-4">
+            <ReportTable
+              dataPerPage={7}
+              data={churnRateTableData}
+              headings={["Month", "Churn Rate (%)", "Churn Users"]}
+              dataKeys={["month", "churnrate", "churnUsers"]}
+            />
+          </div>
         </div>
       </ReportsLayout>
     </>

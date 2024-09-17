@@ -176,7 +176,7 @@ export default function Reports() {
 
         <ReportCard
           cardTitle="Retention Growth"
-          cardLink="/reports"
+          cardLink="/reports/retention-growth"
           growthPercentage={
             activeUserGrowthChartDataJson.growthPercentage || "0"
           }
@@ -193,7 +193,7 @@ export default function Reports() {
         />
         <ReportCard
           cardTitle="Churn Rate"
-          cardLink="/reports"
+          cardLink="/reports/churn-rate"
           growthPercentage={churnRateDataJson.growthPercentage || "0"}
           // total={findTotal(activeUserGrowthChartData) || 0}
           childrenComponent={
