@@ -43,7 +43,7 @@ const CountryRow: React.FC<{ country: Country }> = React.memo(({ country }) => {
 
   return (
     <TableRow key={_id}>
-      <TableCell className="flex font-medium py-3 gap-2 items-center">
+      <TableCell className="flex text-sm font-medium py-3 gap-2 items-center">
         {flagSrc && (
           <img
             className="h-[24px] w-[24px]"

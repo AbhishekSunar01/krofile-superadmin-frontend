@@ -150,7 +150,7 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         </div>
       </div>
     </div>
-  );
+  );  
 };
 
 export default RichTextEditor;

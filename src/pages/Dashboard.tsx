@@ -15,7 +15,7 @@ import industryData from "../json/dummyData/industryType.json";
 import subscribersData from "../json/dummyData/subscribersData.json";
 
 export default function Dashboard() {
-  const [dashboardHasData, setDashboardHasData] = useState(true);
+  const [dashboardHasData, setDashboardHasData] = useState(false);
 
   const handleButtonClick = () => {
     setDashboardHasData(true);
@@ -46,15 +46,15 @@ export default function Dashboard() {
           </div>
         )}
         <div className={`${!dashboardHasData ? " blur-0" : ""}`}>
-          <div className="grid grid-cols-11 gap-6 w-full mb-6">
-            <TotalCustomers className="col-span-7" />
+          <div className="grid grid-cols-8 gap-6 w-full mb-6">
+            <TotalCustomers className="col-span-5" />
             <ActiveSubscriberChart
               pieData={activeSubscribers.pieData}
               titleData={activeSubscribers.titleData}
-              className="col-span-4"
+              className="col-span-3"
             />
           </div>
-          <div className="grid grid-cols-11 gap-6 mb-6">
+          <div className="grid grid-cols-12 gap-6 mb-6">
             <Chart
               chartData={userGrowth}
               title="Active Users Growth Chart"
@@ -66,7 +66,7 @@ export default function Dashboard() {
               chartData={referral}
               title="B2B Referral"
               tooltipData="Refers"
-              className="col-span-4"
+              className="col-span-5"
             />
           </div>
           <div className="flex w-full gap-6 ">

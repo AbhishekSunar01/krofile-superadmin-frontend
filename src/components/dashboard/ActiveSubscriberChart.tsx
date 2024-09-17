@@ -129,7 +129,7 @@ export default function ActiveSubscriberChart({
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="flex items-center justify-center -mt-3">
+        <CardContent className="flex items-center justify-center -mt-5 pl-0">
           <ChartContainer
             config={chartConfig}
             className="flex w-full items-center "
