@@ -33,8 +33,6 @@ const RetentionGrowthPage = () => {
     const retentiongrowth = data.retentiongrowth || 0;
     const month = getMonths(new Date(data.date).getMonth());
 
-    console.log(month);
-
     return {
       ...data,
       retentionrate,
