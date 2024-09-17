@@ -1,4 +1,4 @@
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -6,12 +6,12 @@ import {
   ChartTooltip,
 } from "../ui/chart";
 
-interface IAreaChartProps {
+interface IReportBarChartProps {
   chartConfig: ChartConfig;
-  chartData: { date: string; [key: string]: any }[];
-  XAxisDataKey: string;
+  chartData: { date: string; [key: number]: any }[];
+  YAxisDataKey: string;
   chartLabels: string[];
-  areaType?: "linear" | "monotone" | "natural" | "step";
+  tickFormatter?: (value: number) => string;
 }
 
 interface CustomLegendProps {
@@ -30,9 +30,7 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
             className="inline-block w-3 h-3 rounded-full"
             style={{ backgroundColor: entry.color }}
           ></div>
-          <span className="text-sm text-gray-700 capitalize">
-            {entry.value}(%)
-          </span>
+          <span className="text-sm text-gray-700 capitalize">{entry.value}</span>
         </div>
       ))}
     </div>
@@ -65,7 +63,10 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
               className="inline-block w-2 h-2 rounded-full"
               style={{ backgroundColor: entry.color }}
             ></div>
-            <span className="capitalize">{entry.value}%</span>
+            <span>
+              {/* {entry.name}: */}
+              {entry.value}%
+            </span>
           </div>
         ))}
       </div>
@@ -74,74 +75,37 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
   return null;
 };
 
-const ReportStackedChart = ({
+const ReportBarChart = ({
   chartConfig,
   chartData,
-  XAxisDataKey,
+  YAxisDataKey,
   chartLabels,
-  areaType = "natural",
-}: IAreaChartProps) => {
+  tickFormatter,
+}: IReportBarChartProps) => {
   return (
     <div className="relative">
       <ChartContainer className="h-[330px] w-full" config={chartConfig}>
-        <AreaChart
-          accessibilityLayer
-          data={chartData}
-          margin={{
-            left: 0,
-            right: 0,
-          }}
-          className=""
-        >
+        <BarChart accessibilityLayer data={chartData}>
           {/* Custom Legend */}
           <ChartLegend
             verticalAlign="top"
             align="right"
             content={<CustomLegend />}
           />
-
-          <defs>
-            <linearGradient id="color1" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#22D1EE66" stopOpacity={1} />
-              <stop offset="95%" stopColor="#85EEFF00" stopOpacity={0} />
-            </linearGradient>
-            <linearGradient id="color2" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#EE222266" stopOpacity={1} />
-              <stop offset="95%" stopColor="#FF858500" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-
           <CartesianGrid vertical={true} />
-          {/* <ChartLegend  /> */}
-
-          {/* Left Y-Axis */}
           <YAxis
-            yAxisId="left"
+            dataKey={YAxisDataKey}
             tickLine={false}
             axisLine={false}
             tickMargin={24}
-            tickFormatter={(value) => value + "%"}
+            tickFormatter={tickFormatter}
             padding={{ top: 10 }}
-            orientation="left"
           />
-
-          {/* Right Y-Axis */}
-
-          <YAxis
-            yAxisId="right"
-            tickLine={false}
-            axisLine={false}
-            tickMargin={24}
-            padding={{ top: 10 }}
-            orientation="right"
-          />
-
-          {/* X-Axis */}
           <XAxis
-            dataKey={XAxisDataKey}
+            dataKey="date"
             tickLine={false}
+            tickMargin={10}
             axisLine={false}
-            tickMargin={8}
             tickFormatter={(value) => {
               const date = new Date(value);
               return date.toLocaleDateString("en-US", {
@@ -150,41 +114,21 @@ const ReportStackedChart = ({
               });
             }}
           />
-
           {/* Tooltip */}
           <ChartTooltip content={<CustomTooltip />} />
 
-          {/* Stack areas */}
-
-          {/* <Area
-            dataKey={chartLabels[0]}
-            type={areaType}
-            stroke={`var(--color-${chartLabels[0]})`}
-            fillOpacity={1}
-            fill={`url(#color1)`}
-            yAxisId={"left"} // Assign to left or right Y-axis
-          />
-          <Area
-            dataKey={chartLabels[1]}
-            type={areaType}
-            stroke={`var(--color-${chartLabels[1]})`}
-            fillOpacity={1}
-            fill={`url(#color2)`}
-            yAxisId={"right"} // Assign to left or right Y-axis
-          /> */}
-          {/* Dynamic Area components */}
+          {/* <Bar dataKey="online" fill="var(--color-online)" radius={4} />
+          <Bar dataKey="offline" fill="var(--color-offline)" radius={4} /> */}
+          {/* Dynamic Bars */}
           {chartLabels.map((label, index) => (
-            <Area
+            <Bar
               key={index}
               dataKey={label} // Dynamically set the dataKey based on chartLabels
-              type={areaType}
-              stroke={`var(--color-${label})`}
-              fillOpacity={1}
-              fill={`url(#color${index + 1})`} // Dynamically use gradient ids
-              yAxisId={index % 2 === 0 ? "left" : "right"} // Alternate between left and right Y-axis
+              fill={`var(--color-${label})`} // Use dynamic color variables
+              radius={4}
             />
           ))}
-        </AreaChart>
+        </BarChart>
       </ChartContainer>
       {chartData.length === 0 && (
         <div className="flex w-full h-full items-center justify-center">
@@ -212,4 +156,4 @@ const ReportStackedChart = ({
   );
 };
 
-export default ReportStackedChart;
+export default ReportBarChart;

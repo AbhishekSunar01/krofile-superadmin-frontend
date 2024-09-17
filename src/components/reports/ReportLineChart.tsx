@@ -1,4 +1,4 @@
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   ChartConfig,
   ChartContainer,
@@ -6,12 +6,12 @@ import {
   ChartTooltip,
 } from "../ui/chart";
 
-interface IAreaChartProps {
+interface ILineChartProps {
   chartConfig: ChartConfig;
   chartData: { date: string; [key: string]: any }[];
   XAxisDataKey: string;
   chartLabels: string[];
-  areaType?: "linear" | "monotone" | "natural" | "step";
+  lineType?: "linear" | "monotone" | "natural" | "step";
 }
 
 interface CustomLegendProps {
@@ -31,7 +31,7 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
             style={{ backgroundColor: entry.color }}
           ></div>
           <span className="text-sm text-gray-700 capitalize">
-            {entry.value}(%)
+            {entry.value}
           </span>
         </div>
       ))}
@@ -65,7 +65,9 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
               className="inline-block w-2 h-2 rounded-full"
               style={{ backgroundColor: entry.color }}
             ></div>
-            <span className="capitalize">{entry.value}%</span>
+            <span className="capitalize">
+              {entry.value}
+            </span>
           </div>
         ))}
       </div>
@@ -74,17 +76,17 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
   return null;
 };
 
-const ReportStackedChart = ({
+const ReportLineChart = ({
   chartConfig,
   chartData,
   XAxisDataKey,
   chartLabels,
-  areaType = "natural",
-}: IAreaChartProps) => {
+  lineType = "monotone", // Set default line type to 'monotone'
+}: ILineChartProps) => {
   return (
     <div className="relative">
       <ChartContainer className="h-[330px] w-full" config={chartConfig}>
-        <AreaChart
+        <LineChart
           accessibilityLayer
           data={chartData}
           margin={{
@@ -101,39 +103,41 @@ const ReportStackedChart = ({
           />
 
           <defs>
-            <linearGradient id="color1" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#22D1EE66" stopOpacity={1} />
-              <stop offset="95%" stopColor="#85EEFF00" stopOpacity={0} />
-            </linearGradient>
-            <linearGradient id="color2" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#EE222266" stopOpacity={1} />
-              <stop offset="95%" stopColor="#FF858500" stopOpacity={0} />
-            </linearGradient>
+            {/* Dynamically generate gradients for lines */}
+            {chartLabels.map((label, index) => (
+              <linearGradient
+                key={`gradient-${index}`}
+                id={`color${index + 1}`}
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop
+                  offset="5"
+                  stopColor={`var(--color-${label})66`}
+                  stopOpacity={1}
+                />
+                <stop
+                  offset="95"
+                  stopColor={`var(--color-${label})00`}
+                  stopOpacity={0}
+                />
+              </linearGradient>
+            ))}
           </defs>
 
           <CartesianGrid vertical={true} />
-          {/* <ChartLegend  /> */}
 
-          {/* Left Y-Axis */}
+          {/* Left Y-Axis only */}
           <YAxis
             yAxisId="left"
             tickLine={false}
             axisLine={false}
             tickMargin={24}
-            tickFormatter={(value) => value + "%"}
+            tickFormatter={(value) => value + ""}
             padding={{ top: 10 }}
             orientation="left"
-          />
-
-          {/* Right Y-Axis */}
-
-          <YAxis
-            yAxisId="right"
-            tickLine={false}
-            axisLine={false}
-            tickMargin={24}
-            padding={{ top: 10 }}
-            orientation="right"
           />
 
           {/* X-Axis */}
@@ -154,37 +158,20 @@ const ReportStackedChart = ({
           {/* Tooltip */}
           <ChartTooltip content={<CustomTooltip />} />
 
-          {/* Stack areas */}
-
-          {/* <Area
-            dataKey={chartLabels[0]}
-            type={areaType}
-            stroke={`var(--color-${chartLabels[0]})`}
-            fillOpacity={1}
-            fill={`url(#color1)`}
-            yAxisId={"left"} // Assign to left or right Y-axis
-          />
-          <Area
-            dataKey={chartLabels[1]}
-            type={areaType}
-            stroke={`var(--color-${chartLabels[1]})`}
-            fillOpacity={1}
-            fill={`url(#color2)`}
-            yAxisId={"right"} // Assign to left or right Y-axis
-          /> */}
-          {/* Dynamic Area components */}
+          {/* Dynamic Line components */}
           {chartLabels.map((label, index) => (
-            <Area
+            <Line
               key={index}
               dataKey={label} // Dynamically set the dataKey based on chartLabels
-              type={areaType}
+              type={lineType}
               stroke={`var(--color-${label})`}
-              fillOpacity={1}
-              fill={`url(#color${index + 1})`} // Dynamically use gradient ids
-              yAxisId={index % 2 === 0 ? "left" : "right"} // Alternate between left and right Y-axis
+              strokeWidth={2}
+              dot={false} // You can show dots on the line by changing to `true`
+              activeDot={{ r: 8 }} // Active dot radius for hovered points
+              yAxisId="left" // Assign all lines to the left Y-axis
             />
           ))}
-        </AreaChart>
+        </LineChart>
       </ChartContainer>
       {chartData.length === 0 && (
         <div className="flex w-full h-full items-center justify-center">
@@ -212,4 +199,4 @@ const ReportStackedChart = ({
   );
 };
 
-export default ReportStackedChart;
+export default ReportLineChart;
