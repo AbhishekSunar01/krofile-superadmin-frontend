@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import { ViewTicketProps } from "../../../types/type";
 import arrow from "../../../assets/svg/arrow.svg";
+import logo from "../../../assets/images/logo.jpg";
 import krofileLogo from "../../../assets/images/krofile-logo.png";
-import bold from "../../../assets/svg/bold.svg";
-import underline from "../../../assets/svg/underline.svg";
-import uolist from "../../../assets/svg/unorderlist.svg";
-import italic from "../../../assets/svg/italic.svg";
-import cross from "../../../assets/svg/cross.svg";
 
-import { ToggleGroup, ToggleGroupItem } from "../../ui/toggle-group";
-import { Textarea } from "../../ui/textarea";
+import cross from "../../../assets/svg/cross.svg";
 
 import { Button } from "../../ui/button";
 import {
@@ -19,9 +14,11 @@ import {
   SelectItem,
   SelectTrigger,
 } from "../../ui/select";
-import Upload from "./Upload";
 import SubmittedMessages from "./Message";
 import { FileWithPreview, SubmittedMessage } from "../../../types/type";
+
+import "react-quill/dist/quill.snow.css";
+import RichTextEditor from "../../custom-ui/RichTextEditor";
 
 const TicketDetails: React.FC<ViewTicketProps> = ({
   data,
@@ -37,8 +34,8 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
 
   if (!data) return null;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.target.value);
+  const handleInputChange = (content: string) => {
+    setMessage(content);
   };
 
   const handleUpload = (files: FileWithPreview[]) => {
@@ -80,7 +77,7 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
       colorClass = "text-accentGreen";
       break;
     case "Rejected":
-      colorClass = "text-desctructive";
+      colorClass = "text-destructive";
       break;
     default:
       colorClass = "text-gray-500";
@@ -141,11 +138,7 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
         <div className="w-full">
           <div>
             <div className="flex flex-row gap-2 items-center">
-              <img
-                src={data.logo}
-                alt={data.businessName}
-                className="h-8 w-8"
-              />{" "}
+              <img src={logo} alt={data.businessName} className="h-8 w-8" />{" "}
               <div className="flex items-center w-full">
                 <div className="bg-primary transform rotate-45 h-6 w-5"></div>
                 <h3 className="-ml-5 z-10 text-sm font-medium py-2 px-3 text-white bg-primary w-full rounded-t-md">
@@ -195,45 +188,11 @@ const TicketDetails: React.FC<ViewTicketProps> = ({
               </div>
             </div>
             <div className="mb-2 p-4 ml-10 rounded-b-md text-justify border border-borderColor">
-              <div className="flex gap-4 cursor-pointer w-fit">
-                <ToggleGroup type="multiple">
-                  <ToggleGroupItem value="bold" aria-label="Toggle bold">
-                    <img src={bold} alt="Bold" className="h-6 w-6" />
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="italic" aria-label="Toggle italic">
-                    <img src={italic} alt="Italic" className="h-6 w-6" />
-                  </ToggleGroupItem>
-                  <ToggleGroupItem
-                    value="underline"
-                    aria-label="Toggle underline"
-                  >
-                    <img src={underline} alt="Underline" className="h-6 w-6" />
-                  </ToggleGroupItem>
-                  <ToggleGroupItem
-                    value="unorderlist"
-                    aria-label="Toggle un-orderlist"
-                  >
-                    <img
-                      src={uolist}
-                      alt="Unordered List"
-                      className="h-6 w-6"
-                    />
-                  </ToggleGroupItem>
-                  <Upload onUpload={handleUpload} />
-                </ToggleGroup>
-              </div>
-              <div className="relative">
-                <Textarea
-                  className="w-full p-2 mt-2 bg-gray-100 h-[120px] resize-none"
-                  placeholder="Type here..."
-                  maxLength={300}
-                  value={message}
-                  onChange={handleInputChange}
-                />
-                <div className="flex items-end justify-end text-xs absolute bottom-2 right-2">
-                  {message.length}/300
-                </div>
-              </div>
+              <RichTextEditor
+                value={message}
+                onChange={handleInputChange}
+                onImageUpload={handleUpload}
+              />
               <div className="mt-3 flex flex-row">
                 {uploadedImages.map((image, index) => (
                   <div key={index} className="relative mr-2">

@@ -15,6 +15,7 @@ interface ChartProps {
   chartData: { date: string; data: number }[];
   title: string;
   tooltipData: string;
+  className?: string;
 }
 
 const chartConfig = {
@@ -23,15 +24,20 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function Chart({ chartData, title, tooltipData }: ChartProps) {
+export default function Chart({
+  chartData,
+  title,
+  tooltipData,
+  className = "",
+}: ChartProps) {
   const totalData = React.useMemo(
     () => chartData.reduce((acc, curr) => acc + curr.data, 0),
     [chartData]
   );
 
   return (
-    <div className="">
-      <Card className="flex flex-col min-w-[420px]">
+    <div className={className}>
+      <Card className="flex flex-col h-full">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-5">
           <div className="font-normal text-sm">{title}</div>
           <div className="flex items-center gap-x-2">

@@ -6,20 +6,17 @@ import {
   TableRow,
 } from "../../components/ui/table";
 import { Card } from "../../components/ui/card";
-
 import growth from "../../assets/svg/growth.svg";
+import clsx from "clsx";
 
-interface DashboardTableProps {
+interface TableProps {
   data: Record<string, any>[];
   title: string;
   type: string;
+  width?: string;
 }
 
-const DashboardTable: React.FC<DashboardTableProps> = ({
-  data,
-  title,
-  type,
-}) => {
+const CustomTable: React.FC<TableProps> = ({ data, title, type, width }) => {
   const industry = [
     { key: "_id", header: "SL No" },
     { key: "industryType", header: "Industry Type" },
@@ -35,16 +32,15 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
   const columns = type === "industry" ? industry : subscribers;
 
   const totalData = React.useMemo(
-    () => data.reduce((acc, curr) => acc + (curr.count ?? 0), 0),
+    () => data.reduce((acc, curr) => acc + curr.count, 0),
     [data]
   );
 
   return (
-    <Card className="w-full flex flex-col">
+    <Card className={clsx(`flex flex-col`, width ? `w-[${width}]` : "w-full")}>
       {" "}
       <div className="flex flex-1 flex-col justify-center gap-1 px-6 pt-5">
         <div className="font-normal text-sm">{title}</div>
-
         <div className="flex items-center gap-x-2">
           <span className="text-base font-semibold leading-none">
             {totalData.toLocaleString()}{" "}
@@ -97,4 +93,4 @@ const DashboardTable: React.FC<DashboardTableProps> = ({
   );
 };
 
-export default DashboardTable;
+export default CustomTable;
