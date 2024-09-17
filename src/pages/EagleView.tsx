@@ -73,7 +73,9 @@ export default function EagleView() {
           childrenComponent={
             <ReportTable
               data={ActiveSubscribersData}
-              headings={["SL No", "Business Name", "Reg. Date", "Subs. Plan"]}
+              headings={["Business Name", "Reg. Date", "Subs. Plan"]}
+              dataKeys={["businessName", "date", "plan"]}
+              dataPerPage={5}
             />
           }
         />
