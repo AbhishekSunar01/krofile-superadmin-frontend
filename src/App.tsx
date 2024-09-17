@@ -25,44 +25,42 @@ import {
 
 export default function App() {
   return (
-    <div className="overflow-hidden">
+    <>
       <Toaster />
       <Routes>
+        {/* Auth Routes */}
         <Route path="/auth" element={<AuthLayout />}>
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/change-password" element={<ChangePassword />} />
+          <Route index element={<Navigate replace to="/auth/login" />} />
+          <Route path="login" element={<Login />} />
+          <Route path="change-password" element={<ChangePassword />} />
           <Route
-            path="/auth/change-password-email-verify"
+            path="change-password-email-verify"
             element={<ChangePasswordEmailVerify />}
           />
-          <Route path="/auth/reset-password" element={<ResetPassword />} />
+          <Route path="reset-password" element={<ResetPassword />} />
           <Route
-            path="/auth/reset-password-verify-email"
+            path="reset-password-verify-email"
             element={<ResetPasswordVerify />}
           />
-          <Route path="/auth/set-new-password" element={<NewPassword />} />
-          <Route path="/auth/2fa" element={<TwoFAPage />} />
+          <Route path="set-new-password" element={<NewPassword />} />
+          <Route path="2fa" element={<TwoFAPage />} />
         </Route>
+
+        {/* Main Routes */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Navigate replace to="/dashboard" />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/user-management" element={<UserManagement />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/eagle-view" element={<EagleView />} />
-          <Route path="/support" element={<Support />} />
-          <Route
-            path="/subscription-manager"
-            element={<SubscriptionManager />}
-          />
-          <Route
-            path="/notification-manager"
-            element={<NotificationManager />}
-          />
-          <Route path="/system-status" element={<SystemStatus />} />
-          <Route path="/activity-log" element={<ActivityLog />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="user-management" element={<UserManagement />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="eagle-view" element={<EagleView />} />
+          <Route path="support" element={<Support />} />
+          <Route path="subscription-manager" element={<SubscriptionManager />} />
+          <Route path="notification-manager" element={<NotificationManager />} />
+          <Route path="system-status" element={<SystemStatus />} />
+          <Route path="activity-log" element={<ActivityLog />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
-    </div>
+    </>
   );
 }
