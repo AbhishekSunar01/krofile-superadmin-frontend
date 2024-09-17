@@ -10,7 +10,7 @@ import {
 
 interface IReportCardProps {
   cardTitle: string;
-  cardLink: string;
+  cardLink?: string;
   total?: string | number;
   growthPercentage?: string;
   childrenComponent?: React.ReactNode;
@@ -29,12 +29,14 @@ const ReportCard = ({
         <CardHeader>
           <CardTitle className="font-[400] font-inter text-[16px] flex justify-between items-center text-[#14181F] ">
             <div>{cardTitle}</div>
-            <Link
-              className="text-[#1E7BC8] text-[12px] underline capitalize underline-offset-2"
-              to={cardLink}
-            >
-              View All
-            </Link>
+            {cardLink !== undefined && (
+              <Link
+                className="text-[#1E7BC8] text-[12px] underline capitalize underline-offset-2"
+                to={cardLink === undefined ? "#" : cardLink}
+              >
+                View All
+              </Link>
+            )}
           </CardTitle>
           <CardDescription className="flex select-none justify-start items-center gap-[2px]">
             <span className="text-[28px] text-[#14181F] font-inter font-[600]">

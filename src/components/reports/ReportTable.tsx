@@ -63,6 +63,7 @@ const ReportTable = ({
       <Table className="h-[300px] w-full">
         <TableHeader>
           <TableRow>
+            <TableHead>SL No</TableHead>{" "}
             {headings.map((heading) => (
               <TableHead key={heading}>{heading}</TableHead>
             ))}
@@ -71,6 +72,10 @@ const ReportTable = ({
         <TableBody>
           {currentData.map((item, index) => (
             <TableRow key={index}>
+              <TableCell>
+                {(currentPage - 1) * rowsPerPage + index + 1}
+              </TableCell>{" "}
+              {/* Displaying the serial number */}
               {dataKeys.map((data, index) => (
                 <TableCell key={index}>
                   {/* Dynamically display the value based on the heading. If it doesn't exist in the item, show a default value */}

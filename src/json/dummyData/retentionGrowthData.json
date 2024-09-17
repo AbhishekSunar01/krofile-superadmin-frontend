@@ -1,37 +1,37 @@
 {
   "chartData": [
     {
-      "date": "2024-08-23",
+      "date": "2024-01-23",
       "retentionrate": 85,
       "retentiongrowth": 8.5
     },
     {
-      "date": "2024-08-24",
+      "date": "2024-02-24",
       "retentionrate": 83,
       "retentiongrowth": 3.8
     },
     {
-      "date": "2024-08-25",
+      "date": "2024-03-25",
       "retentionrate": 87,
       "retentiongrowth": 12
     },
     {
-      "date": "2024-08-26",
+      "date": "2024-04-26",
       "retentionrate": 82,
       "retentiongrowth": 3.5
     },
     {
-      "date": "2024-08-27",
+      "date": "2024-05-27",
       "retentionrate": 90,
       "retentiongrowth": 5.0
     },
     {
-      "date": "2024-08-28",
+      "date": "2024-06-28",
       "retentionrate": 88,
       "retentiongrowth": 4.1
     },
     {
-      "date": "2024-08-29",
+      "date": "2024-07-29",
       "retentionrate": 81,
       "retentiongrowth": 3.2
     },
@@ -41,119 +41,24 @@
       "retentiongrowth": 3.7
     },
     {
-      "date": "2024-08-31",
+      "date": "2024-09-31",
       "retentionrate": 89,
       "retentiongrowth": 9
     },
     {
-      "date": "2024-09-01",
+      "date": "2024-10-01",
       "retentionrate": 86,
       "retentiongrowth": 3.9
     },
     {
-      "date": "2024-09-02",
+      "date": "2024-11-02",
       "retentionrate": 84,
       "retentiongrowth": 1
     },
     {
-      "date": "2024-09-03",
+      "date": "2024-12-03",
       "retentionrate": 91,
       "retentiongrowth": 5.1
-    },
-    {
-      "date": "2024-09-04",
-      "retentionrate": 87,
-      "retentiongrowth": 4.0
-    },
-    {
-      "date": "2024-09-05",
-      "retentionrate": 83,
-      "retentiongrowth": 2
-    },
-    {
-      "date": "2024-09-06",
-      "retentionrate": 88,
-      "retentiongrowth": 4.2
-    },
-    {
-      "date": "2024-09-07",
-      "retentionrate": 90,
-      "retentiongrowth": 4.9
-    },
-    {
-      "date": "2024-09-08",
-      "retentionrate": 82,
-      "retentiongrowth": 3.3
-    },
-    {
-      "date": "2024-09-09",
-      "retentionrate": 85,
-      "retentiongrowth": 3.6
-    },
-    {
-      "date": "2024-09-10",
-      "retentionrate": 87,
-      "retentiongrowth": 6
-    },
-    {
-      "date": "2024-09-11",
-      "retentionrate": 88,
-      "retentiongrowth": 5.5
-    },
-    {
-      "date": "2024-09-12",
-      "retentionrate": 92,
-      "retentiongrowth": 5.2
-    },
-    {
-      "date": "2024-09-13",
-      "retentionrate": 84,
-      "retentiongrowth": 3.7
-    },
-    {
-      "date": "2024-09-14",
-      "retentionrate": 89,
-      "retentiongrowth": 4.6
-    },
-    {
-      "date": "2024-09-15",
-      "retentionrate": 86,
-      "retentiongrowth": 3.9
-    },
-    {
-      "date": "2024-09-16",
-      "retentionrate": 80,
-      "retentiongrowth": 3.4
-    },
-    {
-      "date": "2024-09-17",
-      "retentionrate": 93,
-      "retentiongrowth": 7.6
-    },
-    {
-      "date": "2024-09-18",
-      "retentionrate": 88,
-      "retentiongrowth": 4.2
-    },
-    {
-      "date": "2024-09-19",
-      "retentionrate": 85,
-      "retentiongrowth": 3.6
-    },
-    {
-      "date": "2024-09-20",
-      "retentionrate": 89,
-      "retentiongrowth": 4.5
-    },
-    {
-      "date": "2024-09-21",
-      "retentionrate": 91,
-      "retentiongrowth": 5.0
-    },
-    {
-      "date": "2024-09-22",
-      "retentionrate": 87,
-      "retentiongrowth": 12
     }
   ],
   "growthPercentage": "26"

@@ -24,6 +24,12 @@ import {
 } from "./pages/index";
 import ActiveUsersGrowthPage from "./pages/reports/ActiveUsersGrowthPage";
 import ActiveUsersPage from "./pages/reports/ActiveUsersPage";
+import B2bReferralPage from "./pages/reports/B2bReferralPage";
+import ChurnRatePage from "./pages/reports/ChurnRatePage";
+import IndustryTypePage from "./pages/reports/IndustryTypePage";
+import PopularCountriesPage from "./pages/reports/PopularCountriesPage";
+import RetentionGrowthPage from "./pages/reports/RetentionGrowthPage";
+import SystemHealthPage from "./pages/reports/SystemHealthPage";
 
 export default function App() {
   return (
@@ -49,14 +55,24 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-management" element={<UserManagement />} />
           <Route path="/reports" element={<Reports />} />
-          <Route 
+          <Route
             path="/reports/active-users-growth"
             element={<ActiveUsersGrowthPage />}
           />
+          <Route path="/reports/active-users" element={<ActiveUsersPage />} />
           <Route
-            path="/reports/active-users"
-            element={<ActiveUsersPage />}
+            path="/reports/retention-growth"
+            element={<RetentionGrowthPage />}
           />
+          <Route path="/reports/churn-rate" element={<ChurnRatePage />} />
+          <Route path="/reports/system-health" element={<SystemHealthPage />} />
+          <Route path="/reports/b2b-referral" element={<B2bReferralPage />} />
+          <Route
+            path="/reports/popular-countries"
+            element={<PopularCountriesPage />}
+          />
+          <Route path="/reports/industry-type" element={<IndustryTypePage />} />
+
           <Route path="/eagle-view" element={<EagleView />} />
           <Route path="/support" element={<Support />} />
           <Route

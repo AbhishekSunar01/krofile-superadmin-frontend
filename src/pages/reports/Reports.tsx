@@ -168,8 +168,8 @@ export default function Reports() {
             <ReportTable
               dataPerPage={5}
               data={ActiveSubscribersData}
-              headings={["SL No", "Business Name", "Reg. Date", "Subs. Plan"]}
-              dataKeys={["_id", "businessName", "date", "plan"]}
+              headings={["Business Name", "Reg. Date", "Subs. Plan"]}
+              dataKeys={["businessName", "date", "plan"]}
             />
           }
         />
@@ -279,8 +279,8 @@ export default function Reports() {
             <ReportTable
               dataPerPage={5}
               data={IndustryTableData}
-              headings={["SL No", "Industry Type", "Count", "Ratio"]}
-              dataKeys={["_id", "industryType", "count", "ratio"]}
+              headings={["Industry Type", "Count", "Ratio"]}
+              dataKeys={["industryType", "count", "ratio"]}
             />
           }
         />

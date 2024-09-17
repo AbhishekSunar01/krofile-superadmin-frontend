@@ -61,6 +61,48 @@ const ReportsLayout = ({ children, activePage }: IReportsLayoutProps) => {
                   >
                     <div>Active Users</div>
                   </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      return nav("/reports/retention-growth");
+                    }}
+                  >
+                    <div>Retention Growth</div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      return nav("/reports/churn-rate");
+                    }}
+                  >
+                    <div>Churn Rate</div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      return nav("/reports/system-health");
+                    }}
+                  >
+                    <div>System Health</div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      return nav("/reports/b2b-referral");
+                    }}
+                  >
+                    <div>B2B Referral</div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      return nav("/reports/popular-countries");
+                    }}
+                  >
+                    <div>Business acc. to Popular Countries</div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      return nav("/reports/industry-type");
+                    }}
+                  >
+                    <div>Active Users by Industry Type</div>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               <div className="flex justify-center items-center gap-3 text-[14px]">

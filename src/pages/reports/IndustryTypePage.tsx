@@ -12,7 +12,7 @@ interface IChartData {
   [key: string]: any; // This allows for any number of additional properties with any type
 }
 
-const ActiveUsersGrowthPage = () => {
+const IndustryTypePage = () => {
   const activeUserGrowthChartData: IChartData[] =
     activeUserGrowthChartDataJson.chartData;
 
@@ -48,6 +48,7 @@ const ActiveUsersGrowthPage = () => {
       <ReportsLayout activePage="Active Users Growth Chart">
         <ReportCard
           cardTitle="Active Users Growth Chart"
+          cardLink="/reports/active-users-growth"
           growthPercentage={
             activeUserGrowthChartDataJson.growthPercentage || "0"
           }
@@ -77,6 +78,7 @@ const ActiveUsersGrowthPage = () => {
             dataPerPage={7}
             data={activeUserGrowthTableData.data}
             headings={[
+              "S.N.",
               "Business Name",
               "Industry Type",
               "Subs. Status",
@@ -85,6 +87,7 @@ const ActiveUsersGrowthPage = () => {
               "Country",
             ]}
             dataKeys={[
+              "_id",
               "businessName",
               "industryType",
               "subStatus",
@@ -99,4 +102,4 @@ const ActiveUsersGrowthPage = () => {
   );
 };
 
-export default ActiveUsersGrowthPage;
+export default IndustryTypePage;
