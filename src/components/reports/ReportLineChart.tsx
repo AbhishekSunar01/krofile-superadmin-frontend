@@ -84,7 +84,7 @@ const ReportLineChart = ({
   lineType = "monotone", // Set default line type to 'monotone'
 }: ILineChartProps) => {
   return (
-    <>
+    <div className="relative">
       <ChartContainer className="h-[330px] w-full" config={chartConfig}>
         <LineChart
           accessibilityLayer
@@ -173,7 +173,29 @@ const ReportLineChart = ({
           ))}
         </LineChart>
       </ChartContainer>
-    </>
+      {chartData.length === 0 && (
+        <div className="flex w-full h-full items-center justify-center">
+          <p className="text-gray-500">No data available</p>
+        </div>
+      )}
+      {chartData.length === 0 && (
+        <>
+          <div className="absolute top-0 left-0 w-full">
+            <div className="grid grid-rows-7 grid-cols-8 w-full">
+              {
+                // Add a placeholder for the chart
+                Array.from({ length: 8 * 7 }).map((_, index) => (
+                  <div
+                    key={index}
+                    className="border h-[46px] bg-white border-gray-100"
+                  ></div>
+                ))
+              }
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

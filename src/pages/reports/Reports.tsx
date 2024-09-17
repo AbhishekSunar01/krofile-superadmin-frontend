@@ -166,7 +166,7 @@ export default function Reports() {
           total={formatNumberWithCommas(ActiveSubscribersData.length) || 0}
           childrenComponent={
             <ReportTable
-            dataPerPage={5}
+              dataPerPage={5}
               data={ActiveSubscribersData}
               headings={["SL No", "Business Name", "Reg. Date", "Subs. Plan"]}
               dataKeys={["_id", "businessName", "date", "plan"]}
