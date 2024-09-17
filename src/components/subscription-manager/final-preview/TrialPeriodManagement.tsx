@@ -1,9 +1,10 @@
-import { useContentManagementStore } from "../../../app/store";
 import background from "../../../assets/png/Gradient background.png";
+import { useTrialPeriodManagementStore } from "../../../store/subscriptionManagerStore";
 import FinalPreviewTable from "../FinalPreviewTable";
+import parse from "html-react-parser";
 
 export default function TrialPeriodManagement() {
-  const { title, body, tagLine } = useContentManagementStore();
+  const { title, body, tagLine } = useTrialPeriodManagementStore();
 
   return (
     <div
@@ -17,8 +18,8 @@ export default function TrialPeriodManagement() {
       className="p-11 flex flex-col items-center gap-6 mt-6"
     >
       <div className="flex flex-col items-center">
-        <h2>{title}</h2>
-        <p className="text-center">{body}</p>
+        <h2>{parse(title)}</h2>
+        <p className="text-center">{parse(body)}</p>
       </div>
 
       <div className="flex justify-center w-[40%] relative h-[72px]">
@@ -33,7 +34,7 @@ export default function TrialPeriodManagement() {
         </div>
       </div>
 
-      <div>{tagLine}</div>
+      <div>{parse(tagLine)}</div>
 
       <FinalPreviewTable />
     </div>
