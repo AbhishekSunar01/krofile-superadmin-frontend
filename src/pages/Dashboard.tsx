@@ -15,7 +15,7 @@ import industryData from "../json/dummyData/industryType.json";
 import subscribersData from "../json/dummyData/subscribersData.json";
 
 export default function Dashboard() {
-  const [dashboardHasData, setDashboardHasData] = useState(false);
+  const [dashboardHasData, setDashboardHasData] = useState(true);
 
   const handleButtonClick = () => {
     setDashboardHasData(true);

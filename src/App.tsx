@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import "./App.css";
 import AuthLayout from "./layout/AuthLayout";
@@ -44,6 +44,7 @@ export default function App() {
           <Route path="/auth/2fa" element={<TwoFAPage />} />
         </Route>
         <Route path="/" element={<MainLayout />}>
+          <Route index element={<Navigate replace to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-management" element={<UserManagement />} />
           <Route path="/reports" element={<Reports />} />
