@@ -215,8 +215,8 @@ export default function Reports() {
         />
         <ReportCard
           cardTitle="System Health"
-          cardLink="/reports"
-          growthPercentage={churnRateDataJson.growthPercentage || "0"}
+          cardLink="/reports/system-health"
+          growthPercentage={systemHealthDataJson.growthPercentage || "0"}
           // total={findTotal(activeUserGrowthChartData) || 0}
           childrenComponent={
             <ReportBarChart

@@ -1,11 +1,10 @@
-import ReportAreaChart from "../../components/reports/AreaChart";
+import ReportBarChart from "../../components/reports/ReportBarChart";
 import ReportCard from "../../components/reports/ReportCard";
 import ReportsLayout from "../../components/reports/ReportsLayout";
 import ReportTable from "../../components/reports/ReportTable";
 import { ChartConfig } from "../../components/ui/chart";
-import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
-import activeUserGrowthTableData from "../../json/dummyData/activeUserGrowthTableData.json";
-import formatNumberWithCommas from "../../utils/formatNumberWithComma";
+import systemHealthDataJson from "../../json/dummyData/systemHealthData.json";
+import { getMonths } from "../../utils/getMonths";
 
 interface IChartData {
   date: string;
@@ -13,62 +12,43 @@ interface IChartData {
 }
 
 const SystemHealthPage = () => {
-  const activeUserGrowthChartData: IChartData[] =
-    activeUserGrowthChartDataJson.chartData;
+  const systemHealthChartData: IChartData[] = systemHealthDataJson.chartData;
 
-  const activeUserChartLabels: string[] = ["Count"];
-
-  const activeUserGrowthChartConfig = {
-    count: {
-      label: "Count",
-      color: "hsl(var(--chart-6))",
+  const systemHealthChartConfig = {
+    online: {
+      label: "Online",
+      color: "#00A81C",
+    },
+    offline: {
+      label: "Offline",
+      color: "#DF0C3D",
     },
   } satisfies ChartConfig;
 
-  interface ChartData {
-    date: string;
-    [key: string]: number | string; // Allows for dynamic country keys
-  }
+  const systemHealthTableData = systemHealthChartData.map((data, index) => {
+    const month = getMonths(new Date(data.date).getMonth());
+    const day = new Date(data.date).getDate();
 
-  const findTotalSum = (chartData: ChartData[]): number => {
-    return chartData.reduce((totalSum, dataEntry) => {
-      // Loop through each key in the dataEntry object
-      for (const key in dataEntry) {
-        // Skip the "date" key and only sum numerical values (country data)
-        if (key !== "date" && typeof dataEntry[key] === "number") {
-          totalSum += dataEntry[key] as number;
-        }
-      }
-      return totalSum;
-    }, 0); // Initialize the sum to 0
-  };
+    return {
+      ...data,
+      month: day + " " + month,
+      _id: index + 1,
+    };
+  });
 
   return (
     <>
-      <ReportsLayout activePage="Active Users Growth Chart">
+      <ReportsLayout activePage="System Health">
         <ReportCard
-          cardTitle="Active Users Growth Chart"
-          cardLink="/reports/active-users-growth"
-          growthPercentage={
-            activeUserGrowthChartDataJson.growthPercentage || "0"
-          }
-          total={
-            formatNumberWithCommas(findTotalSum(activeUserGrowthChartData)) || 0
-          }
+          cardTitle="System Health"
+          growthPercentage={systemHealthDataJson.growthPercentage || "0"}
           childrenComponent={
-            <ReportAreaChart
-              chartConfig={activeUserGrowthChartConfig}
-              chartData={activeUserGrowthChartData}
-              XAxisDataKey={"date"}
-              YAxisDataKey={"count"}
-              areaType="natural"
-              chartLabels={activeUserChartLabels}
-              tickFormatter={(value) => value / 1000 + "k"}
-              gradientColors={{
-                startColor: "#22D1EE66",
-                endColor: "#85EEFF4D",
-              }}
-              strokeColor="#22D1EE"
+            <ReportBarChart
+              chartConfig={systemHealthChartConfig}
+              chartData={systemHealthChartData}
+              YAxisDataKey={"online"}
+              chartLabels={["online", "offline"]}
+              tickFormatter={(value) => value + "%"}
             />
           }
         />
@@ -76,25 +56,9 @@ const SystemHealthPage = () => {
         <div className="mt-4">
           <ReportTable
             dataPerPage={7}
-            data={activeUserGrowthTableData.data}
-            headings={[
-              "S.N.",
-              "Business Name",
-              "Industry Type",
-              "Subs. Status",
-              "Plan",
-              "Reg. Date",
-              "Country",
-            ]}
-            dataKeys={[
-              "_id",
-              "businessName",
-              "industryType",
-              "subStatus",
-              "plan",
-              "regDate",
-              "country",
-            ]}
+            data={systemHealthTableData}
+            headings={["Month", "Online (%)", "Offline (%)"]}
+            dataKeys={["month", "online", "offline"]}
           />
         </div>
       </ReportsLayout>

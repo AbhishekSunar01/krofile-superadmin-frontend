@@ -63,7 +63,7 @@ const ReportTable = ({
       <Table className="h-[300px] w-full">
         <TableHeader>
           <TableRow>
-            <TableHead>SL No</TableHead>{" "}
+            <TableHead>SL No</TableHead>
             {headings.map((heading) => (
               <TableHead key={heading}>{heading}</TableHead>
             ))}
@@ -74,11 +74,10 @@ const ReportTable = ({
             <TableRow key={index}>
               <TableCell>
                 {(currentPage - 1) * rowsPerPage + index + 1}
-              </TableCell>{" "}
-              {/* Displaying the serial number */}
+              </TableCell>
+
               {dataKeys.map((data, index) => (
                 <TableCell key={index}>
-                  {/* Dynamically display the value based on the heading. If it doesn't exist in the item, show a default value */}
                   {item[data] !== undefined ? item[data] : "--"}
                 </TableCell>
               ))}
@@ -86,6 +85,7 @@ const ReportTable = ({
           ))}
         </TableBody>
       </Table>
+      
       {/* Pagination Controls */}
       <div className="flex text-end justify-end items-center gap-4 pr-1 mt-2">
         <div className="text-[12px] font-[400] font-inter">
