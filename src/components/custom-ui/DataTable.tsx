@@ -29,6 +29,8 @@ import Pagination from "../user-management/list-table/Pagination";
 import search from "../../assets/svg/Search.svg";
 
 import up from "../../assets/svg/up.svg";
+import up1 from "../../assets/svg/active-up.svg";
+import down1 from "../../assets/svg/active-down.svg";
 import down from "../../assets/svg/down.svg";
 import close from "../../assets/svg/close.svg";
 
@@ -165,13 +167,9 @@ export default function DataTable<T extends DataTableItem>({
             {col.header}
             <span className="ml-2 flex flex-col items-center h-4 w-4 -mt-[4px] cursor-pointer">
               <img
-                src={up}
+                src={column.getIsSorted() === "asc" ? up1 : up}
                 alt="Up"
-                className={`cursor-pointer mb-[2px] ${
-                  column.getIsSorted() === "asc"
-                    ? "opacity-50 text-[#74B5EA]"
-                    : "opacity-100"
-                }`}
+                className={`cursor-pointer mb-[2px]`}
                 onClick={() => column.toggleSorting(false)}
                 style={{
                   pointerEvents:
@@ -179,13 +177,9 @@ export default function DataTable<T extends DataTableItem>({
                 }}
               />
               <img
-                src={down}
+                src={column.getIsSorted() === "desc" ? down1 : down}
                 alt="Down"
-                className={`cursor-pointer ${
-                  column.getIsSorted() === "desc"
-                    ? "opacity-50 text-[#74B5EA]"
-                    : "opacity-100"
-                }`}
+                className={`cursor-pointer`}
                 onClick={() => column.toggleSorting(true)}
                 style={{
                   pointerEvents:
@@ -332,7 +326,7 @@ export default function DataTable<T extends DataTableItem>({
                       </div>
 
                       <div
-                        className="bg-[#DF0C3D] rounded-[12px] flex items-center justify-center p-2 cursor-pointer min-w-[100px]"
+                        className="bg-destructive rounded-[12px] flex items-center justify-center p-2 cursor-pointer min-w-[100px]"
                         onClick={handleRemoveAllFilters}
                       >
                         Clear All

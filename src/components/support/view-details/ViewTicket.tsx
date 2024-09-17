@@ -18,7 +18,7 @@ import SubmittedMessages from "./Message";
 import { FileWithPreview, SubmittedMessage } from "../../../types/type";
 
 import "react-quill/dist/quill.snow.css";
-import RichTextEditor from "./RichTextEditor";
+import RichTextEditor from "../../custom-ui/RichTextEditor";
 
 const TicketDetails: React.FC<ViewTicketProps> = ({
   data,

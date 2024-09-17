@@ -5,7 +5,7 @@ import cross from "../../../assets/svg/cross.svg";
 import arrowRight from "../../../assets/svg/arrow-right.svg";
 import krofileLogo from "../../../assets/images/krofile-logo.png";
 import { MoreVertical } from "lucide-react";
-import RichTextEditor from "./RichTextEditor";
+import RichTextEditor from "../../custom-ui/RichTextEditor";
 import {
   DropdownMenu,
   DropdownMenuContent,
