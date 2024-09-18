@@ -106,14 +106,29 @@ const ReportBarChart = ({
             tickLine={false}
             tickMargin={10}
             axisLine={false}
-            tickFormatter={(value) => {
-              const date = new Date(value);
-              return date.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              });
+            // tickFormatter={(value) => {
+            //   const date = new Date(value);
+            //   return date.toLocaleDateString("en-US", {
+            //     month: "short",
+            //     day: "numeric",
+            //   });
+            // }}
+            tickFormatter={(value, index) => {
+              // Display only the first and last date on the X-axis
+              if (index === 0 ) {
+                const date = new Date(value);
+                return date.toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                });
+              }
+              if (index === chartData.length - 1) {
+                return "Today";
+              }
+              return ""; // Hide other tick values
             }}
           />
+
           {/* Tooltip */}
           <ChartTooltip content={<CustomTooltip />} />
 
@@ -130,6 +145,10 @@ const ReportBarChart = ({
           ))}
         </BarChart>
       </ChartContainer>
+      {/* <div className="flex justify-between items-center pl-16">
+        <div>2024-04-05</div>
+        <div>Today</div>
+      </div> */}
       {chartData.length === 0 && (
         <div className="flex w-full h-full items-center justify-center">
           <p className="text-gray-500">No data available</p>

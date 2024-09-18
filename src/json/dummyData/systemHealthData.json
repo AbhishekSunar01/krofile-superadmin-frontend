@@ -24,6 +24,11 @@
       "date": "2024-09-12",
       "online": 80,
       "offline": 20
+    },
+    {
+      "date": "2024-09-12",
+      "online": 80,
+      "offline": 20
     }
   ],
   "growthPercentage": "15"
