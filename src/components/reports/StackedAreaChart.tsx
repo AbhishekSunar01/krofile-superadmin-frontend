@@ -5,6 +5,7 @@ import {
   ChartLegend,
   ChartTooltip,
 } from "../ui/chart";
+import { XAxisTickFormatter } from "../../utils/XAxisTickFormatter";
 
 interface IAreaChartProps {
   chartConfig: ChartConfig;
@@ -142,12 +143,8 @@ const ReportStackedChart = ({
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            tickFormatter={(value) => {
-              const date = new Date(value);
-              return date.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              });
+            tickFormatter={(value, index) => {
+              return XAxisTickFormatter(value, index, chartData);
             }}
           />
 

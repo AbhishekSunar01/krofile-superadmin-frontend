@@ -1,4 +1,5 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { XAxisTickFormatter } from "../../utils/XAxisTickFormatter";
 import {
   ChartConfig,
   ChartContainer,
@@ -30,7 +31,9 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
             className="inline-block w-3 h-3 rounded-full"
             style={{ backgroundColor: entry.color }}
           ></div>
-          <span className="text-sm text-gray-700 capitalize">{entry.value}</span>
+          <span className="text-sm text-gray-700 capitalize">
+            {entry.value}
+          </span>
         </div>
       ))}
     </div>
@@ -106,26 +109,8 @@ const ReportBarChart = ({
             tickLine={false}
             tickMargin={10}
             axisLine={false}
-            // tickFormatter={(value) => {
-            //   const date = new Date(value);
-            //   return date.toLocaleDateString("en-US", {
-            //     month: "short",
-            //     day: "numeric",
-            //   });
-            // }}
             tickFormatter={(value, index) => {
-              // Display only the first and last date on the X-axis
-              if (index === 0 ) {
-                const date = new Date(value);
-                return date.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                });
-              }
-              if (index === chartData.length - 1) {
-                return "Today";
-              }
-              return ""; // Hide other tick values
+              return XAxisTickFormatter(value, index, chartData);
             }}
           />
 
