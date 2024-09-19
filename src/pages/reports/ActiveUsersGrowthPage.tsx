@@ -5,6 +5,7 @@ import ReportTable from "../../components/reports/ReportTable";
 import { ChartConfig } from "../../components/ui/chart";
 import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
 import activeUserGrowthTableData from "../../json/dummyData/activeUserGrowthTableData.json";
+import { formatDate } from "../../utils/formateDate";
 import formatNumberWithCommas from "../../utils/formatNumberWithComma";
 
 interface IChartData {
@@ -15,6 +16,18 @@ interface IChartData {
 const ActiveUsersGrowthPage = () => {
   const activeUserGrowthChartData: IChartData[] =
     activeUserGrowthChartDataJson.chartData;
+
+  const tableData = activeUserGrowthTableData.data.map((data) => {
+    const tableRow = {
+      businessName: data.businessName,
+      industryType: data.industryType,
+      subStatus: data.subStatus,
+      plan: data.plan,
+      regDate: formatDate(data.regDate),
+      country: data.country,
+    };
+    return tableRow;
+  });
 
   const activeUserChartLabels: string[] = ["Count"];
 
@@ -74,7 +87,7 @@ const ActiveUsersGrowthPage = () => {
         <div className="mt-4">
           <ReportTable
             dataPerPage={7}
-            data={activeUserGrowthTableData.data}
+            data={tableData}
             headings={[
               "Business Name",
               "Industry Type",

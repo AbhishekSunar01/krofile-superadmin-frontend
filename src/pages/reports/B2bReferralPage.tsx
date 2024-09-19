@@ -1,8 +1,10 @@
 import ReportAreaChart from "../../components/reports/AreaChart";
 import ReportCard from "../../components/reports/ReportCard";
 import ReportsLayout from "../../components/reports/ReportsLayout";
+import ReportTable from "../../components/reports/ReportTable";
 import { ChartConfig } from "../../components/ui/chart";
 import b2breferralDataJson from "../../json/dummyData/b2breferrals.json";
+import { formatDate } from "../../utils/formateDate";
 import formatNumberWithCommas from "../../utils/formatNumberWithComma";
 
 interface IChartData {
@@ -20,6 +22,17 @@ const B2bReferralPage = () => {
       return chartData;
     }
   );
+
+  const tableData = b2breferralDataJson.data.map((data) => {
+    const tableRow = {
+      referringBusiness: data.referringBusiness,
+      referredBusiness: data.referredBusiness,
+      dateOfReferral: formatDate(data.dateOfReferral),
+      dateOfPurchase: formatDate(data.dateOfPurchase),
+      numberOfReferrals: data.numberOfReferrals,
+    };
+    return tableRow;
+  });
 
   const b2bReferralsLabels: string[] = ["Count"];
 
@@ -74,30 +87,27 @@ const B2bReferralPage = () => {
           }
         />
 
-        {/* <div className="mt-4">
+        <div className="mt-4">
           <ReportTable
+            paginationType="withNumber"
             dataPerPage={7}
-            data={activeUserGrowthTableData.data}
+            data={tableData}
             headings={[
-              "S.N.",
-              "Business Name",
-              "Industry Type",
-              "Subs. Status",
-              "Plan",
-              "Reg. Date",
-              "Country",
+              "Referring Business",
+              "Referred Business",
+              "Date of Referral",
+              "Date of Purchase",
+              "No. of Refferal",
             ]}
             dataKeys={[
-              "_id",
-              "businessName",
-              "industryType",
-              "subStatus",
-              "plan",
-              "regDate",
-              "country",
+              "referringBusiness",
+              "referredBusiness",
+              "dateOfReferral",
+              "dateOfPurchase",
+              "numberOfReferrals",
             ]}
           />
-        </div> */}
+        </div>
       </ReportsLayout>
     </>
   );
