@@ -11,7 +11,15 @@ interface IChartData {
 }
 
 const B2bReferralPage = () => {
-  const b2bReferralChartData: IChartData[] = b2breferralDataJson.chartData;
+  const b2bReferralChartData: IChartData[] = b2breferralDataJson.data.map(
+    (data) => {
+      const chartData = {
+        date: data.dateOfReferral,
+        count: data.numberOfReferrals,
+      };
+      return chartData;
+    }
+  );
 
   const b2bReferralsLabels: string[] = ["Count"];
 

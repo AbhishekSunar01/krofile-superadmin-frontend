@@ -19,6 +19,8 @@ import popularCountriesDataJson from "../../json/dummyData/popularCountriesChart
 import retentionChartDataJson from "../../json/dummyData/retentionGrowthData.json";
 import systemHealthDataJson from "../../json/dummyData/systemHealthData.json";
 import formatNumberWithCommas from "../../utils/formatNumberWithComma";
+import { YAxisNumberTickFormatter } from "../../utils/YAxisNumberTickFormatter";
+import { YAxisPercentageTickFormatter } from "../../utils/YAxisPercentageTickFormatter";
 
 interface IChartData {
   date: string;
@@ -33,7 +35,16 @@ export default function Reports() {
   const churnRateData: IChartData[] = churnRateDataJson.chartData;
   const retentionChartData: IChartData[] = retentionChartDataJson.chartData;
   const systemHealthChartData: IChartData[] = systemHealthDataJson.chartData;
-  const b2bReferralChartData: IChartData[] = b2breferralDataJson.chartData;
+  const b2bReferralChartData: IChartData[] = b2breferralDataJson.data
+    .map((data) => {
+      const chartData = {
+        date: data.dateOfReferral,
+        count: data.numberOfReferrals,
+      };
+      return chartData;
+    })
+    .slice(0, 8);
+
   const popularCountriesChartData = popularCountriesDataJson.chartData;
   const IndustryTableData: Record<string, any>[] = IndustryDataJson.data;
 
@@ -150,7 +161,7 @@ export default function Reports() {
               YAxisDataKey={"count"}
               areaType="natural"
               chartLabels={activeUserChartLabels}
-              tickFormatter={(value) => value / 1000 + "k"}
+              tickFormatter={YAxisNumberTickFormatter}
               gradientColors={{
                 startColor: "#22D1EE66",
                 endColor: "#85EEFF4D",
@@ -196,7 +207,6 @@ export default function Reports() {
           cardTitle="Churn Rate"
           cardLink="/reports/churn-rate"
           growthPercentage={churnRateDataJson.growthPercentage || "0"}
-          // total={findTotal(activeUserGrowthChartData) || 0}
           childrenComponent={
             <ReportAreaChart
               YAxisDataKey="churnrate"
@@ -205,7 +215,7 @@ export default function Reports() {
               XAxisDataKey={"date"}
               areaType="linear"
               chartLabels={churnRateChartLabels}
-              tickFormatter={(value) => value + "%"}
+              tickFormatter={YAxisPercentageTickFormatter}
               gradientColors={{
                 startColor: "#EE222266",
                 endColor: "#FF858500",
@@ -225,7 +235,7 @@ export default function Reports() {
               chartData={systemHealthChartData}
               YAxisDataKey={"online"}
               chartLabels={["online", "offline"]}
-              tickFormatter={(value) => value + "%"}
+              tickFormatter={YAxisPercentageTickFormatter}
             />
           }
         />
@@ -244,7 +254,7 @@ export default function Reports() {
               YAxisDataKey={"count"}
               areaType="natural"
               chartLabels={b2bReferralsLabels}
-              tickFormatter={(value) => value / 1000 + "k"}
+              tickFormatter={YAxisNumberTickFormatter}
               gradientColors={{
                 startColor: "#22D1EE66",
                 endColor: "#85EEFF4D",
