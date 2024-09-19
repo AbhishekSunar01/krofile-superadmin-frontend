@@ -282,7 +282,7 @@ export default function Reports() {
 
         <ReportCard
           cardTitle="Active Users by Industry Type"
-          cardLink="/reports"
+          cardLink="/reports/industry-type"
           growthPercentage={IndustryDataJson.growthPercentage || "0"}
           total={formatNumberWithCommas(findTotal(IndustryTableData)) || 0}
           childrenComponent={

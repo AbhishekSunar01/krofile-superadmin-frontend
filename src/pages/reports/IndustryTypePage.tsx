@@ -1,98 +1,46 @@
-import ReportAreaChart from "../../components/reports/AreaChart";
-import ReportCard from "../../components/reports/ReportCard";
+import GrowthIndicator from "../../assets/svg/growthindicator.svg";
 import ReportsLayout from "../../components/reports/ReportsLayout";
 import ReportTable from "../../components/reports/ReportTable";
-import { ChartConfig } from "../../components/ui/chart";
-import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
-import activeUserGrowthTableData from "../../json/dummyData/activeUserGrowthTableData.json";
-import formatNumberWithCommas from "../../utils/formatNumberWithComma";
-
-interface IChartData {
-  date: string;
-  [key: string]: any; // This allows for any number of additional properties with any type
-}
+import IndustryDataJson from "../../json/dummyData/industryData.json";
 
 const IndustryTypePage = () => {
-  const activeUserGrowthChartData: IChartData[] =
-    activeUserGrowthChartDataJson.chartData;
+  const IndustryTableData: Record<string, any>[] = IndustryDataJson.data;
 
-  const activeUserChartLabels: string[] = ["Count"];
-
-  const activeUserGrowthChartConfig = {
-    count: {
-      label: "Count",
-      color: "hsl(var(--chart-6))",
-    },
-  } satisfies ChartConfig;
-
-  interface ChartData {
-    date: string;
-    [key: string]: number | string; // Allows for dynamic country keys
-  }
-
-  const findTotalSum = (chartData: ChartData[]): number => {
-    return chartData.reduce((totalSum, dataEntry) => {
-      // Loop through each key in the dataEntry object
-      for (const key in dataEntry) {
-        // Skip the "date" key and only sum numerical values (country data)
-        if (key !== "date" && typeof dataEntry[key] === "number") {
-          totalSum += dataEntry[key] as number;
-        }
-      }
-      return totalSum;
-    }, 0); // Initialize the sum to 0
+  const findTotal = (data: Record<string, any>[]): number => {
+    const total = data.reduce((acc: number, curVal: Record<string, any>) => {
+      const count = curVal.count || 0; // Handle cases where count might be undefined
+      return acc + count;
+    }, 0); // Initialize the accumulator to 0
+    return total;
   };
-
   return (
     <>
-      <ReportsLayout activePage="Active Users Growth Chart">
-        <ReportCard
-          growthPercentage={
-            activeUserGrowthChartDataJson.growthPercentage || "0"
-          }
-          total={
-            formatNumberWithCommas(findTotalSum(activeUserGrowthChartData)) || 0
-          }
-          childrenComponent={
-            <ReportAreaChart
-              chartConfig={activeUserGrowthChartConfig}
-              chartData={activeUserGrowthChartData}
-              XAxisDataKey={"date"}
-              YAxisDataKey={"count"}
-              areaType="natural"
-              chartLabels={activeUserChartLabels}
-              tickFormatter={(value) => value / 1000 + "k"}
-              gradientColors={{
-                startColor: "#22D1EE66",
-                endColor: "#85EEFF4D",
-              }}
-              strokeColor="#22D1EE"
-            />
-          }
-        />
-
+      <ReportsLayout activePage="Active Users by Industry Type">
+        <div className="flex select-none justify-start items-center gap-[2px]">
+          <span className="text-[28px] text-[#14181F] font-inter font-[600]">
+            {findTotal(IndustryTableData)}
+          </span>
+          <img
+            src={GrowthIndicator}
+            alt="Growth Indicator"
+            className="inline-block"
+          />
+          <span className="text-[#14181F] text-[12px] font-[500] justify-center items-center inline-block">
+            {IndustryDataJson.growthPercentage !== undefined
+              ? IndustryDataJson.growthPercentage
+              : 0}
+            %&nbsp;
+          </span>
+          <span className="text-[#1E7BC8] text-[12px] font-[400]">
+            vs previous period&nbsp;
+          </span>
+        </div>
         <div className="mt-4">
           <ReportTable
             dataPerPage={7}
-            data={activeUserGrowthTableData.data}
-            headings={[
-              "S.N.",
-              "Business Name",
-              "Industry Type",
-              "Subs. Status",
-              "Plan",
-              "Reg. Date",
-              "Country",
-            ]}
-            dataKeys={[
-              "_id",
-              "businessName",
-              "industryType",
-              "subStatus",
-              "plan",
-              "regDate",
-              "country",
-            ]}
+            data={IndustryTableData}
+            headings={["Industry Type", "Count", "Ratio"]}
+            dataKeys={["industryType", "count", "ratio"]}
             paginationType="withNumber"
           />
         </div>
