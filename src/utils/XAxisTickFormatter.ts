@@ -1,4 +1,7 @@
-export const XAxisTickFormatter = <S extends string | number | Date, T extends { length: number }>(
+export const XAxisTickFormatter = <
+  S extends string | number | Date,
+  T extends { length: number }
+>(
   value: S,
   index: number,
   chartData: T
@@ -13,6 +16,13 @@ export const XAxisTickFormatter = <S extends string | number | Date, T extends {
     });
   }
   if (index === chartData.length - 1) {
+    console.log(
+      "index",
+      chartData,
+      index,
+      "chartdatalength",
+      chartData.length - 1
+    );
     return "Today";
   }
   return ""; // Hide other tick values
