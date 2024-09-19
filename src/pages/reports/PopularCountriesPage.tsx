@@ -1,11 +1,11 @@
-import ReportAreaChart from "../../components/reports/AreaChart";
 import ReportCard from "../../components/reports/ReportCard";
+import ReportLineChart from "../../components/reports/ReportLineChart";
 import ReportsLayout from "../../components/reports/ReportsLayout";
 import ReportTable from "../../components/reports/ReportTable";
 import { ChartConfig } from "../../components/ui/chart";
-import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
-import activeUserGrowthTableData from "../../json/dummyData/activeUserGrowthTableData.json";
+import popularCountriesDataJson from "../../json/dummyData/popularCountriesChartData.json";
 import formatNumberWithCommas from "../../utils/formatNumberWithComma";
+import popularTableData from '../../json/dummyData/popularCountriesData.json';
 
 interface IChartData {
   date: string;
@@ -13,15 +13,22 @@ interface IChartData {
 }
 
 const PopularCountriesPage = () => {
-  const activeUserGrowthChartData: IChartData[] =
-    activeUserGrowthChartDataJson.chartData;
+  const popularCountriesChartData: IChartData[] = popularCountriesDataJson.data;
 
-  const activeUserChartLabels: string[] = ["Count"];
+  const popularCountriesLabels: string[] = ["USA", "UK", "Nepal"]; // Labels for Line Chart
 
-  const activeUserGrowthChartConfig = {
-    count: {
-      label: "Count",
-      color: "hsl(var(--chart-6))",
+  const popularContriesChartConfig = {
+    USA: {
+      label: "USA",
+      color: "#00A81C",
+    },
+    UK: {
+      label: "UK",
+      color: "#DF0C3D",
+    },
+    Nepal: {
+      label: "Nepal",
+      color: "#DB6E00",
     },
   } satisfies ChartConfig;
 
@@ -45,30 +52,19 @@ const PopularCountriesPage = () => {
 
   return (
     <>
-      <ReportsLayout activePage="Active Users Growth Chart">
+      <ReportsLayout activePage="Business acc. to Popular Countries">
         <ReportCard
-          cardTitle="Active Users Growth Chart"
-          cardLink="/reports/active-users-growth"
-          growthPercentage={
-            activeUserGrowthChartDataJson.growthPercentage || "0"
-          }
+          growthPercentage={popularCountriesDataJson.growthPercentage || "0"} // Correct Data
           total={
-            formatNumberWithCommas(findTotalSum(activeUserGrowthChartData)) || 0
-          }
+            formatNumberWithCommas(findTotalSum(popularCountriesChartData)) || 0
+          } // Correct Total Calculation
           childrenComponent={
-            <ReportAreaChart
-              chartConfig={activeUserGrowthChartConfig}
-              chartData={activeUserGrowthChartData}
+            <ReportLineChart
+              chartConfig={popularContriesChartConfig}
+              chartData={popularCountriesChartData} // Correct Data for Popular Countries
               XAxisDataKey={"date"}
-              YAxisDataKey={"count"}
-              areaType="natural"
-              chartLabels={activeUserChartLabels}
-              tickFormatter={(value) => value / 1000 + "k"}
-              gradientColors={{
-                startColor: "#22D1EE66",
-                endColor: "#85EEFF4D",
-              }}
-              strokeColor="#22D1EE"
+              chartLabels={popularCountriesLabels} // Correct Labels for Countries
+              lineType="linear"
             />
           }
         />
@@ -76,24 +72,11 @@ const PopularCountriesPage = () => {
         <div className="mt-4">
           <ReportTable
             dataPerPage={7}
-            data={activeUserGrowthTableData.data}
-            headings={[
-              "S.N.",
-              "Business Name",
-              "Industry Type",
-              "Subs. Status",
-              "Plan",
-              "Reg. Date",
-              "Country",
-            ]}
+            data={popularTableData.data}
+            headings={["Country", "Users"]}
             dataKeys={[
-              "_id",
-              "businessName",
-              "industryType",
-              "subStatus",
-              "plan",
-              "regDate",
               "country",
+              "users",
             ]}
             paginationType="withNumber"
           />

@@ -44,15 +44,14 @@ export default function Reports() {
       return chartData;
     })
     .slice(0, 8);
-
-  const popularCountriesChartData = popularCountriesDataJson.chartData;
+    const popularCountriesChartData: IChartData[] = popularCountriesDataJson.data;
   const IndustryTableData: Record<string, any>[] = IndustryDataJson.data;
 
   const activeUserChartLabels: string[] = ["Count"];
   const retentionChartLabels: string[] = ["retentionrate", "retentiongrowth"];
   const churnRateChartLabels: string[] = ["ChurnRate"];
   const b2bReferralsLabels: string[] = ["Count"];
-  const popularCountriesLabels: string[] = ["usa", "uk", "nepal"]; // Labels for Line Chart
+  const popularCountriesLabels: string[] = ["USA", "UK", "Nepal"]; // Labels for Line Chart
 
   const activeUserGrowthChartConfig = {
     count: {
@@ -98,15 +97,15 @@ export default function Reports() {
   } satisfies ChartConfig;
 
   const popularContriesChartConfig = {
-    usa: {
+    USA: {
       label: "USA",
       color: "#00A81C",
     },
-    uk: {
+    UK: {
       label: "UK",
       color: "#DF0C3D",
     },
-    nepal: {
+    Nepal: {
       label: "Nepal",
       color: "#DB6E00",
     },
@@ -265,7 +264,7 @@ export default function Reports() {
         />
         <ReportCard
           cardTitle="Business acc. to Popular Countries"
-          cardLink="/reports"
+          cardLink="/reports/popular-countries"
           growthPercentage={popularCountriesDataJson.growthPercentage || "0"} // Correct Data
           total={
             formatNumberWithCommas(findTotalSum(popularCountriesChartData)) || 0

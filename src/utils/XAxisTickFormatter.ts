@@ -16,13 +16,6 @@ export const XAxisTickFormatter = <
     });
   }
   if (index === chartData.length - 1) {
-    console.log(
-      "index",
-      chartData,
-      index,
-      "chartdatalength",
-      chartData.length - 1
-    );
     return "Today";
   }
   return ""; // Hide other tick values
