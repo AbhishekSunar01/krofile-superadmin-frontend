@@ -95,6 +95,7 @@ const PopularCountriesPage = () => {
               "regDate",
               "country",
             ]}
+            paginationType="withNumber"
           />
         </div>
       </ReportsLayout>

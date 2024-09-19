@@ -170,6 +170,7 @@ export default function Reports() {
               data={ActiveSubscribersData}
               headings={["Business Name", "Reg. Date", "Subs. Plan"]}
               dataKeys={["businessName", "date", "plan"]}
+              paginationType="withoutNumber"
             />
           }
         />
@@ -230,13 +231,13 @@ export default function Reports() {
         />
         <ReportCard
           cardTitle="B2B Referral"
-          cardLink="/reports"
+          cardLink="/reports/b2b-referral"
           growthPercentage={b2breferralDataJson.growthPercentage || "0"}
           total={
             formatNumberWithCommas(findTotalSum(b2bReferralChartData)) || 0
           }
           childrenComponent={
-            <ReportChart
+            <ReportAreaChart
               chartConfig={b2bReferralChartConfig}
               chartData={b2bReferralChartData}
               XAxisDataKey={"date"}
@@ -281,6 +282,7 @@ export default function Reports() {
               data={IndustryTableData}
               headings={["Industry Type", "Count", "Ratio"]}
               dataKeys={["industryType", "count", "ratio"]}
+              paginationType="withoutNumber"
             />
           }
         />

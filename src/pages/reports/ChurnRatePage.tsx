@@ -41,7 +41,6 @@ const ChurnRatePage = () => {
     <>
       <ReportsLayout activePage="Churn Rate">
         <ReportCard
-          cardTitle="Churn Rate"
           growthPercentage={churnRateDataJson.growthPercentage || "0"}
           childrenComponent={
             <ReportAreaChart
@@ -68,6 +67,7 @@ const ChurnRatePage = () => {
               data={churnRateTableData}
               headings={["Month", "Churn Rate (%)", "Churn Users"]}
               dataKeys={["month", "churnrate", "churnUsers"]}
+              paginationType="withNumber"
             />
           </div>
         </div>

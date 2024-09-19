@@ -47,7 +47,6 @@ const ActiveUsersGrowthPage = () => {
     <>
       <ReportsLayout activePage="Active Users Growth Chart">
         <ReportCard
-          cardTitle="Active Users Growth Chart"
           growthPercentage={
             activeUserGrowthChartDataJson.growthPercentage || "0"
           }
@@ -92,6 +91,7 @@ const ActiveUsersGrowthPage = () => {
               "regDate",
               "country",
             ]}
+            paginationType="withNumber"
           />
         </div>
       </ReportsLayout>

@@ -9,7 +9,7 @@ import {
 } from "../ui/card";
 
 interface IReportCardProps {
-  cardTitle: string;
+  cardTitle?: string;
   cardLink?: string;
   total?: string | number;
   growthPercentage?: string;
@@ -28,7 +28,7 @@ const ReportCard = ({
       <Card className="border col-span-2 h-[470px] select-none">
         <CardHeader>
           <CardTitle className="font-[400] font-inter text-[16px] flex justify-between items-center text-[#14181F] ">
-            <div>{cardTitle}</div>
+            {cardTitle !== undefined && <div>{cardTitle}</div>}
             {cardLink !== undefined && (
               <Link
                 className="text-[#1E7BC8] text-[12px] underline capitalize underline-offset-2"

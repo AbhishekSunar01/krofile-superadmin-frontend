@@ -1,10 +1,8 @@
 import ReportAreaChart from "../../components/reports/AreaChart";
 import ReportCard from "../../components/reports/ReportCard";
 import ReportsLayout from "../../components/reports/ReportsLayout";
-import ReportTable from "../../components/reports/ReportTable";
 import { ChartConfig } from "../../components/ui/chart";
-import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
-import activeUserGrowthTableData from "../../json/dummyData/activeUserGrowthTableData.json";
+import b2breferralDataJson from "../../json/dummyData/b2breferrals.json";
 import formatNumberWithCommas from "../../utils/formatNumberWithComma";
 
 interface IChartData {
@@ -13,12 +11,11 @@ interface IChartData {
 }
 
 const B2bReferralPage = () => {
-  const activeUserGrowthChartData: IChartData[] =
-    activeUserGrowthChartDataJson.chartData;
+  const b2bReferralChartData: IChartData[] = b2breferralDataJson.chartData;
 
-  const activeUserChartLabels: string[] = ["Count"];
+  const b2bReferralsLabels: string[] = ["Count"];
 
-  const activeUserGrowthChartConfig = {
+  const b2bReferralChartConfig = {
     count: {
       label: "Count",
       color: "hsl(var(--chart-6))",
@@ -45,24 +42,20 @@ const B2bReferralPage = () => {
 
   return (
     <>
-      <ReportsLayout activePage="Active Users Growth Chart">
+      <ReportsLayout activePage="B2B Referral">
         <ReportCard
-          cardTitle="Active Users Growth Chart"
-          cardLink="/reports/active-users-growth"
-          growthPercentage={
-            activeUserGrowthChartDataJson.growthPercentage || "0"
-          }
+          growthPercentage={b2breferralDataJson.growthPercentage || "0"}
           total={
-            formatNumberWithCommas(findTotalSum(activeUserGrowthChartData)) || 0
+            formatNumberWithCommas(findTotalSum(b2bReferralChartData)) || 0
           }
           childrenComponent={
             <ReportAreaChart
-              chartConfig={activeUserGrowthChartConfig}
-              chartData={activeUserGrowthChartData}
+              chartConfig={b2bReferralChartConfig}
+              chartData={b2bReferralChartData}
               XAxisDataKey={"date"}
               YAxisDataKey={"count"}
               areaType="natural"
-              chartLabels={activeUserChartLabels}
+              chartLabels={b2bReferralsLabels}
               tickFormatter={(value) => value / 1000 + "k"}
               gradientColors={{
                 startColor: "#22D1EE66",
@@ -73,7 +66,7 @@ const B2bReferralPage = () => {
           }
         />
 
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <ReportTable
             dataPerPage={7}
             data={activeUserGrowthTableData.data}
@@ -96,7 +89,7 @@ const B2bReferralPage = () => {
               "country",
             ]}
           />
-        </div>
+        </div> */}
       </ReportsLayout>
     </>
   );

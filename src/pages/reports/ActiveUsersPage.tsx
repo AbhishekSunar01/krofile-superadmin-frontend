@@ -26,6 +26,7 @@ const ActiveUsersPage = () => {
               "regDate",
               "country",
             ]}
+            paginationType="withNumber"
           />
         </div>
       </ReportsLayout>
