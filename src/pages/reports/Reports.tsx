@@ -19,6 +19,8 @@ import popularCountriesDataJson from "../../json/dummyData/popularCountriesChart
 import retentionChartDataJson from "../../json/dummyData/retentionGrowthData.json";
 import systemHealthDataJson from "../../json/dummyData/systemHealthData.json";
 import formatNumberWithCommas from "../../utils/formatNumberWithComma";
+import { YAxisNumberTickFormatter } from "../../utils/YAxisNumberTickFormatter";
+import { YAxisPercentageTickFormatter } from "../../utils/YAxisPercentageTickFormatter";
 
 interface IChartData {
   date: string;
@@ -33,15 +35,23 @@ export default function Reports() {
   const churnRateData: IChartData[] = churnRateDataJson.chartData;
   const retentionChartData: IChartData[] = retentionChartDataJson.chartData;
   const systemHealthChartData: IChartData[] = systemHealthDataJson.chartData;
-  const b2bReferralChartData: IChartData[] = b2breferralDataJson.chartData;
-  const popularCountriesChartData = popularCountriesDataJson.chartData;
+  const b2bReferralChartData: IChartData[] = b2breferralDataJson.data
+    .map((data) => {
+      const chartData = {
+        date: data.dateOfReferral,
+        count: data.numberOfReferrals,
+      };
+      return chartData;
+    })
+    .slice(0, 8);
+    const popularCountriesChartData: IChartData[] = popularCountriesDataJson.data;
   const IndustryTableData: Record<string, any>[] = IndustryDataJson.data;
 
   const activeUserChartLabels: string[] = ["Count"];
   const retentionChartLabels: string[] = ["retentionrate", "retentiongrowth"];
   const churnRateChartLabels: string[] = ["ChurnRate"];
   const b2bReferralsLabels: string[] = ["Count"];
-  const popularCountriesLabels: string[] = ["usa", "uk", "nepal"]; // Labels for Line Chart
+  const popularCountriesLabels: string[] = ["USA", "UK", "Nepal"]; // Labels for Line Chart
 
   const activeUserGrowthChartConfig = {
     count: {
@@ -87,15 +97,15 @@ export default function Reports() {
   } satisfies ChartConfig;
 
   const popularContriesChartConfig = {
-    usa: {
+    USA: {
       label: "USA",
       color: "#00A81C",
     },
-    uk: {
+    UK: {
       label: "UK",
       color: "#DF0C3D",
     },
-    nepal: {
+    Nepal: {
       label: "Nepal",
       color: "#DB6E00",
     },
@@ -150,7 +160,7 @@ export default function Reports() {
               YAxisDataKey={"count"}
               areaType="natural"
               chartLabels={activeUserChartLabels}
-              tickFormatter={(value) => value / 1000 + "k"}
+              tickFormatter={YAxisNumberTickFormatter}
               gradientColors={{
                 startColor: "#22D1EE66",
                 endColor: "#85EEFF4D",
@@ -170,6 +180,7 @@ export default function Reports() {
               data={ActiveSubscribersData}
               headings={["Business Name", "Reg. Date", "Subs. Plan"]}
               dataKeys={["businessName", "date", "plan"]}
+              paginationType="withoutNumber"
             />
           }
         />
@@ -195,7 +206,6 @@ export default function Reports() {
           cardTitle="Churn Rate"
           cardLink="/reports/churn-rate"
           growthPercentage={churnRateDataJson.growthPercentage || "0"}
-          // total={findTotal(activeUserGrowthChartData) || 0}
           childrenComponent={
             <ReportAreaChart
               YAxisDataKey="churnrate"
@@ -204,7 +214,7 @@ export default function Reports() {
               XAxisDataKey={"date"}
               areaType="linear"
               chartLabels={churnRateChartLabels}
-              tickFormatter={(value) => value + "%"}
+              tickFormatter={YAxisPercentageTickFormatter}
               gradientColors={{
                 startColor: "#EE222266",
                 endColor: "#FF858500",
@@ -224,26 +234,26 @@ export default function Reports() {
               chartData={systemHealthChartData}
               YAxisDataKey={"online"}
               chartLabels={["online", "offline"]}
-              tickFormatter={(value) => value + "%"}
+              tickFormatter={YAxisPercentageTickFormatter}
             />
           }
         />
         <ReportCard
           cardTitle="B2B Referral"
-          cardLink="/reports"
+          cardLink="/reports/b2b-referral"
           growthPercentage={b2breferralDataJson.growthPercentage || "0"}
           total={
             formatNumberWithCommas(findTotalSum(b2bReferralChartData)) || 0
           }
           childrenComponent={
-            <ReportChart
+            <ReportAreaChart
               chartConfig={b2bReferralChartConfig}
               chartData={b2bReferralChartData}
               XAxisDataKey={"date"}
               YAxisDataKey={"count"}
               areaType="natural"
               chartLabels={b2bReferralsLabels}
-              tickFormatter={(value) => value / 1000 + "k"}
+              tickFormatter={YAxisNumberTickFormatter}
               gradientColors={{
                 startColor: "#22D1EE66",
                 endColor: "#85EEFF4D",
@@ -254,7 +264,7 @@ export default function Reports() {
         />
         <ReportCard
           cardTitle="Business acc. to Popular Countries"
-          cardLink="/reports"
+          cardLink="/reports/popular-countries"
           growthPercentage={popularCountriesDataJson.growthPercentage || "0"} // Correct Data
           total={
             formatNumberWithCommas(findTotalSum(popularCountriesChartData)) || 0
@@ -272,7 +282,7 @@ export default function Reports() {
 
         <ReportCard
           cardTitle="Active Users by Industry Type"
-          cardLink="/reports"
+          cardLink="/reports/industry-type"
           growthPercentage={IndustryDataJson.growthPercentage || "0"}
           total={formatNumberWithCommas(findTotal(IndustryTableData)) || 0}
           childrenComponent={
@@ -281,6 +291,7 @@ export default function Reports() {
               data={IndustryTableData}
               headings={["Industry Type", "Count", "Ratio"]}
               dataKeys={["industryType", "count", "ratio"]}
+              paginationType="withoutNumber"
             />
           }
         />

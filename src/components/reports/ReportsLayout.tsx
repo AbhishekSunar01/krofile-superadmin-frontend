@@ -30,7 +30,10 @@ interface IReportsLayoutProps {
 
 const ReportsLayout = ({ children, activePage }: IReportsLayoutProps) => {
   const nav = useNavigate();
-  const [date, setDate] = useState<Date>();
+  const [date, setDate] = useState<{ from: Date | undefined; to: Date | undefined }>({
+    from: undefined,
+    to: undefined,
+  });
   return (
     <>
       <PageLayout title="Reports" description="">
@@ -105,9 +108,9 @@ const ReportsLayout = ({ children, activePage }: IReportsLayoutProps) => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-              <div className="flex justify-center items-center gap-3 text-[14px]">
+              <div className="flex justify-center items-center gap-3 text-[14px] text-[#14181f] font-[400]">
                 <Button variant={"outline"}>
-                  <span>Last 30 Days</span>
+                  <span className="font-[400]">Last 30 Days</span>
                 </Button>
 
                 <Popover>
@@ -115,20 +118,36 @@ const ReportsLayout = ({ children, activePage }: IReportsLayoutProps) => {
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "flex items-center gap-2",
-                        !date && "text-[#14181f]"
+                        "flex items-center gap-2 font-[400]",
+                        !date && "text-[#14181f] font-[400]"
                       )}
                     >
-                      {date ? format(date, "PPP") : <span>Custom Date</span>}
+                      {date?.from ? (
+                        date.to ? (
+                          <>
+                            {format(date.from, "LLL dd, y")} -{" "}
+                            {format(date.to, "LLL dd, y")}
+                          </>
+                        ) : (
+                          format(date.from, "LLL dd, y")
+                        )
+                      ) : (
+                        <span>Custom Date</span>
+                      )}
+                      {/* {date ? format(date, "PPP") : <span>Custom Date</span>} */}
                       <CalendarIcon className="h-[16px] w-[16px]" />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
+                  <PopoverContent
+                    className="w-auto p-0 font-[400]"
+                    align="start"
+                  >
                     <Calendar
-                      mode="single"
-                      selected={date}
-                      onSelect={setDate}
                       initialFocus
+                      mode="range"
+                      selected={date}
+                      onSelect={(range) => setDate({ from: range?.from, to: range?.to })}
+                      numberOfMonths={2}
                     />
                   </PopoverContent>
                 </Popover>
@@ -136,7 +155,7 @@ const ReportsLayout = ({ children, activePage }: IReportsLayoutProps) => {
                 <Button variant={"outline"}>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <div className="flex justify-center items-center gap-2">
+                      <div className="flex justify-center items-center gap-2 font-[400]">
                         <span>Export</span>
                         <CloudUpload />
                       </div>

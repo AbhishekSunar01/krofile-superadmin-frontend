@@ -1,4 +1,5 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { XAxisTickFormatter } from "../../utils/XAxisTickFormatter";
 import {
   ChartConfig,
   ChartContainer,
@@ -30,7 +31,9 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
             className="inline-block w-3 h-3 rounded-full"
             style={{ backgroundColor: entry.color }}
           ></div>
-          <span className="text-sm text-gray-700 capitalize">{entry.value}</span>
+          <span className="text-sm text-gray-700 capitalize">
+            {entry.value}
+          </span>
         </div>
       ))}
     </div>
@@ -106,14 +109,11 @@ const ReportBarChart = ({
             tickLine={false}
             tickMargin={10}
             axisLine={false}
-            tickFormatter={(value) => {
-              const date = new Date(value);
-              return date.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              });
+            tickFormatter={(value, index) => {
+              return XAxisTickFormatter(value, index, chartData);
             }}
           />
+
           {/* Tooltip */}
           <ChartTooltip content={<CustomTooltip />} />
 
@@ -130,6 +130,10 @@ const ReportBarChart = ({
           ))}
         </BarChart>
       </ChartContainer>
+      {/* <div className="flex justify-between items-center pl-16">
+        <div>2024-04-05</div>
+        <div>Today</div>
+      </div> */}
       {chartData.length === 0 && (
         <div className="flex w-full h-full items-center justify-center">
           <p className="text-gray-500">No data available</p>

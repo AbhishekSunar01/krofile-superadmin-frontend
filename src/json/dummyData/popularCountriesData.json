@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "country": "USA",
+      "users": 340
+    },
+    {
+      "country": "India",
+      "users": 300
+    },
+    {
+      "country": "UK",
+      "users": 200
+    },
+    {
+      "country": "Canada",
+      "users": 150
+    },
+    {
+      "country": "Australia",
+      "users": 100
+    },
+    {
+      "country": "Nepal",
+      "users": 50
+    }
+  ],
+  "growthPercentage": "16"
+}

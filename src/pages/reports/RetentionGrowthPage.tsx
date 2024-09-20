@@ -3,7 +3,6 @@ import ReportsLayout from "../../components/reports/ReportsLayout";
 import ReportTable from "../../components/reports/ReportTable";
 import ReportStackedChart from "../../components/reports/StackedAreaChart";
 import { ChartConfig } from "../../components/ui/chart";
-import activeUserGrowthChartDataJson from "../../json/dummyData/activeUserGrowthChartData.json";
 import retentionChartDataJson from "../../json/dummyData/retentionGrowthData.json";
 import { getMonths } from "../../utils/getMonths";
 
@@ -47,11 +46,7 @@ const RetentionGrowthPage = () => {
     <>
       <ReportsLayout activePage="Retention Growth">
         <ReportCard
-          cardTitle="Retention Growth"
-          growthPercentage={
-            activeUserGrowthChartDataJson.growthPercentage || "0"
-          }
-          // total={findTotal(activeUserGrowthChartData) || 0}
+          growthPercentage={retentionChartDataJson.growthPercentage || "0"}
           childrenComponent={
             <ReportStackedChart
               chartConfig={retentionChartConfig}
@@ -68,6 +63,7 @@ const RetentionGrowthPage = () => {
             data={retentionTableData}
             headings={["Month", "Retention Rate (%)", "Retention Growth (%)"]}
             dataKeys={["month", "retentionrate", "retentiongrowth"]}
+            paginationType="withNumber"
           />
         </div>
       </ReportsLayout>

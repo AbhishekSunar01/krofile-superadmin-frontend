@@ -1,4 +1,6 @@
-import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import { XAxisTickFormatter } from "../../utils/XAxisTickFormatter";
+import { YAxisNumberTickFormatter } from "../../utils/YAxisNumberTickFormatter";
 import {
   ChartConfig,
   ChartContainer,
@@ -65,9 +67,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
               className="inline-block w-2 h-2 rounded-full"
               style={{ backgroundColor: entry.color }}
             ></div>
-            <span className="capitalize">
-              {entry.value}
-            </span>
+            <span className="capitalize">{entry.value}</span>
           </div>
         ))}
       </div>
@@ -135,7 +135,7 @@ const ReportLineChart = ({
             tickLine={false}
             axisLine={false}
             tickMargin={24}
-            tickFormatter={(value) => value + ""}
+            tickFormatter={YAxisNumberTickFormatter}
             padding={{ top: 10 }}
             orientation="left"
           />
@@ -146,12 +146,8 @@ const ReportLineChart = ({
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            tickFormatter={(value) => {
-              const date = new Date(value);
-              return date.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              });
+            tickFormatter={(value, index) => {
+              return XAxisTickFormatter(value, index, chartData);
             }}
           />
 

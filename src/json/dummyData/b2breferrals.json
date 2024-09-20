@@ -1,40 +1,144 @@
 {
-  "chartData": [
+  "data": [
     {
-      "date": "2024-09-01",
-      "count": 3000
+      "referringBusiness": "Passage To India",
+      "referredBusiness": "Passage To China",
+      "dateOfReferral": "2024-09-01",
+      "dateOfPurchase": "2024-08-05",
+      "numberOfReferrals": 200
     },
     {
-      "date": "2024-09-02",
-      "count": 3000
+      "referringBusiness": "Nike",
+      "referredBusiness": "Adidas",
+      "dateOfReferral": "2024-08-15",
+      "dateOfPurchase": "2024-08-18",
+      "numberOfReferrals": 150
     },
     {
-      "date": "2024-09-03",
-      "count": 4000
+      "referringBusiness": "Stanford University",
+      "referredBusiness": "MIT",
+      "dateOfReferral": "2024-07-22",
+      "dateOfPurchase": "2024-07-25",
+      "numberOfReferrals": 180
     },
     {
-      "date": "2024-09-04",
-      "count": 3000
+      "referringBusiness": "Apple",
+      "referredBusiness": "Samsung",
+      "dateOfReferral": "2024-06-10",
+      "dateOfPurchase": "2024-06-15",
+      "numberOfReferrals": 160
     },
     {
-      "date": "2024-09-05",
-      "count": 4980
+      "referringBusiness": "Google",
+      "referredBusiness": "Amazon",
+      "dateOfReferral": "2024-05-20",
+      "dateOfPurchase": "2024-05-25",
+      "numberOfReferrals": 170
     },
     {
-      "date": "2024-09-06",
-      "count": 2994
+      "referringBusiness": "Facebook",
+      "referredBusiness": "Twitter",
+      "dateOfReferral": "2024-04-13",
+      "dateOfPurchase": "2024-04-16",
+      "numberOfReferrals": 120
     },
     {
-      "date": "2024-09-07",
-      "count": 5300
+      "referringBusiness": "Microsoft",
+      "referredBusiness": "LinkedIn",
+      "dateOfReferral": "2024-03-05",
+      "dateOfPurchase": "2024-03-08",
+      "numberOfReferrals": 100
     },
     {
-      "date": "2024-09-08",
-      "count": 4440
+      "referringBusiness": "Walmart",
+      "referredBusiness": "Costco",
+      "dateOfReferral": "2024-02-14",
+      "dateOfPurchase": "2024-02-19",
+      "numberOfReferrals": 90
     },
     {
-      "date": "2024-09-09",
-      "count": 4340
+      "referringBusiness": "Maybelline",
+      "referredBusiness": "L'Oréal",
+      "dateOfReferral": "2024-01-30",
+      "dateOfPurchase": "2024-02-03",
+      "numberOfReferrals": 130
+    },
+    {
+      "referringBusiness": "Tesla",
+      "referredBusiness": "Lamborghini",
+      "dateOfReferral": "2024-01-15",
+      "dateOfPurchase": "2024-01-20",
+      "numberOfReferrals": 110
+    },
+    {
+      "referringBusiness": "McDonald's",
+      "referredBusiness": "Starbucks",
+      "dateOfReferral": "2024-01-01",
+      "dateOfPurchase": "2024-01-05",
+      "numberOfReferrals": 105
+    },
+    {
+      "referringBusiness": "H&M",
+      "referredBusiness": "Zara",
+      "dateOfReferral": "2023-12-25",
+      "dateOfPurchase": "2023-12-30",
+      "numberOfReferrals": 95
+    },
+    {
+      "referringBusiness": "Pepsi",
+      "referredBusiness": "Coca-Cola",
+      "dateOfReferral": "2023-12-10",
+      "dateOfPurchase": "2023-12-15",
+      "numberOfReferrals": 85
+    },
+    {
+      "referringBusiness": "Sony",
+      "referredBusiness": "Nintendo",
+      "dateOfReferral": "2023-11-28",
+      "dateOfPurchase": "2023-12-03",
+      "numberOfReferrals": 80
+    },
+    {
+      "referringBusiness": "Hyundai",
+      "referredBusiness": "Toyota",
+      "dateOfReferral": "2023-11-15",
+      "dateOfPurchase": "2023-11-20",
+      "numberOfReferrals": 75
+    },
+    {
+      "referringBusiness": "Adidas",
+      "referredBusiness": "Puma",
+      "dateOfReferral": "2023-10-30",
+      "dateOfPurchase": "2023-11-04",
+      "numberOfReferrals": 140
+    },
+    {
+      "referringBusiness": "Visa",
+      "referredBusiness": "MasterCard",
+      "dateOfReferral": "2023-10-15",
+      "dateOfPurchase": "2023-10-20",
+      "numberOfReferrals": 135
+    },
+    {
+      "referringBusiness": "BBC",
+      "referredBusiness": "CNN",
+      "dateOfReferral": "2023-09-30",
+      "dateOfPurchase": "2023-10-05",
+      "numberOfReferrals": 125
+    },
+    {
+      "referringBusiness": "Canon",
+      "referredBusiness": "Nikon",
+      "dateOfReferral": "2023-09-15",
+      "dateOfPurchase": "2023-09-20",
+      "numberOfReferrals": 115
+    },
+    {
+      "referringBusiness": "Uber",
+      "referredBusiness": "Lyft",
+      "dateOfReferral": "2023-09-01",
+      "dateOfPurchase": "2023-09-06",
+      "numberOfReferrals": 165
     }
   ],
   "growthPercentage": "26"

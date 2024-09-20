@@ -5,6 +5,8 @@ import {
   ChartLegend,
   ChartTooltip,
 } from "../ui/chart";
+import { XAxisTickFormatter } from "../../utils/XAxisTickFormatter";
+import { YAxisPercentageTickFormatter } from "../../utils/YAxisPercentageTickFormatter";
 
 interface IAreaChartProps {
   chartConfig: ChartConfig;
@@ -120,7 +122,7 @@ const ReportStackedChart = ({
             tickLine={false}
             axisLine={false}
             tickMargin={24}
-            tickFormatter={(value) => value + "%"}
+            tickFormatter={YAxisPercentageTickFormatter}
             padding={{ top: 10 }}
             orientation="left"
           />
@@ -142,12 +144,8 @@ const ReportStackedChart = ({
             tickLine={false}
             axisLine={false}
             tickMargin={8}
-            tickFormatter={(value) => {
-              const date = new Date(value);
-              return date.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              });
+            tickFormatter={(value, index) => {
+              return XAxisTickFormatter(value, index, chartData);
             }}
           />
 
