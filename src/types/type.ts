@@ -187,3 +187,8 @@ export type ReferralPeriodManagementState = {
   setBody: (body: string) => void;
   setTagLine: (tagLine: string) => void;
 };
+
+export type AdminLogin = {
+  email: string;
+  password: string;
+};
