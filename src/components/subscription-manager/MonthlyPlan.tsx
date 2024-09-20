@@ -10,6 +10,8 @@ import { Input } from "../ui/input";
 import { useForm, FormProvider } from "react-hook-form";
 import { usePlanStore } from "../../app/store";
 import Plan from "./subscriptionPlan/Plan";
+import { Checkbox } from "../ui/checkbox";
+import { Switch } from "../ui/switch";
 
 export default function MonthlyPlan() {
   const form = useForm();
@@ -101,6 +103,178 @@ export default function MonthlyPlan() {
             />
           );
         })}
+
+        <div className="space-y-2">
+          <div className="flex gap-2 items-center">
+            <Switch />
+            <div className="font-medium">Basic</div>
+          </div>
+          <div className="flex w-full gap-4">
+            <FormField
+              render={({ field }) => (
+                <FormItem className="w-3/5">
+                  <FormLabel>Monthly Price</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Here" {...field} disabled />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              name={""}
+            />
+            <FormField
+              render={({ field }) => (
+                <FormItem className="w-3/5">
+                  <FormLabel>Discount</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter Here"
+                      {...field}
+                      disabled={individualDiscountsDisabled}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              name={""}
+            />
+            <FormField
+              render={({ field }) => (
+                <FormItem className="w-3/5">
+                  <FormLabel>Final Price</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Here" {...field} disabled />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              name={""}
+            />
+          </div>
+          <div className="flex items-center pt-2 space-x-2">
+            <Checkbox id="terms" />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Contact Us
+            </label>
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div className="flex gap-2 items-center">
+            <Switch />
+            <div className="font-medium">Basic</div>
+          </div>
+          <div className="flex w-full gap-4">
+            <FormField
+              render={({ field }) => (
+                <FormItem className="w-3/5">
+                  <FormLabel>Monthly Price</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Here" {...field} disabled />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              name={""}
+            />
+            <FormField
+              render={({ field }) => (
+                <FormItem className="w-3/5">
+                  <FormLabel>Discount</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter Here"
+                      {...field}
+                      disabled={individualDiscountsDisabled}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              name={""}
+            />
+            <FormField
+              render={({ field }) => (
+                <FormItem className="w-3/5">
+                  <FormLabel>Final Price</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Here" {...field} disabled />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              name={""}
+            />
+          </div>
+          <div className="flex items-center pt-2 space-x-2">
+            <Checkbox id="terms" />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Contact Us
+            </label>
+          </div>
+        </div>
+        <div className="space-y-2">
+          <div className="flex gap-2 items-center">
+            <Switch />
+            <div className="font-medium">Basic</div>
+          </div>
+          <div className="flex w-full gap-4">
+            <FormField
+              render={({ field }) => (
+                <FormItem className="w-3/5">
+                  <FormLabel>Monthly Price</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Here" {...field} disabled />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              name={""}
+            />
+            <FormField
+              render={({ field }) => (
+                <FormItem className="w-3/5">
+                  <FormLabel>Discount</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter Here"
+                      {...field}
+                      disabled={individualDiscountsDisabled}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              name={""}
+            />
+            <FormField
+              render={({ field }) => (
+                <FormItem className="w-3/5">
+                  <FormLabel>Final Price</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Here" {...field} disabled />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              name={""}
+            />
+          </div>
+          <div className="flex items-center pt-2 space-x-2">
+            <Checkbox id="terms" />
+            <label
+              htmlFor="terms"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Contact Us
+            </label>
+          </div>
+        </div>
       </form>
     </FormProvider>
   );

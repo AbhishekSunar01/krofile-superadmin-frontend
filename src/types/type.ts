@@ -163,3 +163,27 @@ export interface NotificationType {
   startDate: string;
   expirationDate: string;
 }
+
+export type TrialPeriodManagementState = {
+  trialPeriod: number;
+  title: string;
+  body: string;
+  tagLine: string;
+  setTrialPeriod: (trialPeriod: number) => void;
+  setTitle: (title: string) => void;
+  setBody: (body: string) => void;
+  setTagLine: (tagLine: string) => void;
+};
+
+export type ReferralPeriodManagementState = {
+  getReferralMonths: number;
+  giveReferralMonths: number;
+  title: string;
+  body: string;
+  tagLine: string;
+  setGetReferralMonths: (months: number) => void;
+  setGiveReferralMonths: (months: number) => void;
+  setTitle: (title: string) => void;
+  setBody: (body: string) => void;
+  setTagLine: (tagLine: string) => void;
+};

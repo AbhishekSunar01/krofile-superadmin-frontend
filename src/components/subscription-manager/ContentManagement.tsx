@@ -1,56 +1,24 @@
-import { Textarea } from "../ui/textarea";
-import TextFormatter from "../custom-ui/TextFormatter";
-import { useEffect } from "react";
-import { useContentManagementStore } from "../../app/store";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import ReferralPeriodManagement from "./content-management/ReferralPeriodManagement";
+import TrailPeriodManagement from "./content-management/TrialPeriodManagement";
 
 export default function ContentManagement() {
-  const { title, body, tagLine, setTitle, setBody, setTagLine } =
-    useContentManagementStore();
-
-  useEffect(() => {
-    console.log("Title: ", title);
-    console.log("Body: ", body);
-    console.log("Tagline: ", tagLine);
-  }, [title, body, tagLine]);
-
   return (
-    <div className="flex flex-col items-start w-full gap-4">
-      <div className="w-full px-3 font-medium">
-        Title <span className="text-destructive">*</span>
-        <div className="p-4 mt-2 rounded-lg border flex flex-col items-start gap-2">
-          <TextFormatter />
-          <Textarea
-            className="bg-mainBg h-16"
-            placeholder="Type here..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className="w-full px-3 font-medium">
-        Body <span className="text-destructive">*</span>
-        <div className="p-4 mt-2 rounded-lg border flex flex-col items-start gap-2">
-          <TextFormatter />
-          <Textarea
-            className="bg-mainBg h-16"
-            placeholder="Type here..."
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className="w-full px-3 font-medium">
-        Tagline <span className="text-destructive">*</span>
-        <div className="p-4 mt-2 rounded-lg border flex flex-col items-start gap-2">
-          <TextFormatter />
-          <Textarea
-            className="bg-mainBg h-16"
-            placeholder="Type here..."
-            value={tagLine}
-            onChange={(e) => setTagLine(e.target.value)}
-          />
-        </div>
-      </div>
-    </div>
+    <Tabs defaultValue="trial" className="w-full">
+      <TabsList className="grid grid-cols-2 border w-fit h-full p-2">
+        <TabsTrigger className="py-2 px-2" value="trial">
+          Trial Period Management
+        </TabsTrigger>
+        <TabsTrigger className="py-2 px-2" value="referral">
+          Referral Period Management
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="trial">
+        <TrailPeriodManagement />
+      </TabsContent>
+      <TabsContent value="referral">
+        <ReferralPeriodManagement />
+      </TabsContent>
+    </Tabs>
   );
 }
