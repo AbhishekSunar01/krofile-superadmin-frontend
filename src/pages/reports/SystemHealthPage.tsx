@@ -40,7 +40,6 @@ const SystemHealthPage = () => {
     <>
       <ReportsLayout activePage="System Health">
         <ReportCard
-          cardTitle="System Health"
           growthPercentage={systemHealthDataJson.growthPercentage || "0"}
           childrenComponent={
             <ReportBarChart
@@ -59,6 +58,7 @@ const SystemHealthPage = () => {
             data={systemHealthTableData}
             headings={["Month", "Online (%)", "Offline (%)"]}
             dataKeys={["month", "online", "offline"]}
+            paginationType="withNumber"
           />
         </div>
       </ReportsLayout>

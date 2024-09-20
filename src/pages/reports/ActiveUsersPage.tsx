@@ -1,15 +1,30 @@
 import ReportsLayout from "../../components/reports/ReportsLayout";
 import ReportTable from "../../components/reports/ReportTable";
 import activeUserGrowthTableData from "../../json/dummyData/activeUserGrowthTableData.json";
+import { formatDate } from "../../utils/formateDate";
 
 const ActiveUsersPage = () => {
+  const tableData = activeUserGrowthTableData.data.map((data) => {
+    const tableRow = {
+      businessName: data.businessName,
+      industryType: data.industryType,
+      subStatus: data.subStatus,
+      plan: data.plan,
+      regDate: formatDate(data.regDate),
+      country: data.country,
+    };
+    return tableRow;
+  }
+)
+
+
   return (
     <>
       <ReportsLayout activePage="Active Users">
         <div className="mt-4">
           <ReportTable
             dataPerPage={7}
-            data={activeUserGrowthTableData.data}
+            data={tableData}
             headings={[
               "Business Name",
               "Industry Type",
@@ -26,6 +41,7 @@ const ActiveUsersPage = () => {
               "regDate",
               "country",
             ]}
+            paginationType="withNumber"
           />
         </div>
       </ReportsLayout>
