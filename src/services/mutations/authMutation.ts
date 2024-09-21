@@ -14,13 +14,6 @@ export function useLoginUser() {
     }) => {
       return handleLogin({ email, password });
     },
-
-    onSuccess: (data) => {
-      if (data) {
-        localStorage.setItem("token", data.data.token.access_token);
-        localStorage.setItem("refreshToken", data.data.token.refresh_token);
-      }
-    },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data.message || "Something went wrong");

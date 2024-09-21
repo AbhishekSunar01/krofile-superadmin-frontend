@@ -5,6 +5,7 @@ import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "../../components/ui/button";
 import { Checkbox } from "../../components/ui/checkbox";
@@ -19,6 +20,7 @@ import {
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
 import { useLoginUser } from "../../services/mutations/authMutation";
+import { useLoggedInUser } from "../../services/queries/authQuery";
 import { LoginSchema } from "../../utils/schemas/authSchema";
 
 export default function LoginForm() {
@@ -41,6 +43,8 @@ export default function LoginForm() {
   });
 
   const { isError, error, mutateAsync } = useLoginUser();
+  const getLoggedInUserDataQuery = useLoggedInUser();
+
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     setLoading(true);
 
@@ -52,7 +56,17 @@ export default function LoginForm() {
     if (data.status === "success") {
       setLoading(false);
       setErrorMessage("");
-      return nav("/auth/2fa");
+      console.log("data", getLoggedInUserDataQuery.data);
+      if (getLoggedInUserDataQuery.data?.user.enable2fa === true) {
+        return nav("/auth/2fa");
+      } else {
+        toast.success("You are logged in successfully");
+        localStorage.setItem("token", data.data.token.access_token);
+        localStorage.setItem("refreshToken", data.data.token.refresh_token);
+        return nav("/dashboard");
+      }
+    } else {
+      setLoading(false);
     }
     setLoading(false);
   }

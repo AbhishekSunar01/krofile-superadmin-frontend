@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 
 import { axiosInstance } from ".";
-import { ILoginResponse } from "../../types/authTypes";
+import { ILoggedInUserResponse, ILoginResponse } from "../../types/authTypes";
 
 export const handleLogin = async ({
   email,
@@ -19,6 +19,21 @@ export const handleLogin = async ({
     return response.data;
   } catch (error) {
     console.error("Error in handleLogin function:", error);
+    throw error;
+  }
+};
+
+export const getLoggedinUser = async () => {
+  try {
+    const response: AxiosResponse<ILoggedInUserResponse> =
+      await axiosInstance.get<ILoggedInUserResponse>(`auth/me`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+    return response.data;
+  } catch (error) {
+    console.error("Error in getLoggedinUser function:", error);
     throw error;
   }
 };
