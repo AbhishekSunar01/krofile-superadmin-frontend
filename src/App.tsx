@@ -28,6 +28,7 @@ import B2bReferralPage from "./pages/reports/B2bReferralPage";
 import ChurnRatePage from "./pages/reports/ChurnRatePage";
 import IndustryTypePage from "./pages/reports/IndustryTypePage";
 import PopularCountriesPage from "./pages/reports/PopularCountriesPage";
+import ProtectedRoute from "./pages/reports/ProtectedRouteComponent";
 import RetentionGrowthPage from "./pages/reports/RetentionGrowthPage";
 import SystemHealthPage from "./pages/reports/SystemHealthPage";
 
@@ -51,7 +52,16 @@ export default function App() {
           <Route path="/auth/set-new-password" element={<NewPassword />} />
           <Route path="/auth/2fa" element={<TwoFAPage />} />
         </Route>
-        <Route path="/" element={<MainLayout />}>
+        {/* Protected route */}
+
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user-management" element={<UserManagement />} />
           <Route path="/reports" element={<Reports />} />
