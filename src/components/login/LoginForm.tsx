@@ -171,7 +171,7 @@ export default function LoginForm() {
                   {errorMessage && (
                     <motion.div
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: 100 }}
+                      animate={{ opacity: 1 }}
                       transition={{
                         duration: 0.5,
                       }}

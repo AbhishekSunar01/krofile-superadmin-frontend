@@ -1,14 +1,10 @@
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
-import { Input } from "../ui/input";
-import { useForm } from "react-hook-form"; // Import the 'useForm' hook
 import ConfigurePlanTable from "./subscriptionPlan/ConfigurePlanTable";
 import { useState } from "react";
 
 export default function Configure() {
   const [addNewData, setAddNewData] = useState(false); // Declare the 'addNewData' variable using the 'useState' hook
-  const form = useForm(); // Declare the 'form' variable using the 'useForm' hook
 
   const handleAddNewData = () => {
     setAddNewData(true);
@@ -16,46 +12,6 @@ export default function Configure() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <div className="font-medium">Grow with Referrals & Free Trials</div>
-        <div className="muted">
-          Earn rewards by referring new users and offer extended trial periods
-          to help them explore Krofile.
-        </div>
-      </div>
-      <div>
-        <Form {...form}>
-          <form className="w-full flex gap-4">
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem className="w-1/2">
-                  <FormLabel>Referral Bonus Days</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter the referral days" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem className="w-1/2">
-                  <FormLabel>Trial Period</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter the free trial period"
-                      {...field}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form>
-      </div>
       <div>
         <div className="font-medium">Configure Your Plan</div>
         <div className="muted">
