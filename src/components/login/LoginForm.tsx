@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
+import Cookies from "js-cookie";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -21,6 +22,7 @@ import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
 import { useLoginUser } from "../../services/mutations/authMutation";
 import { useLoggedInUser } from "../../services/queries/authQuery";
+import useAuthStore from "../../store/authStore";
 import { LoginSchema } from "../../utils/schemas/authSchema";
 
 export default function LoginForm() {
@@ -28,6 +30,8 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const nav = useNavigate();
+
+  const { setAccessToken } = useAuthStore();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -52,7 +56,7 @@ export default function LoginForm() {
       email: values.email,
       password: values.password,
     });
-    // console.log("data from mutateasync", data);
+
     if (data.status === "success") {
       setLoading(false);
       setErrorMessage("");
@@ -60,9 +64,12 @@ export default function LoginForm() {
       if (getLoggedInUserDataQuery.data?.user.enable2fa === true) {
         return nav("/auth/2fa");
       } else {
+        // const setAccessToken = useAuthStore((state) => state.setAccessToken);
+        // setAccessToken(data.data.token.access_token);
+        setAccessToken(data.data.token.access_token);
         toast.success("You are logged in successfully");
-        localStorage.setItem("token", data.data.token.access_token);
-        localStorage.setItem("refreshToken", data.data.token.refresh_token);
+        Cookies.set("accessToken", data.data.token.access_token);
+        Cookies.set("refreshToken", data.data.token.refresh_token);
         return nav("/dashboard");
       }
     } else {

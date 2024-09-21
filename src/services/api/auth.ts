@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 
 import { axiosInstance } from ".";
 import { ILoggedInUserResponse, ILoginResponse } from "../../types/authTypes";
+import Cookies from "js-cookie";
 
 export const handleLogin = async ({
   email,
@@ -28,7 +29,7 @@ export const getLoggedinUser = async () => {
     const response: AxiosResponse<ILoggedInUserResponse> =
       await axiosInstance.get<ILoggedInUserResponse>(`auth/me`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${Cookies.get("accessToken")}`,
         },
       });
     return response.data;

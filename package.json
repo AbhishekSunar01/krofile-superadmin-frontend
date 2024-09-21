@@ -46,6 +46,7 @@
     "framer-motion": "^11.3.28",
     "html-react-parser": "^5.1.16",
     "input-otp": "^1.2.4",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.428.0",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
@@ -65,6 +66,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.2.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
