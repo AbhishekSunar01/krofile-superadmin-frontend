@@ -18,7 +18,7 @@ import {
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
-import { useLoginUser } from "../../services/mutations/loginMutation";
+import { useLoginUser } from "../../services/mutations/authMutation";
 import { LoginSchema } from "../../utils/schemas/authSchema";
 
 export default function LoginForm() {
