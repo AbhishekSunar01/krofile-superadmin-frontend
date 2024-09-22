@@ -85,7 +85,7 @@ import { usePostTrialContent } from "../services/mutations/subscriptionMutation"
 import { useTrialPeriodManagementStore } from "../store/subscriptionManagerStore"; // Import the store
 
 export default function SubscriptionManager() {
-  const [activeTab, setActiveTab] = useState("Content Management");
+  const [, setActiveTab] = useState("Content Management");
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
   // Use the mutation hook for submitting trial content
