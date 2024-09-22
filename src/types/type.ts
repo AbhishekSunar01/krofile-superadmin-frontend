@@ -175,6 +175,13 @@ export type TrialPeriodManagementState = {
   setTagLine: (tagLine: string) => void;
 };
 
+export type TrialPeriodData = {
+  trialPeriod: number;
+  title: string;
+  body: string;
+  tagLine: string;
+};
+
 export type ReferralPeriodManagementState = {
   getReferralMonths: number;
   giveReferralMonths: number;

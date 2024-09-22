@@ -2,7 +2,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import ReferralPeriodManagement from "./content-management/ReferralPeriodManagement";
 import TrailPeriodManagement from "./content-management/TrialPeriodManagement";
 
-export default function ContentManagement() {
+type setSaveEnabled = (value: boolean) => void;
+
+export default function ContentManagement({
+  setSaveEnabled,
+}: {
+  setSaveEnabled: setSaveEnabled;
+}) {
   return (
     <Tabs defaultValue="trial" className="w-full">
       <TabsList className="grid grid-cols-2 border w-fit h-full p-2">
@@ -14,7 +20,7 @@ export default function ContentManagement() {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="trial">
-        <TrailPeriodManagement />
+        <TrailPeriodManagement setSaveEnabled={setSaveEnabled} />
       </TabsContent>
       <TabsContent value="referral">
         <ReferralPeriodManagement />

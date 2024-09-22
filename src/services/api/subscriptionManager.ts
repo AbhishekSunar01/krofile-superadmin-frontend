@@ -1,7 +1,7 @@
 import { axiosInstance } from ".";
-import { TrialPeriodManagementState } from "../../types/type";
+import { TrialPeriodData } from "../../types/type";
 
-export const postTrialContent = async (data: TrialPeriodManagementState) => {
+export const postTrialContent = async (data: TrialPeriodData) => {
   try {
     return await axiosInstance.post("subscription/trial", data);
   } catch (error) {
