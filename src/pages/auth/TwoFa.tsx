@@ -1,5 +1,5 @@
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SuccessGif from "../../assets/png/Login Images/fasuccess.gif";
 import MailImage from "../../assets/png/Login Images/MailImage.svg";
@@ -7,10 +7,19 @@ import BackButton from "../../components/custom-ui/BackButton";
 import EmailVerify from "../../components/login/EmailVerify";
 import { Button } from "../../components/ui/button";
 import { cn } from "../../lib/utils";
+import useAuthStore from "../../store/authStore";
 
 const TwoFAPage = () => {
   const [verified, setVerified] = useState(false);
   const [loading] = useState(false);
+
+  const { setIsVerified } = useAuthStore();
+
+  useEffect(() => {
+    if (verified === true) {
+      setIsVerified(true);
+    }
+  }, [verified]);
 
   return (
     <div className="flex justify-center min-h-[84vh] items-center">

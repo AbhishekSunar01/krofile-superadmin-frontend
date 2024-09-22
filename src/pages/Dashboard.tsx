@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ActiveSubscriberChart,
   Chart,
   CountryTable,
-  TotalCustomers,
   DashboardTable,
+  TotalCustomers,
 } from "../components/dashboard/index";
 import activeSubscribers from "../json/dummyData/activeSubscribers.json";
-import userGrowth from "../json/dummyData/userGrowth.json";
-import referral from "../json/dummyData/referralData.json";
 import country from "../json/dummyData/countryTable.json";
-import PageLayout from "../layout/PageLayout";
 import industryData from "../json/dummyData/industryType.json";
+import referral from "../json/dummyData/referralData.json";
 import subscribersData from "../json/dummyData/subscribersData.json";
+import userGrowth from "../json/dummyData/userGrowth.json";
+import PageLayout from "../layout/PageLayout";
+import { useLoggedInUser } from "../services/queries/authQuery";
+import useAuthStore from "../store/authStore";
+import { useUserStore } from "../store/userStore";
 
 export default function Dashboard() {
   const [dashboardHasData, setDashboardHasData] = useState(false);
@@ -20,6 +24,23 @@ export default function Dashboard() {
   const handleButtonClick = () => {
     setDashboardHasData(true);
   };
+  const navigate = useNavigate();
+
+  const { data } = useLoggedInUser();
+  console.log("data", data);
+  const { setLoggedInUserData } = useUserStore();
+  const { isVerified, setIsVerified } = useAuthStore();
+
+  useEffect(() => {
+    if (data !== undefined) {
+      setLoggedInUserData(data.user);
+      if (data?.user.enable2fa === true && isVerified === false) {
+        return navigate("/auth/2fa");
+      } else {
+        setIsVerified(true);
+      }
+    }
+  }, [data, isVerified]);
 
   return (
     <PageLayout

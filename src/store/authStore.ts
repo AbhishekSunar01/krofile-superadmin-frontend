@@ -5,6 +5,8 @@ interface AuthState {
   accessToken: string | null;
   setAccessToken: (accessToken: string) => void;
   clearAccessToken: () => void;
+  isVerified: boolean;
+  setIsVerified: (isVerified: boolean) => void;
 }
 
 const useAuthStore = create<AuthState>()(
@@ -12,7 +14,9 @@ const useAuthStore = create<AuthState>()(
     persist(
       (set) => ({
         accessToken: null,
+        isVerified: false,
         setAccessToken: (accessToken) => set({ accessToken }),
+        setIsVerified: (isVerified) => set({ isVerified }),
         clearAccessToken: () => set({ accessToken: null }),
       }),
       {

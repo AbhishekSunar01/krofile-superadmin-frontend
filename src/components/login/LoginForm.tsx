@@ -21,7 +21,6 @@ import {
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
 import { useLoginUser } from "../../services/mutations/authMutation";
-import { useLoggedInUser } from "../../services/queries/authQuery";
 import useAuthStore from "../../store/authStore";
 import { LoginSchema } from "../../utils/schemas/authSchema";
 
@@ -47,7 +46,8 @@ export default function LoginForm() {
   });
 
   const { isError, error, mutateAsync } = useLoginUser();
-  const getLoggedInUserDataQuery = useLoggedInUser();
+
+  // const getLoggedInUserDataQuery = useLoggedInUser();
 
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     setLoading(true);
@@ -60,18 +60,18 @@ export default function LoginForm() {
     if (data.status === "success") {
       setLoading(false);
       setErrorMessage("");
-      console.log("data", getLoggedInUserDataQuery.data);
-      if (getLoggedInUserDataQuery.data?.user.enable2fa === true) {
-        return nav("/auth/2fa");
-      } else {
-        // const setAccessToken = useAuthStore((state) => state.setAccessToken);
-        // setAccessToken(data.data.token.access_token);
-        setAccessToken(data.data.token.access_token);
-        toast.success("You are logged in successfully");
-        Cookies.set("accessToken", data.data.token.access_token);
-        Cookies.set("refreshToken", data.data.token.refresh_token);
-        return nav("/dashboard");
-      }
+      // console.log("data", getLoggedInUserDataQuery.data);
+      // if (getLoggedInUserDataQuery.data?.user.enable2fa === true) {
+      //   return nav("/auth/2fa");
+      // } else {
+      // const setAccessToken = useAuthStore((state) => state.setAccessToken);
+      // setAccessToken(data.data.token.access_token);
+      setAccessToken(data.data.token.access_token);
+      toast.success("You are logged in successfully");
+      Cookies.set("accessToken", data.data.token.access_token);
+      Cookies.set("refreshToken", data.data.token.refresh_token);
+      return nav("/dashboard");
+      // }
     } else {
       setLoading(false);
     }
