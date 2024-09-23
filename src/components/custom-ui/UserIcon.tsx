@@ -42,7 +42,7 @@ import {
 
 export default function UserIcon() {
   const { clearAccessToken, setIsVerified } = useAuthStore();
-  const { clearLoggedInUserData } = useUserStore();
+  const { clearLoggedInUserData, userData } = useUserStore();
   return (
     <div className="flex items-center justify-center gap-2">
       <div>
@@ -140,7 +140,7 @@ export default function UserIcon() {
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="username">Username</Label>
                       <Input
-                        defaultValue={"Santosh Phaiju"}
+                        defaultValue={userData?.name}
                         type="text"
                         placeholder="Username"
                         className="h-[45px]"
@@ -149,7 +149,7 @@ export default function UserIcon() {
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="email">Email Address</Label>
                       <Input
-                        defaultValue={"santoshphaiju@gmail.com"}
+                        defaultValue={userData?.email}
                         type="email"
                         placeholder="Email"
                         className="h-[45px]"
@@ -160,7 +160,7 @@ export default function UserIcon() {
                       <Label htmlFor="role">Role</Label>
                       <Select
                         onValueChange={() => console.log("hi")}
-                        defaultValue="admin"
+                        defaultValue={userData?.role.toLowerCase()}
                       >
                         <SelectTrigger
                           id="role"
