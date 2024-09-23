@@ -29,19 +29,11 @@ import { useUserStore } from "../../store/userStore";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 
 export default function UserIcon() {
   const { userData } = useUserStore();
   const logout = useAuthStore((state) => state.logout);
+  console.log("userData", userData);
   return (
     <div className="flex items-center justify-center gap-2">
       <div>
@@ -50,7 +42,13 @@ export default function UserIcon() {
             <div className="flex justify-center items-center gap-2">
               <Avatar className="rounded-xl select-none">
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
+                  src={
+                    userData.avatar !== undefined
+                      ? "https://d3dh87jzi8usm4.cloudfront.net/" +
+                        userData.avatar
+                      : "https://github.com/shadcn.png"
+                  }
+                  className="border rounded-full object-cover object-top bg-white"
                   alt="@shadcn"
                 />
                 <AvatarFallback>CN</AvatarFallback>
@@ -106,8 +104,13 @@ export default function UserIcon() {
                       <div className="h-auto flex justify-between items-center border px-[14px] py-[10px] rounded-[8px] ">
                         <div className="flex items-center justify-start gap-2">
                           <img
-                            className="h-[40px] w-[40px]"
-                            src={UserProfileImage}
+                            className="h-[40px] w-[40px] rounded-full object-cover object-top bg-white border"
+                            src={
+                              userData.avatar !== undefined
+                                ? "https://d3dh87jzi8usm4.cloudfront.net/" +
+                                  userData.avatar
+                                : UserProfileImage
+                            }
                             alt="image of the user"
                           />
                           <div className="font-[500] text-[16px]">
@@ -151,31 +154,19 @@ export default function UserIcon() {
                         defaultValue={userData?.email}
                         type="email"
                         placeholder="Email"
-                        className="h-[45px]"
+                        className="h-[45px] text-gray-500 select-none cursor-not-allowed"
+                        readOnly
                       />
                     </div>
 
                     <div className="flex flex-col gap-2">
                       <Label htmlFor="role">Role</Label>
-                      <Select
-                        onValueChange={() => console.log("hi")}
+                      <Input
                         defaultValue={userData?.role.toLowerCase()}
-                      >
-                        <SelectTrigger
-                          id="role"
-                          name="role"
-                          className="w-full h-[40px] py-[22px]"
-                        >
-                          <SelectValue placeholder="Choose Role" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            <SelectLabel>Choose Role</SelectLabel>
-                            <SelectItem value="admin">Admin</SelectItem>
-                            <SelectItem value="support">Support</SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
+                        type="text"
+                        className="h-[45px] select-none text-gray-500 cursor-not-allowed"
+                        readOnly
+                      />
                     </div>
                   </div>
                   <hr />

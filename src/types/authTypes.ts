@@ -16,6 +16,7 @@ export interface ILoggedInUserData {
     lastUsedAt: string;
     _id: string;
   }[];
+  avatar?: string;
 }
 
 export interface ILoggedInUserDataState
