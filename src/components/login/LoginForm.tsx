@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
-import Cookies from "js-cookie";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -30,8 +29,6 @@ export default function LoginForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const nav = useNavigate();
 
-  const { setAccessToken } = useAuthStore();
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -46,8 +43,7 @@ export default function LoginForm() {
   });
 
   const { isError, error, mutateAsync } = useLoginUser();
-
-  // const getLoggedInUserDataQuery = useLoggedInUser();
+  const setTokens = useAuthStore((state) => state.setTokens);
 
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     setLoading(true);
@@ -57,22 +53,16 @@ export default function LoginForm() {
       password: values.password,
     });
 
+    const { access_token, refresh_token } = data.data.token;
+
     if (data.status === "success") {
       setLoading(false);
       setErrorMessage("");
-      // console.log("data", getLoggedInUserDataQuery.data);
-      // if (getLoggedInUserDataQuery.data?.user.enable2fa === true) {
-      //   return nav("/auth/2fa");
-      // } else {
-      // const setAccessToken = useAuthStore((state) => state.setAccessToken);
-      // setAccessToken(data.data.token.access_token);
-      setAccessToken(data.data.token.access_token);
+      setTokens(access_token, refresh_token);
       toast.success("You are logged in successfully");
-      Cookies.set("accessToken", data.data.token.access_token);
-      Cookies.set("refreshToken", data.data.token.refresh_token);
       return nav("/dashboard");
-      // }
     } else {
+      toast.error(data.data.message);
       setLoading(false);
     }
     setLoading(false);

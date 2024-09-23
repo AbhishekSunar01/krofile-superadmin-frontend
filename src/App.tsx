@@ -28,7 +28,7 @@ import B2bReferralPage from "./pages/reports/B2bReferralPage";
 import ChurnRatePage from "./pages/reports/ChurnRatePage";
 import IndustryTypePage from "./pages/reports/IndustryTypePage";
 import PopularCountriesPage from "./pages/reports/PopularCountriesPage";
-import ProtectedRoute from "./pages/reports/ProtectedRouteComponent";
+import ProtectedRoute from "./components/custom-ui/ProtectedRouteComponent";
 import RetentionGrowthPage from "./pages/reports/RetentionGrowthPage";
 import SystemHealthPage from "./pages/reports/SystemHealthPage";
 

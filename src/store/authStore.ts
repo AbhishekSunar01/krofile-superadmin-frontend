@@ -1,35 +1,42 @@
+import Cookies from "js-cookie";
+import { toast } from "sonner";
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
 
+// Define types for your Zustand store
 interface AuthState {
   accessToken: string | null;
-  setAccessToken: (accessToken: string) => void;
-  clearAccessToken: () => void;
-  isVerified: boolean;
-  setIsVerified: (isVerified: boolean) => void;
+  refreshToken: string | null;
+  setTokens: (accessToken: string, refreshToken: string) => void;
+  logout: () => void;
 }
 
-const useAuthStore = create<AuthState>()(
-  devtools(
-    persist(
-      (set) => ({
-        accessToken: null,
-        isVerified: false,
-        setAccessToken: (accessToken) => set({ accessToken }),
-        setIsVerified: (isVerified) => set({ isVerified }),
-        clearAccessToken: () => set({ accessToken: null }),
-      }),
-      {
-        name: "auth-storage",
-      }
-    )
-  )
-);
+// Create the Zustand store
+const useAuthStore = create<AuthState>((set) => ({
+  accessToken: Cookies.get("access_token") || null,
+  refreshToken: Cookies.get("refresh_token") || null,
+
+  // Method to set new tokens
+  setTokens: (accessToken: string, refreshToken: string) => {
+    Cookies.set("access_token", accessToken, {
+      secure: true,
+      sameSite: "Strict",
+    });
+    Cookies.set("refresh_token", refreshToken, {
+      secure: true,
+      sameSite: "Strict",
+    });
+
+    set({ accessToken, refreshToken });
+  },
+
+  // Logout method to clear tokens
+  logout: () => {
+    Cookies.remove("access_token");
+    Cookies.remove("refresh_token");
+    localStorage.clear();
+    toast.success("You are logged out!");
+    set({ accessToken: null, refreshToken: null });
+  },
+}));
 
 export default useAuthStore;
-
-// export const useAuthStore = create<AuthState>((set) => ({
-//   token: null,
-//   setToken: (token) => set({ token }),
-//   clearToken: () => set({ token: null }),
-// }));

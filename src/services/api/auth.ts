@@ -1,7 +1,8 @@
 import { AxiosResponse } from "axios";
 
 import Cookies from "js-cookie";
-import { axiosInstance } from ".";
+import axiosInstance from ".";
+
 
 export interface ILoginResponse {
   status: string;

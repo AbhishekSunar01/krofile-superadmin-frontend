@@ -24,7 +24,6 @@ import DeleteImage from "../../assets/svg/deleteimage.svg";
 import ImageAdd from "../../assets/svg/imageadd.svg";
 import UserProfileImage from "../../assets/svg/userprofile.svg";
 
-import Cookies from "js-cookie";
 import useAuthStore from "../../store/authStore";
 import { useUserStore } from "../../store/userStore";
 import { Button } from "../ui/button";
@@ -41,8 +40,8 @@ import {
 } from "../ui/select";
 
 export default function UserIcon() {
-  const { clearAccessToken, setIsVerified } = useAuthStore();
-  const { clearLoggedInUserData, userData } = useUserStore();
+  const { userData } = useUserStore();
+  const logout = useAuthStore((state) => state.logout);
   return (
     <div className="flex items-center justify-center gap-2">
       <div>
@@ -224,12 +223,11 @@ export default function UserIcon() {
                   "relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-gray-100 hover:bg-gray-100 cursor-pointer  data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                 )}
                 onClick={() => {
-                  Cookies.remove("accessToken");
-                  Cookies.remove("refreshToken");
-                  clearAccessToken();
-                  clearLoggedInUserData();
-                  setIsVerified(false);
-                  localStorage.clear();
+                  // Cookies.remove("accessToken");
+                  // Cookies.remove("refreshToken");
+                  // clearLoggedInUserData();
+                  // localStorage.clear();
+                  logout();
                 }}
               >
                 <LogOut className="mr-2 h-4 w-4" />

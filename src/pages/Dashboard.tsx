@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLayoutEffect, useState } from "react";
 import {
   ActiveSubscriberChart,
   Chart,
@@ -15,7 +14,6 @@ import subscribersData from "../json/dummyData/subscribersData.json";
 import userGrowth from "../json/dummyData/userGrowth.json";
 import PageLayout from "../layout/PageLayout";
 import { useLoggedInUser } from "../services/queries/authQuery";
-import useAuthStore from "../store/authStore";
 import { useUserStore } from "../store/userStore";
 
 export default function Dashboard() {
@@ -24,23 +22,16 @@ export default function Dashboard() {
   const handleButtonClick = () => {
     setDashboardHasData(true);
   };
-  const navigate = useNavigate();
 
   const { data } = useLoggedInUser();
-  console.log("data", data);
-  const { setLoggedInUserData } = useUserStore();
-  const { isVerified, setIsVerified } = useAuthStore();
 
-  useEffect(() => {
+  const { setLoggedInUserData } = useUserStore();
+
+  useLayoutEffect(() => {
     if (data !== undefined) {
       setLoggedInUserData(data.user);
-      if (data?.user.enable2fa === true && isVerified === false) {
-        return navigate("/auth/2fa");
-      } else {
-        setIsVerified(true);
-      }
     }
-  }, [data, isVerified]);
+  }, [data]);
 
   return (
     <PageLayout
