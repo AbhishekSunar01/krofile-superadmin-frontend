@@ -46,7 +46,6 @@
     "framer-motion": "^11.3.28",
     "html-react-parser": "^5.1.16",
     "input-otp": "^1.2.4",
-    "js-cookie": "^3.0.5",
     "lucide-react": "^0.428.0",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
