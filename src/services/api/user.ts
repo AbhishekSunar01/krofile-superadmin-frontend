@@ -16,3 +16,15 @@ export const updateUser = async ({ formData }: { formData: FormData }) => {
     throw error;
   }
 };
+
+export const removeAvatar = async () => {
+  try {
+    const response: AxiosResponse = await axiosInstance("/auth/remove-avatar", {
+      method: "PATCH",
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error in removeAvatar function:", error);
+    throw error;
+  }
+};

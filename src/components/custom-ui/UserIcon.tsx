@@ -32,8 +32,11 @@ import { Label } from "../ui/label";
 
 import React, { useState } from "react";
 import { toast } from "sonner";
-import { useUserUpdate } from "../../services/mutations/userMutation";
-import { IUpdatedUserData } from "../../types/authTypes";
+import {
+  useRemoveAvatar,
+  useUserUpdate,
+} from "../../services/mutations/userMutation";
+import { IRemoveUserAvatarData, IUpdatedUserData } from "../../types/authTypes";
 
 export default function UserIcon() {
   const { userData, setLoggedInUserData } = useUserStore();
@@ -47,6 +50,7 @@ export default function UserIcon() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const { mutateAsync } = useUserUpdate();
+  const removeAvatar = useRemoveAvatar();
 
   // 2. Define a submit handler.
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -180,7 +184,7 @@ export default function UserIcon() {
                                 onChange={(e) => {
                                   const file = e.target.files?.[0];
                                   if (file) {
-                                    setAvatarPreview(URL.createObjectURL(file)); // Generate preview URL for the selected file
+                                    setAvatarPreview(URL.createObjectURL(file));
                                   }
                                   setAvatarFile(e.target.files?.[0]);
                                 }}
@@ -191,6 +195,19 @@ export default function UserIcon() {
                               src={DeleteImage}
                               alt="delete image"
                               className="h-[24px] w-[24px] cursor-pointer"
+                              onClick={async () => {
+                                const data: IRemoveUserAvatarData =
+                                  await removeAvatar.mutateAsync();
+                                if (data.status === "success") {
+                                  toast.success(
+                                    "Your avatar has been removed successfully"
+                                  );
+                                  setIsDialogOpen(false);
+                                  setLoggedInUserData(data.user);
+                                  setAvatarPreview(null);
+                                  setAvatarFile(undefined);
+                                }
+                              }}
                             />
                           </div>
                         </div>

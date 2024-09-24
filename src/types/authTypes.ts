@@ -1,5 +1,3 @@
-
-
 export interface ILoggedInUserData {
   _id: string;
   name: string;
@@ -19,15 +17,20 @@ export interface ILoggedInUserData {
   avatar?: string;
 }
 
-export interface ILoggedInUserDataState
- {
-  userData: ILoggedInUserData,
+export interface ILoggedInUserDataState {
+  userData: ILoggedInUserData;
   setLoggedInUserData: (userData: ILoggedInUserData) => void;
   clearLoggedInUserData: () => void;
- }
+}
 
- export interface IUpdatedUserData {
+export interface IUpdatedUserData {
   status: string;
   message: string;
   user: ILoggedInUserData;
- }
+}
+
+export interface IRemoveUserAvatarData {
+  status: string;
+  message: string;
+  user: ILoggedInUserData;
+}
