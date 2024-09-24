@@ -38,7 +38,7 @@ import { IUpdatedUserData } from "../../types/authTypes";
 export default function UserIcon() {
   const { userData, setLoggedInUserData } = useUserStore();
   const logout = useAuthStore((state) => state.logout);
-  // console.log("userData", userData);
+
   const [avatarFile, setAvatarFile] = useState<File | undefined>();
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null); // State to hold the preview URL
   const [updatedName, setUpdatedName] = useState<string | undefined>(
@@ -60,14 +60,10 @@ export default function UserIcon() {
     if (updatedName) {
       formData.append("name", updatedName);
     }
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
-    console.log("avatar", avatarFile);
 
     // 3. Call the mutation function with the form data.
     const data: IUpdatedUserData = await mutateAsync({ formData });
-    console.log("data", data);
+
     if (data.status === "success") {
       toast.success("Your details have been updated successfully");
       setLoggedInUserData(data.user);
