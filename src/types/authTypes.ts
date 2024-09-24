@@ -25,3 +25,9 @@ export interface ILoggedInUserDataState
   setLoggedInUserData: (userData: ILoggedInUserData) => void;
   clearLoggedInUserData: () => void;
  }
+
+ export interface IUpdatedUserData {
+  status: string;
+  message: string;
+  user: ILoggedInUserData;
+ }

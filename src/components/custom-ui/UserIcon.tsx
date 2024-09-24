@@ -30,10 +30,51 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
+import React, { useState } from "react";
+import { toast } from "sonner";
+import { useUserUpdate } from "../../services/mutations/userMutation";
+import { IUpdatedUserData } from "../../types/authTypes";
+
 export default function UserIcon() {
-  const { userData } = useUserStore();
+  const { userData, setLoggedInUserData } = useUserStore();
   const logout = useAuthStore((state) => state.logout);
-  console.log("userData", userData);
+  // console.log("userData", userData);
+  const [avatarFile, setAvatarFile] = useState<File | undefined>();
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null); // State to hold the preview URL
+  const [updatedName, setUpdatedName] = useState<string | undefined>(
+    userData?.name
+  );
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const { mutateAsync } = useUserUpdate();
+
+  // 2. Define a submit handler.
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData();
+
+    if (avatarFile) {
+      formData.append("avatar", avatarFile);
+    }
+
+    if (updatedName) {
+      formData.append("name", updatedName);
+    }
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
+    console.log("avatar", avatarFile);
+
+    // 3. Call the mutation function with the form data.
+    const data: IUpdatedUserData = await mutateAsync({ formData });
+    console.log("data", data);
+    if (data.status === "success") {
+      toast.success("Your details have been updated successfully");
+      setLoggedInUserData(data.user);
+      setIsDialogOpen(false);
+    }
+  }
+
   return (
     <div className="flex items-center justify-center gap-2">
       <div>
@@ -44,8 +85,7 @@ export default function UserIcon() {
                 <AvatarImage
                   src={
                     userData.avatar !== undefined
-                      ? "https://d3dh87jzi8usm4.cloudfront.net/" +
-                        userData.avatar
+                      ? userData.avatar
                       : "https://github.com/shadcn.png"
                   }
                   className="border rounded-full object-cover object-top bg-white"
@@ -60,7 +100,7 @@ export default function UserIcon() {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-48" align="end">
             <DropdownMenuGroup>
-              <Dialog>
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger
                   onClick={(event) => event.stopPropagation()}
                   asChild
@@ -98,97 +138,125 @@ export default function UserIcon() {
                     </div>
                   </DialogHeader>
                   <hr />
-                  <div className="grid gap-4 py-4">
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="lastPasswordChanged">Image</Label>
-                      <div className="h-auto flex justify-between items-center border px-[14px] py-[10px] rounded-[8px] ">
-                        <div className="flex items-center justify-start gap-2">
-                          <img
-                            className="h-[40px] w-[40px] rounded-full object-cover object-top bg-white border"
-                            src={
-                              userData.avatar !== undefined
-                                ? "https://d3dh87jzi8usm4.cloudfront.net/" +
-                                  userData.avatar
-                                : UserProfileImage
-                            }
-                            alt="image of the user"
-                          />
-                          <div className="font-[500] text-[16px]">
-                            Santosh Phaiju
+
+                  <form onSubmit={onSubmit}>
+                    <div className="grid gap-4 py-4">
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="image">Image</Label>
+                        <div className="h-auto flex justify-between items-center border px-[14px] py-[10px] rounded-[8px] ">
+                          <div className="flex items-center justify-start gap-2">
+                            {avatarPreview === null && (
+                              <img
+                                className="h-[40px] w-[40px] rounded-full object-cover object-top bg-white border"
+                                src={
+                                  userData.avatar !== undefined
+                                    ? userData.avatar
+                                    : UserProfileImage
+                                }
+                                alt="image of the user"
+                              />
+                            )}
+                            {avatarPreview && (
+                              <img
+                                src={avatarPreview}
+                                alt="Avatar Preview"
+                                className="h-[40px] w-[40px] rounded-full object-cover object-top bg-white border"
+                              />
+                            )}
+                            <div className="font-[500] text-[16px]">
+                              {userData.name ?? "Santosh Phaiju"}
+                            </div>
+                          </div>
+                          <div className="flex icons justify-center items-center gap-2">
+                            <Label htmlFor="userImage">
+                              <img
+                                className="h-[24px] w-[24px] cursor-pointer"
+                                src={ImageAdd}
+                                alt="image of the user"
+                              />
+                            </Label>
+                            <div>
+                              <Input
+                                type="file"
+                                id="userImage"
+                                name="avatar"
+                                className="hidden"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0];
+                                  if (file) {
+                                    setAvatarPreview(URL.createObjectURL(file)); // Generate preview URL for the selected file
+                                  }
+                                  setAvatarFile(e.target.files?.[0]);
+                                }}
+                              />
+                            </div>
+
+                            <img
+                              src={DeleteImage}
+                              alt="delete image"
+                              className="h-[24px] w-[24px] cursor-pointer"
+                            />
                           </div>
                         </div>
-                        <div className="flex icons justify-center items-center gap-2">
-                          <label htmlFor="userImage">
-                            <img
-                              className="h-[24px] w-[24px] cursor-pointer"
-                              src={ImageAdd}
-                              alt="image of the user"
-                            />
-                          </label>
-                          <input
-                            type="file"
-                            id="userImage"
-                            name="userImage"
-                            className="hidden"
-                          />
-                          <img
-                            src={DeleteImage}
-                            alt="delete image"
-                            className="h-[24px] w-[24px] cursor-pointer"
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="username">Username</Label>
+                        <div>
+                          <Input
+                            name="name"
+                            id="name"
+                            value={updatedName}
+                            onChange={(
+                              e: React.ChangeEvent<HTMLInputElement>
+                            ) => {
+                              const target = e.target as HTMLInputElement;
+                              setUpdatedName(target.value);
+                            }}
+                            className="h-[45px]"
                           />
                         </div>
                       </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="username">Username</Label>
-                      <Input
-                        defaultValue={userData?.name}
-                        type="text"
-                        placeholder="Username"
-                        className="h-[45px]"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input
-                        defaultValue={userData?.email}
-                        type="email"
-                        placeholder="Email"
-                        className="h-[45px] text-gray-500 select-none cursor-not-allowed"
-                        readOnly
-                      />
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="email">Email Address</Label>
+                        <Input
+                          defaultValue={userData?.email}
+                          type="email"
+                          placeholder="Email"
+                          className="h-[45px] text-gray-500 select-none cursor-not-allowed"
+                          readOnly
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="role">Role</Label>
+                        <Input
+                          defaultValue={userData?.role.toLowerCase()}
+                          type="text"
+                          className="h-[45px] select-none text-gray-500 cursor-not-allowed"
+                          readOnly
+                        />
+                      </div>
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="role">Role</Label>
-                      <Input
-                        defaultValue={userData?.role.toLowerCase()}
-                        type="text"
-                        className="h-[45px] select-none text-gray-500 cursor-not-allowed"
-                        readOnly
-                      />
-                    </div>
-                  </div>
-                  <hr />
-                  <DialogFooter>
-                    <div className="flex justify-between w-full gap-2">
-                      <DialogClose asChild>
-                        <Button
-                          className="w-[50%]"
-                          variant={"outline"}
-                          size={"lg"}
-                          type="submit"
-                        >
-                          Cancel
-                        </Button>
-                      </DialogClose>
-                      <DialogClose asChild>
-                        <Button className="w-[50%]" type="submit" size={"lg"}>
+                    <hr />
+                    <DialogFooter>
+                      <div className="flex justify-between w-full gap-2">
+                        <DialogClose asChild>
+                          <Button
+                            className="w-[50%]"
+                            variant={"outline"}
+                            size={"lg"}
+                          >
+                            Cancel
+                          </Button>
+                        </DialogClose>
+
+                        <Button className="w-[50%]" size={"lg"}>
                           Update & Save
                         </Button>
-                      </DialogClose>
-                    </div>
-                  </DialogFooter>
+                      </div>
+                    </DialogFooter>
+                  </form>
                 </DialogContent>
               </Dialog>
             </DropdownMenuGroup>
