@@ -1,18 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
-import { handleLogin, handleLogout } from "../api/auth";
+import { removeAvatar, updateUser } from "../api/user";
 
-export function useLoginUser() {
+export function useUserUpdate() {
   return useMutation({
     mutationFn: async ({
-      email,
-      password,
+      formData,
     }: {
-      email: string;
-      password: string;
+      formData: FormData
     }) => {
-      return handleLogin({ email, password });
+      return updateUser({ formData });
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
@@ -22,13 +20,17 @@ export function useLoginUser() {
   });
 }
 
-export function logoutUser() {
+
+
+export function useRemoveAvatar() {
   return useMutation({
-    mutationFn: async () => handleLogout,
+    mutationFn: async() => {
+      return removeAvatar();
+    },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
         toast.error(error.response?.data.message || "Something went wrong");
       }
     },
-  });
+  })
 }

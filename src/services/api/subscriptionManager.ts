@@ -1,4 +1,4 @@
-import { axiosInstance } from ".";
+import axiosInstance from ".";
 import { TrialPeriodManagementState } from "../../types/type";
 
 export const postTrialContent = async (data: TrialPeriodManagementState) => {

@@ -44,7 +44,7 @@ export default function Reports() {
       return chartData;
     })
     .slice(0, 8);
-    const popularCountriesChartData: IChartData[] = popularCountriesDataJson.data;
+  const popularCountriesChartData: IChartData[] = popularCountriesDataJson.data;
   const IndustryTableData: Record<string, any>[] = IndustryDataJson.data;
 
   const activeUserChartLabels: string[] = ["Count"];
