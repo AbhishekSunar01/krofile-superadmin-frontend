@@ -1,10 +1,23 @@
 import background from "../../../assets/png/Gradient background.png";
-import { useTrialPeriodManagementStore } from "../../../store/subscriptionManagerStore";
 import FinalPreviewTable from "../FinalPreviewTable";
 import parse from "html-react-parser";
+import { useGetTrialContent } from "../../../services/queries/useSubscriptionQuery";
 
 export default function TrialPeriodManagement() {
-  const { title, body, tagLine } = useTrialPeriodManagementStore();
+  const { data, isLoading, isError } = useGetTrialContent();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading trial content.</div>;
+  }
+
+  // Ensure data is available and is a string before parsing
+  const title = data?.title ? parse(data.title) : "No title available";
+  const body = data?.body ? parse(data.body) : "No body available";
+  const tagLine = data?.tagLine ? parse(data.tagLine) : "No tagline available";
 
   return (
     <div
@@ -18,8 +31,8 @@ export default function TrialPeriodManagement() {
       className="p-11 flex flex-col items-center gap-6 mt-6"
     >
       <div className="flex flex-col items-center">
-        <h2>{parse(title)}</h2>
-        <p className="text-center">{parse(body)}</p>
+        <h2>{title}</h2>
+        <p className="text-center">{body}</p>
       </div>
 
       <div className="flex justify-center w-[40%] relative h-[72px]">
@@ -34,7 +47,7 @@ export default function TrialPeriodManagement() {
         </div>
       </div>
 
-      <div>{parse(tagLine)}</div>
+      <div>{tagLine}</div>
 
       <FinalPreviewTable />
     </div>

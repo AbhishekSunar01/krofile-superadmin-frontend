@@ -165,7 +165,7 @@ export interface NotificationType {
 }
 
 export type TrialPeriodManagementState = {
-  trialPeriod: number;
+  days: number;
   title: string;
   body: string;
   tagLine: string;
@@ -176,15 +176,16 @@ export type TrialPeriodManagementState = {
 };
 
 export type TrialPeriodData = {
-  trialPeriod: number;
+  data?: any;
+  days: number;
   title: string;
   body: string;
   tagLine: string;
 };
 
 export type ReferralPeriodManagementState = {
-  getReferralMonths: number;
-  giveReferralMonths: number;
+  getReferralMonth: number;
+  giveReferralMonth: number;
   title: string;
   body: string;
   tagLine: string;
@@ -193,6 +194,14 @@ export type ReferralPeriodManagementState = {
   setTitle: (title: string) => void;
   setBody: (body: string) => void;
   setTagLine: (tagLine: string) => void;
+};
+
+export type ReferralPeriodData = {
+  getReferralMonth: number;
+  giveReferralMonth: number;
+  title: string;
+  body: string;
+  tagLine: string;
 };
 
 export type AdminLogin = {

@@ -10,11 +10,11 @@ export const useTrialPeriodManagementStore =
     devtools(
       persist(
         (set) => ({
-          trialPeriod: 0,
+          days: 0,
           title: "",
           body: "",
           tagLine: "",
-          setTrialPeriod: (trialPeriod: number) => set({ trialPeriod }),
+          setTrialPeriod: (days: number) => set({ days }),
           setTitle: (title: string) => set({ title }),
           setBody: (body: string) => set({ body }),
           setTagLine: (tagLine: string) => set({ tagLine }),
@@ -31,15 +31,15 @@ export const useReferralPeriodManagementStore =
     devtools(
       persist(
         (set) => ({
-          getReferralMonths: 0,
-          giveReferralMonths: 0,
+          getReferralMonth: 0,
+          giveReferralMonth: 0,
           title: "",
           body: "",
           tagLine: "",
           setGetReferralMonths: (months: number) =>
-            set({ getReferralMonths: months }),
+            set({ getReferralMonth: months }),
           setGiveReferralMonths: (months: number) =>
-            set({ giveReferralMonths: months }),
+            set({ giveReferralMonth: months }),
           setTitle: (title: string) => set({ title }),
           setBody: (body: string) => set({ body }),
           setTagLine: (tagLine: string) => set({ tagLine }),

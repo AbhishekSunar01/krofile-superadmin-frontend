@@ -1,18 +1,20 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import {
   ActiveSubscriberChart,
   Chart,
   CountryTable,
-  TotalCustomers,
   DashboardTable,
+  TotalCustomers,
 } from "../components/dashboard/index";
 import activeSubscribers from "../json/dummyData/activeSubscribers.json";
-import userGrowth from "../json/dummyData/userGrowth.json";
-import referral from "../json/dummyData/referralData.json";
 import country from "../json/dummyData/countryTable.json";
-import PageLayout from "../layout/PageLayout";
 import industryData from "../json/dummyData/industryType.json";
+import referral from "../json/dummyData/referralData.json";
 import subscribersData from "../json/dummyData/subscribersData.json";
+import userGrowth from "../json/dummyData/userGrowth.json";
+import PageLayout from "../layout/PageLayout";
+import { useLoggedInUser } from "../services/queries/authQuery";
+import { useUserStore } from "../store/userStore";
 
 export default function Dashboard() {
   const [dashboardHasData, setDashboardHasData] = useState(false);
@@ -20,6 +22,16 @@ export default function Dashboard() {
   const handleButtonClick = () => {
     setDashboardHasData(true);
   };
+
+  const { data } = useLoggedInUser();
+
+  const { setLoggedInUserData } = useUserStore();
+
+  useLayoutEffect(() => {
+    if (data !== undefined) {
+      setLoggedInUserData(data.user);
+    }
+  }, [data]);
 
   return (
     <PageLayout

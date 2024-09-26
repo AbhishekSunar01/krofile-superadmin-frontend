@@ -12,7 +12,7 @@ export default function TrailPeriodManagement({
   setSaveEnabled: setSaveEnabled;
 }) {
   const {
-    trialPeriod,
+    days,
     title,
     body,
     tagLine,
@@ -25,7 +25,7 @@ export default function TrailPeriodManagement({
   // Enable save button when any of the fields change
   useEffect(() => {
     setSaveEnabled(true); // Enable save button
-  }, [trialPeriod, title, body, tagLine]);
+  }, [days, title, body, tagLine]);
 
   return (
     <div className="flex flex-col items-start w-full gap-4 mt-6">
@@ -33,7 +33,7 @@ export default function TrailPeriodManagement({
         <Label className="text-md">Trial Period</Label>
         <Input
           className="mt-2"
-          value={trialPeriod}
+          value={days}
           onChange={(e) => setTrialPeriod(Number(e.target.value))}
         />
       </div>

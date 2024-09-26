@@ -36,13 +36,13 @@ const IndustryTypePage = () => {
           </span>
         </div>
         <div className="mt-4">
-          <ReportTable
-            dataPerPage={7}
-            data={IndustryTableData}
-            headings={["Industry Type", "Count", "Ratio"]}
-            dataKeys={["industryType", "count", "ratio"]}
-            paginationType="withNumber"
-          />
+          <ReportTable                    
+            dataPerPage={7}                       
+            data={IndustryTableData}                           
+            headings={["Industry Type", "Count", "Ratio"]}                   
+            dataKeys={["industryType", "count", "ratio"]}                  
+            paginationType="withNumber"                  
+          />                   
         </div>
       </ReportsLayout>
     </>
