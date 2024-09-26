@@ -34,3 +34,43 @@ export default function SubscriptionPlan() {
     </Tabs>
   );
 }
+
+// import { useSubscriptionStore } from "../../store/subscriptionManagerStore";
+// import { useSubscriptionPlans } from "../../services/queries/useSubscriptionQuery";
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+// import MonthlyPlan from "./MonthlyPlan";
+// import AnnuallyPlan from "./AnnuallyPlan";
+// import { PlanDetails } from "../../store/subscriptionManagerStore";
+
+// export default function SubscriptionPlan() {
+//   const { data: plans, isLoading, error } = useSubscriptionPlans();
+//   const setPlans = useSubscriptionStore((state) => state.setPlans);
+
+//   // Handle loading and error states
+//   if (isLoading) return <div>Loading...</div>;
+//   if (error) return <div>Error fetching plans</div>;
+
+//   // Update the Zustand store with the fetched plans
+//   if (plans) {
+//     setPlans(plans);
+//   }
+
+//   return (
+//     <Tabs defaultValue="monthly" className="w-full">
+//       <TabsList className="grid grid-cols-2 border w-[400px] h-full p-2">
+//         <TabsTrigger className="py-2 px-2" value="monthly">
+//           Monthly
+//         </TabsTrigger>
+//         <TabsTrigger className="py-2 px-2" value="annually">
+//           Annually
+//         </TabsTrigger>
+//       </TabsList>
+//       <TabsContent value="monthly">
+//         <MonthlyPlan plans={plans as PlanDetails[]} />
+//       </TabsContent>
+//       <TabsContent value="annually">
+//         <AnnuallyPlan plans={plans as PlanDetails[]} />
+//       </TabsContent>
+//     </Tabs>
+//   );
+// }
