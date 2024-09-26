@@ -10,11 +10,12 @@ export const useTrialPeriodManagementStore =
     devtools(
       persist(
         (set) => ({
-          days: 0,
+          period: 0,
+          periodType: "DAY",
           title: "",
           body: "",
           tagLine: "",
-          setTrialPeriod: (days: number) => set({ days }),
+          setTrialPeriod: (period: number) => set({ period }),
           setTitle: (title: string) => set({ title }),
           setBody: (body: string) => set({ body }),
           setTagLine: (tagLine: string) => set({ tagLine }),

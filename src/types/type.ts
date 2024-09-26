@@ -165,7 +165,8 @@ export interface NotificationType {
 }
 
 export type TrialPeriodManagementState = {
-  days: number;
+  period: number;
+  periodType: "DAY" | "MONTH";
   title: string;
   body: string;
   tagLine: string;
@@ -177,7 +178,8 @@ export type TrialPeriodManagementState = {
 
 export type TrialPeriodData = {
   data?: any;
-  days: number;
+  period: number;
+  periodType?: "DAY" | "MONTH";
   title: string;
   body: string;
   tagLine: string;

@@ -45,7 +45,8 @@ export const getReferralContent = async () => {
 
 export const getSubscriptionPlans = async () => {
   try {
-    return await axiosInstance.get("subscription");
+    const data = await axiosInstance.get("subscription/plans");
+    return data.data.data.subscriptionPlans.plans;
   } catch (error) {
     console.error(error);
     throw error;

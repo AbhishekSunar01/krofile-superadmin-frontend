@@ -32,7 +32,8 @@ export default function SubscriptionManager() {
 
   // Get trial data from Zustand store
   const trialPeriodData = useTrialPeriodManagementStore((state) => ({
-    days: state.days,
+    period: state.period,
+    periodType: state.periodType,
     title: state.title,
     body: state.body,
     tagLine: state.tagLine,

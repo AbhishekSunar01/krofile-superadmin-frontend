@@ -23,7 +23,7 @@ export default function ContentManagement({
         <TrailPeriodManagement setSaveEnabled={setSaveEnabled} />
       </TabsContent>
       <TabsContent value="referral">
-        <ReferralPeriodManagement />
+        <ReferralPeriodManagement setSaveEnabled={setSaveEnabled} />
       </TabsContent>
     </Tabs>
   );
