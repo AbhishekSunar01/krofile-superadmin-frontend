@@ -6,9 +6,11 @@ import MailImage from "../../assets/png/Login Images/MailImage.svg";
 import BackButton from "../../components/custom-ui/BackButton";
 import EmailVerify from "../../components/login/EmailVerify";
 import { Button } from "../../components/ui/button";
+import useRedirectIfLoggedIn from "../../hooks/useRedirectIfLoggedIn";
 import { cn } from "../../lib/utils";
 
 const TwoFAPage = () => {
+  useRedirectIfLoggedIn();
   const [verified, setVerified] = useState(false);
   const [loading] = useState(false);
 
