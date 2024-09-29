@@ -4,6 +4,11 @@ import {
   TrialPeriodManagementState,
 } from "../types/type";
 import { devtools, persist } from "zustand/middleware";
+import {
+  PlanDetails,
+  PriceDetails,
+  SubscriptionPlanDetails,
+} from "../types/subscriptionManagementTypes";
 
 export const useTrialPeriodManagementStore =
   create<TrialPeriodManagementState>()(
@@ -51,46 +56,51 @@ export const useReferralPeriodManagementStore =
       )
     )
   );
-interface PriceDetails {
-  initialPrice: string;
-  discount: number;
-  finalPrice: string;
-  contactUs: boolean;
-}
 
-interface PlanDetails {
-  _id: string;
-  title: string;
-  isActive: boolean;
-  monthlyPrice: PriceDetails[];
-  yearlyPrice: PriceDetails[];
-  contactUs: boolean;
-  recommended: boolean;
-}
-
-interface SubscriptionStore {
-  plans: PlanDetails[];
-  setPlans: (plans: PlanDetails[]) => void;
-  updatePlanField: (
-    planId: string,
-    priceType: "monthlyPrice" | "yearlyPrice",
-    value: PriceDetails[]
-  ) => void;
-}
-
-export const useSubscriptionStore = create<SubscriptionStore>((set) => ({
-  plans: [],
-  setPlans: (plans) => set({ plans }),
-
-  updatePlanField: (planId, priceType, value) =>
-    set((state) => ({
-      plans: state.plans.map((plan) =>
-        plan._id === planId
-          ? {
-              ...plan,
-              [priceType]: value,
-            }
-          : plan
-      ),
-    })),
-}));
+export const useSubscriptionPlanStore = create<
+  SubscriptionPlanDetails & {
+    setMonthlyDiscount: (discount: number) => void;
+    setYearlyDiscount: (discount: number) => void;
+    setPlans: (plans: PlanDetails[]) => void;
+    updatePlanField: (
+      planId: string,
+      field: keyof PlanDetails,
+      value: any
+    ) => void;
+    updatePriceDetails: (
+      planId: string,
+      priceType: "monthlyPrice" | "yearlyPrice",
+      priceDetails: PriceDetails[]
+    ) => void;
+  }
+>()(
+  devtools(
+    persist(
+      (set) => ({
+        monthlyDiscount: 0,
+        yearlyDiscount: 0,
+        plans: [],
+        setMonthlyDiscount: (discount) => set({ monthlyDiscount: discount }),
+        setYearlyDiscount: (discount) => set({ yearlyDiscount: discount }),
+        setPlans: (plans) => set({ plans }),
+        updatePlanField: (planId, field, value) =>
+          set((state) => ({
+            plans: state.plans.map((plan) =>
+              plan._id === planId ? { ...plan, [field]: value } : plan
+            ),
+          })),
+        updatePriceDetails: (planId, priceType, priceDetails) =>
+          set((state) => ({
+            plans: state.plans.map((plan) =>
+              plan._id === planId
+                ? { ...plan, [priceType]: priceDetails }
+                : plan
+            ),
+          })),
+      }),
+      {
+        name: "subscription-plan-storage",
+      }
+    )
+  )
+);

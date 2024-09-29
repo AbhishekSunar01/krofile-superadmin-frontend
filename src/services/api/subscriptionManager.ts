@@ -46,7 +46,43 @@ export const getReferralContent = async () => {
 export const getSubscriptionPlans = async () => {
   try {
     const data = await axiosInstance.get("subscription/plans");
-    return data.data.data.subscriptionPlans.plans;
+    return data.data.data.subscriptionPlans;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const postMonthlySubscriptionPlan = async (data: any) => {
+  try {
+    // Validate data before sending
+    data.updates.forEach((update: any, index: number) => {
+      if (typeof update.initialPrice !== "number") {
+        throw new Error(`updates.${index}.initialPrice must be a number`);
+      }
+      if (typeof update.discount !== "number") {
+        throw new Error(`updates.${index}.discount must be a number`);
+      }
+      if (update.discount > 100) {
+        throw new Error(
+          `updates.${index}.discount must not be greater than 100`
+        );
+      }
+    });
+
+    // Log the data being sent
+    console.log("Sending data:", JSON.stringify(data, null, 2));
+
+    return await axiosInstance.put("subscription/plans?type=monthly", data);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const postAnnuallySubscriptionPlan = async (data: any) => {
+  try {
+    return await axiosInstance.post("subscription/plans/annually", data);
   } catch (error) {
     console.error(error);
     throw error;

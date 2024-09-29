@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import {
+  postMonthlySubscriptionPlan,
   postReferralContent,
   postTrialContent,
 } from "../api/subscriptionManager";
@@ -19,6 +20,15 @@ export function usePostReferralContent() {
     mutationFn: (data: ReferralPeriodData) => postReferralContent(data),
     onSuccess: (response) => {
       console.log("Post Referral Content Response:", response);
+    },
+  });
+}
+
+export function usePostMonethlySubscriptionPlan() {
+  return useMutation({
+    mutationFn: (data: any) => postMonthlySubscriptionPlan(data),
+    onSuccess: (response) => {
+      console.log("Post Subscription Plan Response:", response);
     },
   });
 }
