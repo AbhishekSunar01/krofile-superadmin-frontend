@@ -1,14 +1,18 @@
 import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 import {
   ReferralPeriodManagementState,
   TrialPeriodManagementState,
-} from "../types/type";
-import { devtools, persist } from "zustand/middleware";
-import {
   PlanDetails,
   PriceDetails,
   SubscriptionPlanDetails,
+  TabState,
 } from "../types/subscriptionManagementTypes";
+
+export const useTabStateStore = create<TabState>((set) => ({
+  activeTab: "trial",
+  setActiveTab: (tab) => set({ activeTab: tab }),
+}));
 
 export const useTrialPeriodManagementStore =
   create<TrialPeriodManagementState>()(
@@ -77,11 +81,13 @@ export const useSubscriptionPlanStore = create<
   devtools(
     persist(
       (set) => ({
+        globalDiscount: 0,
         monthlyDiscount: 0,
         yearlyDiscount: 0,
         plans: [],
         setMonthlyDiscount: (discount) => set({ monthlyDiscount: discount }),
         setYearlyDiscount: (discount) => set({ yearlyDiscount: discount }),
+        // setGlobalDiscount: (discount) => set({ globalDiscount: discount }),
         setPlans: (plans) => set({ plans }),
         updatePlanField: (planId, field, value) =>
           set((state) => ({

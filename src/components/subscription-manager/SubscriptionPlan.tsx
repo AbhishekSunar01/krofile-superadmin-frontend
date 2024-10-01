@@ -2,7 +2,10 @@ import MonthlyPlan from "./MonthlyPlan";
 import AnnuallyPlan from "./AnnuallyPlan";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { useSubscriptionPlans } from "../../services/queries/useSubscriptionQuery";
-import { useSubscriptionPlanStore } from "../../store/subscriptionManagerStore";
+import {
+  useSubscriptionPlanStore,
+  useTabStateStore,
+} from "../../store/subscriptionManagerStore";
 import { useEffect } from "react";
 
 // export default function SubscriptionPlan() {
@@ -55,6 +58,8 @@ import { useEffect } from "react";
 export default function SubscriptionPlan() {
   // Use the useQuery hook to fetch subscription plans
   const { data: subcriptionPlans, isLoading, error } = useSubscriptionPlans();
+  const { activeTab, setActiveTab } = useTabStateStore();
+  console.log("activeTab", activeTab);
 
   // Get the setPlans method and the plans state from the store
   const setPlans = useSubscriptionPlanStore((state) => state.setPlans);
@@ -80,7 +85,11 @@ export default function SubscriptionPlan() {
   if (!plans || plans.length === 0) return <div>No plans available</div>;
 
   return (
-    <Tabs defaultValue="monthly" className="w-full">
+    <Tabs
+      defaultValue="monthly"
+      className="w-full"
+      onValueChange={setActiveTab}
+    >
       <TabsList className="grid grid-cols-2 border w-[400px] h-full p-2">
         <TabsTrigger className="py-2 px-2" value="monthly">
           Monthly

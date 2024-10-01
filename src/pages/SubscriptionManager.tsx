@@ -14,21 +14,19 @@ import {
   FinalPreview,
 } from "../components/subscription-manager/index";
 import {
-  usePostReferralContent,
-  usePostTrialContent,
-} from "../services/mutations/subscriptionMutation";
-import {
   useReferralPeriodManagementStore,
+  useTabStateStore,
   useTrialPeriodManagementStore,
 } from "../store/subscriptionManagerStore";
+import useSaveSubscriptionData from "../hooks/useSaveSubscriptionData";
 
 export default function SubscriptionManager() {
-  const [, setActiveTab] = useState("Content Management");
+  const { activeTab, setActiveTab } = useTabStateStore();
+  console.log("activeTab", activeTab);
+
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
-  // Use the mutation hook for submitting trial content
-  const postTrialMutation = usePostTrialContent();
-  const postReferralMutation = usePostReferralContent();
+  const saveData = useSaveSubscriptionData();
 
   // Get trial data from Zustand store
   const trialPeriodData = useTrialPeriodManagementStore((state) => ({
@@ -49,8 +47,7 @@ export default function SubscriptionManager() {
   }));
 
   const handleSave = () => {
-    postTrialMutation.mutate(trialPeriodData);
-    postReferralMutation.mutate(referralPeriodData);
+    saveData();
   };
 
   return (
@@ -76,10 +73,10 @@ export default function SubscriptionManager() {
           className="w-full"
         >
           <CustomTabsList className="ml-11">
-            <CustomTabsTrigger value="Content Management">
+            <CustomTabsTrigger value="trial">
               Content Management
             </CustomTabsTrigger>
-            <CustomTabsTrigger value="Subscription Plan">
+            <CustomTabsTrigger value="monthly">
               Subscription Plan
             </CustomTabsTrigger>
             <CustomTabsTrigger value="Configure">Configure</CustomTabsTrigger>
@@ -87,10 +84,10 @@ export default function SubscriptionManager() {
               Final Preview
             </CustomTabsTrigger>
           </CustomTabsList>
-          <CustomTabsContent value="Content Management">
+          <CustomTabsContent value="trial">
             <ContentManagement setSaveEnabled={setIsSaveEnabled} />
           </CustomTabsContent>
-          <CustomTabsContent value="Subscription Plan">
+          <CustomTabsContent value="monthly">
             <SubscriptionPlan />
           </CustomTabsContent>
           <CustomTabsContent value="Configure">
