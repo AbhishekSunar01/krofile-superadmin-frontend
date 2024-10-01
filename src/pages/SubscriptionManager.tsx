@@ -68,7 +68,7 @@ export default function SubscriptionManager() {
           </Button>
         </div>
         <CustomTabs
-          defaultValue="Content Management"
+          defaultValue="trial"
           onValueChange={setActiveTab}
           className="w-full"
         >
