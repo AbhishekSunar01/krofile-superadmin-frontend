@@ -7,7 +7,6 @@ import { useSubscriptionPlanStore } from "../../store/subscriptionManagerStore";
 import { Switch } from "../ui/switch";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { usePostMonethlySubscriptionPlan } from "../../services/mutations/subscriptionMutation";
 import { Checkbox } from "../ui/checkbox";
 import EditPlanDialog from "./EditPlanDialog";
 
