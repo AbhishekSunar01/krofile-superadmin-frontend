@@ -4,7 +4,10 @@ import {
   postReferralContent,
   postTrialContent,
 } from "../api/subscriptionManager";
-import { ReferralPeriodData, TrialPeriodData } from "../../types/type";
+import {
+  ReferralPeriodData,
+  TrialPeriodData,
+} from "../../types/subscriptionManagementTypes";
 
 export function usePostTrialContent() {
   return useMutation({

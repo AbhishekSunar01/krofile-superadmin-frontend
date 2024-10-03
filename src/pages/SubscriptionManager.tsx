@@ -13,11 +13,7 @@ import {
   Configure,
   FinalPreview,
 } from "../components/subscription-manager/index";
-import {
-  useReferralPeriodManagementStore,
-  useTabStateStore,
-  useTrialPeriodManagementStore,
-} from "../store/subscriptionManagerStore";
+import { useTabStateStore } from "../store/subscriptionManagerStore";
 import useSaveSubscriptionData from "../hooks/useSaveSubscriptionData";
 
 export default function SubscriptionManager() {
@@ -27,24 +23,6 @@ export default function SubscriptionManager() {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
   const saveData = useSaveSubscriptionData();
-
-  // Get trial data from Zustand store
-  const trialPeriodData = useTrialPeriodManagementStore((state) => ({
-    period: state.period,
-    periodType: state.periodType,
-    title: state.title,
-    body: state.body,
-    tagLine: state.tagLine,
-  }));
-
-  // Get referral data from Zustand store
-  const referralPeriodData = useReferralPeriodManagementStore((state) => ({
-    getReferralMonth: state.getReferralMonth,
-    giveReferralMonth: state.giveReferralMonth,
-    title: state.title,
-    body: state.body,
-    tagLine: state.tagLine,
-  }));
 
   const handleSave = () => {
     saveData();
