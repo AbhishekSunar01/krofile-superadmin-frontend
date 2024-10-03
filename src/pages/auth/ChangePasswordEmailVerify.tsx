@@ -19,7 +19,10 @@ export default function ChangePasswordEmailVerify() {
             '"A 6-digit code has just been sent to johndoe@gmail.com. Enter it below to proceed"'
           }
         >
-          <EmailVerify setVerified={setVerified} verificationCode="123456" />
+          <div>
+            hi
+          </div>
+          {/* <EmailVerify setVerified={setVerified} verificationCode="123456" /> */}
         </CommonAuthLayout>
       ) : (
         <div className="mx-auto w-[480px] h-auto flex flex-col gap-[24px] mt-[8%]">
