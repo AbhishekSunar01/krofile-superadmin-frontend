@@ -12,13 +12,12 @@ export default function ResetPasswordVerify() {
         '"A 5-digit code has just been sent to admin@gmail.com. Enter it below to proceed"'
       }
     >
-      {/* <EmailVerify
+      <EmailVerify
         verificationCode="123456"
+        type="ResetPassword"
         redirectLink="/auth/set-new-password"
-      /> */}
-      <div>
-        Hi
-      </div>
+      />
+      <div>Hi</div>
     </CommonAuthLayout>
   );
 }

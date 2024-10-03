@@ -18,7 +18,7 @@ export interface ILoginResponse {
 export interface ILoggedInUserResponse {
   status: string;
   message: string;
-  user: {
+  data: {
     _id: string;
     name: string;
     email: string;

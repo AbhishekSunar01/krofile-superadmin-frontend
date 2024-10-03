@@ -26,7 +26,7 @@ export interface ILoggedInUserDataState {
 export interface IUpdatedUserData {
   status: string;
   message: string;
-  data: ILoggedInUserData;
+  user: ILoggedInUserData;
 }
 
 export interface IRemoveUserAvatarData {
