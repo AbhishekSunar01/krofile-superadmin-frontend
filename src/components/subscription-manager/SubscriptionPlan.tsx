@@ -17,11 +17,20 @@ export default function SubscriptionPlan() {
   // Get the setPlans method and the plans state from the store
   const setPlans = useSubscriptionPlanStore((state) => state.setPlans);
   const plans = useSubscriptionPlanStore((state) => state.plans);
+  const setMonthlyDiscount = useSubscriptionPlanStore(
+    (state) => state.setMonthlyDiscount
+  );
+  const monthlyDiscount = useSubscriptionPlanStore(
+    (state) => state.monthlyDiscount
+  );
+
+  console.log("monthlyDiscount", monthlyDiscount);
 
   // Use useEffect to set the plans in the store when subcriptionPlans changes
   useEffect(() => {
     if (subcriptionPlans) {
       setPlans(subcriptionPlans.plans);
+      setMonthlyDiscount(subcriptionPlans.monthlyDiscount);
     }
   }, [subcriptionPlans, setPlans]);
 
@@ -52,7 +61,7 @@ export default function SubscriptionPlan() {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="monthly">
-        <MonthlyPlan plans={plans} />
+        <MonthlyPlan plans={plans} monthlyDiscount={monthlyDiscount ?? 0} />
       </TabsContent>
       <TabsContent value="annually">
         <AnnuallyPlan plans={plans} />

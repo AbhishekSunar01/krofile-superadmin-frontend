@@ -57,9 +57,9 @@ export type PlanDetails = {
 };
 
 export type SubscriptionPlanDetails = {
-  globalDiscount: number;
-  monthlyDiscount: number;
-  yearlyDiscount: number;
+  globalDiscount?: number;
+  monthlyDiscount?: number;
+  yearlyDiscount?: number;
   plans: PlanDetails[];
 };
 

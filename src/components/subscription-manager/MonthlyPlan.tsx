@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   PlanDetails,
   PriceDetails,
@@ -12,16 +12,22 @@ import EditPlanDialog from "./EditPlanDialog";
 
 interface MonthlyPlanProps {
   plans: PlanDetails[];
+  monthlyDiscount: number;
 }
 
-const MonthlyPlan: React.FC<MonthlyPlanProps> = ({ plans }) => {
+const MonthlyPlan: React.FC<MonthlyPlanProps> = ({
+  plans,
+  monthlyDiscount,
+}) => {
   const updatePriceDetails = useSubscriptionPlanStore(
     (state) => state.updatePriceDetails
   );
   const updatePlanField = useSubscriptionPlanStore(
     (state) => state.updatePlanField
   );
-  //   const postMonthlySubscriptionPlan = usePostMonethlySubscriptionPlan();
+  const [globalDiscount, setGlobalDiscount] = useState<number | string>(
+    monthlyDiscount
+  );
 
   const handlePriceChange = (
     planId: string,
@@ -59,31 +65,15 @@ const MonthlyPlan: React.FC<MonthlyPlanProps> = ({ plans }) => {
     updatePlanField(planId, "contactUs", value);
   };
 
-  //   const logStateData = () => {
-  //     const updates = plans.map((plan) => ({
-  //       planId: plan._id,
-  //       initialPrice: Number(plan.monthlyPrice[0]?.initialPrice) || 0,
-  //       discount: Number(plan.monthlyPrice[0]?.discount) || 0,
-  //       contactUs: plan.contactUs,
-  //       isActive: plan.isActive,
-  //     }));
-
-  //     const stateData = {
-  //       globalDiscount: 0,
-  //       updates,
-  //     };
-
-  //     postMonthlySubscriptionPlan.mutate(stateData);
-
-  //     console.log(JSON.stringify(stateData, null, 2));
-  //   };
-
   return (
     <div>
       {/* <button onClick={logStateData}>log</button> */}
       <div className="my-4">
         <Label>Discount{`(%)`}:</Label>
-        <Input type="text" />
+        <Input
+          type="number"
+          onChange={(e) => setGlobalDiscount(Number(e.target.value))}
+        />
       </div>
       {plans.map((plan) => (
         <div key={plan._id} className="plan-card">
@@ -120,7 +110,11 @@ const MonthlyPlan: React.FC<MonthlyPlanProps> = ({ plans }) => {
                   <Input
                     // type="number"
                     value={priceDetail.discount}
+                    {...(globalDiscount && {
+                      value: globalDiscount,
+                    })}
                     className="w-full"
+                    disabled={!!globalDiscount}
                     onChange={(e) =>
                       handlePriceChange(
                         plan._id,
