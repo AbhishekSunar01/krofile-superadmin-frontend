@@ -94,7 +94,7 @@ export default function UserIcon() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div className="flex text-base font-semibold text-primary select-none cursor-pointer justify-center items-center gap-1">
-                Santosh Phaiju <ChevronDown />
+                {userData.name ?? "Santosh Phaiju"} <ChevronDown />
               </div>
             </div>
           </DropdownMenuTrigger>
