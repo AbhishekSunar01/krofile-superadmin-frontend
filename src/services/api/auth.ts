@@ -1,8 +1,8 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import Cookies from "js-cookie";
 import axiosInstance from ".";
-
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export interface ILoginResponse {
   status: string;
@@ -18,7 +18,7 @@ export interface ILoginResponse {
 export interface ILoggedInUserResponse {
   status: string;
   message: string;
-  user: {
+  data: {
     _id: string;
     name: string;
     email: string;
@@ -57,12 +57,52 @@ export const handleLogin = async ({
   }
 };
 
+export const verifyTwoFaOtp = async ({ otp }: { otp: string }) => {
+  try {
+    const response: AxiosResponse = await axios.post(
+      `${baseUrl}/auth/verifyOtp`,
+      {
+        otp: otp,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("temporary_token")}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in verifyotp function:", error);
+    throw error;
+  }
+};
+
+export const resendTwoFaOtp = async ({ email }: { email: string }) => {
+  try {
+    const response: AxiosResponse = await axios.post(
+      `${baseUrl}/auth/resend-otp`,
+      {
+        email,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("temporary_token")}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in verifyotp function:", error);
+    throw error;
+  }
+};
+
 export const getLoggedinUser = async () => {
   try {
     const response: AxiosResponse<ILoggedInUserResponse> =
       await axiosInstance.get<ILoggedInUserResponse>(`auth/me`, {
         headers: {
-          Authorization: `Bearer ${Cookies.get("accessToken")}`,
+          Authorization: `Bearer ${Cookies.get("access_token")}`,
         },
       });
     return response.data;

@@ -1,7 +1,9 @@
 import EmailVerify from "../../components/login/EmailVerify";
+import useRedirectIfLoggedIn from "../../hooks/useRedirectIfLoggedIn";
 import CommonAuthLayout from "../../layout/CommonAuthLayout";
 
 export default function ResetPasswordVerify() {
+  useRedirectIfLoggedIn();
   return (
     <CommonAuthLayout
       backLink={"/auth/reset-password"}
@@ -12,8 +14,10 @@ export default function ResetPasswordVerify() {
     >
       <EmailVerify
         verificationCode="123456"
+        type="ResetPassword"
         redirectLink="/auth/set-new-password"
       />
+      <div>Hi</div>
     </CommonAuthLayout>
   );
 }

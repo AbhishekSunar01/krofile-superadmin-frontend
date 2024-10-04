@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import "./App.css";
+import ProtectedRoute from "./components/custom-ui/ProtectedRouteComponent";
 import AuthLayout from "./layout/AuthLayout";
 import MainLayout from "./layout/MainLayout";
 import ChangePassword from "./pages/auth/ChangePassword";
@@ -28,7 +29,6 @@ import B2bReferralPage from "./pages/reports/B2bReferralPage";
 import ChurnRatePage from "./pages/reports/ChurnRatePage";
 import IndustryTypePage from "./pages/reports/IndustryTypePage";
 import PopularCountriesPage from "./pages/reports/PopularCountriesPage";
-import ProtectedRoute from "./components/custom-ui/ProtectedRouteComponent";
 import RetentionGrowthPage from "./pages/reports/RetentionGrowthPage";
 import SystemHealthPage from "./pages/reports/SystemHealthPage";
 
@@ -39,10 +39,21 @@ export default function App() {
       <Routes>
         <Route path="/auth" element={<AuthLayout />}>
           <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/change-password" element={<ChangePassword />} />
+          <Route
+            path="/auth/change-password"
+            element={
+              <ProtectedRoute>
+                <ChangePassword />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/auth/change-password-email-verify"
-            element={<ChangePasswordEmailVerify />}
+            element={
+              <ProtectedRoute>
+                <ChangePasswordEmailVerify />
+              </ProtectedRoute>
+            }
           />
           <Route path="/auth/reset-password" element={<ResetPassword />} />
           <Route

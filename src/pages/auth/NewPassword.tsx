@@ -5,8 +5,10 @@ import CommonAuthLayout from "../../layout/CommonAuthLayout";
 import { Button } from "../../components/ui/button";
 import { NewPasswordForm } from "../../components/login";
 import { cn } from "../../lib/utils";
+import useRedirectIfLoggedIn from "../../hooks/useRedirectIfLoggedIn";
 
 export default function NewPassword() {
+  useRedirectIfLoggedIn();
   const [verified, setVerified] = useState(false);
   //   const [loading, setLoading] = useState(false);
 

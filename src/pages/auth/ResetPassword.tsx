@@ -1,12 +1,11 @@
-import CommonAuthLayout from "../../layout/CommonAuthLayout";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { z } from "zod";
 import { Button } from "../../components/ui/button";
 import {
   Form,
@@ -17,10 +16,14 @@ import {
   FormMessage,
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
+import useRedirectIfLoggedIn from "../../hooks/useRedirectIfLoggedIn";
+import CommonAuthLayout from "../../layout/CommonAuthLayout";
 import { cn } from "../../lib/utils";
 import { ResetPasswordSchema } from "../../utils/schemas/authSchema";
 
 export default function ResetPassword() {
+  useRedirectIfLoggedIn();
+
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const nav = useNavigate();

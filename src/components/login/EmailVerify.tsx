@@ -21,19 +21,21 @@ import {
   InputOTPSlot,
 } from "../../components/ui/input-otp";
 import { cn } from "../../lib/utils";
+import {
+  useResendTwoFaOtp,
+  useVerifyTwoFaOtp,
+} from "../../services/mutations/authMutation";
+import useAuthStore from "../../store/authStore";
 import { OtpSchema } from "../../utils/schemas/authSchema";
 
 interface IProps {
   verificationCode: string;
   setVerified?: Dispatch<boolean>;
   redirectLink?: string;
+  type: "ResetPassword" | "TwoFa";
 }
 
-const EmailVerify = ({
-  verificationCode,
-  setVerified,
-  redirectLink,
-}: IProps) => {
+const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
   const [reset, setReset] = useState(false);
   const [time, setTime] = useState({
     minutes: 2,
@@ -43,6 +45,10 @@ const EmailVerify = ({
   //   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
   const nav = useNavigate();
+  const verifyTwoFaOtp = useVerifyTwoFaOtp();
+  const resendTwoFaOtp = useResendTwoFaOtp();
+
+  const setTokens = useAuthStore((state) => state.setTokens);
 
   useEffect(() => {
     if (reset === true) {
@@ -53,8 +59,22 @@ const EmailVerify = ({
     }
   }, [reset]);
 
-  const handleResend = () => {
+  const handleResend = async () => {
     setReset(true);
+    if (type === "TwoFa") {
+      try {
+        const responseData = await resendTwoFaOtp.mutateAsync({
+          email: localStorage.getItem("email") || "",
+        });
+        setErrorMessage("");
+
+        toast.success(responseData.data.message);
+        setReset(false);
+      } catch (error) {
+        setReset(false);
+        console.log("error in resendTwoFaOtp", error);
+      }
+    }
   };
 
   const form = useForm<z.infer<typeof OtpSchema>>({
@@ -64,30 +84,47 @@ const EmailVerify = ({
     },
   });
 
-  function onSubmit(data: z.infer<typeof OtpSchema>) {
+  async function onSubmit(data: z.infer<typeof OtpSchema>) {
     setLoading(true);
     if (time.minutes === 0 && time.seconds === 0) {
       setLoading(false);
       setErrorMessage("Invalid or expired reset code. Please try again.");
     } else {
-      if (data.pin === verificationCode) {
-        setTimeout(() => {
+      if (type === "TwoFa") {
+        try {
+          const responseData = await verifyTwoFaOtp.mutateAsync({
+            otp: data.pin,
+          });
+
+          if (responseData.status === "success") {
+            setLoading(false);
+            setErrorMessage("");
+            toast.success("You have been successfully verified and loggedin.");
+            setTokens(
+              responseData.data.token.access_token,
+              responseData.data.token.refresh_token
+            );
+            if (setVerified) {
+              setVerified(true);
+            }
+            setErrorMessage("");
+            if (redirectLink) {
+              return nav(redirectLink);
+            }
+            localStorage.removeItem("temporary_token");
+            localStorage.removeItem("email");
+            return nav("/dashboard");
+          }
+        } catch (error) {
           setLoading(false);
-          if (setVerified) {
-            setVerified(true);
-          }
-          toast.success("You have been successfully verified.");
-          setErrorMessage("");
-          if (redirectLink) {
-            return nav(redirectLink);
-          }
-        }, 2000);
-      } else {
-        setLoading(false);
-        setErrorMessage("Invalid or expired reset code. Please try again.");
+          setErrorMessage("Invalid or expired reset code. Please try again.");
+          console.log("error in verifyTwoFaOtp", error);
+        }
       }
+      setLoading(false);
     }
   }
+
   return (
     <div>
       <Form {...form}>
@@ -143,7 +180,7 @@ const EmailVerify = ({
               {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
             </Button>
           </div>
-          <div className="text-center text-[14px] font-[400]">
+          <div className="text-center text-[14px] font-[400] flex gap-1 w-full justify-center items-center">
             If you didn’t receive a code!{" "}
             <span
               className="text-destructive cursor-pointer font-[400]"
@@ -151,6 +188,9 @@ const EmailVerify = ({
             >
               Resend
             </span>
+            <div>
+              {reset && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+            </div>
           </div>
         </form>
       </Form>

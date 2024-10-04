@@ -20,7 +20,6 @@ import {
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
 import { useLoginUser } from "../../services/mutations/authMutation";
-import useAuthStore from "../../store/authStore";
 import { LoginSchema } from "../../utils/schemas/authSchema";
 
 export default function LoginForm() {
@@ -43,7 +42,6 @@ export default function LoginForm() {
   });
 
   const { isError, error, mutateAsync } = useLoginUser();
-  const setTokens = useAuthStore((state) => state.setTokens);
 
   async function onSubmit(values: z.infer<typeof LoginSchema>) {
     setLoading(true);
@@ -53,14 +51,13 @@ export default function LoginForm() {
       password: values.password,
     });
 
-    const { access_token, refresh_token } = data.data.token;
-
     if (data.status === "success") {
       setLoading(false);
       setErrorMessage("");
-      setTokens(access_token, refresh_token);
-      toast.success("You are logged in successfully");
-      return nav("/dashboard");
+      localStorage.setItem("temporary_token", data?.data.token.access_token);
+      localStorage.setItem("email", values.email);
+      toast.success(data.data.message);
+      return nav("/auth/2fa");
     } else {
       toast.error(data.data.message);
       setLoading(false);
