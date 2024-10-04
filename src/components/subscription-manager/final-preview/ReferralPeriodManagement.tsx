@@ -1,6 +1,6 @@
 import background from "../../../assets/png/Gradient background.png";
 import { useReferralPeriodManagementStore } from "../../../store/subscriptionManagerStore";
-import FinalPreviewTable from "../FinalPreviewTable";
+// import FinalPreviewTable from "../FinalPreviewTable";
 import parse from "html-react-parser";
 
 export default function ReferralPeriodManagement() {
@@ -36,7 +36,7 @@ export default function ReferralPeriodManagement() {
 
       <div>{parse(tagLine)}</div>
 
-      <FinalPreviewTable />
+      {/* <FinalPreviewTable /> */}
     </div>
   );
 }
