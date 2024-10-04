@@ -4,9 +4,15 @@ import { Input } from "../../ui/input";
 import { Label } from "../../ui/label";
 import { useTrialPeriodManagementStore } from "../../../store/subscriptionManagerStore";
 
-export default function TrailPeriodManagement() {
+type setSaveEnabled = (value: boolean) => void;
+
+export default function TrailPeriodManagement({
+  setSaveEnabled,
+}: {
+  setSaveEnabled: setSaveEnabled;
+}) {
   const {
-    trialPeriod,
+    period,
     title,
     body,
     tagLine,
@@ -16,12 +22,10 @@ export default function TrailPeriodManagement() {
     setTagLine,
   } = useTrialPeriodManagementStore();
 
+  // Enable save button when any of the fields change
   useEffect(() => {
-    console.log("Trial Period: ", trialPeriod);
-    console.log("Title: ", title);
-    console.log("Body: ", body);
-    console.log("Tagline: ", tagLine);
-  }, [title, body, tagLine]);
+    setSaveEnabled(true);
+  }, [period, title, body, tagLine]);
 
   return (
     <div className="flex flex-col items-start w-full gap-4 mt-6">
@@ -29,7 +33,7 @@ export default function TrailPeriodManagement() {
         <Label className="text-md">Trial Period</Label>
         <Input
           className="mt-2"
-          value={trialPeriod}
+          value={period}
           onChange={(e) => setTrialPeriod(Number(e.target.value))}
         />
       </div>

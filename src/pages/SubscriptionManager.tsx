@@ -13,9 +13,20 @@ import {
   Configure,
   FinalPreview,
 } from "../components/subscription-manager/index";
+import { useTabStateStore } from "../store/subscriptionManagerStore";
+import useSaveSubscriptionData from "../hooks/useSaveSubscriptionData";
 
 export default function SubscriptionManager() {
-  const [, setActiveTab] = useState("Content Management");
+  const { activeTab, setActiveTab } = useTabStateStore();
+  console.log("activeTab", activeTab);
+
+  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+
+  const saveData = useSaveSubscriptionData();
+
+  const handleSave = () => {
+    saveData();
+  };
 
   return (
     <PageLayout
@@ -25,23 +36,25 @@ export default function SubscriptionManager() {
       <div className="w-full bg-white p-6 gap-4 rounded-[12px] relative">
         <div className="w-full">
           <Button
-            variant={"disabled"}
+            variant={isSaveEnabled ? "default" : "disabled"}
             size="lg"
             className="absolute rounded-xl right-8 top-4"
+            onClick={handleSave}
+            disabled={!isSaveEnabled}
           >
             Save
           </Button>
         </div>
         <CustomTabs
-          defaultValue="Content Management"
+          defaultValue="trial"
           onValueChange={setActiveTab}
           className="w-full"
         >
           <CustomTabsList className="ml-11">
-            <CustomTabsTrigger value="Content Management">
+            <CustomTabsTrigger value="trial">
               Content Management
             </CustomTabsTrigger>
-            <CustomTabsTrigger value="Subscription Plan">
+            <CustomTabsTrigger value="monthly">
               Subscription Plan
             </CustomTabsTrigger>
             <CustomTabsTrigger value="Configure">Configure</CustomTabsTrigger>
@@ -49,10 +62,10 @@ export default function SubscriptionManager() {
               Final Preview
             </CustomTabsTrigger>
           </CustomTabsList>
-          <CustomTabsContent value="Content Management">
-            <ContentManagement />
+          <CustomTabsContent value="trial">
+            <ContentManagement setSaveEnabled={setIsSaveEnabled} />
           </CustomTabsContent>
-          <CustomTabsContent value="Subscription Plan">
+          <CustomTabsContent value="monthly">
             <SubscriptionPlan />
           </CustomTabsContent>
           <CustomTabsContent value="Configure">
