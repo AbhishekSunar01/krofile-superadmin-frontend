@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 import {
+  changePassword,
   handleLogin,
   handleLogout,
   resendTwoFaOtp,
@@ -21,7 +22,10 @@ export function useLoginUser() {
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
   });
@@ -34,7 +38,10 @@ export function useVerifyTwoFaOtp() {
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
   });
@@ -47,7 +54,34 @@ export function useResendTwoFaOtp() {
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
+      }
+    },
+  });
+}
+
+export function useChangePassword() {
+  return useMutation({
+    mutationFn: async ({
+      oldPassword,
+      newPassword,
+      confirmPassword,
+    }: {
+      oldPassword: string;
+      newPassword: string;
+      confirmPassword: string;
+    }) => {
+      return changePassword({ oldPassword, newPassword, confirmPassword });
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
   });
@@ -58,7 +92,10 @@ export function logoutUser() {
     mutationFn: async () => handleLogout,
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
   });

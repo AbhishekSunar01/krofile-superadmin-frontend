@@ -5,7 +5,7 @@ import ProtectedRoute from "./components/custom-ui/ProtectedRouteComponent";
 import AuthLayout from "./layout/AuthLayout";
 import MainLayout from "./layout/MainLayout";
 import ChangePassword from "./pages/auth/ChangePassword";
-import ChangePasswordEmailVerify from "./pages/auth/ChangePasswordEmailVerify";
+import ChangePasswordSuccess from "./pages/auth/ChangePasswordSuccess";
 import TwoFAPage from "./pages/auth/TwoFa";
 import {
   ActivityLog,
@@ -48,10 +48,10 @@ export default function App() {
             }
           />
           <Route
-            path="/auth/change-password-email-verify"
+            path="/auth/change-password-success"
             element={
               <ProtectedRoute>
-                <ChangePasswordEmailVerify />
+                <ChangePasswordSuccess />
               </ProtectedRoute>
             }
           />

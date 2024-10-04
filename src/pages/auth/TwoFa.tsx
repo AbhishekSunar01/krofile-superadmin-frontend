@@ -32,8 +32,8 @@ const TwoFAPage = () => {
               Almost there! Enter the 2FA code to proceed.
             </div>
             <div className="text-[14px] text-center">
-              "A 5-digit code has just been sent to admin@gmail.com. Enter it
-              below to proceed"
+              "A 6-digit code has just been sent to{" "}
+              {localStorage.getItem("email")}. Enter it below to proceed"
             </div>
           </div>
 

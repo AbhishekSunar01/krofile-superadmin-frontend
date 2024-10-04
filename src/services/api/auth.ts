@@ -37,13 +37,38 @@ export interface ILoggedInUserResponse {
   };
 }
 
+interface IVerifyTwoFaOtpResponse {
+  status: string;
+  message: string;
+  data: {
+    token: {
+      access_token: string;
+      refresh_token: string;
+    };
+  };
+}
+
+interface IResendVerifyTwoFaOtpResponse {
+  status: string;
+  data: {
+    message: string;
+  };
+}
+
+interface IChangePasswordResponse {
+  status: string;
+  data: {
+    message: string;
+  };
+}
+
 export const handleLogin = async ({
   email,
   password,
 }: {
   email: string;
   password: string;
-}) => {
+}): Promise<ILoginResponse> => {
   try {
     const response: AxiosResponse<ILoginResponse> =
       await axiosInstance.post<ILoginResponse>(`auth/signIn`, {
@@ -57,19 +82,24 @@ export const handleLogin = async ({
   }
 };
 
-export const verifyTwoFaOtp = async ({ otp }: { otp: string }) => {
+export const verifyTwoFaOtp = async ({
+  otp,
+}: {
+  otp: string;
+}): Promise<IVerifyTwoFaOtpResponse> => {
   try {
-    const response: AxiosResponse = await axios.post(
-      `${baseUrl}/auth/verifyOtp`,
-      {
-        otp: otp,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("temporary_token")}`,
+    const response: AxiosResponse<IVerifyTwoFaOtpResponse> =
+      await axios.post<IVerifyTwoFaOtpResponse>(
+        `${baseUrl}/auth/verifyOtp`,
+        {
+          otp: otp,
         },
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("temporary_token")}`,
+          },
+        }
+      );
     return response.data;
   } catch (error) {
     console.error("Error in verifyotp function:", error);
@@ -77,19 +107,24 @@ export const verifyTwoFaOtp = async ({ otp }: { otp: string }) => {
   }
 };
 
-export const resendTwoFaOtp = async ({ email }: { email: string }) => {
+export const resendTwoFaOtp = async ({
+  email,
+}: {
+  email: string;
+}): Promise<IResendVerifyTwoFaOtpResponse> => {
   try {
-    const response: AxiosResponse = await axios.post(
-      `${baseUrl}/auth/resend-otp`,
-      {
-        email,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("temporary_token")}`,
+    const response: AxiosResponse<IResendVerifyTwoFaOtpResponse> =
+      await axios.post<IResendVerifyTwoFaOtpResponse>(
+        `${baseUrl}/auth/resend-otp`,
+        {
+          email,
         },
-      }
-    );
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("temporary_token")}`,
+          },
+        }
+      );
     return response.data;
   } catch (error) {
     console.error("Error in verifyotp function:", error);
@@ -97,7 +132,33 @@ export const resendTwoFaOtp = async ({ email }: { email: string }) => {
   }
 };
 
-export const getLoggedinUser = async () => {
+export const changePassword = async ({
+  oldPassword,
+  newPassword,
+  confirmPassword,
+}: {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}): Promise<IChangePasswordResponse> => {
+  try {
+    const response: AxiosResponse<IChangePasswordResponse> =
+      await axiosInstance.patch<IChangePasswordResponse>(
+        `auth/update-password`,
+        {
+          oldPassword,
+          newPassword,
+          confirmPassword,
+        }
+      );
+    return response.data;
+  } catch (error) {
+    console.log("Error in changePassword function", error);
+    throw error;
+  }
+};
+
+export const getLoggedinUser = async (): Promise<ILoggedInUserResponse> => {
   try {
     const response: AxiosResponse<ILoggedInUserResponse> =
       await axiosInstance.get<ILoggedInUserResponse>(`auth/me`, {

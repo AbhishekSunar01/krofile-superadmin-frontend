@@ -17,6 +17,8 @@ import {
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
+import { useChangePassword } from "../../services/mutations/authMutation";
+import useAuthStore from "../../store/authStore";
 import { ChangePasswordSchema } from "../../utils/schemas/authSchema";
 
 export default function ChangePasswordForm() {
@@ -51,6 +53,8 @@ export default function ChangePasswordForm() {
       confirmPassword: "",
     },
   });
+  const changePasswordService = useChangePassword();
+  const logout = useAuthStore((state) => state.logout);
 
   useEffect(() => {
     const password = form.watch("password");
@@ -63,15 +67,15 @@ export default function ChangePasswordForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.watch("password"), form.watch("confirmPassword")]);
 
-  function onSubmit(values: z.infer<typeof ChangePasswordSchema>) {
+  async function onSubmit(values: z.infer<typeof ChangePasswordSchema>) {
     setLoading(true);
 
-    if (values.oldpassword !== "admin") {
-      setLoading(false);
-      setErrorMessage("Old Password is incorrect.");
-      toast.error("Old Password is incorrect.");
-      return;
-    }
+    // if (values.oldpassword !== "admin") {
+    //   setLoading(false);
+    //   setErrorMessage("Old Password is incorrect.");
+    //   toast.error("Old Password is incorrect.");
+    //   return;
+    // }
 
     if (!doPasswordsMatch) {
       setLoading(false);
@@ -89,12 +93,28 @@ export default function ChangePasswordForm() {
         "New Password and Confirm Password do not match. Please try again."
       );
     } else {
-      setTimeout(() => {
-        toast.success("Your password is successfully updated!");
-        setLoading(false);
+      try {
+        const response = await changePasswordService.mutateAsync({
+          oldPassword: values.oldpassword,
+          newPassword: values.password,
+          confirmPassword: values.confirmPassword,
+        });
+        console.log("response", response);
+        if (response.status === "success") {
+          setLoading(false);
+          setErrorMessage("");
+          toast.success("Your password is successfully updated!");
+          logout();
+          return nav("/auth/change-password-success");
+        } else {
+          setLoading(false);
+        }
+      } catch (error: unknown) {
+        form.reset();
+        console.log(error);
         setErrorMessage("");
-        return nav("/auth/change-password-email-verify");
-      }, 2000);
+        setLoading(false);
+      }
     }
   }
 
@@ -179,7 +199,7 @@ export default function ChangePasswordForm() {
                 <FormItem className="relative">
                   <FormLabel className="text-[16px] font-[500]">
                     Confirm Password
-                    <span className="text-desctructive">*</span>
+                    <span className="text-destructive">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
