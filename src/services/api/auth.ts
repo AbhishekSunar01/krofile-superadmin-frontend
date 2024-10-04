@@ -62,6 +62,9 @@ interface IChangePasswordResponse {
   };
 }
 
+interface IHandleForgetPasswordResponse extends IChangePasswordResponse {}
+interface IVerifyForgetPasswordOtpResponse extends IChangePasswordResponse {}
+
 export const handleLogin = async ({
   email,
   password,
@@ -189,6 +192,89 @@ export const handleLogout = async () => {
     return response.data;
   } catch (error) {
     console.error("Error in handleLogout function:", error);
+    throw error;
+  }
+};
+
+export const handleForgetPassword = async ({
+  email,
+}: {
+  email: string;
+}): Promise<IHandleForgetPasswordResponse> => {
+  try {
+    const response: AxiosResponse<IHandleForgetPasswordResponse> =
+      await axiosInstance.post<IHandleForgetPasswordResponse>(
+        `auth/forget-password`,
+        {
+          email,
+        }
+      );
+    return response.data;
+  } catch (error) {
+    console.error("Error in handleForgetPassword function:", error);
+    throw error;
+  }
+};
+
+export const resetPasswordVerifyOtp = async ({
+  otp,
+}: {
+  otp: string;
+}): Promise<IVerifyForgetPasswordOtpResponse> => {
+  try {
+    const response: AxiosResponse<IVerifyForgetPasswordOtpResponse> =
+      await axiosInstance.post<IVerifyForgetPasswordOtpResponse>(
+        `auth/verify-reset-otp`,
+        {
+          otp,
+          email: localStorage.getItem("reset-email"),
+        }
+      );
+    return response.data;
+  } catch (error) {
+    console.error("Error in resetPasswordVerifyOtp function:", error);
+    throw error;
+  }
+};
+
+export const handleResendForgetPasswordOtp = async ({
+  email,
+}: {
+  email: string;
+}): Promise<IResendVerifyTwoFaOtpResponse> => {
+  // using this as a type as they both are same...
+  try {
+    const response: AxiosResponse<IResendVerifyTwoFaOtpResponse> =
+      await axiosInstance.post<IResendVerifyTwoFaOtpResponse>(
+        `auth/resend-reset-otp`,
+        {
+          email,
+        }
+      );
+    return response.data;
+  } catch (error) {
+    console.error("Error in handleResendForgetPasswordOtp function:", error);
+    throw error;
+  }
+};
+
+export const handleSetNewPassword = async ({
+  password,
+  confirmPassword,
+}: {
+  password: string;
+  confirmPassword: string;
+}): Promise<IChangePasswordResponse> => {
+  try {
+    const response: AxiosResponse<IChangePasswordResponse> =
+      await axiosInstance.post<IChangePasswordResponse>(`auth/reset-password`, {
+        password,
+        confirmPassword,
+        email: localStorage.getItem("reset-email"),
+      });
+    return response.data;
+  } catch (error) {
+    console.error("Error in handleSetNewPassword function:", error);
     throw error;
   }
 };

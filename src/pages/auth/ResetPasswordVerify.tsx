@@ -8,16 +8,15 @@ export default function ResetPasswordVerify() {
     <CommonAuthLayout
       backLink={"/auth/reset-password"}
       title={"Reset Password"}
-      subTitle={
-        '"A 5-digit code has just been sent to admin@gmail.com. Enter it below to proceed"'
-      }
+      subTitle={`"A 6-digit code has just been sent to ${localStorage.getItem(
+        "reset-email"
+      )}. Enter it below to proceed"`}
     >
       <EmailVerify
-        verificationCode="123456"
+
         type="ResetPassword"
         redirectLink="/auth/set-new-password"
       />
-      <div>Hi</div>
     </CommonAuthLayout>
   );
 }

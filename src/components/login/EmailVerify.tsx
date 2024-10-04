@@ -22,14 +22,15 @@ import {
 } from "../../components/ui/input-otp";
 import { cn } from "../../lib/utils";
 import {
+  useResendForgetPasswordOtp,
   useResendTwoFaOtp,
+  useResetPasswordVerifyOtp,
   useVerifyTwoFaOtp,
 } from "../../services/mutations/authMutation";
 import useAuthStore from "../../store/authStore";
 import { OtpSchema } from "../../utils/schemas/authSchema";
 
 interface IProps {
-  verificationCode: string;
   setVerified?: Dispatch<boolean>;
   redirectLink?: string;
   type: "ResetPassword" | "TwoFa";
@@ -47,6 +48,9 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
   const nav = useNavigate();
   const verifyTwoFaOtp = useVerifyTwoFaOtp();
   const resendTwoFaOtp = useResendTwoFaOtp();
+
+  const resetPasswordVerifyOtpService = useResetPasswordVerifyOtp();
+  const resendForgetPasswordOtpService = useResendForgetPasswordOtp();
 
   const setTokens = useAuthStore((state) => state.setTokens);
 
@@ -73,6 +77,20 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
       } catch (error) {
         setReset(false);
         console.log("error in resendTwoFaOtp", error);
+      }
+    }
+    if (type === "ResetPassword") {
+      try {
+        const responseData = await resendForgetPasswordOtpService.mutateAsync({
+          email: localStorage.getItem("reset-email") || "",
+        });
+        setErrorMessage("");
+
+        toast.success(responseData.data.message);
+        setReset(false);
+      } catch (error) {
+        setReset(false);
+        console.log("error in resendForgetPasswordOtpService", error);
       }
     }
   };
@@ -119,6 +137,40 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
           setLoading(false);
           setErrorMessage("Invalid or expired reset code. Please try again.");
           console.log("error in verifyTwoFaOtp", error);
+        }
+      }
+
+      if (type === "ResetPassword") {
+        try {
+          const responseData = await resetPasswordVerifyOtpService.mutateAsync({
+            otp: data.pin,
+          });
+
+          if (responseData.status === "success") {
+            setLoading(false);
+            setErrorMessage("");
+            toast.success(responseData.data.message);
+            nav("/auth/set-new-password");
+            // toast.success("You have been successfully verified and loggedin.");
+            // setTokens(
+            //   responseData.data.token.access_token,
+            //   responseData.data.token.refresh_token
+            // );
+            // if (setVerified) {
+            //   setVerified(true);
+            // }
+            // setErrorMessage("");
+            // if (redirectLink) {
+            //   return nav(redirectLink);
+            // }
+            // localStorage.removeItem("temporary_token");
+            // localStorage.removeItem("email");
+            // return nav("/dashboard");
+          }
+        } catch (error) {
+          setLoading(false);
+          setErrorMessage("Invalid or expired reset code. Please try again.");
+          console.log("error in verifyResetPasswordOtp", error);
         }
       }
       setLoading(false);

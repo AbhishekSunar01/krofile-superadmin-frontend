@@ -103,11 +103,7 @@ const TwoFAPage = () => {
               </div>
             </form>
           </Form> */}
-          <EmailVerify
-            type="TwoFa"
-            verificationCode="123456"
-            setVerified={setVerified}
-          />
+          <EmailVerify type="TwoFa" setVerified={setVerified} />
         </div>
       ) : (
         <div className="mx-auto w-[480px] h-auto flex flex-col gap-[24px]">
