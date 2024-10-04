@@ -65,6 +65,7 @@ export const useSubscriptionPlanStore = create<
   SubscriptionPlanDetails & {
     setMonthlyDiscount: (discount: number) => void;
     setYearlyDiscount: (discount: number) => void;
+    setGlobalDiscount: (discount: number) => void;
     setPlans: (plans: PlanDetails[]) => void;
     updatePlanField: (
       planId: string,
@@ -87,7 +88,7 @@ export const useSubscriptionPlanStore = create<
         plans: [],
         setMonthlyDiscount: (discount) => set({ monthlyDiscount: discount }),
         setYearlyDiscount: (discount) => set({ yearlyDiscount: discount }),
-        // setGlobalDiscount: (discount) => set({ globalDiscount: discount }),
+        setGlobalDiscount: (discount) => set({ globalDiscount: discount }),
         setPlans: (plans) => set({ plans }),
         updatePlanField: (planId, field, value) =>
           set((state) => ({
