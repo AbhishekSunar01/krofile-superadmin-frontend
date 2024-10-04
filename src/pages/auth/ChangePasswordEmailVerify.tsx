@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import EmailVerify from "../../components/login/EmailVerify";
 import { Button } from "../../components/ui/button";
 import CommonAuthLayout from "../../layout/CommonAuthLayout";
 
 import SuccessGif from "../../assets/png/Login Images/resetpasswordsuccess.gif";
+import EmailVerify from "../../components/login/EmailVerify";
 import { cn } from "../../lib/utils";
 
 export default function ChangePasswordEmailVerify() {
@@ -19,7 +19,12 @@ export default function ChangePasswordEmailVerify() {
             '"A 6-digit code has just been sent to johndoe@gmail.com. Enter it below to proceed"'
           }
         >
-          <EmailVerify setVerified={setVerified} verificationCode="123456" />
+          <div>hi</div>
+          <EmailVerify
+            type="ResetPassword"
+            setVerified={setVerified}
+            verificationCode="123456"
+          />
         </CommonAuthLayout>
       ) : (
         <div className="mx-auto w-[480px] h-auto flex flex-col gap-[24px] mt-[8%]">
