@@ -99,7 +99,7 @@ export default function ChangePasswordForm() {
           newPassword: values.password,
           confirmPassword: values.confirmPassword,
         });
-        console.log("response", response);
+
         if (response.status === "success") {
           setLoading(false);
           setErrorMessage("");

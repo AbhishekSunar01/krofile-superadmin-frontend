@@ -29,7 +29,8 @@ export default function Dashboard() {
 
   useLayoutEffect(() => {
     if (data !== undefined) {
-      setLoggedInUserData(data.data);
+      // setLoggedInUserData(data.data);
+      setLoggedInUserData(data.user); // ! main branch ma .user vanera xa data ani krof-417 ma chai data.data vanera xa what to do ?
     }
   }, [data]);
 
