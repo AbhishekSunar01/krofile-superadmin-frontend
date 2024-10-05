@@ -39,7 +39,7 @@ interface IProps {
 const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
   const [reset, setReset] = useState(false);
   const [time, setTime] = useState({
-    minutes: 2,
+    minutes: 10,
     seconds: 0,
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -57,19 +57,19 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
   useEffect(() => {
     if (reset === true) {
       setTime({
-        minutes: 2,
+        minutes: 10,
         seconds: 0,
       });
     }
   }, [reset]);
 
   const handleResend = async () => {
-    setReset(true);
     if (type === "TwoFa") {
       try {
         const responseData = await resendTwoFaOtp.mutateAsync({
           email: localStorage.getItem("email") || "",
         });
+        setReset(true);
         setErrorMessage("");
 
         toast.success(responseData.data.message);
@@ -85,7 +85,7 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
           email: localStorage.getItem("reset-email") || "",
         });
         setErrorMessage("");
-
+        setReset(true);
         toast.success(responseData.data.message);
         setReset(false);
       } catch (error) {

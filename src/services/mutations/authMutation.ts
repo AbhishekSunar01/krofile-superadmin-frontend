@@ -153,16 +153,12 @@ export function useResendForgetPasswordOtp() {
   });
 }
 
-export function useSetNewPassword({
-  password,
-  confirmPassword,
-}: {
-  email: string;
-  password: string;
-  confirmPassword: string;
-}) {
+export function useSetNewPassword() {
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async ({ password, confirmPassword} : {
+      password: string;
+      confirmPassword: string;
+    }) => {
       return handleSetNewPassword({ password, confirmPassword });
     },
     onError: (error) => {

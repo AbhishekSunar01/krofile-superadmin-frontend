@@ -268,7 +268,7 @@ export const handleSetNewPassword = async ({
   try {
     const response: AxiosResponse<IChangePasswordResponse> =
       await axiosInstance.post<IChangePasswordResponse>(`auth/reset-password`, {
-        password,
+        newPassword: password,
         confirmPassword,
         email: localStorage.getItem("reset-email"),
       });
