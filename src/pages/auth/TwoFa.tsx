@@ -32,7 +32,7 @@ const TwoFAPage = () => {
               Almost there! Enter the 2FA code to proceed.
             </div>
             <div className="text-[14px] text-center">
-              "A 6-digit code has just been sent to
+              "A 6-digit code has just been sent to&nbsp;
               {localStorage.getItem("email")}. Enter it below to proceed"
             </div>
           </div>

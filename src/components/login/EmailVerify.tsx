@@ -45,6 +45,7 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   //   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
   const nav = useNavigate();
   const verifyTwoFaOtp = useVerifyTwoFaOtp();
   const resendTwoFaOtp = useResendTwoFaOtp();
@@ -64,18 +65,22 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
   }, [reset]);
 
   const handleResend = async () => {
+    setResetLoading(true);
+    setReset(false);
     if (type === "TwoFa") {
       try {
         const responseData = await resendTwoFaOtp.mutateAsync({
           email: localStorage.getItem("email") || "",
         });
-        setReset(true);
-        setErrorMessage("");
-
-        toast.success(responseData.data.message);
-        setReset(false);
+        if (responseData.status === "success") {
+          setReset(true);
+          setErrorMessage("");
+          toast.success(responseData.data.message);
+        }
+        setResetLoading(false);
       } catch (error) {
         setReset(false);
+        setResetLoading(false);
         console.log("error in resendTwoFaOtp", error);
       }
     }
@@ -84,12 +89,15 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
         const responseData = await resendForgetPasswordOtpService.mutateAsync({
           email: localStorage.getItem("reset-email") || "",
         });
-        setErrorMessage("");
-        setReset(true);
-        toast.success(responseData.data.message);
-        setReset(false);
+        if (responseData.status === "success") {
+          setReset(true);
+          setErrorMessage("");
+          toast.success(responseData.data.message);
+        }
+        setResetLoading(false);
       } catch (error) {
         setReset(false);
+        setResetLoading(false);
         console.log("error in resendForgetPasswordOtpService", error);
       }
     }
@@ -241,7 +249,9 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
               Resend
             </span>
             <div>
-              {reset && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+              {resetLoading && (
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              )}
             </div>
           </div>
         </form>
