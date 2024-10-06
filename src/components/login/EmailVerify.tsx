@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
 import { Loader2, TriangleAlert } from "lucide-react";
 import { Dispatch, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -22,14 +23,15 @@ import {
 } from "../../components/ui/input-otp";
 import { cn } from "../../lib/utils";
 import {
+  useResendForgetPasswordOtp,
   useResendTwoFaOtp,
+  useResetPasswordVerifyOtp,
   useVerifyTwoFaOtp,
 } from "../../services/mutations/authMutation";
 import useAuthStore from "../../store/authStore";
 import { OtpSchema } from "../../utils/schemas/authSchema";
 
 interface IProps {
-  verificationCode: string;
   setVerified?: Dispatch<boolean>;
   redirectLink?: string;
   type: "ResetPassword" | "TwoFa";
@@ -42,11 +44,14 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
     seconds: 0,
   });
   const [errorMessage, setErrorMessage] = useState("");
-  //   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
   const nav = useNavigate();
   const verifyTwoFaOtp = useVerifyTwoFaOtp();
   const resendTwoFaOtp = useResendTwoFaOtp();
+
+  const resetPasswordVerifyOtpService = useResetPasswordVerifyOtp();
+  const resendForgetPasswordOtpService = useResendForgetPasswordOtp();
 
   const setTokens = useAuthStore((state) => state.setTokens);
 
@@ -60,19 +65,40 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
   }, [reset]);
 
   const handleResend = async () => {
-    setReset(true);
+    setResetLoading(true);
+    setReset(false);
     if (type === "TwoFa") {
       try {
         const responseData = await resendTwoFaOtp.mutateAsync({
           email: localStorage.getItem("email") || "",
         });
-        setErrorMessage("");
-
-        toast.success(responseData.data.message);
-        setReset(false);
+        if (responseData.status === "success") {
+          setReset(true);
+          setErrorMessage("");
+          toast.success(responseData.data.message);
+        }
+        setResetLoading(false);
       } catch (error) {
         setReset(false);
+        setResetLoading(false);
         console.log("error in resendTwoFaOtp", error);
+      }
+    }
+    if (type === "ResetPassword") {
+      try {
+        const responseData = await resendForgetPasswordOtpService.mutateAsync({
+          email: localStorage.getItem("reset-email") || "",
+        });
+        if (responseData.status === "success") {
+          setReset(true);
+          setErrorMessage("");
+          toast.success(responseData.data.message);
+        }
+        setResetLoading(false);
+      } catch (error) {
+        setReset(false);
+        setResetLoading(false);
+        console.log("error in resendForgetPasswordOtpService", error);
       }
     }
   };
@@ -99,7 +125,7 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
           if (responseData.status === "success") {
             setLoading(false);
             setErrorMessage("");
-            toast.success("You have been successfully verified and loggedin.");
+            toast.success("You have been successfully verified and logged in.");
             setTokens(
               responseData.data.token.access_token,
               responseData.data.token.refresh_token
@@ -119,6 +145,25 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
           setLoading(false);
           setErrorMessage("Invalid or expired reset code. Please try again.");
           console.log("error in verifyTwoFaOtp", error);
+        }
+      }
+
+      if (type === "ResetPassword") {
+        try {
+          const responseData = await resetPasswordVerifyOtpService.mutateAsync({
+            otp: data.pin,
+          });
+
+          if (responseData.status === "success") {
+            setLoading(false);
+            setErrorMessage("");
+            toast.success(responseData.data.message);
+            nav("/auth/set-new-password");
+          }
+        } catch (error) {
+          setLoading(false);
+          setErrorMessage("Invalid or expired reset code. Please try again.");
+          console.log("error in verifyResetPasswordOtp", error);
         }
       }
       setLoading(false);
@@ -182,14 +227,26 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
           </div>
           <div className="text-center text-[14px] font-[400] flex gap-1 w-full justify-center items-center">
             If you didn’t receive a code!{" "}
-            <span
-              className="text-destructive cursor-pointer font-[400]"
+            <Button
+              disabled={
+                resetLoading || time.minutes !== 0 || time.seconds !== 0
+              } // Disable button when timer is running
+              variant={"ghost"}
+              className={clsx(
+                "text-destructive font-[400] px-0 cursor-pointer",
+                {
+                  "cursor-not-allowed":
+                    resetLoading || time.minutes !== 0 || time.seconds !== 0,
+                }
+              )}
               onClick={handleResend}
             >
               Resend
-            </span>
+            </Button>
             <div>
-              {reset && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+              {resetLoading && (
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              )}
             </div>
           </div>
         </form>
