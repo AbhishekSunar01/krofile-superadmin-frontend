@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
 import { Loader2, TriangleAlert } from "lucide-react";
 import { Dispatch, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -39,11 +40,10 @@ interface IProps {
 const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
   const [reset, setReset] = useState(false);
   const [time, setTime] = useState({
-    minutes: 10,
+    minutes: 2,
     seconds: 0,
   });
   const [errorMessage, setErrorMessage] = useState("");
-  //   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
   const nav = useNavigate();
@@ -58,7 +58,7 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
   useEffect(() => {
     if (reset === true) {
       setTime({
-        minutes: 10,
+        minutes: 2,
         seconds: 0,
       });
     }
@@ -125,7 +125,7 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
           if (responseData.status === "success") {
             setLoading(false);
             setErrorMessage("");
-            toast.success("You have been successfully verified and loggedin.");
+            toast.success("You have been successfully verified and logged in.");
             setTokens(
               responseData.data.token.access_token,
               responseData.data.token.refresh_token
@@ -159,21 +159,6 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
             setErrorMessage("");
             toast.success(responseData.data.message);
             nav("/auth/set-new-password");
-            // toast.success("You have been successfully verified and loggedin.");
-            // setTokens(
-            //   responseData.data.token.access_token,
-            //   responseData.data.token.refresh_token
-            // );
-            // if (setVerified) {
-            //   setVerified(true);
-            // }
-            // setErrorMessage("");
-            // if (redirectLink) {
-            //   return nav(redirectLink);
-            // }
-            // localStorage.removeItem("temporary_token");
-            // localStorage.removeItem("email");
-            // return nav("/dashboard");
           }
         } catch (error) {
           setLoading(false);
@@ -242,12 +227,22 @@ const EmailVerify = ({ setVerified, redirectLink, type }: IProps) => {
           </div>
           <div className="text-center text-[14px] font-[400] flex gap-1 w-full justify-center items-center">
             If you didn’t receive a code!{" "}
-            <span
-              className="text-destructive cursor-pointer font-[400]"
+            <Button
+              disabled={
+                resetLoading || time.minutes !== 0 || time.seconds !== 0
+              } // Disable button when timer is running
+              variant={"ghost"}
+              className={clsx(
+                "text-destructive font-[400] px-0 cursor-pointer",
+                {
+                  "cursor-not-allowed":
+                    resetLoading || time.minutes !== 0 || time.seconds !== 0,
+                }
+              )}
               onClick={handleResend}
             >
               Resend
-            </span>
+            </Button>
             <div>
               {resetLoading && (
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
