@@ -73,7 +73,7 @@ export default function UserIcon() {
 
       if (data.status === "success") {
         toast.success("Your details have been updated successfully");
-        setLoggedInUserData(data.user);
+        setLoggedInUserData(data.data.user);
         setIsDialogOpen(false);
         setLoading(false);
       }

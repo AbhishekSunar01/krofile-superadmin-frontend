@@ -17,30 +17,32 @@ export interface ILoginResponse {
 
 export interface ILoggedInUserResponse {
   status: string;
-  message: string;
-  user: {
-    _id: string;
-    name: string;
-    email: string;
-    role: string;
-    loginAttempts: number;
-    enable2fa: boolean;
-    disabled_by_admin: boolean;
-    loginDevices: {
-      deviceId: string;
-      devicename: string;
-      hashRt: string;
-      isTwoFactorAuthenticated: boolean;
-      lastUsedAt: string;
+  data: {
+    message: string;
+    user: {
       _id: string;
-    }[];
+      name: string;
+      email: string;
+      role: string;
+      loginAttempts: number;
+      enable2fa: boolean;
+      disabled_by_admin: boolean;
+      loginDevices: {
+        deviceId: string;
+        devicename: string;
+        hashRt: string;
+        isTwoFactorAuthenticated: boolean;
+        lastUsedAt: string;
+        _id: string;
+      }[];
+    };
   };
 }
 
 interface IVerifyTwoFaOtpResponse {
   status: string;
-  message: string;
   data: {
+    message: string;
     token: {
       access_token: string;
       refresh_token: string;

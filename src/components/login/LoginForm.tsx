@@ -19,7 +19,6 @@ import {
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
 import { useLoginUser } from "../../services/mutations/authMutation";
-import useAuthStore from "../../store/authStore";
 import { LoginSchema } from "../../utils/schemas/authSchema";
 
 export default function LoginForm() {
@@ -27,7 +26,6 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const nav = useNavigate();
-  const setTokens = useAuthStore((state) => state.setTokens);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -55,12 +53,10 @@ export default function LoginForm() {
     if (data.status === "success") {
       setLoading(false);
       setErrorMessage("");
-      // localStorage.setItem("temporary_token", data?.data.token.access_token);
-      // localStorage.setItem("email", values.email);
+      localStorage.setItem("temporary_token", data?.data.token.access_token);
+      localStorage.setItem("email", values.email);
       toast.success(data.data.message);
-      setTokens(data.data.token.access_token, data.data.token.refresh_token);
-      // return nav("/auth/2fa");
-      return nav("/dashboard");
+      return nav("/auth/2fa");
     } else {
       toast.error(data.data.message);
       setLoading(false);
