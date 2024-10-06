@@ -17,9 +17,7 @@ import { useTabStateStore } from "../store/subscriptionManagerStore";
 import useSaveSubscriptionData from "../hooks/useSaveSubscriptionData";
 
 export default function SubscriptionManager() {
-  const { activeTab, setActiveTab } = useTabStateStore();
-  console.log("activeTab", activeTab);
-
+  const { setActiveTab } = useTabStateStore();
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
   const saveData = useSaveSubscriptionData();

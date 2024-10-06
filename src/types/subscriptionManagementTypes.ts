@@ -67,3 +67,10 @@ export type TabState = {
   activeTab: string;
   setActiveTab: (tab: string) => void;
 };
+
+export type PlanState = {
+  title: string;
+  initialPrice: number;
+  discount: number;
+  contactUs: boolean;
+};

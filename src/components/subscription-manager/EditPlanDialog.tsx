@@ -12,14 +12,22 @@ import editPen from "../../assets/svg/editIcon.svg";
 import { z } from "zod";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
 import { PlanDetails } from "../../types/subscriptionManagementTypes";
+import { useEffect } from "react";
+import { useUpdateSinglePlan } from "../../services/mutations/subscriptionMutation";
 
 const formSchema = z.object({
   title: z.string().min(2).max(50),
-  initialPrice: z.number().min(0),
-  discount: z.number().min(0),
+  initialPrice: z.number().min(0, "Initial price must be a positive number"),
+  discount: z.number().min(0, "Discount must be a positive number"),
   contactUs: z.boolean(),
 });
 
@@ -29,7 +37,8 @@ interface EditPlanDialogProps {
 
 export default function EditPlanDialog({ plan }: EditPlanDialogProps) {
   const planId = plan._id;
-  console.log(planId);
+  const updatePlan = useUpdateSinglePlan();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,9 +49,28 @@ export default function EditPlanDialog({ plan }: EditPlanDialogProps) {
     },
   });
 
+  useEffect(() => {
+    if (plan) {
+      form.reset({
+        title: plan.title,
+        initialPrice: plan.monthlyPrice[0]?.initialPrice || 0,
+        discount: plan.monthlyPrice[0]?.discount || 0,
+        contactUs: plan.contactUs,
+      });
+    }
+  }, [plan, form]);
+
   const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log(data);
-    // Handle form submission logic here
+    updatePlan.mutate({
+      data: {
+        title: data.title,
+        initialPrice: data.initialPrice,
+        discount: data.discount,
+        contactUs: data.contactUs,
+      },
+      _id: planId,
+      type: "monthly",
+    });
   };
 
   return (
@@ -52,9 +80,9 @@ export default function EditPlanDialog({ plan }: EditPlanDialogProps) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[625px]">
         <DialogHeader>
-          <DialogTitle>Add New Plan</DialogTitle>
+          <DialogTitle>Edit Plan</DialogTitle>
           <DialogDescription>
-            Offer more flexibility with a newly added subscription plan.
+            Update the details of the subscription plan.
           </DialogDescription>
         </DialogHeader>
 
@@ -69,7 +97,7 @@ export default function EditPlanDialog({ plan }: EditPlanDialogProps) {
                   <FormControl>
                     <Input placeholder="Enter title" {...field} />
                   </FormControl>
-                  {/* <FormMessage /> */}
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -80,9 +108,15 @@ export default function EditPlanDialog({ plan }: EditPlanDialogProps) {
                 <FormItem>
                   <FormLabel>Initial Price</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter initial price" {...field} />
+                    <Input
+                      placeholder="Enter initial price"
+                      {...field}
+                      type="number"
+                      value={field.value || ""} // Ensure value is controlled
+                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                    />
                   </FormControl>
-                  {/* <FormMessage /> */}
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -93,9 +127,29 @@ export default function EditPlanDialog({ plan }: EditPlanDialogProps) {
                 <FormItem>
                   <FormLabel>Discount</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter discount" {...field} />
+                    <Input
+                      placeholder="Enter discount"
+                      {...field}
+                      type="number"
+                      value={field.value || ""} // Ensure value is controlled
+                      onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                    />
                   </FormControl>
-                  {/* <FormMessage /> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="contactUs"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Contact Us</FormLabel>
+                  <FormControl>
+                    {/* <input type="checkbox" {...field} /> */}
+                  </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />

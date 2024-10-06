@@ -12,7 +12,6 @@ export default function SubscriptionPlan() {
   // Use the useQuery hook to fetch subscription plans
   const { data: subcriptionPlans, isLoading, error } = useSubscriptionPlans();
   const { activeTab, setActiveTab } = useTabStateStore();
-  console.log("activeTab", activeTab);
 
   // Get the setPlans method and the plans state from the store
   const setPlans = useSubscriptionPlanStore((state) => state.setPlans);
@@ -24,8 +23,6 @@ export default function SubscriptionPlan() {
     (state) => state.monthlyDiscount
   );
 
-  console.log("monthlyDiscount", monthlyDiscount);
-
   // Use useEffect to set the plans in the store when subcriptionPlans changes
   useEffect(() => {
     if (subcriptionPlans) {
@@ -35,9 +32,9 @@ export default function SubscriptionPlan() {
   }, [subcriptionPlans, setPlans]);
 
   // Use useEffect to log the state whenever it changes
-  useEffect(() => {
-    console.log("Current plans state:", plans);
-  }, [plans]);
+  // useEffect(() => {
+  //   console.log("Current plans state:", plans);
+  // }, [plans]);
 
   // Handle loading and error states
   if (isLoading) return <div>Loading...</div>;

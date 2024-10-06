@@ -1,5 +1,6 @@
 import axiosInstance from ".";
 import {
+  PlanState,
   ReferralPeriodData,
   TrialPeriodData,
 } from "../../types/subscriptionManagementTypes";
@@ -86,6 +87,26 @@ export const postMonthlySubscriptionPlan = async (data: any) => {
 export const postAnnuallySubscriptionPlan = async (data: any) => {
   try {
     return await axiosInstance.post("subscription/plans/annually", data);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const updateSubscriptionPlan = async ({
+  data,
+  _id,
+  type,
+}: {
+  data: PlanState;
+  _id: string;
+  type: string;
+}) => {
+  try {
+    return await axiosInstance.patch(
+      `subscription/plans/${_id}?type=${type}`,
+      data
+    );
   } catch (error) {
     console.error(error);
     throw error;
