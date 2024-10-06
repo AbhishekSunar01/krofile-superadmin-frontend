@@ -16,6 +16,7 @@ import {
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
+import { useSetNewPassword } from "../../services/mutations/authMutation";
 import { NewPasswordSchema } from "../../utils/schemas/authSchema";
 
 interface IProps {
@@ -32,6 +33,7 @@ export default function NewPasswordForm({ setVerified }: IProps) {
   const [hasSpecialChar, setHasSpecialChar] = useState(false);
   const [doPasswordsMatch, setDoPasswordsMatch] = useState(true);
   //   const nav = useNavigate();
+  const setNewPasswordService = useSetNewPassword();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -60,7 +62,7 @@ export default function NewPasswordForm({ setVerified }: IProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.watch("password"), form.watch("confirmPassword")]);
 
-  function onSubmit(values: z.infer<typeof NewPasswordSchema>) {
+  async function onSubmit(values: z.infer<typeof NewPasswordSchema>) {
     setLoading(true);
 
     if (!doPasswordsMatch) {
@@ -70,22 +72,30 @@ export default function NewPasswordForm({ setVerified }: IProps) {
       return;
     }
 
-    if (values.password !== values.confirmPassword) {
-      setLoading(false);
-      setErrorMessage(
-        "Password and Confirm Password do not match. Please try again."
-      );
-      toast.error(
-        "Password and Confirm Password do not match. Please try again."
-      );
-    } else {
-      setTimeout(() => {
-        setVerified(true);
-        toast.success("Your password is successfully updated!");
+    try {
+      const responsedata = await setNewPasswordService.mutateAsync({
+        password: values.password,
+        confirmPassword: values.confirmPassword,
+      });
+      if (responsedata.status && responsedata.status === "success") {
         setLoading(false);
+        toast.success(responsedata.data.message);
+        setVerified(true);
         setErrorMessage("");
-      }, 2000);
+        localStorage.clear();
+      } else {
+        setLoading(false);
+      }
+    } catch (error: unknown) {
+      setLoading(false);
+      setErrorMessage("");
+      console.log("error in reset password verify otp", error);
     }
+
+    // setVerified(true);
+    // toast.success("Your password is successfully updated!");
+    // setLoading(false);
+    // setErrorMessage("");
   }
 
   return (
