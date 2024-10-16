@@ -10,7 +10,7 @@ export default function ContentManagement({
 }: {
   setSaveEnabled: setSaveEnabled;
 }) {
-  const { activeTab, setActiveTab } = useTabStateStore();
+  const { setActiveTab } = useTabStateStore();
 
   return (
     <Tabs defaultValue="trial" className="w-full" onValueChange={setActiveTab}>
