@@ -9,6 +9,7 @@ import {
   useTrialPeriodManagementStore,
   useReferralPeriodManagementStore,
 } from "../store/subscriptionManagerStore";
+import { toast } from "sonner";
 
 const useSaveSubscriptionData = () => {
   const postTrialContent = usePostTrialContent();
@@ -35,15 +36,29 @@ const useSaveSubscriptionData = () => {
   }));
 
   const callTrialData = () => {
-    postTrialContent.mutate(trialPeriodData);
+    postTrialContent.mutate(trialPeriodData, {
+      onSuccess: () => {
+        toast.success("Trial data saved");
+      },
+      onError: () => {
+        toast.error("Error saving trial data");
+      },
+    });
 
-    console.log(JSON.stringify(trialPeriodData, null, 2));
+    // console.log(JSON.stringify(trialPeriodData, null, 2));
   };
 
   const callReferralData = () => {
-    postReferralContent.mutate(referralPeriodData);
+    postReferralContent.mutate(referralPeriodData, {
+      onSuccess: () => {
+        toast.success("Referral data saved");
+      },
+      onError: () => {
+        toast.error("Error saving referral data");
+      },
+    });
 
-    console.log(JSON.stringify(referralPeriodData, null, 2));
+    // console.log(JSON.stringify(referralPeriodData, null, 2));
   };
 
   const callMonthlyData = () => {
@@ -60,7 +75,14 @@ const useSaveSubscriptionData = () => {
       updates,
     };
 
-    postMonthlySubscriptionPlan.mutate(stateData);
+    postMonthlySubscriptionPlan.mutate(stateData, {
+      onSuccess: () => {
+        toast.success("Monthly data saved");
+      },
+      onError: () => {
+        toast.error("Error saving monthly data");
+      },
+    });
 
     console.log(JSON.stringify(stateData, null, 2));
   };

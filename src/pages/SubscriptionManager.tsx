@@ -24,6 +24,8 @@ export default function SubscriptionManager() {
 
   const handleSave = () => {
     saveData();
+    console.log("Data saved");
+    console.log("This is it", saveData);
   };
 
   return (
