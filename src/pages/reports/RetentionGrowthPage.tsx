@@ -59,6 +59,7 @@ const RetentionGrowthPage = () => {
         />
         <div className="mt-4">
           <ReportTable
+            cellHeight="h-[80px]"
             dataPerPage={7}
             data={retentionTableData}
             headings={["Month", "Retention Rate (%)", "Retention Growth (%)"]}

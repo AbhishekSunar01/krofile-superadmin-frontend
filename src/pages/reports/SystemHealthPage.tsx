@@ -54,6 +54,7 @@ const SystemHealthPage = () => {
 
         <div className="mt-4">
           <ReportTable
+            cellHeight="h-[80px]"
             dataPerPage={7}
             data={systemHealthTableData}
             headings={["Month", "Online (%)", "Offline (%)"]}

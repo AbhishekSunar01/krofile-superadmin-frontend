@@ -5,32 +5,32 @@ import { removeAvatar, updateUser } from "../api/user";
 
 export function useUserUpdate() {
   return useMutation({
-    mutationFn: async ({
-      formData,
-    }: {
-      formData: FormData
-    }) => {
+    mutationFn: async ({ formData }: { formData: FormData }) => {
       return updateUser({ formData });
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
   });
 }
 
-
-
 export function useRemoveAvatar() {
   return useMutation({
-    mutationFn: async() => {
+    mutationFn: async () => {
       return removeAvatar();
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
-  })
+  });
 }

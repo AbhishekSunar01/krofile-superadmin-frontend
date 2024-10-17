@@ -71,13 +71,11 @@ const PopularCountriesPage = () => {
 
         <div className="mt-4">
           <ReportTable
+            cellHeight="h-[80px]"
             dataPerPage={7}
             data={popularTableData.data}
             headings={["Country", "Users"]}
-            dataKeys={[
-              "country",
-              "users",
-            ]}
+            dataKeys={["country", "users"]}
             paginationType="withNumber"
           />
         </div>

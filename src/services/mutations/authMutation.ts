@@ -2,9 +2,14 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 import {
+  changePassword,
+  handleForgetPassword,
   handleLogin,
   handleLogout,
+  handleResendForgetPasswordOtp,
+  handleSetNewPassword,
   resendTwoFaOtp,
+  resetPasswordVerifyOtp,
   verifyTwoFaOtp,
 } from "../api/auth";
 
@@ -21,7 +26,10 @@ export function useLoginUser() {
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
   });
@@ -34,7 +42,10 @@ export function useVerifyTwoFaOtp() {
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
   });
@@ -47,7 +58,34 @@ export function useResendTwoFaOtp() {
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
+      }
+    },
+  });
+}
+
+export function useChangePassword() {
+  return useMutation({
+    mutationFn: async ({
+      oldPassword,
+      newPassword,
+      confirmPassword,
+    }: {
+      oldPassword: string;
+      newPassword: string;
+      confirmPassword: string;
+    }) => {
+      return changePassword({ oldPassword, newPassword, confirmPassword });
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
   });
@@ -58,7 +96,77 @@ export function logoutUser() {
     mutationFn: async () => handleLogout,
     onError: (error) => {
       if (axios.isAxiosError(error)) {
-        toast.error(error.response?.data.message || "Something went wrong");
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
+      }
+    },
+  });
+}
+
+export function useForgetPassword() {
+  return useMutation({
+    mutationFn: async ({ email }: { email: string }) => {
+      return handleForgetPassword({ email });
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
+      }
+    },
+  });
+}
+
+export function useResetPasswordVerifyOtp() {
+  return useMutation({
+    mutationFn: async ({ otp }: { otp: string }) => {
+      return resetPasswordVerifyOtp({ otp });
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
+      }
+    },
+  });
+}
+
+export function useResendForgetPasswordOtp() {
+  return useMutation({
+    mutationFn: async ({ email }: { email: string }) => {
+      return handleResendForgetPasswordOtp({ email });
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
+      }
+    },
+  });
+}
+
+export function useSetNewPassword() {
+  return useMutation({
+    mutationFn: async ({ password, confirmPassword} : {
+      password: string;
+      confirmPassword: string;
+    }) => {
+      return handleSetNewPassword({ password, confirmPassword });
+    },
+    onError: (error) => {
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data.message ||
+            "Internal server error! Something went wrong!"
+        );
       }
     },
   });

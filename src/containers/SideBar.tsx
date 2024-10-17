@@ -62,12 +62,12 @@ const SidebarItem = ({
 
 export default function SideBar() {
   return (
-    <div className="h-screen fixed bg-card flex flex-col justify-between items-center w-[260px]">
+    <div className="h-screen fixed bg-card flex flex-col justify-between items-center w-[260px] z-50">
       <h1 className="h-[110px] border-b w-full flex flex-col justify-center text-center p-8">
         <img src={MainLogo} alt="Main Logo" className="w-full mx-auto" />
       </h1>
 
-      <div className="h-full py-4 flex flex-col w-full">
+      <div className="flex h-full py-4 flex-col w-full">
         {sidebarItems.map((item, index) => (
           <SidebarItem key={index} {...item} />
         ))}
