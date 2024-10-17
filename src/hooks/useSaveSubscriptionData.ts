@@ -24,7 +24,7 @@ const useSaveSubscriptionData = () => {
     periodType: state.periodType,
     title: state.title,
     body: state.body,
-    tagLine: state.tagLine,
+    tagline: state.tagline,
   }));
 
   const referralPeriodData = useReferralPeriodManagementStore((state) => ({
@@ -32,7 +32,7 @@ const useSaveSubscriptionData = () => {
     giveReferralMonth: state.giveReferralMonth,
     title: state.title,
     body: state.body,
-    tagLine: state.tagLine,
+    tagline: state.tagline,
   }));
 
   const callTrialData = () => {

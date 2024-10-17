@@ -17,7 +17,8 @@ export default function ReferralPeriodManagement() {
   // Ensure data is available and is a string before parsing
   const title = data?.title ? parse(data.title) : "No title available";
   const body = data?.body ? parse(data.body) : "No body available";
-  const tagLine = data?.tagLine ? parse(data.tagLine) : "No tagline available";
+  const tagline = data?.tagline ? parse(data.tagline) : "No tagline available";
+  console.log(data);
 
   return (
     <div
@@ -47,7 +48,7 @@ export default function ReferralPeriodManagement() {
         </div>
       </div>
 
-      <div>{tagLine}</div>
+      <div>{tagline}</div>
 
       {/* <FinalPreviewTable /> */}
     </div>

@@ -23,11 +23,11 @@ export const useTrialPeriodManagementStore =
           periodType: "DAY",
           title: "",
           body: "",
-          tagLine: "",
+          tagline: "",
           setTrialPeriod: (period: number) => set({ period }),
           setTitle: (title: string) => set({ title }),
           setBody: (body: string) => set({ body }),
-          setTagLine: (tagLine: string) => set({ tagLine }),
+          setTagLine: (tagline: string) => set({ tagline }),
         }),
         {
           name: "trial-period-management-storage",
@@ -45,14 +45,14 @@ export const useReferralPeriodManagementStore =
           giveReferralMonth: 0,
           title: "",
           body: "",
-          tagLine: "",
+          tagline: "",
           setGetReferralMonths: (months: number) =>
             set({ getReferralMonth: months }),
           setGiveReferralMonths: (months: number) =>
             set({ giveReferralMonth: months }),
           setTitle: (title: string) => set({ title }),
           setBody: (body: string) => set({ body }),
-          setTagLine: (tagLine: string) => set({ tagLine }),
+          setTagLine: (tagline: string) => set({ tagline }),
         }),
         {
           name: "referral-period-management-storage",

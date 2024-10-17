@@ -3,11 +3,11 @@ export type TrialPeriodManagementState = {
   periodType: "DAY" | "MONTH";
   title: string;
   body: string;
-  tagLine: string;
+  tagline: string;
   setTrialPeriod: (trialPeriod: number) => void;
   setTitle: (title: string) => void;
   setBody: (body: string) => void;
-  setTagLine: (tagLine: string) => void;
+  setTagLine: (tagline: string) => void;
 };
 
 export type TrialPeriodData = {
@@ -16,7 +16,7 @@ export type TrialPeriodData = {
   periodType?: "DAY" | "MONTH";
   title: string;
   body: string;
-  tagLine: string;
+  tagline: string;
 };
 
 export type ReferralPeriodManagementState = {
@@ -24,12 +24,12 @@ export type ReferralPeriodManagementState = {
   giveReferralMonth: number;
   title: string;
   body: string;
-  tagLine: string;
+  tagline: string;
   setGetReferralMonths: (months: number) => void;
   setGiveReferralMonths: (months: number) => void;
   setTitle: (title: string) => void;
   setBody: (body: string) => void;
-  setTagLine: (tagLine: string) => void;
+  setTagLine: (tagline: string) => void;
 };
 
 export type ReferralPeriodData = {
@@ -37,7 +37,7 @@ export type ReferralPeriodData = {
   giveReferralMonth: number;
   title: string;
   body: string;
-  tagLine: string;
+  tagline: string;
 };
 
 export type PriceDetails = {
