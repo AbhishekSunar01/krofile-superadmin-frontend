@@ -23,7 +23,7 @@ const IndustryTypePage = () => {
           <img
             src={GrowthIndicator}
             alt="Growth Indicator"
-            className="inline-block"
+            className="inline-block" 
           />
           <span className="text-[#14181F] text-[12px] font-[500] justify-center items-center inline-block">
             {IndustryDataJson.growthPercentage !== undefined
@@ -36,13 +36,14 @@ const IndustryTypePage = () => {
           </span>
         </div>
         <div className="mt-4">
-          <ReportTable                    
-            dataPerPage={7}                       
-            data={IndustryTableData}                           
-            headings={["Industry Type", "Count", "Ratio"]}                   
-            dataKeys={["industryType", "count", "ratio"]}                  
-            paginationType="withNumber"                  
-          />                   
+          <ReportTable
+            cellHeight="h-[80px]"
+            dataPerPage={7}
+            data={IndustryTableData}
+            headings={["Industry Type", "Count", "Ratio"]}
+            dataKeys={["industryType", "count", "ratio"]}
+            paginationType="withNumber"
+          />
         </div>
       </ReportsLayout>
     </>

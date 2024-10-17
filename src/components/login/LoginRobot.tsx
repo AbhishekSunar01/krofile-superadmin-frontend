@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import SquareLogo from "../../assets/png/Login Images/KrofileSquareLogo.png";
-import RightBg from "../../assets/png/Login Images/LoginRightSideBg.png";
-import RobotImage from "../../assets/png/Login Images/LoginRobotImage1.png";
+import RightBg from "../../assets/png/Login Images/loginrightbg.png";
+import RobotImage from "../../assets/herologinimage.png";
 import StarImage from "../../assets/png/Login Images/LoginStar.svg";
 
 export default function LoginRobot() {
@@ -22,12 +22,12 @@ export default function LoginRobot() {
       <div className="topLeftStar absolute top-[-10px] left-0 flex justify-center items-center w-[64px] h-[64px] p-1 border-2 border-solid border-[#E2E6E9] rounded-full">
         <img src={StarImage} alt="star image" className="" />
       </div>
-      <div className="robot absolute top-0 -left-32 rotate-[-4deg] h-[100%]">
+      <div className="robot absolute top-0 left-0 h-[100%]">
         <img src={RobotImage} alt="RobotImage" className="w-full h-full" />
       </div>
-      <div className="footerContent border border-white absolute bottom-6 left-6 h-auto w-[90%] rounded-[24px] px-[16px] py-[8px] backdrop-blur-[21px] flex justify-between login-gradient">
+      <div className="footerContent loginFooterBorderGradient absolute bottom-6 left-6 h-auto w-[90%] rounded-[24px] px-[16px] py-[8px] flex justify-between ">
         <div className="flex justify-center items-center gap-2">
-          <img src={SquareLogo} alt="RobotImage" className="" />
+          <img src={SquareLogo} alt="square logo here" className="" />
           <span>Krofile is growing...</span>
         </div>
         <motion.button className="px-[24px] bg-white rounded-[12px] h-[48px] relative flex justify-center items-center w-[100px]">
