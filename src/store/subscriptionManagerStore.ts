@@ -63,9 +63,7 @@ export const useReferralPeriodManagementStore =
 
 export const useSubscriptionPlanStore = create<
   SubscriptionPlanDetails & {
-    setMonthlyDiscount: (discount: number) => void;
-    setYearlyDiscount: (discount: number) => void;
-    setGlobalDiscount: (discount: number) => void;
+    setGlobalDiscount: (globalDiscount: number) => void;
     setPlans: (plans: PlanDetails[]) => void;
     updatePlanField: (
       planId: string,
@@ -82,13 +80,12 @@ export const useSubscriptionPlanStore = create<
   devtools(
     persist(
       (set) => ({
-        globalDiscount: 0,
         monthlyDiscount: 0,
         yearlyDiscount: 0,
+        globalDiscount: 0,
         plans: [],
-        setMonthlyDiscount: (discount) => set({ monthlyDiscount: discount }),
-        setYearlyDiscount: (discount) => set({ yearlyDiscount: discount }),
-        setGlobalDiscount: (discount) => set({ globalDiscount: discount }),
+        setGlobalDiscount: (globalDiscount) =>
+          set({ globalDiscount: globalDiscount }),
         setPlans: (plans) => set({ plans }),
         updatePlanField: (planId, field, value) =>
           set((state) => ({

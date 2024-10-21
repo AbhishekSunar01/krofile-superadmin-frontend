@@ -18,6 +18,9 @@ const useSaveSubscriptionData = () => {
   const { activeTab } = useTabStateStore();
 
   const plans = useSubscriptionPlanStore((state) => state.plans);
+  const globalDiscount = useSubscriptionPlanStore(
+    (state) => state.globalDiscount
+  );
 
   const trialPeriodData = useTrialPeriodManagementStore((state) => ({
     period: state.period,
@@ -61,6 +64,32 @@ const useSaveSubscriptionData = () => {
     // console.log(JSON.stringify(referralPeriodData, null, 2));
   };
 
+  // const callMonthlyData = () => {
+  //   const updates = plans.map((plan) => ({
+  //     planId: plan._id,
+  //     initialPrice: Number(plan.monthlyPrice[0]?.initialPrice) || 0,
+  //     discount: Number(plan.monthlyPrice[0]?.discount) || 0,
+  //     contactUs: plan.contactUs,
+  //     isActive: plan.isActive,
+  //   }));
+
+  //   const stateData = {
+  //     globalDiscount: 0,
+  //     updates,
+  //   };
+
+  //   postMonthlySubscriptionPlan.mutate(stateData, {
+  //     onSuccess: () => {
+  //       toast.success("Monthly data saved");
+  //     },
+  //     onError: () => {
+  //       toast.error("Error saving monthly data");
+  //     },
+  //   });
+
+  //   console.log(JSON.stringify(stateData, null, 2));
+  // };
+
   const callMonthlyData = () => {
     const updates = plans.map((plan) => ({
       planId: plan._id,
@@ -71,7 +100,7 @@ const useSaveSubscriptionData = () => {
     }));
 
     const stateData = {
-      globalDiscount: 0,
+      globalDiscount: Number(globalDiscount) || 0, // Ensure it's a number
       updates,
     };
 
