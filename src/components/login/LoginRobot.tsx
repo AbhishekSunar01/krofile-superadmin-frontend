@@ -17,9 +17,9 @@ export default function LoginRobot() {
   }, [texts.length]);
 
   return (
-    <div className="content relative">
-      <img src={RightBg} alt="right bg" className="w-full" />
-      <div className="topLeftStar absolute top-0 left-0 flex justify-center items-center w-[64px] h-[64px] p-1 border-2 border-solid border-[#E2E6E9] rounded-full">
+    <div className="content relative h-[90vh]">
+      <img src={RightBg} alt="right bg" className=" w-full h-full" />
+      <div className="topLeftStar absolute top-[-10px] left-0 flex justify-center items-center w-[64px] h-[64px] p-1 border-2 border-solid border-[#E2E6E9] rounded-full">
         <img src={StarImage} alt="star image" className="" />
       </div>
       <div className="robot absolute top-0 -left-32 rotate-[-4deg] h-[100%]">

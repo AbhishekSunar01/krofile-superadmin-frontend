@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "../../components/ui/button";
-import { Checkbox } from "../../components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -145,8 +144,8 @@ export default function LoginForm() {
                     </FormItem>
                   )}
                 />
-                <div className="flex items-center justify-between space-x-2 -mt-3">
-                  <FormField
+                <div className="flex items-center justify-end space-x-2 -mt-3">
+                  {/* <FormField
                     control={form.control}
                     name="remember"
                     render={({ field }) => (
@@ -166,11 +165,11 @@ export default function LoginForm() {
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
+                  /> */}
 
                   <Link
                     to="/auth/reset-password"
-                    className="text-[14px] underline font-[400] cursor-pointer"
+                    className="text-[14px] underline font-[400] cursor-pointer "
                   >
                     Forgot password?
                   </Link>

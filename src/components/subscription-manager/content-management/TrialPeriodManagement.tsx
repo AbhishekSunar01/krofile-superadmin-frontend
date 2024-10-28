@@ -15,7 +15,7 @@ export default function TrailPeriodManagement({
     period,
     title,
     body,
-    tagLine,
+    tagline,
     setTrialPeriod,
     setTitle,
     setBody,
@@ -25,7 +25,7 @@ export default function TrailPeriodManagement({
   // Enable save button when any of the fields change
   useEffect(() => {
     setSaveEnabled(true);
-  }, [period, title, body, tagLine]);
+  }, [period, title, body, tagline]);
 
   return (
     <div className="flex flex-col items-start w-full gap-4 mt-6">
@@ -61,7 +61,7 @@ export default function TrailPeriodManagement({
         Tagline <span className="text-destructive">*</span>
         <div className="p-4 mt-2 rounded-lg border flex flex-col items-start gap-2">
           <TextEditor
-            value={tagLine}
+            value={tagline}
             onChange={(value) => setTagLine(value)}
             placeholder="Type here..."
           />

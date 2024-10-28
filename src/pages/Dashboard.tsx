@@ -29,7 +29,7 @@ export default function Dashboard() {
 
   useLayoutEffect(() => {
     if (data !== undefined) {
-      setLoggedInUserData(data.data);
+      setLoggedInUserData(data.data.user);
     }
   }, [data]);
 

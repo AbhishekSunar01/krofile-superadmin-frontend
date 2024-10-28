@@ -1,4 +1,4 @@
-import { ChevronDown, Eye, Lock, LogOut } from "lucide-react";
+import { ChevronDown, Eye, Loader2, Lock, LogOut } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -30,6 +30,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
+import clsx from "clsx";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import {
@@ -43,6 +44,7 @@ export default function UserIcon() {
   const logout = useAuthStore((state) => state.logout);
 
   const [avatarFile, setAvatarFile] = useState<File | undefined>();
+  const [loading, setLoading] = useState<boolean>(false);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null); // State to hold the preview URL
   const [updatedName, setUpdatedName] = useState<string | undefined>(
     userData?.name
@@ -54,6 +56,7 @@ export default function UserIcon() {
 
   // 2. Define a submit handler.
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    setLoading(true);
     e.preventDefault();
     const formData = new FormData();
 
@@ -65,13 +68,19 @@ export default function UserIcon() {
       formData.append("name", updatedName);
     }
 
-    // 3. Call the mutation function with the form data.
-    const data: IUpdatedUserData = await mutateAsync({ formData });
+    try {
+      const data: IUpdatedUserData = await mutateAsync({ formData });
 
-    if (data.status === "success") {
-      toast.success("Your details have been updated successfully");
-      setLoggedInUserData(data.user);
-      setIsDialogOpen(false);
+      if (data.status === "success") {
+        toast.success("Your details have been updated successfully");
+        setLoggedInUserData(data.data.user);
+        setIsDialogOpen(false);
+        setLoading(false);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   }
 
@@ -213,7 +222,7 @@ export default function UserIcon() {
                         </div>
                       </div>
                       <div className="flex flex-col gap-2">
-                        <Label htmlFor="username">Username</Label>
+                        <Label htmlFor="name">Name</Label>
                         <div>
                           <Input
                             name="name"
@@ -264,8 +273,18 @@ export default function UserIcon() {
                           </Button>
                         </DialogClose>
 
-                        <Button className="w-[50%]" size={"lg"}>
-                          Update & Save
+                        <Button
+                          disabled={loading}
+                          className={clsx("w-[50%]", {
+                            "cursor-not-allowed": loading,
+                          })}
+                          size={"lg"}
+                        >
+                          {loading ? (
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          ) : (
+                            <span>Update & Save</span>
+                          )}
                         </Button>
                       </div>
                     </DialogFooter>

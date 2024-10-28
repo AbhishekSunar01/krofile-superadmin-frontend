@@ -11,33 +11,30 @@ import { useEffect } from "react";
 export default function SubscriptionPlan() {
   // Use the useQuery hook to fetch subscription plans
   const { data: subcriptionPlans, isLoading, error } = useSubscriptionPlans();
-  const { activeTab, setActiveTab } = useTabStateStore();
-  console.log("activeTab", activeTab);
+  const { setActiveTab } = useTabStateStore();
 
   // Get the setPlans method and the plans state from the store
   const setPlans = useSubscriptionPlanStore((state) => state.setPlans);
   const plans = useSubscriptionPlanStore((state) => state.plans);
-  const setMonthlyDiscount = useSubscriptionPlanStore(
-    (state) => state.setMonthlyDiscount
+  const setGlobalDiscount = useSubscriptionPlanStore(
+    (state) => state.setGlobalDiscount
   );
-  const monthlyDiscount = useSubscriptionPlanStore(
-    (state) => state.monthlyDiscount
+  const globalDiscount = useSubscriptionPlanStore(
+    (state) => state.globalDiscount
   );
-
-  console.log("monthlyDiscount", monthlyDiscount);
 
   // Use useEffect to set the plans in the store when subcriptionPlans changes
   useEffect(() => {
     if (subcriptionPlans) {
       setPlans(subcriptionPlans.plans);
-      setMonthlyDiscount(subcriptionPlans.monthlyDiscount);
+      setGlobalDiscount(subcriptionPlans.globalDiscount);
     }
   }, [subcriptionPlans, setPlans]);
 
   // Use useEffect to log the state whenever it changes
-  useEffect(() => {
-    console.log("Current plans state:", plans);
-  }, [plans]);
+  // useEffect(() => {
+  //   console.log("Current plans state:", plans);
+  // }, [plans]);
 
   // Handle loading and error states
   if (isLoading) return <div>Loading...</div>;
@@ -61,7 +58,7 @@ export default function SubscriptionPlan() {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="monthly">
-        <MonthlyPlan plans={plans} monthlyDiscount={monthlyDiscount ?? 0} />
+        <MonthlyPlan plans={plans} monthlyDiscount={globalDiscount ?? 0} />
       </TabsContent>
       <TabsContent value="annually">
         <AnnuallyPlan plans={plans} />
