@@ -23,11 +23,11 @@ export const useTrialPeriodManagementStore =
           periodType: "DAY",
           title: "",
           body: "",
-          tagLine: "",
+          tagline: "",
           setTrialPeriod: (period: number) => set({ period }),
           setTitle: (title: string) => set({ title }),
           setBody: (body: string) => set({ body }),
-          setTagLine: (tagLine: string) => set({ tagLine }),
+          setTagLine: (tagline: string) => set({ tagline }),
         }),
         {
           name: "trial-period-management-storage",
@@ -45,14 +45,14 @@ export const useReferralPeriodManagementStore =
           giveReferralMonth: 0,
           title: "",
           body: "",
-          tagLine: "",
+          tagline: "",
           setGetReferralMonths: (months: number) =>
             set({ getReferralMonth: months }),
           setGiveReferralMonths: (months: number) =>
             set({ giveReferralMonth: months }),
           setTitle: (title: string) => set({ title }),
           setBody: (body: string) => set({ body }),
-          setTagLine: (tagLine: string) => set({ tagLine }),
+          setTagLine: (tagline: string) => set({ tagline }),
         }),
         {
           name: "referral-period-management-storage",
@@ -63,9 +63,7 @@ export const useReferralPeriodManagementStore =
 
 export const useSubscriptionPlanStore = create<
   SubscriptionPlanDetails & {
-    setMonthlyDiscount: (discount: number) => void;
-    setYearlyDiscount: (discount: number) => void;
-    setGlobalDiscount: (discount: number) => void;
+    setGlobalDiscount: (globalDiscount: number) => void;
     setPlans: (plans: PlanDetails[]) => void;
     updatePlanField: (
       planId: string,
@@ -82,13 +80,12 @@ export const useSubscriptionPlanStore = create<
   devtools(
     persist(
       (set) => ({
-        globalDiscount: 0,
         monthlyDiscount: 0,
         yearlyDiscount: 0,
+        globalDiscount: 0,
         plans: [],
-        setMonthlyDiscount: (discount) => set({ monthlyDiscount: discount }),
-        setYearlyDiscount: (discount) => set({ yearlyDiscount: discount }),
-        setGlobalDiscount: (discount) => set({ globalDiscount: discount }),
+        setGlobalDiscount: (globalDiscount) =>
+          set({ globalDiscount: globalDiscount }),
         setPlans: (plans) => set({ plans }),
         updatePlanField: (planId, field, value) =>
           set((state) => ({

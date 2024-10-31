@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   PlanDetails,
   PriceDetails,
@@ -25,9 +25,16 @@ const MonthlyPlan: React.FC<MonthlyPlanProps> = ({
   const updatePlanField = useSubscriptionPlanStore(
     (state) => state.updatePlanField
   );
-  const [globalDiscount, setGlobalDiscount] = useState<number | string>(
-    monthlyDiscount
+  const setGlobalDiscount = useSubscriptionPlanStore(
+    (state) => state.setGlobalDiscount
   );
+
+  const [globalDiscount] = useState<number | string>(monthlyDiscount);
+
+  // Update the global discount in the store when the local state changes
+  useEffect(() => {
+    setGlobalDiscount(Number(globalDiscount));
+  }, [globalDiscount, setGlobalDiscount]);
 
   const handlePriceChange = (
     planId: string,
@@ -67,12 +74,13 @@ const MonthlyPlan: React.FC<MonthlyPlanProps> = ({
 
   return (
     <div>
-      {/* <button onClick={logStateData}>log</button> */}
       <div className="my-4">
-        <Label>Discount{`(%)`}:</Label>
+        <Label>Discount (%)</Label>
         <Input
           type="number"
+          value={globalDiscount}
           onChange={(e) => setGlobalDiscount(Number(e.target.value))}
+          placeholder="Enter global discount"
         />
       </div>
       {plans.map((plan) => (
@@ -85,7 +93,7 @@ const MonthlyPlan: React.FC<MonthlyPlanProps> = ({
               />
               <h4>{plan.title}</h4>
             </div>
-            <EditPlanDialog />
+            <EditPlanDialog plan={plan} />
           </div>
           <div className="mb-4 pt-2">
             {plan.monthlyPrice.map((priceDetail, index) => (
@@ -108,13 +116,9 @@ const MonthlyPlan: React.FC<MonthlyPlanProps> = ({
                 <div className="w-full">
                   <Label className="w-full">Discount:</Label>
                   <Input
-                    // type="number"
-                    value={priceDetail.discount}
-                    {...(globalDiscount && {
-                      value: globalDiscount,
-                    })}
-                    className="w-full"
+                    value={globalDiscount || priceDetail.discount}
                     disabled={!!globalDiscount}
+                    className="w-full"
                     onChange={(e) =>
                       handlePriceChange(
                         plan._id,

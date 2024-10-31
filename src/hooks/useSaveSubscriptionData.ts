@@ -9,6 +9,7 @@ import {
   useTrialPeriodManagementStore,
   useReferralPeriodManagementStore,
 } from "../store/subscriptionManagerStore";
+import { toast } from "sonner";
 
 const useSaveSubscriptionData = () => {
   const postTrialContent = usePostTrialContent();
@@ -17,13 +18,16 @@ const useSaveSubscriptionData = () => {
   const { activeTab } = useTabStateStore();
 
   const plans = useSubscriptionPlanStore((state) => state.plans);
+  const globalDiscount = useSubscriptionPlanStore(
+    (state) => state.globalDiscount
+  );
 
   const trialPeriodData = useTrialPeriodManagementStore((state) => ({
     period: state.period,
     periodType: state.periodType,
     title: state.title,
     body: state.body,
-    tagLine: state.tagLine,
+    tagline: state.tagline,
   }));
 
   const referralPeriodData = useReferralPeriodManagementStore((state) => ({
@@ -31,20 +35,60 @@ const useSaveSubscriptionData = () => {
     giveReferralMonth: state.giveReferralMonth,
     title: state.title,
     body: state.body,
-    tagLine: state.tagLine,
+    tagline: state.tagline,
   }));
 
   const callTrialData = () => {
-    postTrialContent.mutate(trialPeriodData);
+    postTrialContent.mutate(trialPeriodData, {
+      onSuccess: () => {
+        toast.success("Trial data saved");
+      },
+      onError: () => {
+        toast.error("Error saving trial data");
+      },
+    });
 
-    console.log(JSON.stringify(trialPeriodData, null, 2));
+    // console.log(JSON.stringify(trialPeriodData, null, 2));
   };
 
   const callReferralData = () => {
-    postReferralContent.mutate(referralPeriodData);
+    postReferralContent.mutate(referralPeriodData, {
+      onSuccess: () => {
+        toast.success("Referral data saved");
+      },
+      onError: () => {
+        toast.error("Error saving referral data");
+      },
+    });
 
-    console.log(JSON.stringify(referralPeriodData, null, 2));
+    // console.log(JSON.stringify(referralPeriodData, null, 2));
   };
+
+  // const callMonthlyData = () => {
+  //   const updates = plans.map((plan) => ({
+  //     planId: plan._id,
+  //     initialPrice: Number(plan.monthlyPrice[0]?.initialPrice) || 0,
+  //     discount: Number(plan.monthlyPrice[0]?.discount) || 0,
+  //     contactUs: plan.contactUs,
+  //     isActive: plan.isActive,
+  //   }));
+
+  //   const stateData = {
+  //     globalDiscount: 0,
+  //     updates,
+  //   };
+
+  //   postMonthlySubscriptionPlan.mutate(stateData, {
+  //     onSuccess: () => {
+  //       toast.success("Monthly data saved");
+  //     },
+  //     onError: () => {
+  //       toast.error("Error saving monthly data");
+  //     },
+  //   });
+
+  //   console.log(JSON.stringify(stateData, null, 2));
+  // };
 
   const callMonthlyData = () => {
     const updates = plans.map((plan) => ({
@@ -56,11 +100,18 @@ const useSaveSubscriptionData = () => {
     }));
 
     const stateData = {
-      globalDiscount: 0,
+      globalDiscount: Number(globalDiscount) || 0, // Ensure it's a number
       updates,
     };
 
-    postMonthlySubscriptionPlan.mutate(stateData);
+    postMonthlySubscriptionPlan.mutate(stateData, {
+      onSuccess: () => {
+        toast.success("Monthly data saved");
+      },
+      onError: () => {
+        toast.error("Error saving monthly data");
+      },
+    });
 
     console.log(JSON.stringify(stateData, null, 2));
   };
