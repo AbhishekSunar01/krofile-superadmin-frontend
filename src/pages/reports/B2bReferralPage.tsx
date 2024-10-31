@@ -89,6 +89,7 @@ const B2bReferralPage = () => {
 
         <div className="mt-4">
           <ReportTable
+            cellHeight="h-[80px]"
             paginationType="withNumber"
             dataPerPage={7}
             data={tableData}

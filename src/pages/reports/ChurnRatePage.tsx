@@ -63,6 +63,7 @@ const ChurnRatePage = () => {
         <div className="mt-4">
           <div className="mt-4">
             <ReportTable
+              cellHeight="h-[80px]"
               dataPerPage={7}
               data={churnRateTableData}
               headings={["Month", "Churn Rate (%)", "Churn Users"]}

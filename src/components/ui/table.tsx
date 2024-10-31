@@ -73,7 +73,6 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-
       "py-3 px-[12px] text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
 
       className
@@ -90,9 +89,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-
       "py-3 px-[12px] align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] font-[400] text-[#14181f]",
-
       className
     )}
     {...props}
@@ -114,11 +111,11 @@ TableCaption.displayName = "TableCaption";
 
 export {
   Table,
-  TableHeader,
   TableBody,
+  TableCaption,
+  TableCell,
   TableFooter,
   TableHead,
+  TableHeader,
   TableRow,
-  TableCell,
-  TableCaption,
 };

@@ -101,7 +101,6 @@ ul {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --chart-6: 191 82% 53%;
-
   }
 
   .dark {
@@ -139,4 +138,15 @@ ul {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.loginFooterBorderGradient {
+  border: 1px solid rgba(255, 255, 255, 0.587);
+  backdrop-filter: blur(42px);
+
+  background: linear-gradient(
+    147.29deg,
+    rgba(255, 255, 255, 0.5) 1.03%,
+    rgba(255, 255, 255, 0.25) 98.94%
+  );
 }

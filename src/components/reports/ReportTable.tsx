@@ -193,6 +193,7 @@ interface ITableProps {
   dataKeys: string[];
   dataPerPage: number;
   paginationType: "withNumber" | "withoutNumber";
+  cellHeight?: string;
 }
 
 const ReportTable = ({
@@ -201,6 +202,7 @@ const ReportTable = ({
   dataKeys,
   dataPerPage,
   paginationType,
+  cellHeight = "h-[40px]"
 }: ITableProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = dataPerPage;
@@ -256,12 +258,12 @@ const ReportTable = ({
         </TableHeader>
         <TableBody>
           {currentData.map((item, index) => (
-            <TableRow key={index}>
+            <TableRow className="" key={index}>
               <TableCell>
                 {(currentPage - 1) * rowsPerPage + index + 1}
               </TableCell>
               {dataKeys.map((key, i) => (
-                <TableCell key={i}>
+                <TableCell key={i} className={`${cellHeight}`}>
                   {item[key] !== undefined ? item[key] : "--"}
                 </TableCell>
               ))}
