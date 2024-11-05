@@ -1,0 +1,35 @@
+{
+  "chartData": [
+    {
+      "date": "2024-09-08",
+      "online": 90,
+      "offline": 10
+    },
+    {
+      "date": "2024-09-09",
+      "online": 48,
+      "offline": 52
+    },
+    {
+      "date": "2024-09-10",
+      "online": 78,
+      "offline": 22
+    },
+    {
+      "date": "2024-09-11",
+      "online": 100,
+      "offline": 0
+    },
+    {
+      "date": "2024-09-12",
+      "online": 80,
+      "offline": 20
+    },
+    {
+      "date": "2024-09-12",
+      "online": 80,
+      "offline": 20
+    }
+  ],
+  "growthPercentage": "15"
+}

@@ -1,77 +1,124 @@
-import React, { useRef } from "react";
+import React, { useCallback, useRef, useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Bold, Italic, Underline, List } from "lucide-react";
-import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
+import bold from "../../assets/svg/bold.svg";
+import italic from "../../assets/svg/italic.svg";
+import underline from "../../assets/svg/underline.svg";
+import uolist from "../../assets/svg/unorderlist.svg";
 
-const TextFormatter = ({
-  quillRef,
-}: {
-  quillRef: React.MutableRefObject<any>;
-}) => {
-  const applyFormat = (format: string) => {
-    if (quillRef.current) {
-      const quill = quillRef.current.getEditor();
-      quill.format(format, !quill.getFormat()[format]);
+interface RichTextEditorProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+}
+
+const CHARACTER_LIMIT = 500;
+
+const TextEditor: React.FC<RichTextEditorProps> = ({ value, onChange }) => {
+  const [activeFormats, setActiveFormats] = useState<string[]>([]);
+  const quillRef = useRef<ReactQuill>(null);
+  const [charCount, setCharCount] = useState(0);
+
+  useEffect(() => {
+    const textContent = value.replace(/<[^>]*>/g, "");
+    setCharCount(textContent.length);
+  }, [value]);
+
+  const handleChange = (content: string) => {
+    const quill = quillRef.current?.getEditor();
+    if (quill) {
+      const text = quill.getText().trim();
+      if (text.length <= CHARACTER_LIMIT) {
+        onChange(content);
+      } else {
+        const trimmedDelta = quill.getContents(0, CHARACTER_LIMIT);
+        quill.setContents(trimmedDelta);
+        onChange(quill.root.innerHTML);
+      }
     }
   };
 
-  return (
-    <ToggleGroup type="multiple">
-      <ToggleGroupItem
-        value="bold"
-        aria-label="Toggle bold"
-        onClick={() => applyFormat("bold")}
-      >
-        <Bold className="h-4 w-4" />
-      </ToggleGroupItem>
-      <ToggleGroupItem
-        value="italic"
-        aria-label="Toggle italic"
-        onClick={() => applyFormat("italic")}
-      >
-        <Italic className="h-4 w-4" />
-      </ToggleGroupItem>
-      <ToggleGroupItem
-        value="underline"
-        aria-label="Toggle underline"
-        onClick={() => applyFormat("underline")}
-      >
-        <Underline className="h-4 w-4" />
-      </ToggleGroupItem>
-      <ToggleGroupItem
-        value="list"
-        aria-label="Toggle list"
-        onClick={() => applyFormat("list")}
-      >
-        <List className="h-4 w-4" />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  );
-};
+  const handleFormat = useCallback((format: string) => {
+    if (quillRef.current) {
+      const quill = quillRef.current.getEditor();
+      quill.focus();
+      const selection = quill.getSelection();
+      if (selection) {
+        if (format === "list") {
+          const currentFormat = quill.getFormat(selection);
+          quill.format(
+            "list",
+            currentFormat.list === "bullet" ? false : "bullet"
+          );
+        } else {
+          const currentFormat = quill.getFormat(selection);
+          quill.format(format, !currentFormat[format]);
+        }
+      } else {
+        const length = quill.getLength();
+        const currentFormat = quill.getFormat(0, length);
+        quill.formatText(0, length, format, !currentFormat[format]);
+      }
 
-const TextEditor = ({ value, onChange }: { value: any; onChange: any }) => {
-  const quillRef = useRef(null);
+      const newActiveFormats = quill.getFormat();
+      setActiveFormats(
+        Object.keys(newActiveFormats).filter((f) => newActiveFormats[f])
+      );
+    }
+  }, []);
 
   const modules = {
-    toolbar: {
-      container: "#toolbar",
-    },
+    toolbar: false,
   };
 
   return (
-    <div className="border-none w-full flex flex-col gap-2">
-      <div id="toolbar" className="w-full flex items-start border-black">
-        <TextFormatter quillRef={quillRef} />
+    <div className="w-full">
+      <div className="flex gap-4 cursor-pointer w-full mb-2">
+        <button
+          onClick={() => handleFormat("bold")}
+          className={`p-1 rounded ${
+            activeFormats.includes("bold") ? "bg-gray-200" : ""
+          }`}
+        >
+          <img src={bold} alt="Bold" className="h-6 w-6" />
+        </button>
+        <button
+          onClick={() => handleFormat("italic")}
+          className={`p-1 rounded ${
+            activeFormats.includes("italic") ? "bg-gray-200" : ""
+          }`}
+        >
+          <img src={italic} alt="Italic" className="h-6 w-6" />
+        </button>
+        <button
+          onClick={() => handleFormat("underline")}
+          className={`p-1 rounded ${
+            activeFormats.includes("underline") ? "bg-gray-200" : ""
+          }`}
+        >
+          <img src={underline} alt="Underline" className="h-6 w-6" />
+        </button>
+        <button
+          onClick={() => handleFormat("list")}
+          className={`p-1 rounded ${
+            activeFormats.includes("list") ? "bg-gray-200" : ""
+          }`}
+        >
+          <img src={uolist} alt="Unordered List" className="h-6 w-6" />
+        </button>
       </div>
-      <div className="rounded-xl overflow-hidden">
+      <div className="relative ">
         <ReactQuill
           ref={quillRef}
-          className="bg-mainBg rounded-xl border-none"
           value={value}
-          onChange={onChange}
+          onChange={handleChange}
           modules={modules}
+          className="w-full px-1 bg-mainBg h-[120px] break-all font-medium"
+          placeholder="Type here..."
         />
+        <div className="flex items-end justify-end text-xs absolute bottom-2 right-2">
+          {charCount}/{CHARACTER_LIMIT}
+        </div>
       </div>
     </div>
   );

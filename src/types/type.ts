@@ -163,3 +163,8 @@ export interface NotificationType {
   startDate: string;
   expirationDate: string;
 }
+
+export type AdminLogin = {
+  email: string;
+  password: string;
+};

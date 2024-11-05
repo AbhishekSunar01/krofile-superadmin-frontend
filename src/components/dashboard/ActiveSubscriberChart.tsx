@@ -87,7 +87,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({ payload }) => {
     const data = payload[0].payload;
     return (
       <div className="bg-[#000000] text-white p-2 rounded-md text-xs font-normal">
-        <div className="flex items-center space-x-2  ">
+        <div className="flex items-center space-x-2 ">
           <span
             className="inline-block w-2 h-2 rounded-full"
             style={{ backgroundColor: data.fill }}

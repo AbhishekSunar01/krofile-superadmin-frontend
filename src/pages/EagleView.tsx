@@ -1,11 +1,11 @@
-import PageLayout from "../layout/PageLayout";
-import ActiveSubscribersDataJson from "../json/dummyData/activeSubscribersData.json";
-import activeUserGrowthChartDataJson from "../json/dummyData/activeUserGrowthChartData.json";
-import { ChartConfig } from "../components/ui/chart";
-import formatNumberWithCommas from "../utils/formatNumberWithComma";
+import EagleViewCard from "../components/eagle-view/EagleViewCard";
 import ReportAreaChart from "../components/reports/AreaChart";
 import ReportTable from "../components/reports/ReportTable";
-import EagleViewCard from "../components/eagle-view/EagleViewCard";
+import { ChartConfig } from "../components/ui/chart";
+import ActiveSubscribersDataJson from "../json/dummyData/activeSubscribersData.json";
+import activeUserGrowthChartDataJson from "../json/dummyData/activeUserGrowthChartData.json";
+import PageLayout from "../layout/PageLayout";
+import formatNumberWithCommas from "../utils/formatNumberWithComma";
 
 interface IChartData {
   date: string;
@@ -73,7 +73,10 @@ export default function EagleView() {
           childrenComponent={
             <ReportTable
               data={ActiveSubscribersData}
-              headings={["SL No", "Business Name", "Reg. Date", "Subs. Plan"]}
+              headings={["Business Name", "Reg. Date", "Subs. Plan"]}
+              dataKeys={["businessName", "date", "plan"]}
+              dataPerPage={5}
+              paginationType="withoutNumber"
             />
           }
         />

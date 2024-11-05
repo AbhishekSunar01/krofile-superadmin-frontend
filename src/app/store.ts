@@ -1,3 +1,4 @@
+import axios from "axios";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
@@ -27,74 +28,33 @@ export const useContentManagementStore = create<ContentManagementState>()(
     )
   )
 );
-
-type PlanDetails = {
+interface PlanDetails {
   name: string;
   monthlyPrice: number;
   annuallyPrice: number;
   discount: number;
   monthlyFinalPrice: number;
-  yearlyDiscount: number;
   yearlyFinalPrice: number;
   isActive: boolean;
-};
+}
 
-type PlanState = {
+// Define the PlanState type for Zustand state
+interface PlanState {
   plans: Record<string, PlanDetails>;
   setMonthlyPrice: (planType: string, price: number) => void;
   setDiscount: (planType: string, discount: number) => void;
   calculateFinalPrice: (planType: string) => void;
-  addPlanType: (planType: string) => void;
   setActive: (planType: string, isActive: boolean) => void;
-  loadPlansFromJSON: () => void; // Add this line
-};
+  loadPlansFromJSON: () => Promise<void>;
+}
 
 export const usePlanStore = create<PlanState>()(
   devtools(
     persist(
       (set, get) => ({
-        plans: {
-          Standard: {
-            name: "Standard",
-            monthlyPrice: 0,
-            annuallyPrice: 0,
-            discount: 0,
-            monthlyFinalPrice: 0,
-            yearlyDiscount: 0,
-            yearlyFinalPrice: 0,
-            isActive: false,
-          },
-          Upgraded: {
-            name: "Upgraded",
-            monthlyPrice: 0,
-            annuallyPrice: 0,
-            discount: 0,
-            monthlyFinalPrice: 0,
-            yearlyDiscount: 0,
-            yearlyFinalPrice: 0,
-            isActive: false,
-          },
-          Premium: {
-            name: "Premium",
-            monthlyPrice: 0,
-            annuallyPrice: 0,
-            discount: 0,
-            monthlyFinalPrice: 0,
-            yearlyDiscount: 0,
-            yearlyFinalPrice: 0,
-            isActive: false,
-          },
-          Enterprise: {
-            name: "Enterprise",
-            monthlyPrice: 0,
-            annuallyPrice: 0,
-            discount: 0,
-            monthlyFinalPrice: 0,
-            yearlyDiscount: 0,
-            yearlyFinalPrice: 0,
-            isActive: false,
-          },
-        },
+        plans: {},
+
+        // Set monthly price for a specific plan
         setMonthlyPrice: (planType, price) => {
           const plans = get().plans;
           set({
@@ -103,12 +63,13 @@ export const usePlanStore = create<PlanState>()(
               [planType]: {
                 ...plans[planType],
                 monthlyPrice: price,
-                annuallyPrice: price * 12, // Update annual price
               },
             },
           });
           get().calculateFinalPrice(planType);
         },
+
+        // Set discount for a specific plan
         setDiscount: (planType, discount) => {
           const plans = get().plans;
           set({
@@ -119,46 +80,29 @@ export const usePlanStore = create<PlanState>()(
           });
           get().calculateFinalPrice(planType);
         },
+
+        // Calculate final prices based on discount
         calculateFinalPrice: (planType) => {
           const plans = get().plans;
           const { monthlyPrice, discount } = plans[planType];
           const monthlyFinalPrice =
             monthlyPrice - (monthlyPrice * discount) / 100;
           const annuallyPrice = monthlyPrice * 12;
-          const additionalAnnualDiscount = 0; // Example additional discount for annual plans
           const yearlyFinalPrice =
-            annuallyPrice -
-            (annuallyPrice * (discount + additionalAnnualDiscount)) / 100;
+            annuallyPrice - (annuallyPrice * discount) / 100;
           set({
             plans: {
               ...plans,
               [planType]: {
                 ...plans[planType],
                 monthlyFinalPrice: parseFloat(monthlyFinalPrice.toFixed(2)),
-                annuallyPrice: parseFloat(annuallyPrice.toFixed(2)),
                 yearlyFinalPrice: parseFloat(yearlyFinalPrice.toFixed(2)),
               },
             },
           });
         },
-        addPlanType: (planType) => {
-          const plans = get().plans;
-          set({
-            plans: {
-              ...plans,
-              [planType]: {
-                name: planType,
-                monthlyPrice: 0,
-                annuallyPrice: 0,
-                discount: 0,
-                monthlyFinalPrice: 0,
-                yearlyDiscount: 0,
-                yearlyFinalPrice: 0,
-                isActive: false,
-              },
-            },
-          });
-        },
+
+        // Set active status for a specific plan
         setActive: (planType, isActive) => {
           const plans = get().plans;
           set({
@@ -168,22 +112,38 @@ export const usePlanStore = create<PlanState>()(
             },
           });
         },
-        loadPlansFromJSON: () => {
-          // Implementation to load plans from JSON
-          const jsonPlans = {
-            Standard: {
-              name: "Standard",
-              monthlyPrice: 10,
-              annuallyPrice: 120,
-              discount: 10,
-              monthlyFinalPrice: 9,
-              yearlyDiscount: 10,
-              yearlyFinalPrice: 108,
-              isActive: true,
-            },
-            // Add other plans as needed
-          };
-          set({ plans: jsonPlans });
+
+        // Fetch plans from the backend and update the store
+        loadPlansFromJSON: async () => {
+          try {
+            const response = await axios.get(
+              "http://localhost:8000/subscription/plans"
+            );
+            const jsonData = response.data;
+
+            const mappedPlans = jsonData.data.subscriptionPlans.plans.reduce(
+              (acc: Record<string, PlanDetails>, plan: any) => {
+                acc[plan.title] = {
+                  name: plan.title,
+                  monthlyPrice: parseFloat(plan.monthlyPrice[0].initialPrice),
+                  annuallyPrice:
+                    parseFloat(plan.yearlyPrice[0].initialPrice) * 12,
+                  discount: plan.monthlyPrice[0].discount,
+                  monthlyFinalPrice: parseFloat(
+                    plan.monthlyPrice[0].finalPrice
+                  ),
+                  yearlyFinalPrice: parseFloat(plan.yearlyPrice[0].finalPrice),
+                  isActive: plan.isActive,
+                };
+                return acc;
+              },
+              {}
+            );
+
+            set({ plans: mappedPlans });
+          } catch (error) {
+            console.error("Error fetching subscription plans:", error);
+          }
         },
       }),
       {

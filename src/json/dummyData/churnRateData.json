@@ -1,52 +1,64 @@
 {
   "chartData": [
     {
-      "date": "2024-09-01",
-      "churnrate": 5
+      "date": "2024-01-01",
+      "churnrate": 5,
+      "churnUsers": 100
     },
     {
-      "date": "2024-09-02",
-      "churnrate": 4.5
+      "date": "2024-02-02",
+      "churnrate": 4.5,
+      "churnUsers": 200
     },
     {
-      "date": "2024-09-03",
-      "churnrate": 6
+      "date": "2024-03-03",
+      "churnrate": 6,
+      "churnUsers": 300
     },
     {
-      "date": "2024-09-04",
-      "churnrate": 3.8
+      "date": "2024-04-04",
+      "churnrate": 3.8,
+      "churnUsers": 400
     },
     {
       "date": "2024-09-05",
-      "churnrate": 5.2
+      "churnrate": 5.2,
+      "churnUsers": 500
     },
     {
       "date": "2024-09-06",
-      "churnrate": 4.7
+      "churnrate": 4.7,
+      "churnUsers": 600
     },
     {
       "date": "2024-09-07",
-      "churnrate": 6.1
+      "churnrate": 6.1,
+      "churnUsers": 700
     },
     {
       "date": "2024-09-08",
-      "churnrate": 3.9
+      "churnrate": 3.9,
+      "churnUsers": 800
     },
     {
       "date": "2024-09-09",
-      "churnrate": 4.2
+      "churnrate": 4.2,
+      "churnUsers": 900
     },
     {
       "date": "2024-09-10",
-      "churnrate": 5.4
+      "churnrate": 5.4,
+      "churnUsers": 1000
     },
     {
       "date": "2024-09-11",
-      "churnrate": 3.6
+      "churnrate": 3.6,
+      "churnUsers": 1100
     },
     {
       "date": "2024-09-12",
-      "churnrate": 4.9
+      "churnrate": 4.9,
+      "churnUsers": 1200
     }
   ],
   "growthPercentage": "26"

@@ -1,12 +1,11 @@
-import CommonAuthLayout from "../../layout/CommonAuthLayout";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { z } from "zod";
 import { Button } from "../../components/ui/button";
 import {
   Form,
@@ -17,13 +16,19 @@ import {
   FormMessage,
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
+import useRedirectIfLoggedIn from "../../hooks/useRedirectIfLoggedIn";
+import CommonAuthLayout from "../../layout/CommonAuthLayout";
 import { cn } from "../../lib/utils";
+import { useForgetPassword } from "../../services/mutations/authMutation";
 import { ResetPasswordSchema } from "../../utils/schemas/authSchema";
 
 export default function ResetPassword() {
+  useRedirectIfLoggedIn();
+
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const nav = useNavigate();
+  const forgetPasswordService = useForgetPassword();
 
   const form = useForm<z.infer<typeof ResetPasswordSchema>>({
     resolver: zodResolver(ResetPasswordSchema),
@@ -32,28 +37,27 @@ export default function ResetPassword() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof ResetPasswordSchema>) {
+  async function onSubmit(values: z.infer<typeof ResetPasswordSchema>) {
     setLoading(true);
 
-    if (values.email !== "admin@gmail.com") {
-      setLoading(false);
-      setErrorMessage(
-        "Oops! The email you entered is incorrect. Please try again."
-      );
-      toast.error(
-        "Oops! The email you entered is incorrect. Please try again."
-      );
-    } else {
-      // Simulate a login request.
-      setTimeout(() => {
-        // toast.success("You are successfully logged in!");
-
+    try {
+      const responseData = await forgetPasswordService.mutateAsync({
+        email: values.email,
+      });
+      if (responseData.status && responseData.status === "success") {
         setLoading(false);
+        toast.success(responseData.data.message);
+        localStorage.setItem("reset-email", values.email);
+        nav("/auth/reset-password-verify-email");
         setErrorMessage("");
-        return nav("/auth/reset-password-verify-email");
-        // redirect("/auth/2fa");
-      }, 2000);
+      }
+    } catch (error: unknown) {
+      setLoading(false);
+      setErrorMessage("");
+      console.log("error in reset password", error);
     }
+
+    // redirect("/auth/2fa");
   }
 
   return (

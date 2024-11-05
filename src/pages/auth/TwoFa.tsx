@@ -6,9 +6,11 @@ import MailImage from "../../assets/png/Login Images/MailImage.svg";
 import BackButton from "../../components/custom-ui/BackButton";
 import EmailVerify from "../../components/login/EmailVerify";
 import { Button } from "../../components/ui/button";
+import useRedirectIfLoggedIn from "../../hooks/useRedirectIfLoggedIn";
 import { cn } from "../../lib/utils";
 
 const TwoFAPage = () => {
+  useRedirectIfLoggedIn();
   const [verified, setVerified] = useState(false);
   const [loading] = useState(false);
 
@@ -30,8 +32,8 @@ const TwoFAPage = () => {
               Almost there! Enter the 2FA code to proceed.
             </div>
             <div className="text-[14px] text-center">
-              "A 5-digit code has just been sent to admin@gmail.com. Enter it
-              below to proceed"
+              "A 6-digit code has just been sent to&nbsp;
+              {localStorage.getItem("email")}. Enter it below to proceed"
             </div>
           </div>
 
@@ -101,7 +103,7 @@ const TwoFAPage = () => {
               </div>
             </form>
           </Form> */}
-          <EmailVerify verificationCode="123456" setVerified={setVerified} />
+          <EmailVerify type="TwoFa" setVerified={setVerified} />
         </div>
       ) : (
         <div className="mx-auto w-[480px] h-auto flex flex-col gap-[24px]">

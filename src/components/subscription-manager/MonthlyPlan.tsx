@@ -1,107 +1,169 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
+  PlanDetails,
+  PriceDetails,
+} from "../../types/subscriptionManagementTypes";
+import { useSubscriptionPlanStore } from "../../store/subscriptionManagerStore";
+import { Switch } from "../ui/switch";
+import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { useForm, FormProvider } from "react-hook-form";
-import { usePlanStore } from "../../app/store";
-import Plan from "./subscriptionPlan/Plan";
+import { Checkbox } from "../ui/checkbox";
+import EditPlanDialog from "./EditPlanDialog";
 
-export default function MonthlyPlan() {
-  const form = useForm();
-  const {
-    plans,
-    setMonthlyPrice,
-    setDiscount,
-    setActive,
-    calculateFinalPrice,
-  } = usePlanStore();
-  const [mainDiscount, setMainDiscount] = useState(0);
-  const [mainDiscountDisabled, setMainDiscountDisabled] = useState(false);
-  const [individualDiscountsDisabled, setIndividualDiscountsDisabled] =
-    useState(false);
+interface MonthlyPlanProps {
+  plans: PlanDetails[];
+  monthlyDiscount: number;
+}
 
-  const handleMainDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const discount = parseFloat(e.target.value) || 0;
-    setMainDiscount(discount);
-    setIndividualDiscountsDisabled(discount > 0);
+const MonthlyPlan: React.FC<MonthlyPlanProps> = ({
+  plans,
+  monthlyDiscount,
+}) => {
+  const updatePriceDetails = useSubscriptionPlanStore(
+    (state) => state.updatePriceDetails
+  );
+  const updatePlanField = useSubscriptionPlanStore(
+    (state) => state.updatePlanField
+  );
+  const setGlobalDiscount = useSubscriptionPlanStore(
+    (state) => state.setGlobalDiscount
+  );
 
-    Object.keys(plans).forEach((planType) => {
-      setDiscount(planType, discount);
-      calculateFinalPrice(planType);
+  const [globalDiscount] = useState<number | string>(monthlyDiscount);
+
+  // Update the global discount in the store when the local state changes
+  useEffect(() => {
+    setGlobalDiscount(Number(globalDiscount));
+  }, [globalDiscount, setGlobalDiscount]);
+
+  const handlePriceChange = (
+    planId: string,
+    index: number,
+    field: keyof PriceDetails,
+    value: string | number
+  ) => {
+    const numericValue =
+      field === "initialPrice" || field === "discount" ? Number(value) : value;
+
+    const updatedPlans = plans.map((plan) => {
+      if (plan._id === planId) {
+        const updatedMonthlyPrice = plan.monthlyPrice.map((priceDetail, i) => {
+          if (i === index) {
+            return { ...priceDetail, [field]: numericValue };
+          }
+          return priceDetail;
+        });
+        return { ...plan, monthlyPrice: updatedMonthlyPrice };
+      }
+      return plan;
     });
+    updatePriceDetails(
+      planId,
+      "monthlyPrice",
+      updatedPlans.find((plan) => plan._id === planId)?.monthlyPrice || []
+    );
   };
 
-  const handleIndividualDiscountChange = (
-    planType: string,
-    discount: number
-  ) => {
-    if (discount > 0) {
-      setMainDiscountDisabled(true);
-      setIndividualDiscountsDisabled(false);
-    } else {
-      const otherDiscountsSet = Object.keys(plans).some(
-        (type) => type !== planType && plans[type].discount > 0
-      );
-      if (!otherDiscountsSet) {
-        setMainDiscountDisabled(false);
-        setIndividualDiscountsDisabled(false);
-      }
-    }
-    setDiscount(planType, discount);
-    calculateFinalPrice(planType);
+  const handleSwitchChange = (planId: string, value: boolean) => {
+    updatePlanField(planId, "isActive", value);
+  };
+
+  const handleCheckboxChange = (planId: string, value: boolean) => {
+    updatePlanField(planId, "contactUs", value);
   };
 
   return (
-    <FormProvider {...form}>
-      <form className="space-y-4 p-4">
-        <div className="space-y-2">
-          <FormField
-            control={form.control}
-            name="mainDiscount"
-            render={({ field }) => (
-              <FormItem className="w-3/5">
-                <FormLabel>Discount (%)</FormLabel>
-                <FormControl>
+    <div>
+      <div className="my-4">
+        <Label>Discount (%)</Label>
+        <Input
+          type="number"
+          value={globalDiscount}
+          onChange={(e) => setGlobalDiscount(Number(e.target.value))}
+          placeholder="Enter global discount"
+        />
+      </div>
+      {plans.map((plan) => (
+        <div key={plan._id} className="plan-card">
+          <div className="flex w-full justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Switch
+                checked={plan.isActive}
+                onCheckedChange={(value) => handleSwitchChange(plan._id, value)}
+              />
+              <h4>{plan.title}</h4>
+            </div>
+            <EditPlanDialog plan={plan} />
+          </div>
+          <div className="mb-4 pt-2">
+            {plan.monthlyPrice.map((priceDetail, index) => (
+              <div key={index} className="flex gap-4">
+                <div className="w-full">
+                  <Label>Monthly Prices:</Label>
                   <Input
-                    placeholder="Enter discount for all plans"
-                    {...field}
-                    value={mainDiscount}
-                    disabled={mainDiscountDisabled}
-                    onChange={handleMainDiscountChange}
+                    value={priceDetail.initialPrice}
+                    className="w-full"
+                    onChange={(e) =>
+                      handlePriceChange(
+                        plan._id,
+                        index,
+                        "initialPrice",
+                        e.target.value
+                      )
+                    }
                   />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
+                </div>
+                <div className="w-full">
+                  <Label className="w-full">Discount:</Label>
+                  <Input
+                    value={globalDiscount || priceDetail.discount}
+                    disabled={!!globalDiscount}
+                    className="w-full"
+                    onChange={(e) =>
+                      handlePriceChange(
+                        plan._id,
+                        index,
+                        "discount",
+                        e.target.value
+                      )
+                    }
+                  />
+                </div>
+                <div className="w-full">
+                  <Label className="w-full">Final Price:</Label>
+                  <Input
+                    type="text"
+                    value={priceDetail.finalPrice}
+                    className="w-full"
+                    disabled
+                    onChange={(e) =>
+                      handlePriceChange(
+                        plan._id,
+                        index,
+                        "finalPrice",
+                        e.target.value
+                      )
+                    }
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
 
-        {Object.keys(plans).map((planType) => {
-          const plan = plans[planType];
-          const finalPrice = plan.monthlyFinalPrice;
-
-          return (
-            <Plan
-              key={planType}
-              planType={planType}
-              plan={plan}
-              finalPrice={finalPrice}
-              setPrice={setMonthlyPrice}
-              setActive={setActive}
-              setDiscount={setDiscount}
-              individualDiscountsDisabled={individualDiscountsDisabled}
-              handleIndividualDiscountChange={handleIndividualDiscountChange}
-              control={form.control}
-              isMonthly={true}
+          <div className="flex gap-1 mb-8 items-center text-sm font-medium">
+            <Checkbox
+              checked={plan.contactUs}
+              onCheckedChange={(value) =>
+                handleCheckboxChange(plan._id, value as boolean)
+              }
+              className="border-none"
             />
-          );
-        })}
-      </form>
-    </FormProvider>
+            Contact Us
+          </div>
+        </div>
+      ))}
+    </div>
   );
-}
+};
+
+export default MonthlyPlan;

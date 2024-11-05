@@ -1,13 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
-import { z } from "zod";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { z } from "zod";
 import { Button } from "../../components/ui/button";
-import { Checkbox } from "../../components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -18,6 +18,7 @@ import {
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../lib/utils";
+import { useLoginUser } from "../../services/mutations/authMutation";
 import { LoginSchema } from "../../utils/schemas/authSchema";
 
 export default function LoginForm() {
@@ -39,29 +40,38 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof LoginSchema>) {
+  const { isError, error, mutateAsync } = useLoginUser();
+
+  async function onSubmit(values: z.infer<typeof LoginSchema>) {
     setLoading(true);
 
+    const data = await mutateAsync({
+      email: values.email,
+      password: values.password,
+    });
 
-    if (values.email !== 'admin@gmail.com' || values.password !== 'admin') {
-      
+    if (data.status === "success") {
       setLoading(false);
-      setErrorMessage(
-        "Oops! The email or password you entered is incorrect. Please try again."
-      );
-      toast.error(
-        "Oops! The email or password you entered is incorrect. Please try again."
-      );
+      setErrorMessage("");
+      localStorage.setItem("temporary_token", data?.data.token.access_token);
+      localStorage.setItem("email", values.email);
+      toast.success(data.data.message);
+      return nav("/auth/2fa");
     } else {
-      setTimeout(() => {
-        toast.success("You are successfully logged in!");
-
-        setLoading(false);
-        setErrorMessage("");
-        return nav("/auth/2fa");
-      }, 2000);
+      toast.error(data.data.message);
+      setLoading(false);
     }
+    setLoading(false);
   }
+
+  useEffect(() => {
+    if (isError) {
+      setLoading(false);
+      if (axios.isAxiosError(error)) {
+        setErrorMessage(error.response?.data.message);
+      }
+    }
+  }, [isError, error]);
 
   return (
     <div className="h-full">
@@ -134,8 +144,8 @@ export default function LoginForm() {
                     </FormItem>
                   )}
                 />
-                <div className="flex items-center justify-between space-x-2 -mt-3">
-                  <FormField
+                <div className="flex items-center justify-end space-x-2 -mt-3">
+                  {/* <FormField
                     control={form.control}
                     name="remember"
                     render={({ field }) => (
@@ -155,11 +165,11 @@ export default function LoginForm() {
                         <FormMessage />
                       </FormItem>
                     )}
-                  />
+                  /> */}
 
                   <Link
                     to="/auth/reset-password"
-                    className="text-[14px] underline font-[400] cursor-pointer"
+                    className="text-[14px] underline font-[400] cursor-pointer "
                   >
                     Forgot password?
                   </Link>
@@ -168,7 +178,7 @@ export default function LoginForm() {
                   {errorMessage && (
                     <motion.div
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: 100 }}
+                      animate={{ opacity: 1 }}
                       transition={{
                         duration: 0.5,
                       }}
