@@ -274,6 +274,28 @@ export const Columns: ColumnDefinition<BusinessData>[] = [
     },
   },
   {
+    id: "customerEmail",
+    header: "User Email",
+    accessorKey: "customerEmail",
+    sortable: true,
+    searchable: true,
+    filterable: false,
+    cell: ({ row }) => (
+      <Button
+        variant="ghost"
+        style={{
+          width: "175px",
+          whiteSpace: "normal",
+          wordBreak: "break-all",
+          overflowWrap: "break-word",
+        }}
+        className="flex items-center justify-start -ml-1"
+      >
+        {row.getValue("customerEmail")}
+      </Button>
+    ),
+  },
+  {
     id: "businessName",
     header: "Business Name",
     accessorKey: "businessName",

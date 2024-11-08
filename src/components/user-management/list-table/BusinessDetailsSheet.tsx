@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../../ui/sheet";
 import { Switch } from "../../ui/switch";
 import {
@@ -21,17 +21,41 @@ import {
 } from "../../ui/table";
 import {
   BusinessDetailsSheetProps,
+  PaymentDetailsProps,
   SubscriptionDetailsProps,
 } from "../../../types/type";
+import { RadioGroup, RadioGroupItem } from "../../ui/radio-group";
+import { Label } from "../../ui/label";
+import { Button } from "../../ui/button";
+import { CalendarDays } from "lucide-react";
+import { addMonths, format } from "date-fns";
 
 const BusinessDetailsSheet: React.FC<BusinessDetailsSheetProps> = ({
   isOpen,
   onOpenChange,
   businessData,
+  onLocationClick,
 }) => {
   if (!businessData) return null;
 
-  const formatDate = (date: string) => new Date(date).toLocaleDateString();
+  const [extendedExpiryDates, setExtendedExpiryDates] = useState<
+    Record<string, string>
+  >({});
+
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    });
+  };
+  const handleLocationClick = () => {
+    if ((businessData.numberOfLocations ?? 0) > 1) {
+      if (businessData.customerEmail) {
+        onLocationClick(businessData.customerEmail);
+      }
+    }
+  };
 
   const InfoSection = ({
     title,
@@ -45,6 +69,13 @@ const BusinessDetailsSheet: React.FC<BusinessDetailsSheetProps> = ({
       {children}
     </div>
   );
+
+  const setExtendedExpiryDate = (businessId: string, date: string) => {
+    setExtendedExpiryDates((prev) => ({
+      ...prev,
+      [businessId]: date,
+    }));
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -70,23 +101,81 @@ const BusinessDetailsSheet: React.FC<BusinessDetailsSheetProps> = ({
             <span>Industry Type: {businessData.industryType}</span>
             <span>Email: {businessData.customerEmail}</span>
             <span>Location: {businessData.location}</span>
-            <span>Contact Number: {businessData.contactNumber}</span>
-            <span>No. of Locations: {businessData.numberOfLocations}</span>
+            <span>Contact Number: {businessData.contactNumber}</span>{" "}
+            <span>
+              No. of Locations:{" "}
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleLocationClick();
+                }}
+                className={
+                  (businessData.numberOfLocations ?? 0) > 1
+                    ? "cursor-pointer text-primary underline"
+                    : ""
+                }
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleLocationClick();
+                  }
+                }}
+              >
+                {businessData.numberOfLocations}
+              </span>
+            </span>
             <span>Website: {businessData.website}</span>
             <span>Team Members: {businessData.teamMembers}</span>
           </InfoSection>
 
           {/* Subscription Details */}
           <InfoSection title="Subscription Details">
-            <div className="flex justify-between items-center">
-              <span>Subscription History</span>
+            <div className="-mt-7 flex justify-end items-center mb-1">
               <SubscriptionDetails businessData={businessData} />
             </div>
             <span>Current Plan: {businessData.plan}</span>
             <span>Status: {businessData.subStatus}</span>
             <span>Registration Date: {formatDate(businessData.regDate)}</span>
-            <span>Last Renewal: {formatDate(businessData.regDate)}</span>
-            <span>Expiry Date: {businessData.expiryDate}</span>
+            <span>Last Renewal: {formatDate(businessData.regDate)}</span>{" "}
+            <div className=" flex justify-between items-center">
+              <span>
+                Next Payment Date:{" "}
+                {businessData?.expiryDate
+                  ? formatDate(businessData.expiryDate)
+                  : "--"}
+              </span>
+              <PaymentDetails
+                businessData={businessData}
+                onOpenChange={onOpenChange}
+                setExtendedExpiryDate={(date) =>
+                  setExtendedExpiryDate(businessData._id, date)
+                }
+              />
+            </div>{" "}
+            {extendedExpiryDates[businessData._id] && (
+              <div className="flex justify-between items-center">
+                <span>
+                  Extended Upto: {extendedExpiryDates[businessData._id]}
+                </span>
+                <PaymentDetails
+                  businessData={businessData}
+                  onOpenChange={onOpenChange}
+                  setExtendedExpiryDate={(date) =>
+                    setExtendedExpiryDate(businessData._id, date)
+                  }
+                />
+              </div>
+            )}
+          </InfoSection>
+
+          {/* Renewal */}
+          <InfoSection title="Auto-Renewal Setting">
+            {" "}
+            <div className="-mt-7 flex justify-end items-center mb-1">
+              <SubscriptionDetails businessData={businessData} />
+            </div>
             <div className="flex justify-between items-center">
               <span>Auto Renewal:</span>
               <Switch />
@@ -99,6 +188,148 @@ const BusinessDetailsSheet: React.FC<BusinessDetailsSheetProps> = ({
 };
 
 export default BusinessDetailsSheet;
+
+const PaymentDetails: React.FC<PaymentDetailsProps> = ({
+  businessData,
+  onOpenChange,
+  setExtendedExpiryDate,
+}) => {
+  const [selectedMonths, setSelectedMonths] = useState("1month");
+  const [showMainDialog, setShowMainDialog] = useState(false);
+
+  const calculateNewExpiryDate = () => {
+    const currentExpiryDate = businessData.expiryDate
+      ? new Date(businessData.expiryDate)
+      : new Date();
+    const monthsToAdd = getMonthsNumber(selectedMonths);
+    const newExpiryDate = addMonths(currentExpiryDate, monthsToAdd);
+    return format(newExpiryDate, "MMM dd, yyyy");
+  };
+
+  const getMonthsNumber = (value: string) => {
+    return parseInt(value.replace("months", "").replace("month", ""));
+  };
+
+  const handleConfirm = () => {
+    const newExpiry = calculateNewExpiryDate();
+    setExtendedExpiryDate(newExpiry);
+    onOpenChange(true);
+    setShowMainDialog(false);
+  };
+
+  return (
+    <>
+      <Dialog open={showMainDialog} onOpenChange={setShowMainDialog}>
+        <DialogTrigger asChild className="cursor-pointer">
+          <CalendarDays />
+        </DialogTrigger>
+        <DialogContent className="p-6 min-w-[400px]" variant="cross">
+          <DialogHeader>
+            <DialogTitle>Extend Next Payment Dates</DialogTitle>
+            <hr />
+          </DialogHeader>
+          <div className="space-y-4">
+            <p className="text-base">
+              You are about to extend the next payment date for this
+              subscription, delaying the scheduled payment while ensuring
+              continued service for the user. Please confirm the new payment
+              date, ensuring it aligns with the business policy.
+            </p>
+            <p className="text-base font-medium">Extend date by:</p>
+
+            <RadioGroup
+              defaultValue="1month"
+              value={selectedMonths}
+              onValueChange={setSelectedMonths}
+            >
+              <div className="grid grid-cols-3 gap-4 mb-4">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="1month" id="r1" variant="dot" />
+                  <Label htmlFor="r1">1 month</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="2months" id="r2" variant="dot" />
+                  <Label htmlFor="r2">2 months</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="3months" id="r3" variant="dot" />
+                  <Label htmlFor="r3">3 months</Label>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="4months" id="r4" variant="dot" />
+                  <Label htmlFor="r4">4 months</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="5months" id="r5" variant="dot" />
+                  <Label htmlFor="r5">5 months</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="6months" id="r6" variant="dot" />
+                  <Label htmlFor="r6">6 months</Label>
+                </div>
+              </div>
+            </RadioGroup>
+          </div>
+          <div className="flex gap-3 mt-2">
+            <Button
+              variant="outline1"
+              className="w-full"
+              onClick={() => {
+                setShowMainDialog(false);
+                onOpenChange(false);
+              }}
+            >
+              Cancel
+            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  variant="paginationActive"
+                  className="w-full rounded-md"
+                >
+                  Extend
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[525px]" variant="default">
+                <img
+                  src="/assets/images/extended.png"
+                  alt="Extended image"
+                  className="flex items-center justify-center w-full"
+                />
+                <div className="">
+                  <p className="text-base text-center font-medium">
+                    The next payment date for this subscription has been
+                    successfully extended by {getMonthsNumber(selectedMonths)}{" "}
+                    month
+                    {getMonthsNumber(selectedMonths) > 1 ? "s" : ""}. The new
+                    payment date has been set to{" "}
+                    <span className="font-semibold">
+                      ({calculateNewExpiryDate()})
+                    </span>{" "}
+                    . The user will continue to have uninterrupted access to the
+                    service until the new payment date.
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <Button
+                    variant="paginationActive"
+                    className="w-full rounded-md"
+                    onClick={handleConfirm}
+                  >
+                    Continue
+                  </Button>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
 
 const SubscriptionDetails: React.FC<SubscriptionDetailsProps> = ({
   businessData,

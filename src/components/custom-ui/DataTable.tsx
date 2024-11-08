@@ -77,6 +77,11 @@ export default function DataTable<T extends DataTableItem>({
   const [isTicketOpen, setIsTicketOpen] = useState(false);
   const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false);
 
+  const handleLocationClick = (email: string) => {
+    setGlobalFilter(email);
+    setIsSheetOpen(false);
+  };
+
   const uniqueStatuses = useMemo(() => {
     const statuses = new Set<string>();
     data.forEach((item: any) => {
@@ -409,6 +414,7 @@ export default function DataTable<T extends DataTableItem>({
                 isOpen={isSheetOpen}
                 onOpenChange={setIsSheetOpen}
                 businessData={selectedRow}
+                onLocationClick={handleLocationClick}
               />
             )}
 

@@ -26,7 +26,18 @@
     "subStatus": "Inactive",
     "plan": "Standard",
     "regDate": "2021-07-19",
-    "country": "Canada"
+    "country": "Canada",
+    "customerName": "John Smith",
+    "customerEmail": "retailworld@example.com",
+    "customerContact": "+1 234 567 8901",
+    "customerType": "1Y",
+    "contactNumber": "+1 234 567 8901",
+    "location": "123 Main St, Toronto, ON M5H 2N2",
+    "numberOfLocations": 5,
+    "website": "retailworld.ca",
+    "teamMembers": 10,
+    "expiryDate": "2023-07-18",
+    "autoRenewal": false
   },
   {
     "_id": "003",
@@ -35,7 +46,18 @@
     "subStatus": "Active",
     "plan": "Premium",
     "regDate": "2020-11-11",
-    "country": "Germany"
+    "country": "Germany",
+    "customerName": "Lisa Müller",
+    "customerEmail": "autocare@exam.de",
+    "customerContact": "+49 123 456 7890",
+    "customerType": "2Y",
+    "contactNumber": "+49 123 456 7890",
+    "location": "Benzstraße 5, 60314 Frankfurt am Main",
+    "numberOfLocations": 3,
+    "website": "autocaresolutions.de",
+    "teamMembers": 25,
+    "expiryDate": "2024-11-10",
+    "autoRenewal": true
   },
   {
     "_id": "004",
@@ -44,7 +66,18 @@
     "subStatus": "Unsubscribed",
     "plan": "Standard",
     "regDate": "2022-02-15",
-    "country": "France"
+    "country": "France",
+    "customerName": "Pierre Dupont",
+    "customerEmail": "greengrocers@exam.fr",
+    "customerContact": "+33 1 23 45 67 89",
+    "customerType": "6M",
+    "contactNumber": "+33 1 23 45 67 89",
+    "location": "12 Rue de Rivoli, 75004 Paris",
+    "numberOfLocations": 1,
+    "website": "greengrocers.fr",
+    "teamMembers": 8,
+    "expiryDate": "2023-02-14",
+    "autoRenewal": false
   },
   {
     "_id": "005",
@@ -53,7 +86,18 @@
     "subStatus": "Trial",
     "plan": "Premium",
     "regDate": "2021-06-01",
-    "country": "UK"
+    "country": "UK",
+    "customerName": "Emily Brown",
+    "customerEmail": "glowbeauty@exam.co.uk",
+    "customerContact": "+44 20 1234 5678",
+    "customerType": "3M",
+    "contactNumber": "+44 20 1234 5678",
+    "location": "221B Baker St, London NW1 6XE",
+    "numberOfLocations": 1,
+    "website": "glowbeauty.co.uk",
+    "teamMembers": 5,
+    "expiryDate": "2022-06-01",
+    "autoRenewal": false
   },
   {
     "_id": "006",
@@ -62,7 +106,18 @@
     "subStatus": "Pending Confirmation",
     "plan": "Enterprise",
     "regDate": "2022-09-10",
-    "country": "Australia"
+    "country": "Australia",
+    "customerName": "James Cook",
+    "customerEmail": "hospitalityexperts@exa.au",
+    "customerContact": "+61 3 1234 5678",
+    "customerType": "1Y",
+    "contactNumber": "+61 3 1234 5678",
+    "location": "88 Collins St, Melbourne VIC 3000",
+    "numberOfLocations": 4,
+    "website": "hospitalityexperts.com.au",
+    "teamMembers": 20,
+    "expiryDate": "2023-09-09",
+    "autoRenewal": true
   },
   {
     "_id": "007",
@@ -71,7 +126,18 @@
     "subStatus": "Active",
     "plan": "Standard",
     "regDate": "2021-03-19",
-    "country": "USA"
+    "country": "USA",
+    "customerName": "Michael Green",
+    "customerEmail": "artshub@example.com",
+    "customerContact": "+1 987 654 3210",
+    "customerType": "6M",
+    "contactNumber": "+1 987 654 3210",
+    "location": "456 Art Ave, Los Angeles, CA 90013",
+    "numberOfLocations": 2,
+    "website": "artshub.com",
+    "teamMembers": 7,
+    "expiryDate": "2023-09-19",
+    "autoRenewal": false
   },
   {
     "_id": "008",
@@ -80,7 +146,18 @@
     "subStatus": "On Hold",
     "plan": "Enterprise",
     "regDate": "2022-08-23",
-    "country": "Canada"
+    "country": "Canada",
+    "customerName": "Sarah White",
+    "customerEmail": "proservices@example.ca",
+    "customerContact": "+1 416 555 1234",
+    "customerType": "1Y",
+    "contactNumber": "+1 416 555 1234",
+    "location": "789 Bay St, Toronto, ON M5G 2C8",
+    "numberOfLocations": 1,
+    "website": "proservices.ca",
+    "teamMembers": 12,
+    "expiryDate": "2023-08-22",
+    "autoRenewal": true
   },
   {
     "_id": "009",
@@ -89,7 +166,18 @@
     "subStatus": "Subscribed",
     "plan": "Premium",
     "regDate": "2020-04-12",
-    "country": "Germany"
+    "country": "Germany",
+    "customerName": "Sven Müller",
+    "customerEmail": "advantage@example.de",
+    "customerContact": "+49 30 12345678",
+    "customerType": "2Y",
+    "contactNumber": "+49 30 12345678",
+    "location": "Kurfürstendamm 234, 10719 Berlin",
+    "numberOfLocations": 3,
+    "website": "advantage.de",
+    "teamMembers": 30,
+    "expiryDate": "2024-04-11",
+    "autoRenewal": true
   },
   {
     "_id": "010",
@@ -98,7 +186,18 @@
     "subStatus": "Expired",
     "plan": "Basic",
     "regDate": "2021-08-20",
-    "country": "UK"
+    "country": "UK",
+    "customerName": "Olivia James",
+    "customerEmail": "fitnation@exam.uk",
+    "customerContact": "+44 161 123 4567",
+    "customerType": "6M",
+    "contactNumber": "+44 161 123 4567",
+    "location": "101 Gym St, Manchester M1 1AA",
+    "numberOfLocations": 2,
+    "website": "fitnation.co.uk",
+    "teamMembers": 4,
+    "expiryDate": "2022-02-20",
+    "autoRenewal": false
   },
   {
     "_id": "011",
@@ -107,7 +206,8 @@
     "subStatus": "Lapsed",
     "plan": "Standard",
     "regDate": "2021-04-11",
-    "country": "Norway"
+    "country": "Norway",
+    "customerEmail": "cooper@gmail.com"
   },
   {
     "_id": "012",
@@ -116,7 +216,8 @@
     "subStatus": "Suspended",
     "plan": "Enterprise",
     "regDate": "2022-12-03",
-    "country": "Netherlands"
+    "country": "Netherlands",
+    "customerEmail": "fitnation@exam.uk"
   },
   {
     "_id": "013",
@@ -125,7 +226,8 @@
     "subStatus": "Subscribed",
     "plan": "Standard",
     "regDate": "2020-09-14",
-    "country": "India"
+    "country": "India",
+    "customerEmail": "retailworld@example.com"
   },
   {
     "_id": "014",
@@ -143,7 +245,8 @@
     "subStatus": "Rejected",
     "plan": "Standard",
     "regDate": "2022-07-04",
-    "country": "Brazil"
+    "country": "Brazil",
+    "customerEmail": "hospitalityexperts@exa.au"
   },
   {
     "_id": "016",

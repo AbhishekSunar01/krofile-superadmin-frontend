@@ -63,10 +63,17 @@ export interface BusinessDetailsSheetProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   businessData: BusinessData | null;
+  onLocationClick: (email: string) => void;
 }
 
 export interface SubscriptionDetailsProps {
   businessData: BusinessData;
+}
+
+export interface PaymentDetailsProps {
+  businessData: BusinessData;
+  onOpenChange: (open: boolean) => void;
+  setExtendedExpiryDate: (date: string) => void;
 }
 
 export type SupportBusinessData = {
